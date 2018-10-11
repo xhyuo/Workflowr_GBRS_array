@@ -6,4 +6,23 @@ output:
     toc: false
 ---
 
-Welcome to my research website.
+Research website for GBRS_array.
+
+# Goal
+To evaluate the performance of GBRS by comparing its genoprob with arraybased genoprob (MUGA, MegaMUGA, and GigaMUGA).
+
+# Approach
+1. number of recombinations
+2. pearson correlation between genoprobs
+3. LODs on local eQTLs - accumulative and/or scatterplot
+
+## Recombinations
+* [Recombinations in DO Liver MUGA](recombinations_in_DO_Liver_MUGA.html)
+* [Recombinations in DO Liver MEGAMUGA](recombinations_in_DO_Liver_MEGAMUGA.html)
+* [Recombinations in DO Striatum](recombinations_in_DO_Striatum.html)
+
+## Pearson correlation between genoprobs
+* [Pearson correlation between MUGA and GBRS](cor_DO_Liver_GBRS_MUGA.html)
+
+## LODs on local eQTLs
+* [LODs on local eQTLs](LOD_eqtl.html)
