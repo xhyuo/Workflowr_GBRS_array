@@ -1,0 +1,185 @@
+---
+title: "recombinations"
+author: "Hao He"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+  toc: true
+vignette: >
+  %\VignetteIndexEntry{recombinations_in_DO_Liver_MUGA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE)
+```
+
+```{r load_packages, include=FALSE}
+library(reticulate)
+library(abind)
+library(qtl2)
+library(ggplot2)
+library(DOQTL)
+library(gridExtra)
+library(VennDiagram)
+library(foreach)
+library(doParallel)
+library(parallel)
+library(plyr)
+library(DT)
+```
+
+# Recombination comparsion between MUGA282 and GBRS282
+```{r Recombination comparsion between MUGA282 and GBRS282, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+#sample sheet
+sample.sheet <- read.table("/projects/heh/HH/GBRS_array/data/DO_Liver/sample_sheet.tsv", header = TRUE)
+
+#muga282
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga282.recomb.RData")
+#add gen
+#merge with sample sheet
+recomb.muga.plot <- merge(muga282.recomb, sample.sheet, by = "Sample", all.x = TRUE)
+recomb.muga.plot$Gen <- as.factor(recomb.muga.plot$Gen)
+#get summary table for each generation
+summary.muga.recomb <- ddply(recomb.muga.plot,.(Gen),
+                           summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
+#display summary table summary.muga.recomb
+DT::datatable(summary.muga.recomb,options = list(pageLength = 20, scrollY = "100px", scrollX = "20px"))
+#boxplot
+p1 <-ggplot(recomb.muga.plot, aes(x = Gen, y = recomb)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
+  theme(legend.position="none") +
+  geom_smooth(method = "lm", se=FALSE, color="black", aes(group=1), linetype="dotted") +
+  labs(x = "DO Outbreeding Generations") +
+  labs(y = paste0("Number of Recombinations (MUGA)")) +
+  scale_x_discrete(limits=c("4","5","6","7")) +
+  ylim(100, 700) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
+print(p1)
+
+#gbrs282
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/GBRS282.recomb.RData")
+sigma = c("0.110", "0.115", "0.120", "0.125", "0.130")
+p <- list()
+summary.GBRS.recomb <- list()
+for (sg in sigma){
+  #merge with sample sheet
+  recomb.GBRS.plot <- merge(GBRS282.recomb[[sg]], sample.sheet, by = "Sample", all.x = TRUE)
+  recomb.GBRS.plot$Gen <- as.factor(recomb.GBRS.plot$Gen)
+  #get summary table for each generation per sigma value
+  summary.GBRS.recomb[[sg]] <- ddply(recomb.GBRS.plot,.(Gen),
+                           summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
+  summary.GBRS.recomb[[sg]]$sigma <- sg
+  #boxplot
+  p[[sg]]<- ggplot(recomb.GBRS.plot, aes(x = Gen, y = recomb)) +
+    geom_boxplot(outlier.shape = NA) +
+    geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
+    theme(legend.position="none") +
+    geom_smooth(method = "lm", se=FALSE, color="black", aes(group=1), linetype="dotted") +
+    labs(x = "DO Outbreeding Generations") +
+    labs(y = paste0("Number of Recombinations (GBRS,sigma =", sg, ")")) +
+    scale_x_discrete(limits=c("4","5","6","7")) +
+    ylim(100, 700) +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
+  print(p[[sg]])
+}
+#plot between GBRS and MUGA
+grid.arrange(p1,p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=6,top = textGrob("Recombination events between GBRS and MUGA",gp=gpar(fontsize=20,font=3)))
+#get summary table for GBRS
+summary.GBRS.recomb <- do.call(rbind.data.frame,summary.GBRS.recomb)
+rownames(summary.GBRS.recomb) <- NULL
+#display summary table summary.GBRS.recomb
+DT::datatable(summary.GBRS.recomb,options = list(pageLength = 100, scrollY = "800px", scrollX = "20px"))
+```
+
+# Recombination comparsion between MEGAMUGA200 and GBRS200
+```{r Recombination comparsion between MEGAMUGA200 and GBRS200, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+#sample sheet
+sample.sheet <- read.table("/projects/heh/HH/GBRS_array/data/DO_Liver/sample_sheet.tsv", header = TRUE)
+#megamuga200
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga200.recomb.RData")
+#add gen
+#merge with sample sheet
+recomb.muga.plot <- merge(megamuga200.recomb, sample.sheet, by = "Sample", all.x = TRUE)
+recomb.muga.plot$Gen <- as.factor(recomb.muga.plot$Gen)
+#get summary table for each generation
+summary.muga.recomb <- ddply(recomb.muga.plot,.(Gen),
+                           summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
+#display summary table summary.muga.recomb
+DT::datatable(summary.muga.recomb,options = list(pageLength = 20, scrollY = "100px", scrollX = "20px"))
+#boxplot
+p1 <-ggplot(recomb.muga.plot, aes(x = Gen, y = recomb)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
+  theme(legend.position="none") +
+  geom_smooth(method = "lm", se=FALSE, color="black", aes(group=1), linetype="dotted") +
+  labs(x = "DO Outbreeding Generations") +
+  labs(y = paste0("Number of Recombinations (MEGAMUGA)")) +
+  scale_x_discrete(limits=c("4","7","11")) +
+  ylim(100, 700) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
+print(p1)
+
+# two samples with crazy recombinations > 600
+#merge with sample sheet
+recomb.muga.plot <- recomb.muga.plot[recomb.muga.plot$recomb < 600,]
+#get summary table for each generation
+summary.muga.recomb <- ddply(recomb.muga.plot,.(Gen),
+                           summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
+#display summary table summary.muga.recomb
+DT::datatable(summary.muga.recomb,options = list(pageLength = 20, scrollY = "100px", scrollX = "20px"))
+#boxplot
+p2 <-ggplot(recomb.muga.plot, aes(x = Gen, y = recomb)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
+  theme(legend.position="none") +
+  geom_smooth(method = "lm", se=FALSE, color="black", aes(group=1), linetype="dotted") +
+  labs(x = "DO Outbreeding Generations") +
+  labs(y = paste0("Number of Recombinations (MEGAMUGA)")) +
+  scale_x_discrete(limits=c("4","7","11")) +
+  ylim(100, 700) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
+print(p2)
+
+#gbrs200
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/GBRS200.recomb.RData")
+sigma = c("0.110", "0.115", "0.120", "0.125", "0.130")
+p <- list()
+summary.GBRS.recomb <- list()
+for (sg in sigma){
+  #merge with sample sheet
+  recomb.GBRS.plot <- merge(GBRS200.recomb[[sg]], sample.sheet, by = "Sample", all.x = TRUE)
+  recomb.GBRS.plot$Gen <- as.factor(recomb.GBRS.plot$Gen)
+  #get summary table for each generation per sigma value
+  summary.GBRS.recomb[[sg]] <- ddply(recomb.GBRS.plot,.(Gen),
+                           summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
+  summary.GBRS.recomb[[sg]]$sigma <- sg
+  #boxplot
+  p[[sg]]<- ggplot(recomb.GBRS.plot, aes(x = Gen, y = recomb)) +
+    geom_boxplot(outlier.shape = NA) +
+    geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
+    theme(legend.position="none") +
+    geom_smooth(method = "lm", se=FALSE, color="black", aes(group=1), linetype="dotted") +
+    labs(x = "DO Outbreeding Generations") +
+    labs(y = paste0("Number of Recombinations (GBRS,sigma =", sg, ")")) +
+    scale_x_discrete(limits=c("4","7","11")) +
+    ylim(100, 700) +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
+  print(p[[sg]])
+}
+#plot between GBRS and MUGA
+grid.arrange(p2,p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=6,top = textGrob("Recombination events between GBRS and MEGAMUGA",gp=gpar(fontsize=20,font=3)))
+#get summary table for GBRS
+summary.GBRS.recomb <- do.call(rbind.data.frame,summary.GBRS.recomb)
+rownames(summary.GBRS.recomb) <- NULL
+#display summary table summary.GBRS.recomb
+DT::datatable(summary.GBRS.recomb,options = list(pageLength = 20, scrollY = "800px", scrollX = "20px"))
+```
+

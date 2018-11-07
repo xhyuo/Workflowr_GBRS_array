@@ -1,0 +1,163 @@
+---
+title: "Cis-eQTL"
+author: "Hao He"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+  toc: true
+vignette: >
+  %\VignetteIndexEntry{Cis-eQTL}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE)
+```
+
+```{r load_packages, include=FALSE}
+library(ggplot2)
+library(DT)
+library(gridExtra)
+library(grid)
+```
+
+# Cis-eQTL between MUGA282 and GBRS282
+```{r Cis-eQTL between MUGA282 and GBRS282, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+#load cis-eqtl
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.muga282.RData")
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.GBRS282.RData")
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.combine282.fix.RData")
+# sigma
+sigma = c("0.110", "0.115", "0.120", "0.125", "0.130")
+lod.muga282 <- list()
+lod.GBRS282 <- list()
+lod.combine282 <- list()
+
+for (sg in sigma){
+  print(sg)
+  lod.muga282[[sg]] <- data.frame(gene = names(cis.eqtl.muga282[[sg]]),
+                                  lod = unlist(cis.eqtl.muga282[[sg]]))
+  
+  lod.GBRS282[[sg]] <- data.frame(gene = names(cis.eqtl.GBRS282[[sg]]),
+                                  lod = unlist(cis.eqtl.GBRS282[[sg]]))
+  
+  lod.combine282[[sg]] <- data.frame(gene = names(cis.eqtl.combine282[[sg]]),
+                                     lod = unlist(cis.eqtl.combine282[[sg]]))
+}
+
+#plot
+p <- list()
+for (sg in sigma){
+  print(sg)
+  cislod.282.plot <- data.frame(qgrid = seq(from=0.55, to=0.999, length=100), 
+                                lod.gbrs = quantile(lod.GBRS282[[sg]]$lod[!is.nan(lod.GBRS282[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
+                                lod.array = quantile(lod.muga282[[sg]]$lod[!is.nan(lod.muga282[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
+                                lod.combine = quantile(lod.combine282[[sg]]$lod[!is.nan(lod.combine282[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)))
+  p[[sg]] <- ggplot(cislod.282.plot, aes(qgrid)) + 
+    geom_line(aes(y = lod.array, colour = "MUGA")) +
+    geom_line(aes(y = lod.gbrs, colour = "GBRS")) +
+    geom_line(aes(y = lod.combine, colour = "Combine")) +
+    xlab("Quantile of LODs") +
+    ylab("LOD of cis-eQTL") +
+    scale_y_continuous(limits=c(0, 120)) +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    theme(axis.text=element_text(size=16),axis.title=element_text(size=16,face="bold"))
+  print(p[[sg]])
+}
+#pdf("Cis-eQTL between GBRS and MUGA.pdf", width=20)
+#plot between GBRS and MEGAMUGA
+grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=5,
+             top = textGrob("Cis-eQTL between GBRS and MUGA",
+                            gp=gpar(fontsize=20,font=3)))
+#dev.off()
+```
+
+# Cis-eQTL between MEGAMUGA200 and GBRS200
+```{r Cis-eQTL between MEGAMUGA200 and GBRS200, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+#load cis-eqtl
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.megamuga200.RData")
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.GBRS200.RData")
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.combine200.fix.RData")
+
+# sigma
+sigma = c("0.110", "0.115", "0.120", "0.125", "0.130")
+lod.megamuga200 <- list()
+lod.GBRS200 <- list()
+lod.combine200 <- list()
+for (sg in sigma){
+  print(sg)
+  lod.megamuga200[[sg]] <- data.frame(gene = names(cis.eqtl.megamuga200[[sg]]),
+                                      lod = unlist(cis.eqtl.megamuga200[[sg]]))
+  
+  lod.GBRS200[[sg]] <- data.frame(gene = names(cis.eqtl.GBRS200[[sg]]),
+                                  lod = unlist(cis.eqtl.GBRS200[[sg]]))
+  
+  lod.combine200[[sg]] <- data.frame(gene = names(cis.eqtl.combine200[[sg]]),
+                                     lod = unlist(cis.eqtl.combine200[[sg]]))
+}
+#plot
+p <- list()
+for (sg in sigma){
+  print(sg)
+  cislod.200.plot <- data.frame(qgrid = seq(from=0.55, to=0.999, length=100), 
+                                lod.gbrs = quantile(lod.GBRS200[[sg]]$lod[!is.nan(lod.GBRS200[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
+                                lod.array = quantile(lod.megamuga200[[sg]]$lod[!is.nan(lod.megamuga200[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
+                                lod.combine = quantile(lod.combine200[[sg]]$lod[!is.nan(lod.combine200[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)))
+
+  p[[sg]] <- ggplot(cislod.200.plot, aes(qgrid)) + 
+  geom_line(aes(y = lod.array, colour = "MEGAMUGA")) +
+  geom_line(aes(y = lod.gbrs, colour = "GBRS")) +
+  geom_line(aes(y = lod.combine, colour = "Combine")) +
+  xlab("Quantile of LODs") +
+  ylab("LOD of cis-eQTL") +
+  scale_y_continuous(limits=c(0, 85)) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme(axis.text=element_text(size=16),axis.title=element_text(size=16,face="bold"))
+  print(p[[sg]])
+}
+#pdf("Cis-eQTL between GBRS and MEGAMUGA.pdf", width=20)
+#plot between GBRS and MEGAMUGA
+grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=5,
+             top = textGrob("Cis-eQTL between GBRS and MEGAMUGA",
+                            gp=gpar(fontsize=20,font=3)))
+#dev.off()
+```
+
+# Cis-eQTL between GIGAMUGA369 and GBRS369
+```{r Cis-eQTL between GIGAMUGA369 and GBRS369, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+#load cis-eqtl
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.gigamuga369.RData")
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.GBRS369.RData")
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.combine369.fix.RData")
+
+
+lod.gigamuga369 <- data.frame(gene = names(cis.eqtl.gigamuga369),
+                                      lod = unlist(cis.eqtl.gigamuga369))
+  
+lod.GBRS369 <- data.frame(gene = names(cis.eqtl.GBRS369),
+                                  lod = unlist(cis.eqtl.GBRS369))
+  
+lod.combine369 <- data.frame(gene = names(cis.eqtl.combine369),
+                                     lod = unlist(cis.eqtl.combine369))
+
+#plot
+cislod.369.plot <- data.frame(qgrid = seq(from=0.55, to=0.999, length=100), 
+                                lod.gbrs = quantile(lod.GBRS369$lod[!is.nan(lod.GBRS369$lod)], seq(from=0.55, to=0.999, length=100)),
+                                lod.array = quantile(lod.gigamuga369$lod[!is.nan(lod.gigamuga369$lod)], seq(from=0.55, to=0.999, length=100)),
+                                lod.combine = quantile(lod.combine369$lod[!is.nan(lod.combine369$lod)], seq(from=0.55, to=0.999, length=100)))
+p <- ggplot(cislod.369.plot, aes(qgrid)) + 
+     geom_line(aes(y = lod.array, colour = "GIGAGAMUGA")) +
+     geom_line(aes(y = lod.gbrs, colour = "GBRS")) +
+     geom_line(aes(y = lod.combine, colour = "Combine")) +
+     xlab("Quantile of LODs") +
+     ylab("LOD of cis-eQTL") +
+     scale_y_continuous(limits=c(0, 160)) +
+     theme(plot.title = element_text(hjust = 0.5)) +
+     theme(axis.text=element_text(size=16),axis.title=element_text(size=16,face="bold"))
+
+#pdf("Cis-eQTL between GBRS and GIGAMUGA.pdf", width=20)
+#plot between GBRS and MEGAMUGA
+print(p)
+#dev.off()
+```
