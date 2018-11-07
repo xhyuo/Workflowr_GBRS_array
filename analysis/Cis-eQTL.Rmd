@@ -147,13 +147,13 @@ cislod.369.plot <- data.frame(qgrid = seq(from=0.55, to=0.999, length=100),
                                 lod.array = quantile(lod.gigamuga369$lod[!is.nan(lod.gigamuga369$lod)], seq(from=0.55, to=0.999, length=100)),
                                 lod.combine = quantile(lod.combine369$lod[!is.nan(lod.combine369$lod)], seq(from=0.55, to=0.999, length=100)))
 p <- ggplot(cislod.369.plot, aes(qgrid)) + 
-     geom_line(aes(y = lod.array, colour = "GIGAGAMUGA")) +
+     geom_line(aes(y = lod.array, colour = "GIGAMUGA")) +
      geom_line(aes(y = lod.gbrs, colour = "GBRS")) +
      geom_line(aes(y = lod.combine, colour = "Combine")) +
      xlab("Quantile of LODs") +
      ylab("LOD of cis-eQTL") +
      scale_y_continuous(limits=c(0, 160)) +
-     theme(plot.title = element_text(hjust = 0.5), legend.title=element_text(size=24),legend.text=element_text(size=24)) +
+     theme(plot.title = element_text(hjust = 0.5), legend.title=element_text(size=20),legend.text=element_text(size=20)) +
      theme(axis.text=element_text(size=16),axis.title=element_text(size=16,face="bold"))
 
 #pdf("Cis-eQTL between GBRS and GIGAMUGA.pdf", width=20)
