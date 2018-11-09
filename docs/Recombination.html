@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2018-11-07" />
+<meta name="date" content="2018-11-09" />
 
 <title>recombinations</title>
 
@@ -321,12 +321,12 @@ div.section {
 
 <h1 class="title toc-ignore">recombinations</h1>
 <h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2018-11-07</em></h4>
+<h4 class="date"><em>2018-11-09</em></h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2018-11-07</p>
+<p><strong>Last updated:</strong> 2018-11-09</p>
 <strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
 <ul>
 <li>
@@ -350,7 +350,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/20c98966f301c484c799aa2f1dd5de9bb2da864d" target="_blank">20c9896</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/bc719faf537ab1999d2f07447b2fb6194454198a" target="_blank">bc719fa</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -358,8 +358,6 @@ Ignored files:
 
 Untracked files:
     Untracked:  analysis/old_analysis/
-    Untracked:  docs/figure/Cis-eQTL.Rmd/
-    Untracked:  docs/figure/Correlation.Rmd/
     Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
     Untracked:  output/DO_Liver/
     Untracked:  output/DO_Striatum/
@@ -400,6 +398,40 @@ Message
 Rmd
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/bc719faf537ab1999d2f07447b2fb6194454198a/analysis/Recombination.Rmd" target="_blank">bc719fa</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-09
+</td>
+<td style="text-align:left;">
+update requested plot building
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/7ba11656b7324f9091573a12ba71c8218b05ed4e/docs/Recombination.html" target="_blank">7ba1165</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/20c98966f301c484c799aa2f1dd5de9bb2da864d/analysis/Recombination.Rmd" target="_blank">20c9896</a>
 </td>
 <td style="text-align:left;">
@@ -417,11 +449,10 @@ update building
 </ul>
 <p></details></p>
 <hr />
-<div id="recombination-comparsion-between-muga282-and-gbrs282" class="section level1">
-<h1>Recombination comparsion between MUGA282 and GBRS282</h1>
+<div id="recombination-comparsion-between-muga282-and-gbrs282-genoprobs" class="section level1">
+<h1>Recombination comparsion between MUGA282 and GBRS282 (Genoprobs)</h1>
 <pre class="r"><code>#sample sheet
 sample.sheet &lt;- read.table(&quot;/projects/heh/HH/GBRS_array/data/DO_Liver/sample_sheet.tsv&quot;, header = TRUE)
-
 #muga282
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga282.recomb.RData&quot;)
 #add gen
@@ -441,14 +472,16 @@ p1 &lt;-ggplot(recomb.muga.plot, aes(x = Gen, y = recomb)) +
   geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
   theme(legend.position=&quot;none&quot;) +
   geom_smooth(method = &quot;lm&quot;, se=FALSE, color=&quot;black&quot;, aes(group=1), linetype=&quot;dotted&quot;) +
+  geom_text(x = 2, y = 700, size = 8, 
+            label = lm_eqn(df = data.frame(y = recomb.muga.plot$recomb, x = recomb.muga.plot$Gen)), parse = TRUE) +
   labs(x = &quot;DO Outbreeding Generations&quot;) +
-  labs(y = paste0(&quot;Number of Recombinations (MUGA)&quot;)) +
+  labs(y = &quot;Number of Recombinations (MUGA)&quot;) +
   scale_x_discrete(limits=c(&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;)) +
   ylim(100, 700) +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face=&quot;bold&quot;))
 print(p1)</code></pre>
-<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282%20(Genoprobs)-2.png" width="1920" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>
 #gbrs282
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/GBRS282.recomb.RData&quot;)
@@ -469,18 +502,20 @@ for (sg in sigma){
     geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
     theme(legend.position=&quot;none&quot;) +
     geom_smooth(method = &quot;lm&quot;, se=FALSE, color=&quot;black&quot;, aes(group=1), linetype=&quot;dotted&quot;) +
+    geom_text(x = 2, y = 600, size = 4, 
+            label = lm_eqn(df = data.frame(y = recomb.GBRS.plot$recomb, x = recomb.GBRS.plot$Gen)), parse = TRUE) +
     labs(x = &quot;DO Outbreeding Generations&quot;) +
-    labs(y = paste0(&quot;Number of Recombinations (GBRS,sigma =&quot;, sg, &quot;)&quot;)) +
+    labs(y = paste0(&quot;Number of Recombinations (GBRS,sigma =&quot;, sg, &quot;), (Genoprobs)&quot;)) +
     scale_x_discrete(limits=c(&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;)) +
-    ylim(100, 700) +
+    ylim(100, 600) +
     theme(plot.title = element_text(hjust = 0.5)) +
     theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face=&quot;bold&quot;))
   print(p[[sg]])
 }</code></pre>
-<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282-3.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282-4.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282-5.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282-6.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282-7.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282%20(Genoprobs)-3.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282%20(Genoprobs)-4.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282%20(Genoprobs)-5.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282%20(Genoprobs)-6.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282%20(Genoprobs)-7.png" width="1920" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#plot between GBRS and MUGA
-grid.arrange(p1,p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=6,top = textGrob(&quot;Recombination events between GBRS and MUGA&quot;,gp=gpar(fontsize=20,font=3)))</code></pre>
-<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282-8.png" width="1920" style="display: block; margin: auto;" /></p>
+grid.arrange(p1,p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=6,top = textGrob(&quot;Recombination events between GBRS and MUGA&quot;,gp=gpar(fontsize=14,font=2)))</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MUGA282%20and%20GBRS282%20(Genoprobs)-8.png" width="1920" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#get summary table for GBRS
 summary.GBRS.recomb &lt;- do.call(rbind.data.frame,summary.GBRS.recomb)
 rownames(summary.GBRS.recomb) &lt;- NULL
@@ -489,8 +524,71 @@ DT::datatable(summary.GBRS.recomb,options = list(pageLength = 100, scrollY = &qu
 <div id="htmlwidget-d053ff70fe96d3a47473" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-d053ff70fe96d3a47473">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["4","5","7","4","5","7","4","5","7","4","5","7","4","5","7"],[335.234042553192,361,390.170212765957,317.595744680851,340.914893617021,377.627659574468,304.127659574468,324.765957446808,367.425531914894,292.255319148936,311.255319148936,359.723404255319,283.063829787234,302.702127659574,353.143617021277],[848.096207215541,519.652173913043,567.19012401866,809.593894542091,471.81868640148,536.320514279213,655.59204440333,478.487511563367,507.850039822505,641.107308048104,497.45513413506,483.965866423939,563.930619796485,410.126734505088,453.01134941404],[47,47,188,47,47,188,47,47,188,47,47,188,47,47,188],["0.110","0.110","0.110","0.115","0.115","0.115","0.120","0.120","0.120","0.125","0.125","0.125","0.130","0.130","0.130"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n      <th>sigma<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":100,"scrollY":"800px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 </div>
-<div id="recombination-comparsion-between-megamuga200-and-gbrs200" class="section level1">
-<h1>Recombination comparsion between MEGAMUGA200 and GBRS200</h1>
+<div id="recombination-gbrs282-genotypes" class="section level1">
+<h1>Recombination GBRS282 (Genotypes)</h1>
+<pre class="r"><code>load(&quot;./output/DO_Liver/recomb.GBRS.genotypes.RData&quot;)
+#muga282
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga282.recomb.RData&quot;)
+#sample sheet
+sample.sheet &lt;- read.table(&quot;/projects/heh/HH/GBRS_array/data/DO_Liver/sample_sheet.tsv&quot;, header = TRUE)
+#subset sample sheet to 282 samples
+sample.sheet &lt;- sample.sheet[sample.sheet$Sample %in% muga282.recomb$Sample,]
+sigma = c(&quot;0.110&quot;, &quot;0.115&quot;, &quot;0.120&quot;, &quot;0.125&quot;, &quot;0.130&quot;)
+#get summary table for each generation per sigma value
+summary.tab &lt;- list()
+p &lt;- list()
+for (sg in sigma){
+  print(sg)
+  #merge with sample sheet
+  recomb.GBRS.genotypes.plot &lt;- merge(recomb.GBRS.genotypes[[sg]], sample.sheet, by = &quot;Sample&quot;, all.y = TRUE)
+  recomb.GBRS.genotypes.plot$Gen &lt;- as.factor(recomb.GBRS.genotypes.plot$Gen)
+  #get summary table for each generation per sigma value
+  summary.tab[[sg]] &lt;- ddply(recomb.GBRS.genotypes.plot,.(Gen),
+                summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
+  summary.tab[[sg]]$sigma &lt;- sg
+  
+  #boxplot
+  p[[sg]] &lt;-ggplot(recomb.GBRS.genotypes.plot, aes(x = Gen, y = recomb)) +
+    geom_boxplot(outlier.shape = NA) +
+    geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
+    theme(legend.position=&quot;none&quot;) +
+    geom_smooth(method = &quot;lm&quot;, se=FALSE, color=&quot;black&quot;, aes(group=1), linetype=&quot;dotted&quot;) +
+    geom_text(x = 2, y = 500, size = 4, 
+            label = lm_eqn(df = data.frame(y = recomb.GBRS.genotypes.plot$recomb, x = recomb.GBRS.genotypes.plot$Gen)), parse = TRUE) +
+    labs(x = &quot;DO Outbreeding Generations&quot;) +
+    labs(y = paste0(&quot;Number of Recombinations (GBRS,sigma =&quot;, sg, &quot;), (Genotypes)&quot;)) +
+    scale_x_discrete(limits=c(&quot;4&quot;,&quot;5&quot;,&quot;6&quot;,&quot;7&quot;)) +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    ylim(100, 500) +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    theme(axis.text=element_text(size=8),axis.title=element_text(size=8,face=&quot;bold&quot;))
+  
+  print(p[[sg]])
+  
+}
+# [1] &quot;0.110&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS282%20(Genotypes)-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre><code># [1] &quot;0.115&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS282%20(Genotypes)-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre><code># [1] &quot;0.120&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS282%20(Genotypes)-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre><code># [1] &quot;0.125&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS282%20(Genotypes)-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre><code># [1] &quot;0.130&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS282%20(Genotypes)-5.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#plot between GBRS sigmas
+grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=5,top = textGrob(&quot;Recombination events of GBRS282 Genotypes in different sigmas&quot;,gp=gpar(fontsize=12,font=2)))</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS282%20(Genotypes)-6.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+summary.tab.genotype &lt;- do.call(rbind.data.frame,summary.tab)
+rownames(summary.tab.genotype) &lt;- NULL
+#display summary table
+DT::datatable(summary.tab.genotype,options = list(pageLength = 100, scrollY = &quot;800px&quot;, scrollX = &quot;20px&quot;))</code></pre>
+<div id="htmlwidget-be2dd0ede7b762376b57" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-be2dd0ede7b762376b57">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["4","5","7","4","5","7","4","5","7","4","5","7","4","5","7"],[294.893617021277,311.553191489362,325.585106382979,268.31914893617,284.893617021277,308.186170212766,250.510638297872,263.531914893617,294.781914893617,235.170212765957,247.723404255319,283.909574468085,224.148936170213,236.595744680851,275.606382978723],[548.314523589269,445.556891766883,397.773466833542,478.569842738205,353.358001850139,355.136278302423,360.690101757632,272.254394079556,324.406730003413,304.926919518964,209.421831637373,291.686966662874,302.99907493062,208.68085106383,266.935146205484],[47,47,188,47,47,188,47,47,188,47,47,188,47,47,188],["0.110","0.110","0.110","0.115","0.115","0.115","0.120","0.120","0.120","0.125","0.125","0.125","0.130","0.130","0.130"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n      <th>sigma<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":100,"scrollY":"800px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="recombination-comparsion-between-megamuga200-and-gbrs200-genoprobs" class="section level1">
+<h1>Recombination comparsion between MEGAMUGA200 and GBRS200 (Genoprobs)</h1>
 <pre class="r"><code>#sample sheet
 sample.sheet &lt;- read.table(&quot;/projects/heh/HH/GBRS_array/data/DO_Liver/sample_sheet.tsv&quot;, header = TRUE)
 #megamuga200
@@ -504,25 +602,25 @@ summary.muga.recomb &lt;- ddply(recomb.muga.plot,.(Gen),
                            summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
 #display summary table summary.muga.recomb
 DT::datatable(summary.muga.recomb,options = list(pageLength = 20, scrollY = &quot;100px&quot;, scrollX = &quot;20px&quot;))</code></pre>
-<div id="htmlwidget-be2dd0ede7b762376b57" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-be2dd0ede7b762376b57">{"x":{"filter":"none","data":[["1","2","3"],["4","7","11"],[190.5,321.142857142857,358.30890052356],[144.5,35936.8095238095,22799.4146045743],[2,7,191]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"scrollY":"100px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b0a72bdb3478a2a43000" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b0a72bdb3478a2a43000">{"x":{"filter":"none","data":[["1","2","3"],["4","7","11"],[190.5,321.142857142857,358.30890052356],[144.5,35936.8095238095,22799.4146045743],[2,7,191]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"scrollY":"100px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>#boxplot
 p1 &lt;-ggplot(recomb.muga.plot, aes(x = Gen, y = recomb)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
   theme(legend.position=&quot;none&quot;) +
   geom_smooth(method = &quot;lm&quot;, se=FALSE, color=&quot;black&quot;, aes(group=1), linetype=&quot;dotted&quot;) +
+  geom_text(x = 2, y = 700, size = 8, 
+            label = lm_eqn(df = data.frame(y = recomb.muga.plot$recomb, x = recomb.muga.plot$Gen)),
+            parse = TRUE) +
   labs(x = &quot;DO Outbreeding Generations&quot;) +
   labs(y = paste0(&quot;Number of Recombinations (MEGAMUGA)&quot;)) +
   scale_x_discrete(limits=c(&quot;4&quot;,&quot;7&quot;,&quot;11&quot;)) +
-  ylim(100, 700) +
+  #ylim(100, 700) +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face=&quot;bold&quot;))
-print(p1)
-# Warning: Removed 4 rows containing non-finite values (stat_boxplot).
-# Warning: Removed 4 rows containing non-finite values (stat_smooth).
-# Warning: Removed 4 rows containing missing values (geom_point).</code></pre>
-<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200-2.png" width="1920" style="display: block; margin: auto;" /></p>
+print(p1)</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200%20(Genoprobs)-2.png" width="960" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>
 # two samples with crazy recombinations &gt; 600
 #merge with sample sheet
@@ -532,14 +630,17 @@ summary.muga.recomb &lt;- ddply(recomb.muga.plot,.(Gen),
                            summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
 #display summary table summary.muga.recomb
 DT::datatable(summary.muga.recomb,options = list(pageLength = 20, scrollY = &quot;100px&quot;, scrollX = &quot;20px&quot;))</code></pre>
-<div id="htmlwidget-b0a72bdb3478a2a43000" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b0a72bdb3478a2a43000">{"x":{"filter":"none","data":[["1","2","3"],["4","7","11"],[190.5,249.5,338.209677419355],[144.5,9.5,636.826068003487],[2,6,186]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"scrollY":"100px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fc356a171e578452d421" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fc356a171e578452d421">{"x":{"filter":"none","data":[["1","2","3"],["4","7","11"],[190.5,249.5,338.209677419355],[144.5,9.5,636.826068003487],[2,6,186]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"scrollY":"100px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>#boxplot
 p2 &lt;-ggplot(recomb.muga.plot, aes(x = Gen, y = recomb)) +
   geom_boxplot(outlier.shape = NA) +
   geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
   theme(legend.position=&quot;none&quot;) +
   geom_smooth(method = &quot;lm&quot;, se=FALSE, color=&quot;black&quot;, aes(group=1), linetype=&quot;dotted&quot;) +
+  geom_text(x = 2, y = 700, size = 8, 
+            label = lm_eqn(df = data.frame(y = recomb.muga.plot$recomb, x = recomb.muga.plot$Gen)),
+            parse = TRUE) +
   labs(x = &quot;DO Outbreeding Generations&quot;) +
   labs(y = paste0(&quot;Number of Recombinations (MEGAMUGA)&quot;)) +
   scale_x_discrete(limits=c(&quot;4&quot;,&quot;7&quot;,&quot;11&quot;)) +
@@ -547,7 +648,7 @@ p2 &lt;-ggplot(recomb.muga.plot, aes(x = Gen, y = recomb)) +
   theme(plot.title = element_text(hjust = 0.5)) +
   theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face=&quot;bold&quot;))
 print(p2)</code></pre>
-<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200%20(Genoprobs)-4.png" width="960" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>
 #gbrs200
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/GBRS200.recomb.RData&quot;)
@@ -568,25 +669,91 @@ for (sg in sigma){
     geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
     theme(legend.position=&quot;none&quot;) +
     geom_smooth(method = &quot;lm&quot;, se=FALSE, color=&quot;black&quot;, aes(group=1), linetype=&quot;dotted&quot;) +
+    geom_text(x = 2, y = 700, size = 8, 
+            label = lm_eqn(df = data.frame(y = recomb.GBRS.plot$recomb, x = recomb.GBRS.plot$Gen)),
+            parse = TRUE) +
     labs(x = &quot;DO Outbreeding Generations&quot;) +
-    labs(y = paste0(&quot;Number of Recombinations (GBRS,sigma =&quot;, sg, &quot;)&quot;)) +
+    labs(y = paste0(&quot;Number of Recombinations (GBRS,sigma =&quot;, sg, &quot;) (Genoprobs)&quot;)) +
     scale_x_discrete(limits=c(&quot;4&quot;,&quot;7&quot;,&quot;11&quot;)) +
     ylim(100, 700) +
     theme(plot.title = element_text(hjust = 0.5)) +
     theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face=&quot;bold&quot;))
   print(p[[sg]])
 }</code></pre>
-<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200-5.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200-6.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200-7.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200-8.png" width="1920" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200-9.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200%20(Genoprobs)-5.png" width="960" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200%20(Genoprobs)-6.png" width="960" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200%20(Genoprobs)-7.png" width="960" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200%20(Genoprobs)-8.png" width="960" style="display: block; margin: auto;" /><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200%20(Genoprobs)-9.png" width="960" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#plot between GBRS and MUGA
 grid.arrange(p2,p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=6,top = textGrob(&quot;Recombination events between GBRS and MEGAMUGA&quot;,gp=gpar(fontsize=20,font=3)))</code></pre>
-<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200-10.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Recombination.Rmd/Recombination%20comparsion%20between%20MEGAMUGA200%20and%20GBRS200%20(Genoprobs)-10.png" width="960" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#get summary table for GBRS
 summary.GBRS.recomb &lt;- do.call(rbind.data.frame,summary.GBRS.recomb)
 rownames(summary.GBRS.recomb) &lt;- NULL
 #display summary table summary.GBRS.recomb
 DT::datatable(summary.GBRS.recomb,options = list(pageLength = 20, scrollY = &quot;800px&quot;, scrollX = &quot;20px&quot;))</code></pre>
-<div id="htmlwidget-fc356a171e578452d421" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fc356a171e578452d421">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["4","7","11","4","7","11","4","7","11","4","7","11","4","7","11"],[288.5,386.714285714286,495.178010471204,273.5,377.428571428571,476.513089005236,273.5,365.857142857143,462.534031413613,259.5,359.142857142857,450.570680628272,254.5,356.714285714286,440.397905759162],[24.5,445.238095238095,684.662882336732,364.5,342.285714285714,618.387985670984,612.5,218.142857142857,569.534362083219,544.5,179.142857142857,535.004188481675,264.5,296.238095238095,512.272416643704],[2,7,191,2,7,191,2,7,191,2,7,191,2,7,191],["0.110","0.110","0.110","0.115","0.115","0.115","0.120","0.120","0.120","0.125","0.125","0.125","0.130","0.130","0.130"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n      <th>sigma<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"scrollY":"800px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ee4f9b97efed4cc3d831" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ee4f9b97efed4cc3d831">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["4","7","11","4","7","11","4","7","11","4","7","11","4","7","11"],[288.5,386.714285714286,495.178010471204,273.5,377.428571428571,476.513089005236,273.5,365.857142857143,462.534031413613,259.5,359.142857142857,450.570680628272,254.5,356.714285714286,440.397905759162],[24.5,445.238095238095,684.662882336732,364.5,342.285714285714,618.387985670984,612.5,218.142857142857,569.534362083219,544.5,179.142857142857,535.004188481675,264.5,296.238095238095,512.272416643704],[2,7,191,2,7,191,2,7,191,2,7,191,2,7,191],["0.110","0.110","0.110","0.115","0.115","0.115","0.120","0.120","0.120","0.125","0.125","0.125","0.130","0.130","0.130"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n      <th>sigma<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":20,"scrollY":"800px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,20,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="recombination-gbrs200-genotypes" class="section level1">
+<h1>Recombination GBRS200 (Genotypes)</h1>
+<pre class="r"><code>load(&quot;./output/DO_Liver/recomb.GBRS.genotypes.RData&quot;)
+#megamuga200
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga200.recomb.RData&quot;)
+#sample sheet
+sample.sheet &lt;- read.table(&quot;/projects/heh/HH/GBRS_array/data/DO_Liver/sample_sheet.tsv&quot;, header = TRUE)
+#subset sample sheet to 200 samples
+sample.sheet &lt;- sample.sheet[sample.sheet$Sample %in% megamuga200.recomb$Sample,]
+sigma = c(&quot;0.110&quot;, &quot;0.115&quot;, &quot;0.120&quot;, &quot;0.125&quot;, &quot;0.130&quot;)
+#get summary table for each generation per sigma value
+summary.tab &lt;- list()
+p &lt;- list()
+for (sg in sigma){
+  print(sg)
+  #merge with sample sheet
+  recomb.GBRS.genotypes.plot &lt;- merge(recomb.GBRS.genotypes[[sg]], sample.sheet, by = &quot;Sample&quot;, all.y = TRUE)
+  recomb.GBRS.genotypes.plot$Gen &lt;- as.factor(recomb.GBRS.genotypes.plot$Gen)
+  #get summary table for each generation per sigma value
+  summary.tab[[sg]] &lt;- ddply(recomb.GBRS.genotypes.plot,.(Gen),
+                summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
+  summary.tab[[sg]]$sigma &lt;- sg
+  
+  #boxplot
+  p[[sg]] &lt;-ggplot(recomb.GBRS.genotypes.plot, aes(x = Gen, y = recomb)) +
+    geom_boxplot(outlier.shape = NA) +
+    geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
+    theme(legend.position=&quot;none&quot;) +
+    geom_smooth(method = &quot;lm&quot;, se=FALSE, color=&quot;black&quot;, aes(group=1), linetype=&quot;dotted&quot;) +
+    geom_text(x = 2, y = 600, size = 4, 
+            label = lm_eqn(df = data.frame(y = recomb.GBRS.genotypes.plot$recomb, x = recomb.GBRS.genotypes.plot$Gen)), parse = TRUE) +
+    labs(x = &quot;DO Outbreeding Generations&quot;) +
+    labs(y = paste0(&quot;Number of Recombinations (GBRS,sigma =&quot;, sg, &quot;), (Genotypes)&quot;)) +
+    scale_x_discrete(limits=c(&quot;4&quot;,&quot;7&quot;,&quot;11&quot;)) +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    ylim(100, 600) +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    theme(axis.text=element_text(size=8),axis.title=element_text(size=8,face=&quot;bold&quot;))
+  
+  print(p[[sg]])
+  
+}
+# [1] &quot;0.110&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS200%20(Genotypes)-1.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code># [1] &quot;0.115&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS200%20(Genotypes)-2.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code># [1] &quot;0.120&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS200%20(Genotypes)-3.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code># [1] &quot;0.125&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS200%20(Genotypes)-4.png" width="960" style="display: block; margin: auto;" /></p>
+<pre><code># [1] &quot;0.130&quot;</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS200%20(Genotypes)-5.png" width="960" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#plot between GBRS sigmas
+grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=5,top = textGrob(&quot;Recombination events of GBRS200 Genotypes in different sigmas&quot;,gp=gpar(fontsize=12,font=2)))</code></pre>
+<p><img src="figure/Recombination.Rmd/Recombination%20GBRS200%20(Genotypes)-6.png" width="960" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+summary.tab.genotype &lt;- do.call(rbind.data.frame,summary.tab)
+rownames(summary.tab.genotype) &lt;- NULL
+#display summary table
+DT::datatable(summary.tab.genotype,options = list(pageLength = 100, scrollY = &quot;800px&quot;, scrollX = &quot;20px&quot;))</code></pre>
+<div id="htmlwidget-bfeaa1ec505fd6dd8ad4" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bfeaa1ec505fd6dd8ad4">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],["4","7","11","4","7","11","4","7","11","4","7","11","4","7","11"],[263.5,325.571428571429,420.96335078534,240,306.285714285714,395.424083769634,227,291.142857142857,376.329842931937,216,282.857142857143,360.670157068063,205,275,348.38219895288],[4.5,409.285714285714,516.81443923946,2,226.238095238095,407.971837971893,32,127.47619047619,367.106420501516,8,108.47619047619,320.664315238358,18,116,303.47947092863],[2,7,191,2,7,191,2,7,191,2,7,191,2,7,191],["0.110","0.110","0.110","0.115","0.115","0.115","0.120","0.120","0.120","0.125","0.125","0.125","0.130","0.130","0.130"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n      <th>sigma<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":100,"scrollY":"800px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[2,3,4]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()

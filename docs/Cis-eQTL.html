@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2018-11-07" />
+<meta name="date" content="2018-11-09" />
 
 <title>Cis-eQTL</title>
 
@@ -313,12 +313,12 @@ div.section {
 
 <h1 class="title toc-ignore">Cis-eQTL</h1>
 <h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2018-11-07</em></h4>
+<h4 class="date"><em>2018-11-09</em></h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2018-11-07</p>
+<p><strong>Last updated:</strong> 2018-11-09</p>
 <strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
 <ul>
 <li>
@@ -342,7 +342,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/e015989d7523dc7e3583e9c2649d26b8f9cae1ab" target="_blank">e015989</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/bc719faf537ab1999d2f07447b2fb6194454198a" target="_blank">bc719fa</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -385,6 +385,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/bc719faf537ab1999d2f07447b2fb6194454198a/analysis/Cis-eQTL.Rmd" target="_blank">bc719fa</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-09
+</td>
+<td style="text-align:left;">
+update requested plot building
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/09c3f857f9d66e01923fa6891da8495280339bb2/docs/Cis-eQTL.html" target="_blank">09c3f85</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 Rmd
@@ -549,9 +583,12 @@ update building
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.muga282.RData&quot;)
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.GBRS282.RData&quot;)
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.combine282.fix.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.fixed.muga282.RData&quot;)
+
 # sigma
 sigma = c(&quot;0.110&quot;, &quot;0.115&quot;, &quot;0.120&quot;, &quot;0.125&quot;, &quot;0.130&quot;)
 lod.muga282 &lt;- list()
+lod.fixedmuga282 &lt;- list()
 lod.GBRS282 &lt;- list()
 lod.combine282 &lt;- list()
 
@@ -559,6 +596,9 @@ for (sg in sigma){
   print(sg)
   lod.muga282[[sg]] &lt;- data.frame(gene = names(cis.eqtl.muga282[[sg]]),
                                   lod = unlist(cis.eqtl.muga282[[sg]]))
+  
+  lod.fixedmuga282[[sg]] &lt;- data.frame(gene = names(cis.eqtl.fixed.muga282[[sg]]),
+                                       lod = unlist(cis.eqtl.fixed.muga282[[sg]]))
   
   lod.GBRS282[[sg]] &lt;- data.frame(gene = names(cis.eqtl.GBRS282[[sg]]),
                                   lod = unlist(cis.eqtl.GBRS282[[sg]]))
@@ -579,11 +619,13 @@ for (sg in sigma){
   cislod.282.plot &lt;- data.frame(qgrid = seq(from=0.55, to=0.999, length=100), 
                                 lod.gbrs = quantile(lod.GBRS282[[sg]]$lod[!is.nan(lod.GBRS282[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
                                 lod.array = quantile(lod.muga282[[sg]]$lod[!is.nan(lod.muga282[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
+                                lod.fixed = quantile(lod.fixedmuga282[[sg]]$lod[!is.nan(lod.fixedmuga282[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
                                 lod.combine = quantile(lod.combine282[[sg]]$lod[!is.nan(lod.combine282[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)))
   p[[sg]] &lt;- ggplot(cislod.282.plot, aes(qgrid)) + 
-    geom_line(aes(y = lod.array, colour = &quot;MUGA&quot;)) +
     geom_line(aes(y = lod.gbrs, colour = &quot;GBRS&quot;)) +
+    geom_line(aes(y = lod.fixed, colour = &quot;FIXED MUGA&quot;)) +
     geom_line(aes(y = lod.combine, colour = &quot;Combine&quot;)) +
+    geom_line(aes(y = lod.array, colour = &quot;MUGA&quot;)) +
     xlab(&quot;Quantile of LODs&quot;) +
     ylab(&quot;LOD of cis-eQTL&quot;) +
     scale_y_continuous(limits=c(0, 120)) +
@@ -867,7 +909,95 @@ xhyuo
 #grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=5,
 #              top = textGrob(&quot;Cis-eQTL between GBRS and MUGA&quot;,
 #                             gp=gpar(fontsize=20,font=3)))
-#dev.off()</code></pre>
+#dev.off()
+
+p.gbrs &lt;- list()
+#plot GBRS side by side
+for (sg in sigma){
+  print(sg)
+  p.gbrs[[sg]] &lt;- ggplot(cislod.282.plot, aes(qgrid)) + 
+    geom_line(aes(y = lod.gbrs, colour = &quot;GBRS&quot;)) +
+    xlab(&quot;Quantile of LODs&quot;) +
+    ylab(&quot;LOD of cis-eQTL&quot;) +
+    scale_y_continuous(limits=c(0, 120)) +
+    theme(plot.title = element_text(hjust = 0.5), legend.title=element_text(size=20),legend.text=element_text(size=20)) +
+    theme(axis.text=element_text(size=16),axis.title=element_text(size=16,face=&quot;bold&quot;)) +
+    guides(color = guide_legend(override.aes = list(size=5)))
+}
+# [1] &quot;0.110&quot;
+# [1] &quot;0.115&quot;
+# [1] &quot;0.120&quot;
+# [1] &quot;0.125&quot;
+# [1] &quot;0.130&quot;
+grid.arrange(p.gbrs[[1]],p.gbrs[[2]],p.gbrs[[3]],p.gbrs[[4]],p.gbrs[[5]], ncol=5,
+            top = textGrob(&quot;Cis-eQTL between GBRS282 of different sigmas&quot;,
+            gp=gpar(fontsize=20,font=3)))</code></pre>
+<p><img src="figure/Cis-eQTL.Rmd/Cis-eQTL%20between%20MUGA282%20and%20GBRS282-6.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Cis-eQTL between MUGA282 and GBRS282-6.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/68ba02d4ac51541f4d88098cb1312b8452074164/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MUGA282 and GBRS282-6.png" target="_blank">68ba02d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7ba11656b7324f9091573a12ba71c8218b05ed4e/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MUGA282 and GBRS282-6.png" target="_blank">7ba1165</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
+#all GBRS line in one plot
+cislod.282.GBRSplot &lt;- data.frame(
+qgrid = seq(from=0.55, to=0.999, length=100), 
+x1= quantile(lod.GBRS282$`0.110`$lod[!is.nan(lod.GBRS282$`0.110`$lod)], seq(from=0.55, to=0.999, length=100)),
+x2= quantile(lod.GBRS282$`0.115`$lod[!is.nan(lod.GBRS282$`0.115`$lod)], seq(from=0.55, to=0.999, length=100)),
+x3= quantile(lod.GBRS282$`0.120`$lod[!is.nan(lod.GBRS282$`0.120`$lod)], seq(from=0.55, to=0.999, length=100)),
+x4= quantile(lod.GBRS282$`0.125`$lod[!is.nan(lod.GBRS282$`0.125`$lod)], seq(from=0.55, to=0.999, length=100)),
+x5= quantile(lod.GBRS282$`0.130`$lod[!is.nan(lod.GBRS282$`0.130`$lod)], seq(from=0.55, to=0.999, length=100))
+)
+p &lt;-ggplot(cislod.282.GBRSplot, aes(qgrid)) + 
+    geom_line(aes(y = x1, colour = &quot;0.110&quot;)) +
+    geom_line(aes(y = x2, colour = &quot;0.115&quot;)) +
+    geom_line(aes(y = x3, colour = &quot;0.120&quot;)) +
+    geom_line(aes(y = x4, colour = &quot;0.125&quot;)) +
+    geom_line(aes(y = x5, colour = &quot;0.130&quot;)) +
+    xlab(&quot;Quantile of LODs&quot;) +
+    ylab(&quot;LOD of cis-eQTL&quot;) +
+    scale_y_continuous(limits=c(0, 120)) +
+    theme(plot.title = element_text(hjust = 0.5), legend.title=element_text(size=20),legend.text=element_text(size=20)) +
+    theme(axis.text=element_text(size=16),axis.title=element_text(size=16,face=&quot;bold&quot;)) +
+    guides(color = guide_legend(override.aes = list(size=5)))
+print(p)</code></pre>
+<p><img src="figure/Cis-eQTL.Rmd/Cis-eQTL%20between%20MUGA282%20and%20GBRS282-7.png" width="1920" style="display: block; margin: auto;" /></p>
 </div>
 <div id="cis-eqtl-between-megamuga200-and-gbrs200" class="section level1">
 <h1>Cis-eQTL between MEGAMUGA200 and GBRS200</h1>
@@ -875,16 +1005,22 @@ xhyuo
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.megamuga200.RData&quot;)
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.GBRS200.RData&quot;)
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.combine200.fix.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.fixed.megamuga200.RData&quot;)
 
 # sigma
 sigma = c(&quot;0.110&quot;, &quot;0.115&quot;, &quot;0.120&quot;, &quot;0.125&quot;, &quot;0.130&quot;)
 lod.megamuga200 &lt;- list()
+lod.fixedmuga200 &lt;- list()
 lod.GBRS200 &lt;- list()
 lod.combine200 &lt;- list()
+
 for (sg in sigma){
   print(sg)
   lod.megamuga200[[sg]] &lt;- data.frame(gene = names(cis.eqtl.megamuga200[[sg]]),
                                       lod = unlist(cis.eqtl.megamuga200[[sg]]))
+  
+  lod.fixedmuga200[[sg]] &lt;- data.frame(gene = names(cis.eqtl.fixed.megamuga200[[sg]]),
+                                       lod = unlist(cis.eqtl.fixed.megamuga200[[sg]]))
   
   lod.GBRS200[[sg]] &lt;- data.frame(gene = names(cis.eqtl.GBRS200[[sg]]),
                                   lod = unlist(cis.eqtl.GBRS200[[sg]]))
@@ -904,12 +1040,14 @@ for (sg in sigma){
   cislod.200.plot &lt;- data.frame(qgrid = seq(from=0.55, to=0.999, length=100), 
                                 lod.gbrs = quantile(lod.GBRS200[[sg]]$lod[!is.nan(lod.GBRS200[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
                                 lod.array = quantile(lod.megamuga200[[sg]]$lod[!is.nan(lod.megamuga200[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
+                                lod.fixed = quantile(lod.fixedmuga200[[sg]]$lod[!is.nan(lod.fixedmuga200[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)),
                                 lod.combine = quantile(lod.combine200[[sg]]$lod[!is.nan(lod.combine200[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)))
 
   p[[sg]] &lt;- ggplot(cislod.200.plot, aes(qgrid)) + 
-  geom_line(aes(y = lod.array, colour = &quot;MEGAMUGA&quot;)) +
-  geom_line(aes(y = lod.gbrs, colour = &quot;GBRS&quot;)) +
-  geom_line(aes(y = lod.combine, colour = &quot;Combine&quot;)) +
+    geom_line(aes(y = lod.gbrs, colour = &quot;GBRS&quot;)) +
+    geom_line(aes(y = lod.fixed, colour = &quot;FIXED MEGAMUGA&quot;)) +
+    geom_line(aes(y = lod.combine, colour = &quot;Combine&quot;)) +
+    geom_line(aes(y = lod.array, colour = &quot;MEGAMUGA&quot;)) +
   xlab(&quot;Quantile of LODs&quot;) +
   ylab(&quot;LOD of cis-eQTL&quot;) +
   scale_y_continuous(limits=c(0, 85)) +
@@ -937,6 +1075,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/09c3f857f9d66e01923fa6891da8495280339bb2/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-1.png" target="_blank">09c3f85</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/34357f81b8fc03e2868ab6a6d3eeffcae989c0bd/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-1.png" target="_blank">34357f8</a>
@@ -993,6 +1142,17 @@ Date
 <tbody>
 <tr>
 <td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/09c3f857f9d66e01923fa6891da8495280339bb2/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-2.png" target="_blank">09c3f85</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/34357f81b8fc03e2868ab6a6d3eeffcae989c0bd/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-2.png" target="_blank">34357f8</a>
 </td>
 <td style="text-align:left;">
@@ -1045,6 +1205,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/09c3f857f9d66e01923fa6891da8495280339bb2/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-3.png" target="_blank">09c3f85</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/34357f81b8fc03e2868ab6a6d3eeffcae989c0bd/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-3.png" target="_blank">34357f8</a>
@@ -1101,6 +1272,17 @@ Date
 <tbody>
 <tr>
 <td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/09c3f857f9d66e01923fa6891da8495280339bb2/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-4.png" target="_blank">09c3f85</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/34357f81b8fc03e2868ab6a6d3eeffcae989c0bd/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-4.png" target="_blank">34357f8</a>
 </td>
 <td style="text-align:left;">
@@ -1155,6 +1337,17 @@ Date
 <tbody>
 <tr>
 <td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/09c3f857f9d66e01923fa6891da8495280339bb2/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-5.png" target="_blank">09c3f85</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/34357f81b8fc03e2868ab6a6d3eeffcae989c0bd/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-5.png" target="_blank">34357f8</a>
 </td>
 <td style="text-align:left;">
@@ -1194,7 +1387,95 @@ xhyuo
 # grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=5,
 #              top = textGrob(&quot;Cis-eQTL between GBRS and MEGAMUGA&quot;,
 #                             gp=gpar(fontsize=20,font=3)))
-#dev.off()</code></pre>
+#dev.off()
+
+p.gbrs &lt;- list()
+#plot GBRS side by side
+for (sg in sigma){
+  print(sg)
+  p.gbrs[[sg]] &lt;- ggplot(cislod.200.plot, aes(qgrid)) + 
+    geom_line(aes(y = lod.gbrs, colour = &quot;GBRS&quot;)) +
+    xlab(&quot;Quantile of LODs&quot;) +
+    ylab(&quot;LOD of cis-eQTL&quot;) +
+    scale_y_continuous(limits=c(0, 120)) +
+    theme(plot.title = element_text(hjust = 0.5), legend.title=element_text(size=20),legend.text=element_text(size=20)) +
+    theme(axis.text=element_text(size=16),axis.title=element_text(size=16,face=&quot;bold&quot;)) +
+    guides(color = guide_legend(override.aes = list(size=5)))
+}
+# [1] &quot;0.110&quot;
+# [1] &quot;0.115&quot;
+# [1] &quot;0.120&quot;
+# [1] &quot;0.125&quot;
+# [1] &quot;0.130&quot;
+grid.arrange(p.gbrs[[1]],p.gbrs[[2]],p.gbrs[[3]],p.gbrs[[4]],p.gbrs[[5]], ncol=5,
+            top = textGrob(&quot;Cis-eQTL between GBRS200 of different sigmas&quot;,
+            gp=gpar(fontsize=20,font=3)))</code></pre>
+<p><img src="figure/Cis-eQTL.Rmd/Cis-eQTL%20between%20MEGAMUGA200%20and%20GBRS200-6.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Cis-eQTL between MEGAMUGA200 and GBRS200-6.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/68ba02d4ac51541f4d88098cb1312b8452074164/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-6.png" target="_blank">68ba02d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7ba11656b7324f9091573a12ba71c8218b05ed4e/docs/figure/Cis-eQTL.Rmd/Cis-eQTL between MEGAMUGA200 and GBRS200-6.png" target="_blank">7ba1165</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
+#all GBRS line in one plot
+cislod.200.GBRSplot &lt;- data.frame(
+qgrid = seq(from=0.55, to=0.999, length=100), 
+x1= quantile(lod.GBRS200$`0.110`$lod[!is.nan(lod.GBRS200$`0.110`$lod)], seq(from=0.55, to=0.999, length=100)),
+x2= quantile(lod.GBRS200$`0.115`$lod[!is.nan(lod.GBRS200$`0.115`$lod)], seq(from=0.55, to=0.999, length=100)),
+x3= quantile(lod.GBRS200$`0.120`$lod[!is.nan(lod.GBRS200$`0.120`$lod)], seq(from=0.55, to=0.999, length=100)),
+x4= quantile(lod.GBRS200$`0.125`$lod[!is.nan(lod.GBRS200$`0.125`$lod)], seq(from=0.55, to=0.999, length=100)),
+x5= quantile(lod.GBRS200$`0.130`$lod[!is.nan(lod.GBRS200$`0.130`$lod)], seq(from=0.55, to=0.999, length=100))
+)
+p &lt;-ggplot(cislod.200.GBRSplot, aes(qgrid)) + 
+    geom_line(aes(y = x1, colour = &quot;0.110&quot;)) +
+    geom_line(aes(y = x2, colour = &quot;0.115&quot;)) +
+    geom_line(aes(y = x3, colour = &quot;0.120&quot;)) +
+    geom_line(aes(y = x4, colour = &quot;0.125&quot;)) +
+    geom_line(aes(y = x5, colour = &quot;0.130&quot;)) +
+    xlab(&quot;Quantile of LODs&quot;) +
+    ylab(&quot;LOD of cis-eQTL&quot;) +
+    scale_y_continuous(limits=c(0, 120)) +
+    theme(plot.title = element_text(hjust = 0.5), legend.title=element_text(size=20),legend.text=element_text(size=20)) +
+    theme(axis.text=element_text(size=16),axis.title=element_text(size=16,face=&quot;bold&quot;)) +
+    guides(color = guide_legend(override.aes = list(size=5)))
+print(p)</code></pre>
+<p><img src="figure/Cis-eQTL.Rmd/Cis-eQTL%20between%20MEGAMUGA200%20and%20GBRS200-7.png" width="1920" style="display: block; margin: auto;" /></p>
 </div>
 <div id="cis-eqtl-between-gigamuga369-and-gbrs369" class="section level1">
 <h1>Cis-eQTL between GIGAMUGA369 and GBRS369</h1>
@@ -1202,26 +1483,32 @@ xhyuo
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.gigamuga369.RData&quot;)
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.GBRS369.RData&quot;)
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.combine369.fix.RData&quot;)
-
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/cis.eqtl.fixed369.RData&quot;)
 
 lod.gigamuga369 &lt;- data.frame(gene = names(cis.eqtl.gigamuga369),
                                       lod = unlist(cis.eqtl.gigamuga369))
-  
+
+lod.fixed369 &lt;- data.frame(gene = names(cis.eqtl.fixed369),
+                                      lod = unlist(cis.eqtl.fixed369))
+
 lod.GBRS369 &lt;- data.frame(gene = names(cis.eqtl.GBRS369),
                                   lod = unlist(cis.eqtl.GBRS369))
   
 lod.combine369 &lt;- data.frame(gene = names(cis.eqtl.combine369),
                                      lod = unlist(cis.eqtl.combine369))
 
+
 #plot
 cislod.369.plot &lt;- data.frame(qgrid = seq(from=0.55, to=0.999, length=100), 
                                 lod.gbrs = quantile(lod.GBRS369$lod[!is.nan(lod.GBRS369$lod)], seq(from=0.55, to=0.999, length=100)),
                                 lod.array = quantile(lod.gigamuga369$lod[!is.nan(lod.gigamuga369$lod)], seq(from=0.55, to=0.999, length=100)),
+                                lod.fixed = quantile(lod.fixed369$lod[!is.nan(lod.fixed369$lod)], seq(from=0.55, to=0.999, length=100)),
                                 lod.combine = quantile(lod.combine369$lod[!is.nan(lod.combine369$lod)], seq(from=0.55, to=0.999, length=100)))
 p &lt;- ggplot(cislod.369.plot, aes(qgrid)) + 
-     geom_line(aes(y = lod.array, colour = &quot;GIGAMUGA&quot;)) +
-     geom_line(aes(y = lod.gbrs, colour = &quot;GBRS&quot;)) +
-     geom_line(aes(y = lod.combine, colour = &quot;Combine&quot;)) +
+       geom_line(aes(y = lod.gbrs, colour = &quot;GBRS&quot;)) +
+       geom_line(aes(y = lod.fixed, colour = &quot;FIXED GIGAMUGA&quot;)) +
+       geom_line(aes(y = lod.combine, colour = &quot;Combine&quot;)) +
+       geom_line(aes(y = lod.array, colour = &quot;GIGAMUGA&quot;)) +
      xlab(&quot;Quantile of LODs&quot;) +
      ylab(&quot;LOD of cis-eQTL&quot;) +
      scale_y_continuous(limits=c(0, 160)) +
