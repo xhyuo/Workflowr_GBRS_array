@@ -208,7 +208,7 @@ p2 <-ggplot(recomb.muga.plot, aes(x = Gen, y = recomb)) +
   geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
   theme(legend.position="none") +
   geom_smooth(method = "lm", se=FALSE, color="black", aes(group=1), linetype="dotted") +
-  geom_text(x = 2, y = 700, size = 4, 
+  geom_text(x = 2, y = 700, size = 3, 
             label = lm_eqn(df = data.frame(y = recomb.muga.plot$recomb, x = recomb.muga.plot$Gen)),
             parse = TRUE) +
   labs(x = "DO Outbreeding Generations") +
@@ -216,7 +216,7 @@ p2 <-ggplot(recomb.muga.plot, aes(x = Gen, y = recomb)) +
   scale_x_discrete(limits=c("4","7","11")) +
   ylim(100, 700) +
   theme(plot.title = element_text(hjust = 0.5)) +
-  theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
+  theme(axis.text=element_text(size=12),axis.title=element_text(size=12,face="bold"))
 print(p2)
 
 #gbrs200
@@ -238,7 +238,7 @@ for (sg in sigma){
     geom_jitter(position = position_jitter(0.25), aes(colour = Gen)) +
     theme(legend.position="none") +
     geom_smooth(method = "lm", se=FALSE, color="black", aes(group=1), linetype="dotted") +
-    geom_text(x = 2, y = 700, size = 4, 
+    geom_text(x = 2, y = 700, size = 3, 
             label = lm_eqn(df = data.frame(y = recomb.GBRS.plot$recomb, x = recomb.GBRS.plot$Gen)),
             parse = TRUE) +
     labs(x = "DO Outbreeding Generations") +
@@ -246,7 +246,7 @@ for (sg in sigma){
     scale_x_discrete(limits=c("4","7","11")) +
     ylim(100, 700) +
     theme(plot.title = element_text(hjust = 0.5)) +
-    theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
+    theme(axis.text=element_text(size=12),axis.title=element_text(size=12,face="bold"))
   print(p[[sg]])
 }
 #plot between GBRS and MUGA
@@ -292,16 +292,15 @@ for (sg in sigma){
     labs(x = "DO Outbreeding Generations") +
     labs(y = paste0("Number of Recombinations (GBRS,sigma =", sg, "), (Genotypes)")) +
     scale_x_discrete(limits=c("4","7","11")) +
-    theme(plot.title = element_text(hjust = 0.5)) +
     ylim(100, 600) +
     theme(plot.title = element_text(hjust = 0.5)) +
-    theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
+    theme(axis.text=element_text(size=12),axis.title=element_text(size=12,face="bold"))
   
   print(p[[sg]])
   
 }
 #plot between GBRS sigmas
-grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=5,top = textGrob("Recombination events of GBRS200 Genotypes in different sigmas",gp=gpar(fontsize=12,font=2)))
+grid.arrange(p[[1]],p[[2]],p[[3]],p[[4]],p[[5]], ncol=5,top = textGrob("Recombination events of GBRS200 Genotypes in different sigmas",gp=gpar(fontsize=10,font=1)))
 
 summary.tab.genotype <- do.call(rbind.data.frame,summary.tab)
 rownames(summary.tab.genotype) <- NULL
