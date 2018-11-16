@@ -85,6 +85,9 @@ p.gbrs <- list()
 #plot GBRS side by side
 for (sg in sigma){
   print(sg)
+  cislod.282.plot <- data.frame(qgrid = seq(from=0.55, to=0.999, length=100), 
+                                lod.gbrs = quantile(lod.GBRS282[[sg]]$lod[!is.nan(lod.GBRS282[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)))
+  
   p.gbrs[[sg]] <- ggplot(cislod.282.plot, aes(qgrid)) + 
     geom_line(aes(y = lod.gbrs, colour = "GBRS")) +
     xlab("Quantile of LODs") +
@@ -186,6 +189,8 @@ p.gbrs <- list()
 #plot GBRS side by side
 for (sg in sigma){
   print(sg)
+  cislod.200.plot <- data.frame(qgrid = seq(from=0.55, to=0.999, length=100), 
+                                lod.gbrs = quantile(lod.GBRS200[[sg]]$lod[!is.nan(lod.GBRS200[[sg]]$lod)], seq(from=0.55, to=0.999, length=100)))
   p.gbrs[[sg]] <- ggplot(cislod.200.plot, aes(qgrid)) + 
     geom_line(aes(y = lod.gbrs, colour = "GBRS")) +
     xlab("Quantile of LODs") +
