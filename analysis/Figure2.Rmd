@@ -1,0 +1,161 @@
+---
+title: "Figure2"
+author: "Hao He"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+  toc: true
+vignette: >
+  %\VignetteIndexEntry{Figure2}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE)
+```
+
+# Figure 2. Correlations
+a) Let’s try a single histogram (or maybe density plot?) that shows all three array types. But let’s not filter out the unmatching samples (bars in low correlation regions) to show there exist considerable sample mixups across datasets.
+b) Gary wanted to count how many times genotype calls agree/disagree between GBRS and arrays along 69k grid points. I am thinking this should be a table.
+
+```{r Figure 2, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+library(sinaplot)
+library(ggplot2)
+library(plyr)
+
+#load mismatch results to get the correlation
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_muga275GBRS.RData")
+muga.cor <- mismatch_muga275GBRS$`0.130`
+muga.cor$array <- "MUGA"
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_megamuga184GBRS.RData")
+megamuga.cor <- mismatch_megamuga184GBRS$`0.130`
+megamuga.cor$array <- "MEGAMUGA"
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_gigamuga358GBRS.RData")
+gigamuga.cor <- mismatch_gigamuga358GBRS
+gigamuga.cor$array <- "GIGAMUGA"
+#correlation results
+gbrs.array.cor <- rbind(rbind(muga.cor,megamuga.cor),gigamuga.cor)
+#histgram
+#pdf(file = "Figure2_correlation_histogram.pdf", width = 12, height = 10)
+p <- ggplot(gbrs.array.cor, aes(x=self.cor, fill = array)) +
+  geom_histogram(alpha=0.70, position="identity",binwidth=0.005) +
+  scale_color_manual(values=c("green3", "blue", "cyan")) +
+  scale_fill_manual(values=c("green3", "blue", "cyan")) +
+  labs(x = "Correlation between GBRS and Array") +
+  labs(y = "Count") +
+  #scale_x_discrete(limits=c(-0.02,1)) +
+  scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
+  theme(legend.title=element_blank(), text = element_text(size=20), 
+        axis.title=element_text(size=14,face="bold"))
+p
+#dev.off()
+```
+
+# Get agree table
+```{r Agree table, message=FALSE, eval=FALSE}
+# Library -----------------------------------------------------------------
+# Load packages
+library(qtl2)
+library(tidyr)
+library(dplyr)
+library(data.table)
+library(abind)
+
+#MUGA -----------------------------------------------------------------
+#load muga275.probs.69kchr  
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/MG/muga275.probs.69kchr.RData")
+#For each individual at each position, find the genotype with the maximum marginal probability.
+muga275.g <- maxmarg(muga275.probs.69kchr,cores = 20)
+muga275.g <- do.call("abind",list(muga275.g,along = 2))
+
+#GBRS275.geno.probs
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/GBRS/GBRS275.geno.probs.RData")
+attr(GBRS275.geno.probs, "crosstype") <- "do"
+attr(GBRS275.geno.probs, "is_x_chr") <- structure(c(rep(FALSE,19),TRUE), names=1:20)
+attr(GBRS275.geno.probs, "alleles") <- LETTERS[1:8]
+attr(GBRS275.geno.probs, "alleleprobs") <- FALSE
+attr(GBRS275.geno.probs, "class") <- c("calc_genoprob", "list")
+gbrs275.g <- maxmarg(GBRS275.geno.probs$`0.130`,cores = 20)
+gbrs275.g <- do.call("abind",list(gbrs275.g,along = 2))
+
+#agree and disagree in muga275
+muga275.z <- muga275.g == gbrs275.g
+muga275.z1 <- apply(muga275.z,1, function(x){length(which(x == TRUE))})
+muga275.z2 <- apply(muga275.z,1, function(x){length(which(x == FALSE))})
+
+#MEGAMUGA -----------------------------------------------------------------
+#load megamuga184.probs.69kchr  
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/MM/megamuga184.probs.69kchr.RData")
+#For each individual at each position, find the genotype with the maximum marginal probability.
+megamuga184.g <- maxmarg(megamuga184.probs.69kchr,cores = 20)
+megamuga184.g <- do.call("abind",list(megamuga184.g,along = 2))
+
+#GBRS184.geno.probs
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/GBRS/GBRS184.geno.probs.RData")
+attr(GBRS184.geno.probs, "crosstype") <- "do"
+attr(GBRS184.geno.probs, "is_x_chr") <- structure(c(rep(FALSE,19),TRUE), names=1:20)
+attr(GBRS184.geno.probs, "alleles") <- LETTERS[1:8]
+attr(GBRS184.geno.probs, "alleleprobs") <- FALSE
+attr(GBRS184.geno.probs, "class") <- c("calc_genoprob", "list")
+gbrs184.g <- maxmarg(GBRS184.geno.probs$`0.130`,cores = 20)
+gbrs184.g <- do.call("abind",list(gbrs184.g,along = 2))
+
+#agree and disagree in megamuga184
+megamuga184.z <- megamuga184.g == gbrs184.g
+megamuga184.z1 <- apply(megamuga184.z,1, function(x){length(which(x == TRUE))})
+megamuga184.z2 <- apply(megamuga184.z,1, function(x){length(which(x == FALSE))})
+
+#GIGAMUGA -----------------------------------------------------------------
+#load gigamuga358.probs.69kchr  
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/GM/gigamuga358.probs.69kchr.RData")
+#For each individual at each position, find the genotype with the maximum marginal probability.
+gigamuga358.g <- maxmarg(gigamuga358.probs.69kchr,cores = 20)
+gigamuga358.g <- do.call("abind",list(gigamuga358.g,along = 2))
+
+#GBRS358.geno.probs
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/GBRS/GBRS358.geno.probs.RData")
+attr(GBRS358.geno.probs, "crosstype") <- "do"
+attr(GBRS358.geno.probs, "is_x_chr") <- structure(c(rep(FALSE,19),TRUE), names=1:20)
+attr(GBRS358.geno.probs, "alleles") <- LETTERS[1:8]
+attr(GBRS358.geno.probs, "alleleprobs") <- FALSE
+attr(GBRS358.geno.probs, "class") <- c("calc_genoprob", "list")
+gbrs358.g <- maxmarg(GBRS358.geno.probs,cores = 20)
+gbrs358.g <- do.call("abind",list(gbrs358.g,along = 2))
+
+#agree and disagree in gigamuga358
+gigamuga358.z <- gigamuga358.g == gbrs358.g
+gigamuga358.z1 <- apply(gigamuga358.z,1, function(x){length(which(x == TRUE))})
+gigamuga358.z2 <- apply(gigamuga358.z,1, function(x){length(which(x == FALSE))})
+
+
+# Summary table for agree and disagree ------------------------------------
+tab <- data.frame(Array = c("MUGA", "MEGAMUGA", "GIGAMUGA"),
+                  
+                  Agree = c( paste0(round(mean(muga275.z1),2), " ± ", round(sd(muga275.z1), 2)),
+                             paste0(round(mean(megamuga184.z1),2), " ± ", round(sd(megamuga184.z1), 2)),
+                             paste0(round(mean(gigamuga358.z1),2), " ± ", round(sd(gigamuga358.z1), 2))),
+                  
+                  Disagree = c( paste0(round(mean(muga275.z2),2), " ± ", round(sd(muga275.z2), 2)),
+                             paste0(round(mean(megamuga184.z2),2), " ± ", round(sd(megamuga184.z2), 2)),
+                             paste0(round(mean(gigamuga358.z2),2), " ± ", round(sd(gigamuga358.z2), 2))),
+                  
+                  total.percentage.agree = c( round(100*sum(muga275.z1)/c(dim(muga275.z)[1]*dim(muga275.z)[2]),3),
+                                              round(100*sum(megamuga184.z1)/c(dim(megamuga184.z)[1]*dim(megamuga184.z)[2]),3),
+                                              round(100*sum(gigamuga358.z1)/c(dim(gigamuga358.z)[1]*dim(gigamuga358.z)[2]),3)),
+                  
+                  total.percentage.disagree = c( round(100*sum(muga275.z2)/c(dim(muga275.z)[1]*dim(muga275.z)[2]),3),
+                                                 round(100*sum(megamuga184.z2)/c(dim(megamuga184.z)[1]*dim(megamuga184.z)[2]),3),
+                                                 round(100*sum(gigamuga358.z2)/c(dim(gigamuga358.z)[1]*dim(gigamuga358.z)[2]),3)))
+write.csv(tab, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.csv")  
+save(tab, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.RData")  
+```
+
+# show agree table
+```{r, message=FALSE, eval=TRUE}
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.RData")                       
+#display summary table
+DT::datatable(tab,options = list(pageLength = 5, scrollY = "8px", scrollX = "20px"))
+```
+
+

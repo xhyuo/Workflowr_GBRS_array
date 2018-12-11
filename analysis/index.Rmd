@@ -18,9 +18,11 @@ To evaluate the performance of GBRS by comparing its genoprob with arraybased ge
 
 ## Recombinations
 * [Recombinations](Recombination.html)
+* [Figure1](Figure1.html)
 
 ## Pearson correlation between genoprobs
 * [Correlations](Correlation.html)
+* [Figure2](Figure2.html)
 
 ## LODs on local eQTLs
 * [Cis-eQTLs](Cis-eQTL.html)
