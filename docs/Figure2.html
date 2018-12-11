@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Hao He" />
+
+<meta name="date" content="2018-12-11" />
+
+<title>Figure2</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.4/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Workflowr_GBRS_array</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jdblischak/workflowr">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Figure2</h1>
+<h4 class="author"><em>Hao He</em></h4>
+<h4 class="date"><em>2018-12-11</em></h4>
+
+</div>
+
+
+<p><strong>Last updated:</strong> 2018-12-11</p>
+<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
+<ul>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Environment:</strong> empty </summary></p>
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Seed:</strong> <code>set.seed(20181011)</code> </summary></p>
+<p>The command <code>set.seed(20181011)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Session information:</strong> recorded </summary></p>
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/02ee9e0077aebf34669dffc9707015274f397b4f" target="_blank">02ee9e0</a> </summary></p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+<pre><code>
+Ignored files:
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  analysis/Figure1_by_vit.R
+    Untracked:  analysis/Figure3.Rmd
+    Untracked:  analysis/old_analysis/
+    Untracked:  docs/figure/Figure1.Rmd/
+    Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
+    Untracked:  output/DO_Liver/
+    Untracked:  output/DO_Striatum/
+
+Unstaged changes:
+    Modified:   analysis/Recombination.Rmd
+    Deleted:    analysis/recombinations_in_DO_Liver_MEGAMUGA.Rmd
+    Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
+
+</code></pre>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
+</li>
+</ul>
+<details> <summary> <small><strong>Expand here to see past versions:</strong></small> </summary>
+<ul>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/02ee9e0077aebf34669dffc9707015274f397b4f/analysis/Figure2.Rmd" target="_blank">02ee9e0</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-11
+</td>
+<td style="text-align:left;">
+Figure12
+</td>
+</tr>
+</tbody>
+</table>
+</ul>
+<p></details></p>
+<hr />
+<div id="figure-2.-correlations" class="section level1">
+<h1>Figure 2. Correlations</h1>
+<ol style="list-style-type: lower-alpha">
+<li>Let’s try a single histogram (or maybe density plot?) that shows all three array types. But let’s not filter out the unmatching samples (bars in low correlation regions) to show there exist considerable sample mixups across datasets.</li>
+<li>Gary wanted to count how many times genotype calls agree/disagree between GBRS and arrays along 69k grid points. I am thinking this should be a table.</li>
+</ol>
+<pre class="r"><code>library(sinaplot)
+library(ggplot2)
+library(plyr)
+
+#load mismatch results to get the correlation
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_muga275GBRS.RData&quot;)
+muga.cor &lt;- mismatch_muga275GBRS$`0.130`
+muga.cor$array &lt;- &quot;MUGA&quot;
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_megamuga184GBRS.RData&quot;)
+megamuga.cor &lt;- mismatch_megamuga184GBRS$`0.130`
+megamuga.cor$array &lt;- &quot;MEGAMUGA&quot;
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_gigamuga358GBRS.RData&quot;)
+gigamuga.cor &lt;- mismatch_gigamuga358GBRS
+gigamuga.cor$array &lt;- &quot;GIGAMUGA&quot;
+#correlation results
+gbrs.array.cor &lt;- rbind(rbind(muga.cor,megamuga.cor),gigamuga.cor)
+#histgram
+#pdf(file = &quot;Figure2_correlation_histogram.pdf&quot;, width = 12, height = 10)
+p &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, fill = array)) +
+  geom_histogram(alpha=0.70, position=&quot;identity&quot;,binwidth=0.005) +
+  scale_color_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  scale_fill_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  labs(x = &quot;Correlation between GBRS and Array&quot;) +
+  labs(y = &quot;Count&quot;) +
+  #scale_x_discrete(limits=c(-0.02,1)) +
+  scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
+  theme(legend.title=element_blank(), text = element_text(size=20), 
+        axis.title=element_text(size=14,face=&quot;bold&quot;))
+p</code></pre>
+<p><img src="figure/Figure2.Rmd/Figure%202-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+<div id="get-agree-table" class="section level1">
+<h1>Get agree table</h1>
+<pre class="r"><code># Library -----------------------------------------------------------------
+# Load packages
+library(qtl2)
+library(tidyr)
+library(dplyr)
+library(data.table)
+library(abind)
+
+#MUGA -----------------------------------------------------------------
+#load muga275.probs.69kchr  
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/MG/muga275.probs.69kchr.RData&quot;)
+#For each individual at each position, find the genotype with the maximum marginal probability.
+muga275.g &lt;- maxmarg(muga275.probs.69kchr,cores = 20)
+muga275.g &lt;- do.call(&quot;abind&quot;,list(muga275.g,along = 2))
+
+#GBRS275.geno.probs
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/GBRS/GBRS275.geno.probs.RData&quot;)
+attr(GBRS275.geno.probs, &quot;crosstype&quot;) &lt;- &quot;do&quot;
+attr(GBRS275.geno.probs, &quot;is_x_chr&quot;) &lt;- structure(c(rep(FALSE,19),TRUE), names=1:20)
+attr(GBRS275.geno.probs, &quot;alleles&quot;) &lt;- LETTERS[1:8]
+attr(GBRS275.geno.probs, &quot;alleleprobs&quot;) &lt;- FALSE
+attr(GBRS275.geno.probs, &quot;class&quot;) &lt;- c(&quot;calc_genoprob&quot;, &quot;list&quot;)
+gbrs275.g &lt;- maxmarg(GBRS275.geno.probs$`0.130`,cores = 20)
+gbrs275.g &lt;- do.call(&quot;abind&quot;,list(gbrs275.g,along = 2))
+
+#agree and disagree in muga275
+muga275.z &lt;- muga275.g == gbrs275.g
+muga275.z1 &lt;- apply(muga275.z,1, function(x){length(which(x == TRUE))})
+muga275.z2 &lt;- apply(muga275.z,1, function(x){length(which(x == FALSE))})
+
+#MEGAMUGA -----------------------------------------------------------------
+#load megamuga184.probs.69kchr  
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/MM/megamuga184.probs.69kchr.RData&quot;)
+#For each individual at each position, find the genotype with the maximum marginal probability.
+megamuga184.g &lt;- maxmarg(megamuga184.probs.69kchr,cores = 20)
+megamuga184.g &lt;- do.call(&quot;abind&quot;,list(megamuga184.g,along = 2))
+
+#GBRS184.geno.probs
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/GBRS/GBRS184.geno.probs.RData&quot;)
+attr(GBRS184.geno.probs, &quot;crosstype&quot;) &lt;- &quot;do&quot;
+attr(GBRS184.geno.probs, &quot;is_x_chr&quot;) &lt;- structure(c(rep(FALSE,19),TRUE), names=1:20)
+attr(GBRS184.geno.probs, &quot;alleles&quot;) &lt;- LETTERS[1:8]
+attr(GBRS184.geno.probs, &quot;alleleprobs&quot;) &lt;- FALSE
+attr(GBRS184.geno.probs, &quot;class&quot;) &lt;- c(&quot;calc_genoprob&quot;, &quot;list&quot;)
+gbrs184.g &lt;- maxmarg(GBRS184.geno.probs$`0.130`,cores = 20)
+gbrs184.g &lt;- do.call(&quot;abind&quot;,list(gbrs184.g,along = 2))
+
+#agree and disagree in megamuga184
+megamuga184.z &lt;- megamuga184.g == gbrs184.g
+megamuga184.z1 &lt;- apply(megamuga184.z,1, function(x){length(which(x == TRUE))})
+megamuga184.z2 &lt;- apply(megamuga184.z,1, function(x){length(which(x == FALSE))})
+
+#GIGAMUGA -----------------------------------------------------------------
+#load gigamuga358.probs.69kchr  
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/GM/gigamuga358.probs.69kchr.RData&quot;)
+#For each individual at each position, find the genotype with the maximum marginal probability.
+gigamuga358.g &lt;- maxmarg(gigamuga358.probs.69kchr,cores = 20)
+gigamuga358.g &lt;- do.call(&quot;abind&quot;,list(gigamuga358.g,along = 2))
+
+#GBRS358.geno.probs
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/GBRS/GBRS358.geno.probs.RData&quot;)
+attr(GBRS358.geno.probs, &quot;crosstype&quot;) &lt;- &quot;do&quot;
+attr(GBRS358.geno.probs, &quot;is_x_chr&quot;) &lt;- structure(c(rep(FALSE,19),TRUE), names=1:20)
+attr(GBRS358.geno.probs, &quot;alleles&quot;) &lt;- LETTERS[1:8]
+attr(GBRS358.geno.probs, &quot;alleleprobs&quot;) &lt;- FALSE
+attr(GBRS358.geno.probs, &quot;class&quot;) &lt;- c(&quot;calc_genoprob&quot;, &quot;list&quot;)
+gbrs358.g &lt;- maxmarg(GBRS358.geno.probs,cores = 20)
+gbrs358.g &lt;- do.call(&quot;abind&quot;,list(gbrs358.g,along = 2))
+
+#agree and disagree in gigamuga358
+gigamuga358.z &lt;- gigamuga358.g == gbrs358.g
+gigamuga358.z1 &lt;- apply(gigamuga358.z,1, function(x){length(which(x == TRUE))})
+gigamuga358.z2 &lt;- apply(gigamuga358.z,1, function(x){length(which(x == FALSE))})
+
+
+# Summary table for agree and disagree ------------------------------------
+tab &lt;- data.frame(Array = c(&quot;MUGA&quot;, &quot;MEGAMUGA&quot;, &quot;GIGAMUGA&quot;),
+                  
+                  Agree = c( paste0(round(mean(muga275.z1),2), &quot; ± &quot;, round(sd(muga275.z1), 2)),
+                             paste0(round(mean(megamuga184.z1),2), &quot; ± &quot;, round(sd(megamuga184.z1), 2)),
+                             paste0(round(mean(gigamuga358.z1),2), &quot; ± &quot;, round(sd(gigamuga358.z1), 2))),
+                  
+                  Disagree = c( paste0(round(mean(muga275.z2),2), &quot; ± &quot;, round(sd(muga275.z2), 2)),
+                             paste0(round(mean(megamuga184.z2),2), &quot; ± &quot;, round(sd(megamuga184.z2), 2)),
+                             paste0(round(mean(gigamuga358.z2),2), &quot; ± &quot;, round(sd(gigamuga358.z2), 2))),
+                  
+                  total.percentage.agree = c( round(100*sum(muga275.z1)/c(dim(muga275.z)[1]*dim(muga275.z)[2]),3),
+                                              round(100*sum(megamuga184.z1)/c(dim(megamuga184.z)[1]*dim(megamuga184.z)[2]),3),
+                                              round(100*sum(gigamuga358.z1)/c(dim(gigamuga358.z)[1]*dim(gigamuga358.z)[2]),3)),
+                  
+                  total.percentage.disagree = c( round(100*sum(muga275.z2)/c(dim(muga275.z)[1]*dim(muga275.z)[2]),3),
+                                                 round(100*sum(megamuga184.z2)/c(dim(megamuga184.z)[1]*dim(megamuga184.z)[2]),3),
+                                                 round(100*sum(gigamuga358.z2)/c(dim(gigamuga358.z)[1]*dim(gigamuga358.z)[2]),3)))
+write.csv(tab, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.csv&quot;)  
+save(tab, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.RData&quot;)  </code></pre>
+</div>
+<div id="show-agree-table" class="section level1">
+<h1>show agree table</h1>
+<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.RData&quot;)                       
+#display summary table
+DT::datatable(tab,options = list(pageLength = 5, scrollY = &quot;8px&quot;, scrollX = &quot;20px&quot;))</code></pre>
+<div id="htmlwidget-61b14e40a9f168c7cdcc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-61b14e40a9f168c7cdcc">{"x":{"filter":"none","data":[["1","2","3"],["MUGA","MEGAMUGA","GIGAMUGA"],["5511.05 ± 2167.27","5972.88 ± 2049.69","5137.19 ± 1752.78"],["36156.69 ± 2894.7","40132.27 ± 2277.28","35212.15 ± 1857.05"],[7.986,8.656,7.445],[52.397,58.158,51.028]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Array<\/th>\n      <th>Agree<\/th>\n      <th>Disagree<\/th>\n      <th>total.percentage.agree<\/th>\n      <th>total.percentage.disagree<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":5,"scrollY":"8px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[5,10,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="session-information" class="section level2">
+<h2>Session information</h2>
+<pre class="r"><code>sessionInfo()
+# R version 3.3.2 (2016-10-31)
+# Platform: x86_64-pc-linux-gnu (64-bit)
+# Running under: CentOS release 6.7 (Final)
+# 
+# locale:
+#  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+#  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+#  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+#  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+#  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+# [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+# 
+# attached base packages:
+# [1] stats     graphics  grDevices utils     datasets  methods   base     
+# 
+# other attached packages:
+# [1] ggplot2_2.2.1  sinaplot_1.1.0 plyr_1.8.4    
+# 
+# loaded via a namespace (and not attached):
+#  [1] Rcpp_0.12.18      pillar_1.0.1      later_0.7.5      
+#  [4] git2r_0.23.0      workflowr_1.1.1   R.methodsS3_1.7.1
+#  [7] R.utils_2.5.0     tools_3.3.2       digest_0.6.13    
+# [10] jsonlite_1.5      evaluate_0.10     tibble_1.4.1     
+# [13] gtable_0.2.0      rlang_0.2.2       shiny_1.0.5      
+# [16] crosstalk_1.0.0   yaml_2.1.14       stringr_1.2.0    
+# [19] knitr_1.20        htmlwidgets_1.3   rprojroot_1.3-2  
+# [22] grid_3.3.2        DT_0.4            R6_2.2.2         
+# [25] rmarkdown_1.9     magrittr_1.5      whisker_0.3-2    
+# [28] backports_1.1.2   scales_0.4.1      promises_1.0.1   
+# [31] htmltools_0.3.6   mime_0.5          colorspace_1.3-2 
+# [34] xtable_1.8-2      httpuv_1.4.5      labeling_0.3     
+# [37] stringi_1.1.2     lazyeval_0.2.0    munsell_0.4.3    
+# [40] R.oo_1.21.0</code></pre>
+</div>
+</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<hr>
+<p>
+  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
+  analysis was created with
+  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
+</p>
+<hr>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

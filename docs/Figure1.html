@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Hao He" />
+
+<meta name="date" content="2018-12-11" />
+
+<title>Figure1</title>
+
+<script src="site_libs/jquery-1.12.4/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="site_libs/datatables-binding-0.4/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Workflowr_GBRS_array</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jdblischak/workflowr">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Figure1</h1>
+<h4 class="author"><em>Hao He</em></h4>
+<h4 class="date"><em>2018-12-11</em></h4>
+
+</div>
+
+
+<p><strong>Last updated:</strong> 2018-12-11</p>
+<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
+<ul>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Environment:</strong> empty </summary></p>
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Seed:</strong> <code>set.seed(20181011)</code> </summary></p>
+<p>The command <code>set.seed(20181011)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Session information:</strong> recorded </summary></p>
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/02ee9e0077aebf34669dffc9707015274f397b4f" target="_blank">02ee9e0</a> </summary></p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+<pre><code>
+Ignored files:
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  analysis/Figure1_by_vit.R
+    Untracked:  analysis/Figure3.Rmd
+    Untracked:  analysis/old_analysis/
+    Untracked:  docs/figure/Figure2.Rmd/
+    Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
+    Untracked:  output/DO_Liver/
+    Untracked:  output/DO_Striatum/
+
+Unstaged changes:
+    Modified:   analysis/Recombination.Rmd
+    Deleted:    analysis/recombinations_in_DO_Liver_MEGAMUGA.Rmd
+    Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
+
+</code></pre>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
+</li>
+</ul>
+<details> <summary> <small><strong>Expand here to see past versions:</strong></small> </summary>
+<ul>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/02ee9e0077aebf34669dffc9707015274f397b4f/analysis/Figure1.Rmd" target="_blank">02ee9e0</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-11
+</td>
+<td style="text-align:left;">
+Figure12
+</td>
+</tr>
+</tbody>
+</table>
+</ul>
+<p></details></p>
+<hr />
+<div id="figure-1.-the-number-of-recombinations" class="section level1">
+<h1>Figure 1. The number of recombinations</h1>
+<ol style="list-style-type: lower-alpha">
+<li><p>Why don’t we try a single Sinaplot that includes all the results (GBRS, Muga, Megamuga, and Gigamuga) across all existing generations. Please use genotype-call based recombinations for GBRS. For this manuscript, I like to pick sigma=0.130 which gets us a consistent slope value around 18-20. I believe though I should re-run GBRS for Striatum data since I used sigma=0.120.</p></li>
+<li><p>Gary wants a single scatterplot of array vs GBRS w.r.t # of recombinations. Each array type should be given a different color.</p></li>
+</ol>
+<pre class="r"><code>library(sinaplot)
+library(ggplot2)
+library(plyr)
+
+#load recombination results for three arrays
+#DO_liver
+#muga
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga275.recomb.RData&quot;)
+muga275.recomb$array &lt;- &quot;MUGA&quot;
+muga275.recomb$array.sub &lt;- &quot;MUGA&quot;
+#megamuga
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga184.recomb.RData&quot;)
+megamuga184.recomb$array &lt;- &quot;MEGAMUGA&quot;
+megamuga184.recomb$array.sub &lt;- &quot;MEGAMUGA&quot;
+#DO liver GBRS
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/DO_liver_recomb.GBRS.genotypes.RData&quot;)
+gbrs.genotype.recomb &lt;- recomb.GBRS.genotypes$`0.130`
+gbrs.genotype.recomb$array &lt;- &quot;GBRS&quot;
+gbrs.genotype.recomb$array.sub &lt;- NULL
+#GBRS.MUGA
+gbrs.genotype.recomb[gbrs.genotype.recomb$Sample %in% c(as.character(muga275.recomb$Sample)),&quot;array.sub&quot;] &lt;- &quot;GBRS.MUGA&quot;
+#GBRS.MEGAMUGA
+gbrs.genotype.recomb[gbrs.genotype.recomb$Sample %in% c(as.character(megamuga184.recomb$Sample)),&quot;array.sub&quot;] &lt;- &quot;GBRS.MEGAMUGA&quot;
+
+#DO_liver recombinations
+DO_liver_recomb &lt;- rbind(rbind(muga275.recomb,megamuga184.recomb),gbrs.genotype.recomb)
+#merge with sample sheet in DO_liver
+sample.sheet &lt;- read.table(&quot;/projects/heh/HH/GBRS_array/data/DO_Liver/sample_sheet.tsv&quot;, header = TRUE)
+DO_liver_recomb &lt;- merge(DO_liver_recomb,sample.sheet, by = &quot;Sample&quot;, all.x = TRUE)
+DO_liver_recomb &lt;- DO_liver_recomb[,c(1:6)]
+
+#DO_Striatum
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga358.recomb.RData&quot;)
+gigamuga358.recomb$array &lt;- &quot;GIGAMUGA&quot;
+gigamuga358.recomb$array.sub &lt;- &quot;GIGAMUGA&quot;
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/DO_Striatum_recomb.GBRS.genotypes.RData&quot;)
+gbrs.genotype.recomb &lt;- gbrs.genotype.recomb[gbrs.genotype.recomb$Sample %in% gigamuga358.recomb$Sample,]
+gbrs.genotype.recomb &lt;- recomb.GBRS.genotypes$`0.130`
+gbrs.genotype.recomb$array &lt;- &quot;GBRS&quot;
+gbrs.genotype.recomb$array.sub &lt;- &quot;GBRS.GIGAMUGA&quot;
+#DO_striatum recombinations
+DO_striatum_recomb &lt;- rbind(gigamuga358.recomb,gbrs.genotype.recomb)
+#merge with sample sheet in DO_Striatum
+sample.sheet &lt;- read.table(&quot;/projects/heh/HH/GBRS_array/data/DO_Striatum/sample_sheet.tsv&quot;, header = TRUE)
+DO_striatum_recomb &lt;- merge(DO_striatum_recomb,sample.sheet, by = &quot;Sample&quot;, all.x = TRUE)
+DO_striatum_recomb &lt;- DO_striatum_recomb[,c(1:6)]
+
+#all recomb results
+recomb &lt;- rbind(DO_liver_recomb,DO_striatum_recomb)
+recomb$Gen &lt;- as.factor(recomb$Gen)
+recomb$array &lt;- as.factor(recomb$array)
+recomb$array.sub &lt;- factor(recomb$array.sub, 
+                           levels = c(&quot;GBRS.MUGA&quot;, &quot;MUGA&quot;, 
+                                      &quot;GBRS.MEGAMUGA&quot;,&quot;MEGAMUGA&quot;,
+                                      &quot;GBRS.GIGAMUGA&quot;,&quot;GIGAMUGA&quot;))
+
+#get summary table for each generation per array
+summary.tab &lt;- ddply(recomb,.(array,Gen),
+                           summarise,mean = mean(recomb),var = var(recomb), n= length(recomb))
+#display summary table
+DT::datatable(summary.tab,options = list(pageLength = 100, scrollY = &quot;800px&quot;, scrollX = &quot;20px&quot;))</code></pre>
+<div id="htmlwidget-61b14e40a9f168c7cdcc" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-61b14e40a9f168c7cdcc">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"],["GBRS","GBRS","GBRS","GBRS","GBRS","GBRS","GBRS","GIGAMUGA","GIGAMUGA","GIGAMUGA","MEGAMUGA","MEGAMUGA","MEGAMUGA","MUGA","MUGA","MUGA"],["4","5","7","11","21","22","23","21","22","23","4","7","11","4","5","7"],[224.127659574468,236.595744680851,275.59375,348.411458333333,459.78,470.117647058824,485.578231292517,458.631944444444,472.845454545455,486.288461538462,190.5,249.5,336.556818181818,160.333333333333,172.065217391304,203.342391304348],[303.722479185939,208.68085106383,264.043520942408,302.054946553229,347.488187919463,359.257228315055,282.62911191874,314.150301087801,346.480483736447,311.100448095594,144.5,9.5,290.431038961039,123.318181818182,108.640096618357,126.084313376099],[47,47,192,192,150,119,147,144,110,104,2,6,176,45,46,184]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>array<\/th>\n      <th>Gen<\/th>\n      <th>mean<\/th>\n      <th>var<\/th>\n      <th>n<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":100,"scrollY":"800px","scrollX":"20px","columnDefs":[{"className":"dt-right","targets":[3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>
+#Figure1_sinaplot
+#color
+# GBRS &lt;- &quot;red&quot;,
+# MUGA &lt;- &quot;cyan&quot;,
+# MEGAMUGA &lt;- &quot;blue&quot;,
+# GIGAMUGA &lt;- &quot;green3&quot;
+#pdf(file = &quot;Figure1_sinaplot_array.sub.pdf&quot;, width = 12, height = 10)
+sinaplot(formula = recomb ~ array.sub, data = recomb, col = c(&quot;red&quot;,&quot;cyan&quot;,&quot;red&quot;,&quot;blue&quot;,&quot;red&quot;,&quot;green3&quot;), pch = c(15,18,15,17,15,16), bty = &quot;n&quot;,
+         xlab = &quot;&quot;,
+         ylab = &quot;Number of Recombinations&quot;,
+         ylim=c(50, 600), cex.axis=1.5, cex.lab=1.5, cex = 1.2)</code></pre>
+<p><img src="figure/Figure1.Rmd/Figure%201-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+
+#pdf(file = &quot;Figure1_sinaplot_array.pdf&quot;, width = 12, height = 10)
+sinaplot(formula = recomb ~ array, data = recomb, col = c(&quot;red&quot;,&quot;green3&quot;,&quot;blue&quot;,&quot;cyan&quot;), pch = c(15:18), bty = &quot;n&quot;,
+         xlab = &quot;DO Outbreeding Generations&quot;,
+         ylab = &quot;Number of Recombinations&quot;,
+         ylim=c(50, 600), cex.axis=1.5, cex.lab=1.5, cex = 1.2)</code></pre>
+<p><img src="figure/Figure1.Rmd/Figure%201-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+
+## sina plot
+#pdf(file = &quot;Figure1_scatterplot.pdf&quot;, width = 12, height = 10)
+p2 &lt;- ggplot(recomb, aes(x=Gen, y=recomb)) + 
+  geom_jitter(aes(color=array, shape = array), size = 3, position=position_jitter(0.25))+
+  scale_shape_manual(values=c(15:18))+
+  scale_color_manual(values=c(&quot;red&quot;,&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  scale_fill_manual(values=c(&quot;red&quot;,&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  labs(x = &quot;DO Outbreeding Generations&quot;) +
+  labs(y = &quot;Number of Recombinations&quot;) +
+  theme(legend.title=element_blank(), text = element_text(size=25), 
+        axis.title=element_text(size=20,face=&quot;bold&quot;))
+p2</code></pre>
+<p><img src="figure/Figure1.Rmd/Figure%201-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+<div id="session-information" class="section level2">
+<h2>Session information</h2>
+<pre class="r"><code>sessionInfo()
+# R version 3.3.2 (2016-10-31)
+# Platform: x86_64-pc-linux-gnu (64-bit)
+# Running under: CentOS release 6.7 (Final)
+# 
+# locale:
+#  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+#  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+#  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+#  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+#  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+# [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+# 
+# attached base packages:
+# [1] stats     graphics  grDevices utils     datasets  methods   base     
+# 
+# other attached packages:
+# [1] ggplot2_2.2.1  sinaplot_1.1.0 plyr_1.8.4    
+# 
+# loaded via a namespace (and not attached):
+#  [1] Rcpp_0.12.18      pillar_1.0.1      later_0.7.5      
+#  [4] git2r_0.23.0      workflowr_1.1.1   R.methodsS3_1.7.1
+#  [7] R.utils_2.5.0     tools_3.3.2       digest_0.6.13    
+# [10] jsonlite_1.5      evaluate_0.10     tibble_1.4.1     
+# [13] gtable_0.2.0      rlang_0.2.2       shiny_1.0.5      
+# [16] crosstalk_1.0.0   yaml_2.1.14       stringr_1.2.0    
+# [19] knitr_1.20        htmlwidgets_1.3   rprojroot_1.3-2  
+# [22] grid_3.3.2        DT_0.4            R6_2.2.2         
+# [25] rmarkdown_1.9     magrittr_1.5      whisker_0.3-2    
+# [28] backports_1.1.2   scales_0.4.1      promises_1.0.1   
+# [31] htmltools_0.3.6   mime_0.5          colorspace_1.3-2 
+# [34] xtable_1.8-2      httpuv_1.4.5      labeling_0.3     
+# [37] stringi_1.1.2     lazyeval_0.2.0    munsell_0.4.3    
+# [40] R.oo_1.21.0</code></pre>
+</div>
+</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<hr>
+<p>
+  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
+  analysis was created with
+  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
+</p>
+<hr>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
