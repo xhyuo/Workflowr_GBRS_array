@@ -155,7 +155,7 @@ save(tab, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_
 ```{r, message=FALSE, eval=TRUE}
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.RData")                       
 #display summary table
-DT::datatable(tab,options = list(pageLength = 5, scrollY = "8px", scrollX = "20px"))
+DT::datatable(tab,options = list(pageLength = 20, scrollY = "100px", scrollX = "20px"))
 ```
 
 
