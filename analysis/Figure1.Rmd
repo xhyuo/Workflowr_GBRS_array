@@ -113,12 +113,20 @@ sinaplot(formula = recomb ~ array, data = recomb, col = c("red","green3","blue",
 
 ## sina plot
 #pdf(file = "Figure1_scatterplot.pdf", width = 12, height = 10)
+lm_eqn <- function(df){
+    df$x <- as.numeric(as.character(df$x))
+    m <- lm(y ~ x, df);
+    eq <- substitute(italic(y) == a + b %.% italic(x), 
+         list(a = format(coef(m)[1], digits = 2), 
+              b = format(coef(m)[2], digits = 2)))
+    as.character(as.expression(eq));                 
+  }
 recomb$Gen <- as.numeric(as.character(recomb$Gen))
+#without slope
 p2 <- ggplot(recomb, aes(x=Gen, y=recomb)) + 
   geom_jitter(aes(color=array, shape = array), size = 3, position=position_jitter(0.35))+
   scale_shape_manual(values=c(15:18)) +
   scale_x_continuous(breaks = c(4,5,NA,7,rep(NA,3),11,rep(NA,9),21:23)) +
-  #scale_x_discrete(labels=c(as.character(4:23))) +
   scale_color_manual(values=c("red","green3", "blue", "cyan")) +
   scale_fill_manual(values=c("red","green3", "blue", "cyan")) +
   labs(x = "DO Outbreeding Generations") +
@@ -127,6 +135,23 @@ p2 <- ggplot(recomb, aes(x=Gen, y=recomb)) +
         axis.title=element_text(size=22,face="bold")) +
   guides(shape = guide_legend(override.aes = list(size = 5)))
 p2
+#with slope
+p3 <- ggplot(recomb, aes(x=Gen, y=recomb)) + 
+  geom_jitter(aes(color=array, shape = array), size = 3, position=position_jitter(0.35))+
+  scale_shape_manual(values=c(15:18)) +
+  scale_x_continuous(breaks = c(4,5,NA,7,rep(NA,3),11,rep(NA,9),21:23)) +
+  geom_smooth(method = "lm", se=FALSE, color="black", aes(group=1), linetype="dotted") +
+  geom_text(x = 11, y = 500, size = 14, 
+            label = lm_eqn(df = data.frame(y = recomb$recomb, x = recomb$Gen)), parse = TRUE) +
+  #scale_x_discrete(labels=c(as.character(4:23))) +
+  scale_color_manual(values=c("red","green3", "blue", "cyan")) +
+  scale_fill_manual(values=c("red","green3", "blue", "cyan")) +
+  labs(x = "DO Outbreeding Generations") +
+  labs(y = "Number of Recombinations") +
+  theme(legend.title=element_blank(), text = element_text(size=22), 
+        axis.title=element_text(size=22,face="bold")) +
+  guides(shape = guide_legend(override.aes = list(size = 5)))
+p3
 #dev.off()
 ```
 
