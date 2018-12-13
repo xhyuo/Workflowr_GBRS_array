@@ -46,8 +46,8 @@ p <- ggplot(gbrs.array.cor, aes(x=self.cor, fill = array)) +
   labs(y = "Count") +
   #scale_x_discrete(limits=c(-0.02,1)) +
   scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
-  theme(legend.title=element_blank(), text = element_text(size=20), 
-        axis.title=element_text(size=14,face="bold"))
+  theme(legend.title=element_blank(), text = element_text(size=22), 
+        axis.title=element_text(size=18,face="bold"))
 p
 #dev.off()
 ```

@@ -98,7 +98,7 @@ sinaplot(formula = recomb ~ array.sub, data = recomb, col = c("red","cyan","red"
          xlab = "",
          ylab = "Number of Recombinations",
          ylim=c(50, 600), cex.axis=1.5, cex.lab=1.5, cex = 1.2)
-legend("top", inset=.02, title="Array type",
+  legend("top", inset=.02, title="Array type",
    c("GBRS.MUGA", "MUGA", "GBRS.MEGAMUGA","MEGAMUGA","GBRS.GIGAMUGA","GIGAMUGA"), col=c("red","cyan","red","blue","red","green3"), pch = c(15,18,15,17,15,16), horiz=TRUE, cex=1.7)
 #dev.off()
 
@@ -107,7 +107,7 @@ sinaplot(formula = recomb ~ array, data = recomb, col = c("red","green3","blue",
          xlab = "",
          ylab = "Number of Recombinations",
          ylim=c(50, 600), cex.axis=1.5, cex.lab=1.5, cex = 1.2)
-legend("top", inset=.02, title="Array type",
+  legend("top", inset=.02, title="Array type",
    c("GBRS","GIGAMUGA", "MEGAMUGA", "MUGA"), col=c("red","green3","blue","cyan"), pch = c(15:18), horiz=TRUE, cex=1.7)
 #dev.off()
 
