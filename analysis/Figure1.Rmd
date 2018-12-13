@@ -113,15 +113,18 @@ sinaplot(formula = recomb ~ array, data = recomb, col = c("red","green3","blue",
 
 ## sina plot
 #pdf(file = "Figure1_scatterplot.pdf", width = 12, height = 10)
+recomb$Gen <- as.numeric(as.character(recomb$Gen))
 p2 <- ggplot(recomb, aes(x=Gen, y=recomb)) + 
-  geom_jitter(aes(color=array, shape = array), size = 3, position=position_jitter(0.25))+
-  scale_shape_manual(values=c(15:18))+
+  geom_jitter(aes(color=array, shape = array), size = 3, position=position_jitter(0.35))+
+  scale_shape_manual(values=c(15:18)) +
+  scale_x_continuous(breaks = c(4,5,NA,7,rep(NA,3),11,rep(NA,9),21:23)) +
+  #scale_x_discrete(labels=c(as.character(4:23))) +
   scale_color_manual(values=c("red","green3", "blue", "cyan")) +
   scale_fill_manual(values=c("red","green3", "blue", "cyan")) +
   labs(x = "DO Outbreeding Generations") +
   labs(y = "Number of Recombinations") +
-  theme(legend.title=element_blank(), text = element_text(size=26), 
-        axis.title=element_text(size=25,face="bold")) +
+  theme(legend.title=element_blank(), text = element_text(size=22), 
+        axis.title=element_text(size=22,face="bold")) +
   guides(shape = guide_legend(override.aes = list(size = 5)))
 p2
 #dev.off()
