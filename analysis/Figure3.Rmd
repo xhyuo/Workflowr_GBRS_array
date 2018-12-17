@@ -76,7 +76,19 @@ cislod.plot$sub.array <- as.factor(cislod.plot$sub.array)
 # MEGAMUGA <- "blue",
 # GIGAMUGA <- "green3"
 p <- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
-  geom_line(aes(linetype=sub.array,color=sub.array), size = 0.9) +
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
+  scale_color_manual(values=c("cyan","cyan", "cyan", "blue", "blue", "blue", "green3","green3","green3")) +
+  scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
+  xlab("Quantile of LODs") +
+  ylab("LOD of cis-eQTL") +
+  ggtitle("Cis-eQTL without generation") + 
+  #scale_y_continuous(limits=c(0, 120)) +
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = "bold")) +
+  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face="bold"))
+p
+
+p <- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
   scale_color_manual(values=c("cyan","red", "cyan", "blue", "red", "blue", "green3","red","green3")) +
   scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
   xlab("Quantile of LODs") +
@@ -139,7 +151,19 @@ cislod.plot$sub.array <- as.factor(cislod.plot$sub.array)
 # MEGAMUGA <- "blue",
 # GIGAMUGA <- "green3"
 p <- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
-  geom_line(aes(linetype=sub.array,color=sub.array), size = 0.9) +
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
+  scale_color_manual(values=c("cyan","cyan", "cyan", "blue", "blue", "blue", "green3","green3","green3")) +
+  scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
+  xlab("Quantile of LODs") +
+  ylab("LOD of cis-eQTL") +
+  ggtitle("Cis-eQTL with generation") + 
+  #scale_y_continuous(limits=c(0, 120)) +
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = "bold")) +
+  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face="bold"))
+p
+
+p <- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
   scale_color_manual(values=c("cyan","red", "cyan", "blue", "red", "blue", "green3","red","green3")) +
   scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
   xlab("Quantile of LODs") +
