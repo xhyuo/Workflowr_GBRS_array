@@ -89,7 +89,7 @@ p
 
 p <- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
   geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
-  scale_color_manual(values=c("cyan","red", "cyan", "blue", "red", "blue", "green3","red","green3")) +
+  scale_color_manual(values=c("cyan","cyan", "cyan", "blue", "blue", "blue", "green3","green3","green3")) +
   scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
   xlab("Quantile of LODs") +
   ylab("LOD of cis-eQTL") +
@@ -164,7 +164,7 @@ p
 
 p <- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
   geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
-  scale_color_manual(values=c("cyan","red", "cyan", "blue", "red", "blue", "green3","red","green3")) +
+  scale_color_manual(values=c("cyan","cyan", "cyan", "blue", "blue", "blue", "green3","green3","green3")) +
   scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
   xlab("Quantile of LODs") +
   ylab("LOD of cis-eQTL") +
