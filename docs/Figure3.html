@@ -342,7 +342,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/b6cad7564e07e3163a9d4c8fe01a21436fe390de" target="_blank">b6cad75</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/81b3dc3b560783e041c9884826ead0b57541eb33" target="_blank">81b3dc3</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -389,6 +389,40 @@ Message
 <tbody>
 <tr>
 <td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/81b3dc3b560783e041c9884826ead0b57541eb33/analysis/Figure3.Rmd" target="_blank">81b3dc3</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-17
+</td>
+<td style="text-align:left;">
+Figure3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/6552bad8e756f5db6dc3f9df4689353636989838/docs/Figure3.html" target="_blank">6552bad</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-17
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 html
 </td>
 <td style="text-align:left;">
@@ -426,11 +460,14 @@ Figure3
 </ul>
 <p></details></p>
 <hr />
-<div id="figure-3-lod-of-cis-eqtls" class="section level1">
-<h1>Figure 3: LOD of cis-eQTLs</h1>
+<div id="figure-3" class="section level1">
+<h1>Figure 3</h1>
 <ol style="list-style-type: lower-alpha">
 <li>Maybe just one plot with the curves of GBRS (sigma=0.130), Muga, Megamuga, and Gigamuga including both before/after correction of sample mixups. Because combining results did not make the result better, let’s ditch it.</li>
 </ol>
+</div>
+<div id="figure-3-cis-eqtl" class="section level1">
+<h1>Figure 3, Cis-eQTL</h1>
 <pre class="r"><code>library(sinaplot)
 library(ggplot2)
 library(plyr)
@@ -624,6 +661,9 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
+</div>
+<div id="figure-3-trans-eqtl" class="section level1">
+<h1>Figure 3, Trans-eQTL</h1>
 <pre class="r"><code>a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
 #load trans-eqtl muga275
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/muga275.w.gen.transqtl.RData&quot;)
