@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Hao He" />
+
+<meta name="date" content="2018-12-17" />
+
+<title>Figure3</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Workflowr_GBRS_array</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jdblischak/workflowr">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Figure3</h1>
+<h4 class="author"><em>Hao He</em></h4>
+<h4 class="date"><em>2018-12-17</em></h4>
+
+</div>
+
+
+<p><strong>Last updated:</strong> 2018-12-17</p>
+<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
+<ul>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Environment:</strong> empty </summary></p>
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Seed:</strong> <code>set.seed(20181011)</code> </summary></p>
+<p>The command <code>set.seed(20181011)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Session information:</strong> recorded </summary></p>
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</details>
+</li>
+<li>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/2b6598342a3f5034ccf9450c96f7513cc69c6f5a" target="_blank">2b65983</a> </summary></p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+<pre><code>
+Ignored files:
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  analysis/Figure1_by_vit.R
+    Untracked:  analysis/old_analysis/
+    Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
+    Untracked:  output/DO_Liver/
+    Untracked:  output/DO_Striatum/
+
+Unstaged changes:
+    Modified:   analysis/Recombination.Rmd
+    Deleted:    analysis/recombinations_in_DO_Liver_MEGAMUGA.Rmd
+    Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
+
+</code></pre>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
+</li>
+</ul>
+<details> <summary> <small><strong>Expand here to see past versions:</strong></small> </summary>
+<ul>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/2b6598342a3f5034ccf9450c96f7513cc69c6f5a/analysis/Figure3.Rmd" target="_blank">2b65983</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-17
+</td>
+<td style="text-align:left;">
+Figure3
+</td>
+</tr>
+</tbody>
+</table>
+</ul>
+<p></details></p>
+<hr />
+<div id="figure-3-lod-of-cis-eqtls" class="section level1">
+<h1>Figure 3: LOD of cis-eQTLs</h1>
+<ol style="list-style-type: lower-alpha">
+<li>Maybe just one plot with the curves of GBRS (sigma=0.130), Muga, Megamuga, and Gigamuga including both before/after correction of sample mixups. Because combining results did not make the result better, let’s ditch it.</li>
+</ol>
+<pre class="r"><code>library(sinaplot)
+library(ggplot2)
+library(plyr)
+library(VennDiagram)
+library(dplyr)
+
+#eqtl results without generation -----------------------------------------------------------------
+#load cis-eqtl muga275
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/muga275.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/gbrs275.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/fixed.muga275.cisqtl.RData&quot;)
+
+#load cis-eqtl megamuga184
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/megamuga184.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/gbrs184.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/fixed.megamuga184.cisqtl.RData&quot;)
+
+#load cis-eqtl gigamuga358
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gigamuga358.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gbrs358.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/fixed.gigamuga358.cisqtl.RData&quot;)
+
+# quantile and combine cisqtl
+cislod.plot &lt;- do.call(rbind.data.frame,list(
+  #muga
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100),array = &quot;MUGA&quot;,sub.array = &quot;MUGA&quot;,
+             quantile.cislod = quantile(muga275.cisqtl$cislod[!is.nan(muga275.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MUGA&quot;,sub.array = &quot;GBRS.MUGA&quot;,
+             quantile.cislod = quantile(gbrs275.cisqtl$cislod[!is.nan(gbrs275.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MUGA&quot;,sub.array = &quot;FIXED.MUGA&quot;,
+             quantile.cislod = quantile(fixed.muga275.cisqtl$cislod[!is.nan(fixed.muga275.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  #megamuga
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;MEGAMUGA&quot;,
+             quantile.cislod = quantile(megamuga184.cisqtl$cislod[!is.nan(megamuga184.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;GBRS.MEGAMUGA&quot;,
+             quantile.cislod = quantile(gbrs184.cisqtl$cislod[!is.nan(gbrs184.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;FIXED.MEGAMUGA&quot;,
+             quantile.cislod = quantile(fixed.megamuga184.cisqtl$cislod[!is.nan(fixed.megamuga184.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  #gigamuga
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;GIGAMUGA&quot;,
+             quantile.cislod = quantile(gigamuga358.cisqtl$cislod[!is.nan(gigamuga358.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;GBRS.GIGAMUGA&quot;,
+             quantile.cislod = quantile(gbrs358.cisqtl$cislod[!is.nan(gbrs358.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;FIXED.GIGAMUGA&quot;,
+             quantile.cislod = quantile(fixed.gigamuga358.cisqtl$cislod[!is.nan(fixed.gigamuga358.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100)))
+))
+cislod.plot$array &lt;- as.factor(cislod.plot$array)
+cislod.plot$sub.array &lt;- as.factor(cislod.plot$sub.array)
+
+# plot
+# GBRS &lt;- &quot;red&quot;,
+# MUGA &lt;- &quot;cyan&quot;,
+# MEGAMUGA &lt;- &quot;blue&quot;,
+# GIGAMUGA &lt;- &quot;green3&quot;
+p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 0.9) +
+  scale_color_manual(values=c(&quot;cyan&quot;,&quot;red&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;red&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;red&quot;,&quot;green3&quot;)) +
+  scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
+  xlab(&quot;Quantile of LODs&quot;) +
+  ylab(&quot;LOD of cis-eQTL&quot;) +
+  ggtitle(&quot;Cis-eQTL without generation&quot;) + 
+  #scale_y_continuous(limits=c(0, 120)) +
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = &quot;bold&quot;)) +
+  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;),
+        strip.text = element_text(size = 20)) +
+  facet_grid(array ~ ., scales=&quot;free&quot;, space=&quot;free&quot;)
+#facet_grid(.~array, scales=&quot;free&quot;, space=&quot;free&quot;)
+p</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Cis-eQTL-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+#eqtl results with generation -----------------------------------------------------------------
+#load cis-eqtl muga275
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/muga275.w.gen.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/gbrs275.w.gen.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/fixed.muga275.w.gen.cisqtl.RData&quot;)
+
+#load cis-eqtl megamuga184
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/megamuga184.w.gen.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/gbrs184.w.gen.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/fixed.megamuga184.w.gen.cisqtl.RData&quot;)
+
+#load cis-eqtl gigamuga358
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gigamuga358.w.gen.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gbrs358.w.gen.cisqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/fixed.gigamuga358.w.gen.cisqtl.RData&quot;)
+
+# quantile and combine cisqtl
+cislod.plot &lt;- do.call(rbind.data.frame,list(
+  #muga
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100),array = &quot;MUGA&quot;,sub.array = &quot;MUGA&quot;,
+             quantile.cislod = quantile(muga275.w.gen.cisqtl$cislod[!is.nan(muga275.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MUGA&quot;,sub.array = &quot;GBRS.MUGA&quot;,
+             quantile.cislod = quantile(gbrs275.w.gen.cisqtl$cislod[!is.nan(gbrs275.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MUGA&quot;,sub.array = &quot;FIXED.MUGA&quot;,
+             quantile.cislod = quantile(fixed.muga275.w.gen.cisqtl$cislod[!is.nan(fixed.muga275.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  #megamuga
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;MEGAMUGA&quot;,
+             quantile.cislod = quantile(megamuga184.w.gen.cisqtl$cislod[!is.nan(megamuga184.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;GBRS.MEGAMUGA&quot;,
+             quantile.cislod = quantile(gbrs184.w.gen.cisqtl$cislod[!is.nan(gbrs184.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;FIXED.MEGAMUGA&quot;,
+             quantile.cislod = quantile(fixed.megamuga184.w.gen.cisqtl$cislod[!is.nan(fixed.megamuga184.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  #gigamuga
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;GIGAMUGA&quot;,
+             quantile.cislod = quantile(gigamuga358.w.gen.cisqtl$cislod[!is.nan(gigamuga358.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;GBRS.GIGAMUGA&quot;,
+             quantile.cislod = quantile(gbrs358.w.gen.cisqtl$cislod[!is.nan(gbrs358.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
+  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;FIXED.GIGAMUGA&quot;,
+             quantile.cislod = quantile(fixed.gigamuga358.w.gen.cisqtl$cislod[!is.nan(fixed.gigamuga358.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100)))
+))
+cislod.plot$array &lt;- as.factor(cislod.plot$array)
+cislod.plot$sub.array &lt;- as.factor(cislod.plot$sub.array)
+
+# plot
+# GBRS &lt;- &quot;red&quot;,
+# MUGA &lt;- &quot;cyan&quot;,
+# MEGAMUGA &lt;- &quot;blue&quot;,
+# GIGAMUGA &lt;- &quot;green3&quot;
+p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 0.9) +
+  scale_color_manual(values=c(&quot;cyan&quot;,&quot;red&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;red&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;red&quot;,&quot;green3&quot;)) +
+  scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
+  xlab(&quot;Quantile of LODs&quot;) +
+  ylab(&quot;LOD of cis-eQTL&quot;) +
+  ggtitle(&quot;Cis-eQTL with generation&quot;) + 
+  #scale_y_continuous(limits=c(0, 120)) +
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = &quot;bold&quot;)) +
+  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;),
+        strip.text = element_text(size = 20)) +
+  facet_grid(array ~ ., scales=&quot;free&quot;, space=&quot;free&quot;)
+#facet_grid(.~array, scales=&quot;free&quot;, space=&quot;free&quot;)
+p</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Cis-eQTL-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
+#load trans-eqtl muga275
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/muga275.w.gen.transqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/gbrs275.w.gen.transqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/fixed.muga275.w.gen.transqtl.RData&quot;)
+a1[[1]] = nrow(muga275.w.gen.transqtl)
+a2[[1]] = nrow(gbrs275.w.gen.transqtl)
+a3[[1]] = nrow(fixed.muga275.w.gen.transqtl)
+n12[[1]] &lt;- nrow(inner_join(muga275.w.gen.transqtl[,1:2],gbrs275.w.gen.transqtl[,1:2]))
+n13[[1]] &lt;- nrow(inner_join(muga275.w.gen.transqtl[,1:2],fixed.muga275.w.gen.transqtl[,1:2]))
+n23[[1]] &lt;- nrow(inner_join(gbrs275.w.gen.transqtl[,1:2],fixed.muga275.w.gen.transqtl[,1:2]))
+n123[[1]] = nrow(inner_join(muga275.w.gen.transqtl[,1:2],inner_join(gbrs275.w.gen.transqtl[,1:2],fixed.muga275.w.gen.transqtl[,1:2])))
+
+#load trans-eqtl megamuga184
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/megamuga184.w.gen.transqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/gbrs184.w.gen.transqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/fixed.megamuga184.w.gen.transqtl.RData&quot;)
+a1[[2]] = nrow(megamuga184.w.gen.transqtl)
+a2[[2]] = nrow(gbrs184.w.gen.transqtl)
+a3[[2]] = nrow(fixed.megamuga184.w.gen.transqtl)
+n12[[2]] &lt;- nrow(inner_join(megamuga184.w.gen.transqtl[,1:2],gbrs184.w.gen.transqtl[,1:2]))
+n13[[2]] &lt;- nrow(inner_join(megamuga184.w.gen.transqtl[,1:2],fixed.megamuga184.w.gen.transqtl[,1:2]))
+n23[[2]] &lt;- nrow(inner_join(gbrs184.w.gen.transqtl[,1:2],fixed.megamuga184.w.gen.transqtl[,1:2]))
+n123[[2]] = nrow(inner_join(megamuga184.w.gen.transqtl[,1:2],inner_join(gbrs184.w.gen.transqtl[,1:2],fixed.megamuga184.w.gen.transqtl[,1:2])))
+
+#load trans-eqtl gigamuga358
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gigamuga358.w.gen.transqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gbrs358.w.gen.transqtl.RData&quot;)
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/fixed.gigamuga358.w.gen.transqtl.RData&quot;)
+a1[[3]] = nrow(gigamuga358.w.gen.transqtl)
+a2[[3]] = nrow(gbrs358.w.gen.transqtl)
+a3[[3]] = nrow(fixed.gigamuga358.w.gen.transqtl)
+n12[[3]] &lt;- nrow(inner_join(gigamuga358.w.gen.transqtl[,1:2],gbrs358.w.gen.transqtl[,1:2]))
+n13[[3]] &lt;- nrow(inner_join(gigamuga358.w.gen.transqtl[,1:2],fixed.gigamuga358.w.gen.transqtl[,1:2]))
+n23[[3]] &lt;- nrow(inner_join(gbrs358.w.gen.transqtl[,1:2],fixed.gigamuga358.w.gen.transqtl[,1:2]))
+n123[[3]] = nrow(inner_join(gigamuga358.w.gen.transqtl[,1:2],inner_join(gbrs358.w.gen.transqtl[,1:2],fixed.gigamuga358.w.gen.transqtl[,1:2])))
+
+save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl.RData&quot;)
+
+#MUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[1]], 
+                 area2 = a2[[1]], 
+                 area3 = a3[[1]], 
+                 n12 = n12[[1]], 
+                 n23 = n23[[1]], 
+                 n13 = n13[[1]], 
+                 n123 = n123[[1]], 
+                 category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.347], polygon[GRID.polygon.348], polygon[GRID.polygon.349], polygon[GRID.polygon.350], polygon[GRID.polygon.351], polygon[GRID.polygon.352], text[GRID.text.353], text[GRID.text.354], text[GRID.text.355], text[GRID.text.356], text[GRID.text.357], text[GRID.text.358], text[GRID.text.359], text[GRID.text.360], text[GRID.text.361], text[GRID.text.362])
+
+#MEGAMUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[2]], 
+                 area2 = a2[[2]], 
+                 area3 = a3[[2]], 
+                 n12 = n12[[2]], 
+                 n23 = n23[[2]], 
+                 n13 = n13[[2]], 
+                 n123 = n123[[2]], 
+                 category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.363], polygon[GRID.polygon.364], polygon[GRID.polygon.365], polygon[GRID.polygon.366], polygon[GRID.polygon.367], polygon[GRID.polygon.368], text[GRID.text.369], text[GRID.text.370], text[GRID.text.371], text[GRID.text.372], text[GRID.text.373], text[GRID.text.374], text[GRID.text.375], text[GRID.text.376], text[GRID.text.377], text[GRID.text.378])
+
+#GIGAMUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[3]], 
+                 area2 = a2[[3]], 
+                 area3 = a3[[3]], 
+                 n12 = n12[[3]], 
+                 n23 = n23[[3]], 
+                 n13 = n13[[3]], 
+                 n123 = n123[[3]], 
+                 category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.379], polygon[GRID.polygon.380], polygon[GRID.polygon.381], polygon[GRID.polygon.382], polygon[GRID.polygon.383], polygon[GRID.polygon.384], text[GRID.text.385], text[GRID.text.386], text[GRID.text.387], text[GRID.text.388], text[GRID.text.389], text[GRID.text.390], text[GRID.text.391], text[GRID.text.392], text[GRID.text.393], text[GRID.text.394])</code></pre>
+<div id="session-information" class="section level2">
+<h2>Session information</h2>
+<pre class="r"><code>sessionInfo()
+# R version 3.3.2 (2016-10-31)
+# Platform: x86_64-pc-linux-gnu (64-bit)
+# Running under: CentOS release 6.7 (Final)
+# 
+# locale:
+#  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+#  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+#  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+#  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+#  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+# [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+# 
+# attached base packages:
+# [1] grid      stats     graphics  grDevices utils     datasets  methods  
+# [8] base     
+# 
+# other attached packages:
+# [1] dplyr_0.7.6         VennDiagram_1.6.17  futile.logger_1.4.3
+# [4] ggplot2_2.2.1       sinaplot_1.1.0      plyr_1.8.4         
+# 
+# loaded via a namespace (and not attached):
+#  [1] Rcpp_1.0.0           pillar_1.0.1         formatR_1.5         
+#  [4] git2r_0.23.0         workflowr_1.1.1      bindr_0.1.1         
+#  [7] R.methodsS3_1.7.1    R.utils_2.5.0        futile.options_1.0.1
+# [10] tools_3.3.2          digest_0.6.13        evaluate_0.10       
+# [13] tibble_1.4.1         gtable_0.2.0         pkgconfig_2.0.1     
+# [16] rlang_0.2.2          yaml_2.1.14          bindrcpp_0.2.2      
+# [19] stringr_1.2.0        knitr_1.20           tidyselect_0.2.4    
+# [22] rprojroot_1.3-2      glue_1.3.0           R6_2.2.2            
+# [25] rmarkdown_1.9        reshape2_1.4.2       purrr_0.2.2         
+# [28] lambda.r_1.2.3       magrittr_1.5         whisker_0.3-2       
+# [31] backports_1.1.2      scales_0.4.1         htmltools_0.3.6     
+# [34] assertthat_0.2.0     colorspace_1.3-2     labeling_0.3        
+# [37] stringi_1.1.2        lazyeval_0.2.0       munsell_0.4.3       
+# [40] R.oo_1.21.0</code></pre>
+</div>
+</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<hr>
+<p>
+  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
+  analysis was created with
+  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
+</p>
+<hr>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
