@@ -15,11 +15,11 @@ vignette: >
 knitr::opts_chunk$set(comment = "#",collapse = TRUE)
 ```
 
-# Figure 3: LOD of cis-eQTLs
-
+# Figure 3
 a) Maybe just one plot with the curves of GBRS (sigma=0.130), Muga, Megamuga, and Gigamuga including both before/after correction of sample mixups. 
 Because combining results did not make the result better, let’s ditch it.
 
+# Figure 3, Cis-eQTL
 ```{r Figure 3 Cis-eQTL, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
 library(sinaplot)
 library(ggplot2)
@@ -154,6 +154,7 @@ p <- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) +
 p
 ```
 
+# Figure 3, Trans-eQTL
 ```{r Figure 3 Trans-eQTL number, message=FALSE, eval=FALSE}
 a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
 #load trans-eqtl muga275
