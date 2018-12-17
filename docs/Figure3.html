@@ -342,7 +342,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/81b3dc3b560783e041c9884826ead0b57541eb33" target="_blank">81b3dc3</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/18301a6a1493b2b74e6479818d0f8629cf4352ac" target="_blank">18301a6</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -356,6 +356,7 @@ Untracked files:
     Untracked:  output/DO_Striatum/
 
 Unstaged changes:
+    Modified:   analysis/Figure1.Rmd
     Modified:   analysis/Recombination.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MEGAMUGA.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
@@ -387,6 +388,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/18301a6a1493b2b74e6479818d0f8629cf4352ac/analysis/Figure3.Rmd" target="_blank">18301a6</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-17
+</td>
+<td style="text-align:left;">
+Figure3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/4c2fc6c16d4adfe45c61f569616546f0af4c8555/docs/Figure3.html" target="_blank">4c2fc6c</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-17
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 Rmd
@@ -523,18 +558,15 @@ cislod.plot$sub.array &lt;- as.factor(cislod.plot$sub.array)
 # MEGAMUGA &lt;- &quot;blue&quot;,
 # GIGAMUGA &lt;- &quot;green3&quot;
 p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
-  geom_line(aes(linetype=sub.array,color=sub.array), size = 0.9) +
-  scale_color_manual(values=c(&quot;cyan&quot;,&quot;red&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;red&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;red&quot;,&quot;green3&quot;)) +
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
+  scale_color_manual(values=c(&quot;cyan&quot;,&quot;cyan&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;green3&quot;,&quot;green3&quot;)) +
   scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
   xlab(&quot;Quantile of LODs&quot;) +
   ylab(&quot;LOD of cis-eQTL&quot;) +
   ggtitle(&quot;Cis-eQTL without generation&quot;) + 
   #scale_y_continuous(limits=c(0, 120)) +
   theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = &quot;bold&quot;)) +
-  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;),
-        strip.text = element_text(size = 20)) +
-  facet_grid(array ~ ., scales=&quot;free&quot;, space=&quot;free&quot;)
-#facet_grid(.~array, scales=&quot;free&quot;, space=&quot;free&quot;)
+  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;))
 p</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Cis-eQTL-1.png" width="1920" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Cis-eQTL-1.png:</em></summary>
@@ -556,6 +588,52 @@ Date
 <tr>
 <td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/d3e956c8d8b3d844496ba6404c5a7cb1ff83bec5/docs/figure/Figure3.Rmd/Figure 3 Cis-eQTL-1.png" target="_blank">d3e956c</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-17
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
+p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
+  scale_color_manual(values=c(&quot;cyan&quot;,&quot;red&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;red&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;red&quot;,&quot;green3&quot;)) +
+  scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
+  xlab(&quot;Quantile of LODs&quot;) +
+  ylab(&quot;LOD of cis-eQTL&quot;) +
+  ggtitle(&quot;Cis-eQTL without generation&quot;) + 
+  #scale_y_continuous(limits=c(0, 120)) +
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = &quot;bold&quot;)) +
+  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;),
+        strip.text = element_text(size = 20)) +
+  facet_grid(array ~ ., scales=&quot;free&quot;, space=&quot;free&quot;)
+#facet_grid(.~array, scales=&quot;free&quot;, space=&quot;free&quot;)
+p</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Cis-eQTL-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Cis-eQTL-2.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/d3e956c8d8b3d844496ba6404c5a7cb1ff83bec5/docs/figure/Figure3.Rmd/Figure 3 Cis-eQTL-2.png" target="_blank">d3e956c</a>
 </td>
 <td style="text-align:left;">
 xhyuo
@@ -617,7 +695,20 @@ cislod.plot$sub.array &lt;- as.factor(cislod.plot$sub.array)
 # MEGAMUGA &lt;- &quot;blue&quot;,
 # GIGAMUGA &lt;- &quot;green3&quot;
 p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
-  geom_line(aes(linetype=sub.array,color=sub.array), size = 0.9) +
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
+  scale_color_manual(values=c(&quot;cyan&quot;,&quot;cyan&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;green3&quot;,&quot;green3&quot;)) +
+  scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
+  xlab(&quot;Quantile of LODs&quot;) +
+  ylab(&quot;LOD of cis-eQTL&quot;) +
+  ggtitle(&quot;Cis-eQTL with generation&quot;) + 
+  #scale_y_continuous(limits=c(0, 120)) +
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = &quot;bold&quot;)) +
+  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;))
+p</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Cis-eQTL-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
   scale_color_manual(values=c(&quot;cyan&quot;,&quot;red&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;red&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;red&quot;,&quot;green3&quot;)) +
   scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
   xlab(&quot;Quantile of LODs&quot;) +
@@ -630,37 +721,7 @@ p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) +
   facet_grid(array ~ ., scales=&quot;free&quot;, space=&quot;free&quot;)
 #facet_grid(.~array, scales=&quot;free&quot;, space=&quot;free&quot;)
 p</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Cis-eQTL-2.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Cis-eQTL-2.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/d3e956c8d8b3d844496ba6404c5a7cb1ff83bec5/docs/figure/Figure3.Rmd/Figure 3 Cis-eQTL-2.png" target="_blank">d3e956c</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2018-12-17
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Cis-eQTL-4.png" width="1920" style="display: block; margin: auto;" /></p>
 </div>
 <div id="figure-3-trans-eqtl" class="section level1">
 <h1>Figure 3, Trans-eQTL</h1>
@@ -746,7 +807,7 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.347], polygon[GRID.polygon.348], polygon[GRID.polygon.349], polygon[GRID.polygon.350], polygon[GRID.polygon.351], polygon[GRID.polygon.352], text[GRID.text.353], text[GRID.text.354], text[GRID.text.355], text[GRID.text.356], text[GRID.text.357], text[GRID.text.358], text[GRID.text.359], text[GRID.text.360], text[GRID.text.361], text[GRID.text.362])
+<pre><code># (polygon[GRID.polygon.529], polygon[GRID.polygon.530], polygon[GRID.polygon.531], polygon[GRID.polygon.532], polygon[GRID.polygon.533], polygon[GRID.polygon.534], text[GRID.text.535], text[GRID.text.536], text[GRID.text.537], text[GRID.text.538], text[GRID.text.539], text[GRID.text.540], text[GRID.text.541], text[GRID.text.542], text[GRID.text.543], text[GRID.text.544])
 
 #MEGAMUGA
 grid.newpage()
@@ -790,7 +851,7 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.363], polygon[GRID.polygon.364], polygon[GRID.polygon.365], polygon[GRID.polygon.366], polygon[GRID.polygon.367], polygon[GRID.polygon.368], text[GRID.text.369], text[GRID.text.370], text[GRID.text.371], text[GRID.text.372], text[GRID.text.373], text[GRID.text.374], text[GRID.text.375], text[GRID.text.376], text[GRID.text.377], text[GRID.text.378])
+<pre><code># (polygon[GRID.polygon.545], polygon[GRID.polygon.546], polygon[GRID.polygon.547], polygon[GRID.polygon.548], polygon[GRID.polygon.549], polygon[GRID.polygon.550], text[GRID.text.551], text[GRID.text.552], text[GRID.text.553], text[GRID.text.554], text[GRID.text.555], text[GRID.text.556], text[GRID.text.557], text[GRID.text.558], text[GRID.text.559], text[GRID.text.560])
 
 #GIGAMUGA
 grid.newpage()
@@ -834,7 +895,7 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.379], polygon[GRID.polygon.380], polygon[GRID.polygon.381], polygon[GRID.polygon.382], polygon[GRID.polygon.383], polygon[GRID.polygon.384], text[GRID.text.385], text[GRID.text.386], text[GRID.text.387], text[GRID.text.388], text[GRID.text.389], text[GRID.text.390], text[GRID.text.391], text[GRID.text.392], text[GRID.text.393], text[GRID.text.394])</code></pre>
+<pre><code># (polygon[GRID.polygon.561], polygon[GRID.polygon.562], polygon[GRID.polygon.563], polygon[GRID.polygon.564], polygon[GRID.polygon.565], polygon[GRID.polygon.566], text[GRID.text.567], text[GRID.text.568], text[GRID.text.569], text[GRID.text.570], text[GRID.text.571], text[GRID.text.572], text[GRID.text.573], text[GRID.text.574], text[GRID.text.575], text[GRID.text.576])</code></pre>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()
