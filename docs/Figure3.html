@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2018-12-17" />
+<meta name="date" content="2019-01-02" />
 
 <title>Figure3</title>
 
@@ -313,12 +313,12 @@ div.section {
 
 <h1 class="title toc-ignore">Figure3</h1>
 <h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2018-12-17</em></h4>
+<h4 class="date"><em>2019-01-02</em></h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2018-12-17</p>
+<p><strong>Last updated:</strong> 2019-01-02</p>
 <strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
 <ul>
 <li>
@@ -342,7 +342,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/987c0138042b7ee6c29502e404d9234d0b4d8391" target="_blank">987c013</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/bb5b12270051d3b9d269c84eeafe2b7b12dea886" target="_blank">bb5b122</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -350,7 +350,10 @@ Ignored files:
 
 Untracked files:
     Untracked:  analysis/Figure1_by_vit.R
+    Untracked:  analysis/Figure3.0.Rmd
+    Untracked:  analysis/Figure3_0.Rmd
     Untracked:  analysis/old_analysis/
+    Untracked:  docs/figure/Figure3_2.Rmd/
     Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
     Untracked:  output/DO_Liver/
     Untracked:  output/DO_Striatum/
@@ -388,6 +391,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/bb5b12270051d3b9d269c84eeafe2b7b12dea886/analysis/Figure3.Rmd" target="_blank">bb5b122</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-01-02
+</td>
+<td style="text-align:left;">
+Figure3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/4cdd7f7abd70594e191d2eacedecba16ce9c7add/docs/Figure3.html" target="_blank">4cdd7f7</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-17
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 html
@@ -560,61 +597,70 @@ library(plyr)
 library(VennDiagram)
 library(dplyr)
 
-#eqtl results without generation -----------------------------------------------------------------
-#load cis-eqtl muga275
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/muga275.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/gbrs275.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/fixed.muga275.cisqtl.RData&quot;)
+#eqtl results with generation -----------------------------------------------------------------
+#load cis-eqtl
+##meta data
+meta.data &lt;- c(&quot;muga275&quot;, &quot;gbrs275&quot;, &quot;fixed.muga275&quot;,
+               &quot;megamuga184&quot;,&quot;gbrs184&quot;,&quot;fixed.megamuga184&quot;,
+               &quot;gigamuga358&quot;,&quot;gbrs358&quot;,&quot;fixed.gigamuga358&quot;)
 
-#load cis-eqtl megamuga184
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/megamuga184.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/gbrs184.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/fixed.megamuga184.cisqtl.RData&quot;)
+mainDir &lt;- &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/&quot;
 
-#load cis-eqtl gigamuga358
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gigamuga358.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gbrs358.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/fixed.gigamuga358.cisqtl.RData&quot;)
+cis.eqtl.total &lt;- list()
+cislod.plot &lt;- list()
+for (i in meta.data){
+  cis.eqtl.total[[i]] &lt;- get(load(paste0(mainDir,i,&quot;/&quot;,i,&quot;_cis.eqtl.RData&quot;)))
+  # quantile and combine cisqtl
+  cislod.plot[[i]]$array = rep(i,100)
+  cislod.plot[[i]]$sub.array = rep(i,100)
+  cislod.plot[[i]]$qgrid = seq(from=0.70, to=0.999, length=100)
+  cislod.plot[[i]]$quantile.cislod &lt;- quantile(cis.eqtl.total[[i]]$cislod[!is.nan(cis.eqtl.total[[i]]$cislod)],
+                      seq(from=0.70, to=0.999, length=100))
+  }
+cislod.plot.data &lt;- do.call(rbind.data.frame, cislod.plot)
+cislod.plot.data$array &lt;- ordered(cislod.plot.data$array, 
+                                  levels = c(&quot;muga275&quot;, &quot;gbrs275&quot;, &quot;fixed.muga275&quot;,
+                                             &quot;megamuga184&quot;,&quot;gbrs184&quot;,&quot;fixed.megamuga184&quot;,
+                                             &quot;gigamuga358&quot;,&quot;gbrs358&quot;,&quot;fixed.gigamuga358&quot;))
+cislod.plot.data$sub.array &lt;- ordered(cislod.plot.data$sub.array, 
+                                  levels = c(&quot;muga275&quot;, &quot;gbrs275&quot;, &quot;fixed.muga275&quot;,
+                                             &quot;megamuga184&quot;,&quot;gbrs184&quot;,&quot;fixed.megamuga184&quot;,
+                                             &quot;gigamuga358&quot;,&quot;gbrs358&quot;,&quot;fixed.gigamuga358&quot;))
 
-# quantile and combine cisqtl
-cislod.plot &lt;- do.call(rbind.data.frame,list(
-  #muga
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100),array = &quot;MUGA&quot;,sub.array = &quot;MUGA&quot;,
-             quantile.cislod = quantile(muga275.cisqtl$cislod[!is.nan(muga275.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MUGA&quot;,sub.array = &quot;GBRS.MUGA&quot;,
-             quantile.cislod = quantile(gbrs275.cisqtl$cislod[!is.nan(gbrs275.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MUGA&quot;,sub.array = &quot;FIXED.MUGA&quot;,
-             quantile.cislod = quantile(fixed.muga275.cisqtl$cislod[!is.nan(fixed.muga275.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  #megamuga
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;MEGAMUGA&quot;,
-             quantile.cislod = quantile(megamuga184.cisqtl$cislod[!is.nan(megamuga184.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;GBRS.MEGAMUGA&quot;,
-             quantile.cislod = quantile(gbrs184.cisqtl$cislod[!is.nan(gbrs184.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;FIXED.MEGAMUGA&quot;,
-             quantile.cislod = quantile(fixed.megamuga184.cisqtl$cislod[!is.nan(fixed.megamuga184.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  #gigamuga
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;GIGAMUGA&quot;,
-             quantile.cislod = quantile(gigamuga358.cisqtl$cislod[!is.nan(gigamuga358.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;GBRS.GIGAMUGA&quot;,
-             quantile.cislod = quantile(gbrs358.cisqtl$cislod[!is.nan(gbrs358.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;FIXED.GIGAMUGA&quot;,
-             quantile.cislod = quantile(fixed.gigamuga358.cisqtl$cislod[!is.nan(fixed.gigamuga358.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100)))
-))
-cislod.plot$array &lt;- as.factor(cislod.plot$array)
-cislod.plot$sub.array &lt;- as.factor(cislod.plot$sub.array)
+#revalue 
+cislod.plot.data$array &lt;- revalue(cislod.plot.data$array, c(&quot;muga275&quot; = &quot;MUGA&quot;, 
+                                  &quot;gbrs275&quot; = &quot;MUGA&quot;, 
+                                  &quot;fixed.muga275&quot; = &quot;MUGA&quot;,
+                                  &quot;megamuga184&quot; = &quot;MEGAMUGA&quot;,
+                                  &quot;gbrs184&quot; = &quot;MEGAMUGA&quot;,
+                                  &quot;fixed.megamuga184&quot; = &quot;MEGAMUGA&quot;,
+                                  &quot;gigamuga358&quot; = &quot;GIGAMUGA&quot;,
+                                  &quot;gbrs358&quot; = &quot;GIGAMUGA&quot;,
+                                  &quot;fixed.gigamuga358&quot; = &quot;GIGAMUGA&quot;))
+
+#revalue 
+cislod.plot.data$sub.array &lt;- revalue(cislod.plot.data$sub.array, c(&quot;muga275&quot; = &quot;MUGA&quot;, 
+                                  &quot;gbrs275&quot; = &quot;GBRS.MUGA&quot;, 
+                                  &quot;fixed.muga275&quot; = &quot;FIXED.MUGA&quot;,
+                                  &quot;megamuga184&quot; = &quot;MEGAMUGA&quot;,
+                                  &quot;gbrs184&quot; = &quot;GBRS.MEGAMUGA&quot;,
+                                  &quot;fixed.megamuga184&quot; = &quot;FIXED.MEGAMUGA&quot;,
+                                  &quot;gigamuga358&quot; = &quot;GIGAMUGA&quot;,
+                                  &quot;gbrs358&quot; = &quot;GBRS.GIGAMUGA&quot;,
+                                  &quot;fixed.gigamuga358&quot; = &quot;FIXED.GIGAMUGA&quot;))
 
 # plot
 # GBRS &lt;- &quot;red&quot;,
 # MUGA &lt;- &quot;cyan&quot;,
 # MEGAMUGA &lt;- &quot;blue&quot;,
 # GIGAMUGA &lt;- &quot;green3&quot;
-p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
+p &lt;- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) + 
   geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
   scale_color_manual(values=c(&quot;cyan&quot;,&quot;cyan&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;green3&quot;,&quot;green3&quot;)) +
   scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
   xlab(&quot;Quantile of LODs&quot;) +
   ylab(&quot;LOD of cis-eQTL&quot;) +
-  ggtitle(&quot;Cis-eQTL without generation&quot;) + 
+  ggtitle(&quot;Cis-eQTL with generation&quot;) + 
   #scale_y_continuous(limits=c(0, 120)) +
   theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = &quot;bold&quot;)) +
   theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;))
@@ -662,13 +708,13 @@ xhyuo
 </table>
 <p></details></p>
 <pre class="r"><code>
-p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
+p &lt;- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) + 
   geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
   scale_color_manual(values=c(&quot;cyan&quot;,&quot;cyan&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;green3&quot;,&quot;green3&quot;)) +
   scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
   xlab(&quot;Quantile of LODs&quot;) +
   ylab(&quot;LOD of cis-eQTL&quot;) +
-  ggtitle(&quot;Cis-eQTL without generation&quot;) + 
+  ggtitle(&quot;Cis-eQTL with generation&quot;) + 
   #scale_y_continuous(limits=c(0, 120)) +
   theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = &quot;bold&quot;)) +
   theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;),
@@ -729,208 +775,83 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre class="r"><code>
-#eqtl results with generation -----------------------------------------------------------------
-#load cis-eqtl muga275
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/muga275.w.gen.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/gbrs275.w.gen.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/fixed.muga275.w.gen.cisqtl.RData&quot;)
-
-#load cis-eqtl megamuga184
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/megamuga184.w.gen.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/gbrs184.w.gen.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/fixed.megamuga184.w.gen.cisqtl.RData&quot;)
-
-#load cis-eqtl gigamuga358
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gigamuga358.w.gen.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gbrs358.w.gen.cisqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/fixed.gigamuga358.w.gen.cisqtl.RData&quot;)
-
-# quantile and combine cisqtl
-cislod.plot &lt;- do.call(rbind.data.frame,list(
-  #muga
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100),array = &quot;MUGA&quot;,sub.array = &quot;MUGA&quot;,
-             quantile.cislod = quantile(muga275.w.gen.cisqtl$cislod[!is.nan(muga275.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MUGA&quot;,sub.array = &quot;GBRS.MUGA&quot;,
-             quantile.cislod = quantile(gbrs275.w.gen.cisqtl$cislod[!is.nan(gbrs275.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MUGA&quot;,sub.array = &quot;FIXED.MUGA&quot;,
-             quantile.cislod = quantile(fixed.muga275.w.gen.cisqtl$cislod[!is.nan(fixed.muga275.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  #megamuga
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;MEGAMUGA&quot;,
-             quantile.cislod = quantile(megamuga184.w.gen.cisqtl$cislod[!is.nan(megamuga184.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;GBRS.MEGAMUGA&quot;,
-             quantile.cislod = quantile(gbrs184.w.gen.cisqtl$cislod[!is.nan(gbrs184.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;MEGAMUGA&quot;,sub.array = &quot;FIXED.MEGAMUGA&quot;,
-             quantile.cislod = quantile(fixed.megamuga184.w.gen.cisqtl$cislod[!is.nan(fixed.megamuga184.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  #gigamuga
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;GIGAMUGA&quot;,
-             quantile.cislod = quantile(gigamuga358.w.gen.cisqtl$cislod[!is.nan(gigamuga358.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;GBRS.GIGAMUGA&quot;,
-             quantile.cislod = quantile(gbrs358.w.gen.cisqtl$cislod[!is.nan(gbrs358.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100))),
-  data.frame(qgrid = seq(from=0.70, to=0.999, length=100), array = &quot;GIGAMUGA&quot;,sub.array = &quot;FIXED.GIGAMUGA&quot;,
-             quantile.cislod = quantile(fixed.gigamuga358.w.gen.cisqtl$cislod[!is.nan(fixed.gigamuga358.w.gen.cisqtl$cislod)], seq(from=0.70, to=0.999, length=100)))
-))
-cislod.plot$array &lt;- as.factor(cislod.plot$array)
-cislod.plot$sub.array &lt;- as.factor(cislod.plot$sub.array)
-
-# plot
-# GBRS &lt;- &quot;red&quot;,
-# MUGA &lt;- &quot;cyan&quot;,
-# MEGAMUGA &lt;- &quot;blue&quot;,
-# GIGAMUGA &lt;- &quot;green3&quot;
-p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
-  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
-  scale_color_manual(values=c(&quot;cyan&quot;,&quot;cyan&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;green3&quot;,&quot;green3&quot;)) +
-  scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
-  xlab(&quot;Quantile of LODs&quot;) +
-  ylab(&quot;LOD of cis-eQTL&quot;) +
-  ggtitle(&quot;Cis-eQTL with generation&quot;) + 
-  #scale_y_continuous(limits=c(0, 120)) +
-  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = &quot;bold&quot;)) +
-  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;))
-p</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Cis-eQTL-3.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Cis-eQTL-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/8ee39a383302f86ebb873f37f9933d305c66575b/docs/figure/Figure3.Rmd/Figure 3 Cis-eQTL-3.png" target="_blank">8ee39a3</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2018-12-17
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
-p &lt;- ggplot(data=cislod.plot, aes(x=qgrid, y = quantile.cislod)) + 
-  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
-  scale_color_manual(values=c(&quot;cyan&quot;,&quot;cyan&quot;, &quot;cyan&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;blue&quot;, &quot;green3&quot;,&quot;green3&quot;,&quot;green3&quot;)) +
-  scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
-  xlab(&quot;Quantile of LODs&quot;) +
-  ylab(&quot;LOD of cis-eQTL&quot;) +
-  ggtitle(&quot;Cis-eQTL with generation&quot;) + 
-  #scale_y_continuous(limits=c(0, 120)) +
-  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = &quot;bold&quot;)) +
-  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face=&quot;bold&quot;),
-        strip.text = element_text(size = 20)) +
-  facet_grid(array ~ ., scales=&quot;free&quot;, space=&quot;free&quot;)
-#facet_grid(.~array, scales=&quot;free&quot;, space=&quot;free&quot;)
-p</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Cis-eQTL-4.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Cis-eQTL-4.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/987c0138042b7ee6c29502e404d9234d0b4d8391/docs/figure/Figure3.Rmd/Figure 3 Cis-eQTL-4.png" target="_blank">987c013</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2018-12-17
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/8ee39a383302f86ebb873f37f9933d305c66575b/docs/figure/Figure3.Rmd/Figure 3 Cis-eQTL-4.png" target="_blank">8ee39a3</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2018-12-17
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
 </div>
 <div id="figure-3-trans-eqtl" class="section level1">
 <h1>Figure 3, Trans-eQTL</h1>
 <pre class="r"><code>a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
 #load trans-eqtl muga275
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/muga275.w.gen.transqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/gbrs275.w.gen.transqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga_qtl/fixed.muga275.w.gen.transqtl.RData&quot;)
-a1[[1]] = nrow(muga275.w.gen.transqtl)
-a2[[1]] = nrow(gbrs275.w.gen.transqtl)
-a3[[1]] = nrow(fixed.muga275.w.gen.transqtl)
-n12[[1]] &lt;- nrow(inner_join(muga275.w.gen.transqtl[,1:2],gbrs275.w.gen.transqtl[,1:2]))
-n13[[1]] &lt;- nrow(inner_join(muga275.w.gen.transqtl[,1:2],fixed.muga275.w.gen.transqtl[,1:2]))
-n23[[1]] &lt;- nrow(inner_join(gbrs275.w.gen.transqtl[,1:2],fixed.muga275.w.gen.transqtl[,1:2]))
-n123[[1]] = nrow(inner_join(muga275.w.gen.transqtl[,1:2],inner_join(gbrs275.w.gen.transqtl[,1:2],fixed.muga275.w.gen.transqtl[,1:2])))
+a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/muga275/muga275_pvalue.RData&quot;))
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
+b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData&quot;))
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
+c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData&quot;))
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
+
+#cut off at q value 0.01
+a &lt;- a[a$qvalue &lt;= 0.01,]
+b &lt;- b[b$qvalue &lt;= 0.01,]
+c &lt;- c[c$qvalue &lt;= 0.01,]
+
+a1[[1]] = length(unique(a$marker))
+a2[[1]] = length(unique(b$marker))
+a3[[1]] = length(unique(c$marker))
+n12[[1]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[1]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[1]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[1]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
 #load trans-eqtl megamuga184
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/megamuga184.w.gen.transqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/gbrs184.w.gen.transqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga_qtl/fixed.megamuga184.w.gen.transqtl.RData&quot;)
-a1[[2]] = nrow(megamuga184.w.gen.transqtl)
-a2[[2]] = nrow(gbrs184.w.gen.transqtl)
-a3[[2]] = nrow(fixed.megamuga184.w.gen.transqtl)
-n12[[2]] &lt;- nrow(inner_join(megamuga184.w.gen.transqtl[,1:2],gbrs184.w.gen.transqtl[,1:2]))
-n13[[2]] &lt;- nrow(inner_join(megamuga184.w.gen.transqtl[,1:2],fixed.megamuga184.w.gen.transqtl[,1:2]))
-n23[[2]] &lt;- nrow(inner_join(gbrs184.w.gen.transqtl[,1:2],fixed.megamuga184.w.gen.transqtl[,1:2]))
-n123[[2]] = nrow(inner_join(megamuga184.w.gen.transqtl[,1:2],inner_join(gbrs184.w.gen.transqtl[,1:2],fixed.megamuga184.w.gen.transqtl[,1:2])))
+#load trans-eqtl megamuga184
+a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData&quot;))
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
+b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData&quot;))
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
+c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData&quot;))
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
+
+#cut off at q value 0.01
+a &lt;- a[a$qvalue &lt;= 0.01,]
+b &lt;- b[b$qvalue &lt;= 0.01,]
+c &lt;- c[c$qvalue &lt;= 0.01,]
+
+a1[[2]] = length(unique(a$marker))
+a2[[2]] = length(unique(b$marker))
+a3[[2]] = length(unique(c$marker))
+n12[[2]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[2]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[2]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[2]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
 #load trans-eqtl gigamuga358
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gigamuga358.w.gen.transqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/gbrs358.w.gen.transqtl.RData&quot;)
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga_qtl/fixed.gigamuga358.w.gen.transqtl.RData&quot;)
-a1[[3]] = nrow(gigamuga358.w.gen.transqtl)
-a2[[3]] = nrow(gbrs358.w.gen.transqtl)
-a3[[3]] = nrow(fixed.gigamuga358.w.gen.transqtl)
-n12[[3]] &lt;- nrow(inner_join(gigamuga358.w.gen.transqtl[,1:2],gbrs358.w.gen.transqtl[,1:2]))
-n13[[3]] &lt;- nrow(inner_join(gigamuga358.w.gen.transqtl[,1:2],fixed.gigamuga358.w.gen.transqtl[,1:2]))
-n23[[3]] &lt;- nrow(inner_join(gbrs358.w.gen.transqtl[,1:2],fixed.gigamuga358.w.gen.transqtl[,1:2]))
-n123[[3]] = nrow(inner_join(gigamuga358.w.gen.transqtl[,1:2],inner_join(gbrs358.w.gen.transqtl[,1:2],fixed.gigamuga358.w.gen.transqtl[,1:2])))
+#load trans-eqtl gigamuga358
+a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData&quot;))
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
+b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
+c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData&quot;))
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
 
-save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl.RData&quot;)</code></pre>
-<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl.RData&quot;)
+#cut off at q value 0.01
+a &lt;- a[a$qvalue &lt;= 0.01,]
+b &lt;- b[b$qvalue &lt;= 0.01,]
+c &lt;- c[c$qvalue &lt;= 0.01,]
 
-#MUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[1]], 
-                 area2 = a2[[1]], 
-                 area3 = a3[[1]], 
-                 n12 = n12[[1]], 
-                 n23 = n23[[1]], 
-                 n13 = n13[[1]], 
-                 n123 = n123[[1]], 
-                 category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+a1[[3]] = length(unique(a$marker))
+a2[[3]] = length(unique(b$marker))
+a3[[3]] = length(unique(c$marker))
+n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
+
+save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/new_venn_diag_transeqtl.RData&quot;)</code></pre>
+<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/new_venn_diag_transeqtl.RData&quot;)
+#bar plot
+barplot(c(a3[[1]],a3[[2]],a3[[3]]),
+        ylab = &quot;Number of trans-eQTL&quot;,
+        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
+        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
+        ylim = c(0,12000))</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL-1.png" width="1920" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
@@ -962,18 +883,17 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.529], polygon[GRID.polygon.530], polygon[GRID.polygon.531], polygon[GRID.polygon.532], polygon[GRID.polygon.533], polygon[GRID.polygon.534], text[GRID.text.535], text[GRID.text.536], text[GRID.text.537], text[GRID.text.538], text[GRID.text.539], text[GRID.text.540], text[GRID.text.541], text[GRID.text.542], text[GRID.text.543], text[GRID.text.544])
-
-#MEGAMUGA
+<pre class="r"><code>
+#MUGA
 grid.newpage()
-draw.triple.venn(area1 = a1[[2]], 
-                 area2 = a2[[2]], 
-                 area3 = a3[[2]], 
-                 n12 = n12[[2]], 
-                 n23 = n23[[2]], 
-                 n13 = n13[[2]], 
-                 n123 = n123[[2]], 
-                 category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+draw.triple.venn(area1 = a1[[1]], 
+                 area2 = a2[[1]], 
+                 area3 = a3[[1]], 
+                 n12 = n12[[1]], 
+                 n23 = n23[[1]], 
+                 n13 = n13[[1]], 
+                 n123 = n123[[1]], 
+                 category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL-2.png" width="1920" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL-2.png:</em></summary>
@@ -1006,18 +926,18 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.545], polygon[GRID.polygon.546], polygon[GRID.polygon.547], polygon[GRID.polygon.548], polygon[GRID.polygon.549], polygon[GRID.polygon.550], text[GRID.text.551], text[GRID.text.552], text[GRID.text.553], text[GRID.text.554], text[GRID.text.555], text[GRID.text.556], text[GRID.text.557], text[GRID.text.558], text[GRID.text.559], text[GRID.text.560])
+<pre><code># (polygon[GRID.polygon.265], polygon[GRID.polygon.266], polygon[GRID.polygon.267], polygon[GRID.polygon.268], polygon[GRID.polygon.269], polygon[GRID.polygon.270], text[GRID.text.271], text[GRID.text.272], text[GRID.text.273], text[GRID.text.274], text[GRID.text.275], text[GRID.text.276], text[GRID.text.277], text[GRID.text.278], text[GRID.text.279], text[GRID.text.280])
 
-#GIGAMUGA
+#MEGAMUGA
 grid.newpage()
-draw.triple.venn(area1 = a1[[3]], 
-                 area2 = a2[[3]], 
-                 area3 = a3[[3]], 
-                 n12 = n12[[3]], 
-                 n23 = n23[[3]], 
-                 n13 = n13[[3]], 
-                 n123 = n123[[3]], 
-                 category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+draw.triple.venn(area1 = a1[[2]], 
+                 area2 = a2[[2]], 
+                 area3 = a3[[2]], 
+                 n12 = n12[[2]], 
+                 n23 = n23[[2]], 
+                 n13 = n13[[2]], 
+                 n123 = n123[[2]], 
+                 category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL-3.png" width="1920" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL-3.png:</em></summary>
@@ -1050,7 +970,21 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.561], polygon[GRID.polygon.562], polygon[GRID.polygon.563], polygon[GRID.polygon.564], polygon[GRID.polygon.565], polygon[GRID.polygon.566], text[GRID.text.567], text[GRID.text.568], text[GRID.text.569], text[GRID.text.570], text[GRID.text.571], text[GRID.text.572], text[GRID.text.573], text[GRID.text.574], text[GRID.text.575], text[GRID.text.576])</code></pre>
+<pre><code># (polygon[GRID.polygon.281], polygon[GRID.polygon.282], polygon[GRID.polygon.283], polygon[GRID.polygon.284], polygon[GRID.polygon.285], polygon[GRID.polygon.286], text[GRID.text.287], text[GRID.text.288], text[GRID.text.289], text[GRID.text.290], text[GRID.text.291], text[GRID.text.292], text[GRID.text.293], text[GRID.text.294], text[GRID.text.295], text[GRID.text.296])
+
+#GIGAMUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[3]], 
+                 area2 = a2[[3]], 
+                 area3 = a3[[3]], 
+                 n12 = n12[[3]], 
+                 n23 = n23[[3]], 
+                 n13 = n13[[3]], 
+                 n123 = n123[[3]], 
+                 category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.297], polygon[GRID.polygon.298], polygon[GRID.polygon.299], polygon[GRID.polygon.300], polygon[GRID.polygon.301], polygon[GRID.polygon.302], text[GRID.text.303], text[GRID.text.304], text[GRID.text.305], text[GRID.text.306], text[GRID.text.307], text[GRID.text.308], text[GRID.text.309], text[GRID.text.310], text[GRID.text.311], text[GRID.text.312])</code></pre>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()
