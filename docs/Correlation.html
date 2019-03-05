@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2018-11-07" />
+<meta name="date" content="2019-03-04" />
 
 <title>Correlations</title>
 
@@ -35,7 +35,8 @@
 <script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
 <link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -104,8 +105,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -121,7 +128,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -141,6 +147,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -162,18 +205,77 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -321,12 +423,12 @@ div.section {
 
 <h1 class="title toc-ignore">Correlations</h1>
 <h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2018-11-07</em></h4>
+<h4 class="date"><em>2019-03-04</em></h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2018-11-07</p>
+<p><strong>Last updated:</strong> 2019-03-04</p>
 <strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
 <ul>
 <li>
@@ -350,21 +452,26 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/20c98966f301c484c799aa2f1dd5de9bb2da864d" target="_blank">20c9896</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/0477584d35e26c53f954ca0eecfa71dae8474702" target="_blank">0477584</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
 Untracked files:
+    Untracked:  analysis/Figure1_by_vit.R
+    Untracked:  analysis/Figure3.0.Rmd
+    Untracked:  analysis/Figure3_0.Rmd
     Untracked:  analysis/old_analysis/
-    Untracked:  docs/figure/Cis-eQTL.Rmd/
-    Untracked:  docs/figure/Recombination.Rmd/
+    Untracked:  docs/figure/Figure3_2.Rmd/
     Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
     Untracked:  output/DO_Liver/
     Untracked:  output/DO_Striatum/
 
 Unstaged changes:
+    Modified:   analysis/Figure1.Rmd
+    Modified:   analysis/Recombination.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MEGAMUGA.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
 
@@ -400,6 +507,40 @@ Message
 Rmd
 </td>
 <td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0477584d35e26c53f954ca0eecfa71dae8474702/analysis/Correlation.Rmd" target="_blank">0477584</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+<td style="text-align:left;">
+update Figure2,3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/7ba11656b7324f9091573a12ba71c8218b05ed4e/docs/Correlation.html" target="_blank">7ba1165</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-11-07
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/20c98966f301c484c799aa2f1dd5de9bb2da864d/analysis/Correlation.Rmd" target="_blank">20c9896</a>
 </td>
 <td style="text-align:left;">
@@ -417,76 +558,144 @@ update building
 </ul>
 <p></details></p>
 <hr />
-<div id="correlation-between-muga282-and-gbrs282" class="section level1">
-<h1>Correlation between MUGA282 and GBRS282</h1>
-<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_muga282GBRS.RData&quot;)
+<div id="correlation-between-muga275-and-gbrs275" class="section level1">
+<h1>Correlation between MUGA275 and GBRS275</h1>
+<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_muga275GBRS.RData&quot;)
 #summary
-x &lt;- summary(mismatch_muga282GBRS$`0.120`$self.cor)
+x &lt;- summary(mismatch_muga275GBRS$`0.130`$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 <div id="htmlwidget-61b14e40a9f168c7cdcc" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-61b14e40a9f168c7cdcc">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[-0.01635,0.8502,0.8719,0.7879,0.9042,0.9273]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-61b14e40a9f168c7cdcc">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[-0.01515,0.8523,0.8756,0.7936,0.9067,0.9301]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>
 #summary after remove mismatch
-x &lt;- summary(mismatch_muga282GBRS$`0.120`[mismatch_muga282GBRS$`0.120`$mismatch == FALSE,]$self.cor)
+x &lt;- summary(mismatch_muga275GBRS$`0.130`[mismatch_muga275GBRS$`0.130`$mismatch == FALSE,]$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 <div id="htmlwidget-60d053ff70fe96d3a474" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-60d053ff70fe96d3a474">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[0.8264,0.8576,0.8835,0.882,0.907,0.9273]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-60d053ff70fe96d3a474">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[0.8308,0.8585,0.8847,0.8836,0.9092,0.9301]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>
 #plot
-hist(mismatch_muga282GBRS$`0.120`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MUGA&quot;,
+hist(mismatch_muga275GBRS$`0.130`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
-<p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA282%20and%20GBRS282-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA275%20and%20GBRS275-3.png" width="1920" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>#ignore mismatch with r &lt; 0.6
-hist(mismatch_muga282GBRS$`0.120`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MUGA&quot;,
+hist(mismatch_muga275GBRS$`0.130`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
-<p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA282%20and%20GBRS282-4.png" width="1920" style="display: block; margin: auto;" /></p>
-</div>
-<div id="correlation-between-megamuga200-and-gbrs200" class="section level1">
-<h1>Correlation between MEGAMUGA200 and GBRS200</h1>
-<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_megamuga200GBRS.RData&quot;)
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA275%20and%20GBRS275-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+#on autosome
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_muga275GBRS.RData&quot;)
 #summary
-x &lt;- summary(mismatch_megamuga200GBRS$`0.120`$self.cor)
+x &lt;- summary(mismatch_autochr_muga275GBRS$`0.130`$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 <div id="htmlwidget-73be2dd0ede7b762376b" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-73be2dd0ede7b762376b">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[-0.006809,0.8439,0.8573,0.768,0.8954,0.927]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-73be2dd0ede7b762376b">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[-0.0108,0.9024,0.9118,0.821,0.9216,0.9407]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>
 #summary after remove mismatch
-x &lt;- summary(mismatch_megamuga200GBRS$`0.120`[mismatch_megamuga200GBRS$`0.120`$mismatch == FALSE,]$self.cor)
+x &lt;- summary(mismatch_autochr_muga275GBRS$`0.130`[mismatch_autochr_muga275GBRS$`0.130`$mismatch == FALSE,]$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 <div id="htmlwidget-57b0a72bdb3478a2a430" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-57b0a72bdb3478a2a430">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[0.7538,0.8483,0.8758,0.8723,0.8985,0.927]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-57b0a72bdb3478a2a430">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[0.8858,0.906,0.9136,0.9141,0.9223,0.9407]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>
 #plot
-hist(mismatch_megamuga200GBRS$`0.120`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MEGAMUGA&quot;,
+hist(mismatch_autochr_muga275GBRS$`0.130`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MUGA on autosome&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
-<p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA200%20and%20GBRS200-3.png" width="1920" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>hist(mismatch_megamuga200GBRS$`0.120`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MEMUGA&quot;,
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA275%20and%20GBRS275-7.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ignore mismatch with r &lt; 0.6
+hist(mismatch_autochr_muga275GBRS$`0.130`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MUGA on autosome&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
-<p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA200%20and%20GBRS200-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA275%20and%20GBRS275-8.png" width="1920" style="display: block; margin: auto;" /></p>
 </div>
-<div id="correlation-between-gigamuga369-and-gbrs369" class="section level1">
-<h1>Correlation between GIGAMUGA369 and GBRS369</h1>
-<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_gigamuga369GBRS.RData&quot;)
+<div id="correlation-between-megamuga184-and-gbrs184" class="section level1">
+<h1>Correlation between MEGAMUGA184 and GBRS184</h1>
+<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_megamuga184GBRS.RData&quot;)
 #summary
-x &lt;- summary(mismatch_gigamuga369GBRS$self.cor)
+x &lt;- summary(mismatch_megamuga184GBRS$`0.130`$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 <div id="htmlwidget-00fc356a171e578452d4" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-00fc356a171e578452d4">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[-0.02402,0.8399,0.856,0.7728,0.8694,0.895]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-00fc356a171e578452d4">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[-0.006611,0.8463,0.8624,0.7813,0.8986,0.9214]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>
 #summary after remove mismatch
-x &lt;- summary(mismatch_gigamuga369GBRS[mismatch_gigamuga369GBRS$mismatch == FALSE,]$self.cor)
+x &lt;- summary(mismatch_megamuga184GBRS$`0.130`[mismatch_megamuga184GBRS$`0.130`$mismatch == FALSE,]$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 <div id="htmlwidget-21ee4f9b97efed4cc3d8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-21ee4f9b97efed4cc3d8">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[0.7949,0.8459,0.8581,0.8572,0.8706,0.895]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-21ee4f9b97efed4cc3d8">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[0.8328,0.85,0.8793,0.8758,0.9004,0.9214]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>
 #plot
-hist(mismatch_gigamuga369GBRS$self.cor, breaks=80, main=&quot;Correlation between GBRS and GIGAMUGA&quot;,
+hist(mismatch_megamuga184GBRS$`0.130`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MEGAMUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
-<p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA369%20and%20GBRS369-3.png" width="1920" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>#ignore mismatch with r &lt; 0.6
-hist(mismatch_gigamuga369GBRS$self.cor, breaks=60, main=&quot;Correlation between GBRS and GIGAMUGA&quot;,
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA184%20and%20GBRS184-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>hist(mismatch_megamuga184GBRS$`0.130`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MEMUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
-<p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA369%20and%20GBRS369-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA184%20and%20GBRS184-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+#on autosome
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_megamuga184GBRS.RData&quot;)
+#summary
+x &lt;- summary(mismatch_autochr_megamuga184GBRS$`0.130`$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
+<div id="htmlwidget-31bfeaa1ec505fd6dd8a" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-31bfeaa1ec505fd6dd8a">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[-0.007029,0.8975,0.9064,0.809,0.9119,0.9467]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>
+#summary after remove mismatch
+x &lt;- summary(mismatch_autochr_megamuga184GBRS$`0.130`[mismatch_autochr_megamuga184GBRS$`0.130`$mismatch == FALSE,]$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
+<div id="htmlwidget-d48753b439bc63a7e4f9" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d48753b439bc63a7e4f9">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[0.8835,0.8996,0.9073,0.9069,0.9128,0.9467]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>
+#plot
+hist(mismatch_autochr_megamuga184GBRS$`0.130`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MEGAMUGA on autosome&quot;,
+     xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA184%20and%20GBRS184-7.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>hist(mismatch_autochr_megamuga184GBRS$`0.130`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MEMUGA on autosome&quot;,
+     xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA184%20and%20GBRS184-8.png" width="1920" style="display: block; margin: auto;" /></p>
+</div>
+<div id="correlation-between-gigamuga358-and-gbrs358" class="section level1">
+<h1>Correlation between GIGAMUGA358 and GBRS358</h1>
+<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_gigamuga358GBRS.RData&quot;)
+#summary
+x &lt;- summary(mismatch_gigamuga358GBRS$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
+<div id="htmlwidget-f198e616e6f45a329270" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f198e616e6f45a329270">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[-0.01368,0.8168,0.8336,0.7571,0.8654,0.8958]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>
+#summary after remove mismatch
+x &lt;- summary(mismatch_gigamuga358GBRS[mismatch_gigamuga358GBRS$mismatch == FALSE,]$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
+<div id="htmlwidget-04f6601843a0cdcb8b77" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-04f6601843a0cdcb8b77">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[0.7912,0.822,0.8436,0.8446,0.868,0.8958]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>
+#plot
+hist(mismatch_gigamuga358GBRS$self.cor, breaks=80, main=&quot;Correlation between GBRS and GIGAMUGA&quot;,
+     xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA358%20and%20GBRS358-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ignore mismatch with r &lt; 0.6
+hist(mismatch_gigamuga358GBRS$self.cor, breaks=60, main=&quot;Correlation between GBRS and GIGAMUGA&quot;,
+     xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA358%20and%20GBRS358-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+# on autosome
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_gigamuga358GBRS.RData&quot;)
+#summary
+x &lt;- summary(mismatch_autochr_gigamuga358GBRS$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
+<div id="htmlwidget-86786d6e9e9259de4f32" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-86786d6e9e9259de4f32">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[-0.01457,0.865,0.8744,0.7848,0.8829,0.9027]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>
+#summary after remove mismatch
+x &lt;- summary(mismatch_autochr_gigamuga358GBRS[mismatch_autochr_gigamuga358GBRS$mismatch == FALSE,]$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
+<div id="htmlwidget-83b093d6909c3f439304" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-83b093d6909c3f439304">{"x":{"filter":"none","data":[["Min.","1st Qu.","Median","Mean","3rd Qu.","Max."],[0.839,0.869,0.876,0.8758,0.8838,0.9027]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>x<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":1},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>
+#plot
+hist(mismatch_autochr_gigamuga358GBRS$self.cor, breaks=80, main=&quot;Correlation between GBRS and GIGAMUGA on autosome&quot;,
+     xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA358%20and%20GBRS358-7.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#ignore mismatch with r &lt; 0.6
+hist(mismatch_autochr_gigamuga358GBRS$self.cor, breaks=60, main=&quot;Correlation between GBRS and GIGAMUGA on autosome&quot;,
+     xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
+<p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA358%20and%20GBRS358-8.png" width="1920" style="display: block; margin: auto;" /></p>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()
@@ -506,22 +715,26 @@ hist(mismatch_gigamuga369GBRS$self.cor, breaks=60, main=&quot;Correlation betwee
 # [1] stats     graphics  grDevices utils     datasets  methods   base     
 # 
 # other attached packages:
-# [1] DT_0.4        ggplot2_2.2.1
+# [1] DT_0.4        ggplot2_3.1.0
 # 
 # loaded via a namespace (and not attached):
-#  [1] Rcpp_0.12.18      knitr_1.20        whisker_0.3-2    
-#  [4] magrittr_1.5      workflowr_1.1.1   munsell_0.4.3    
-#  [7] xtable_1.8-2      colorspace_1.3-2  R6_2.2.2         
-# [10] rlang_0.2.2       stringr_1.2.0     plyr_1.8.4       
-# [13] tools_3.3.2       grid_3.3.2        gtable_0.2.0     
-# [16] R.oo_1.21.0       git2r_0.23.0      crosstalk_1.0.0  
-# [19] htmltools_0.3.6   yaml_2.1.14       lazyeval_0.2.0   
-# [22] rprojroot_1.3-2   digest_0.6.13     tibble_1.4.1     
-# [25] shiny_1.0.5       later_0.7.5       promises_1.0.1   
-# [28] htmlwidgets_1.3   R.utils_2.5.0     mime_0.5         
-# [31] evaluate_0.10     rmarkdown_1.9     stringi_1.1.2    
-# [34] pillar_1.0.1      scales_0.4.1      backports_1.1.2  
-# [37] R.methodsS3_1.7.1 jsonlite_1.5      httpuv_1.4.5</code></pre>
+#  [1] Rcpp_1.0.0        later_0.7.5       pillar_1.3.1     
+#  [4] git2r_0.23.0      plyr_1.8.4        workflowr_1.1.1  
+#  [7] bindr_0.1.1       R.methodsS3_1.7.1 R.utils_2.5.0    
+# [10] tools_3.3.2       digest_0.6.18     jsonlite_1.6     
+# [13] evaluate_0.10     tibble_1.4.1      gtable_0.2.0     
+# [16] pkgconfig_2.0.2   rlang_0.3.1       shiny_1.2.0      
+# [19] crosstalk_1.0.0   yaml_2.2.0        bindrcpp_0.2.2   
+# [22] withr_2.1.2       stringr_1.3.1     dplyr_0.7.6      
+# [25] knitr_1.20        htmlwidgets_1.3   rprojroot_1.3-2  
+# [28] grid_3.3.2        tidyselect_0.2.4  glue_1.3.0       
+# [31] R6_2.3.0          rmarkdown_1.11    purrr_0.2.2      
+# [34] magrittr_1.5      whisker_0.3-2     promises_1.0.1   
+# [37] backports_1.1.2   scales_1.0.0      htmltools_0.3.6  
+# [40] assertthat_0.2.0  xtable_1.8-3      mime_0.5         
+# [43] colorspace_1.4-0  httpuv_1.4.5      stringi_1.2.4    
+# [46] lazyeval_0.2.1    munsell_0.5.0     crayon_1.3.4     
+# [49] R.oo_1.21.0</code></pre>
 </div>
 </div>
 
