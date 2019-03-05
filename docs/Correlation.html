@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2019-03-04" />
+<meta name="date" content="2019-03-05" />
 
 <title>Correlations</title>
 
@@ -423,12 +423,12 @@ div.section {
 
 <h1 class="title toc-ignore">Correlations</h1>
 <h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2019-03-04</em></h4>
+<h4 class="date"><em>2019-03-05</em></h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2019-03-04</p>
+<p><strong>Last updated:</strong> 2019-03-05</p>
 <strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
 <ul>
 <li>
@@ -452,7 +452,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/0477584d35e26c53f954ca0eecfa71dae8474702" target="_blank">0477584</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/d5709b024e1da192d61a867e75d4dce0f9c168cb" target="_blank">d5709b0</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -502,6 +502,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/Correlation.html" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 Rmd
@@ -577,10 +594,70 @@ DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 hist(mismatch_muga275GBRS$`0.130`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA275%20and%20GBRS275-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between MUGA275 and GBRS275-3.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between MUGA275 and GBRS275-3.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>#ignore mismatch with r &lt; 0.6
 hist(mismatch_muga275GBRS$`0.130`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA275%20and%20GBRS275-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between MUGA275 and GBRS275-4.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between MUGA275 and GBRS275-4.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 #on autosome
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_muga275GBRS.RData&quot;)
@@ -600,10 +677,70 @@ DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 hist(mismatch_autochr_muga275GBRS$`0.130`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MUGA on autosome&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA275%20and%20GBRS275-7.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between MUGA275 and GBRS275-7.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between MUGA275 and GBRS275-7.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>#ignore mismatch with r &lt; 0.6
 hist(mismatch_autochr_muga275GBRS$`0.130`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MUGA on autosome&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20MUGA275%20and%20GBRS275-8.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between MUGA275 and GBRS275-8.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between MUGA275 and GBRS275-8.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 </div>
 <div id="correlation-between-megamuga184-and-gbrs184" class="section level1">
 <h1>Correlation between MEGAMUGA184 and GBRS184</h1>
@@ -624,9 +761,69 @@ DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 hist(mismatch_megamuga184GBRS$`0.130`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MEGAMUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA184%20and%20GBRS184-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between MEGAMUGA184 and GBRS184-3.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between MEGAMUGA184 and GBRS184-3.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>hist(mismatch_megamuga184GBRS$`0.130`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MEMUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA184%20and%20GBRS184-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between MEGAMUGA184 and GBRS184-4.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between MEGAMUGA184 and GBRS184-4.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 #on autosome
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_megamuga184GBRS.RData&quot;)
@@ -646,9 +843,69 @@ DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 hist(mismatch_autochr_megamuga184GBRS$`0.130`$self.cor, breaks=80, main=&quot;Correlation between GBRS and MEGAMUGA on autosome&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA184%20and%20GBRS184-7.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between MEGAMUGA184 and GBRS184-7.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between MEGAMUGA184 and GBRS184-7.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>hist(mismatch_autochr_megamuga184GBRS$`0.130`$self.cor, breaks=60, main=&quot;Correlation between GBRS and MEMUGA on autosome&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20MEGAMUGA184%20and%20GBRS184-8.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between MEGAMUGA184 and GBRS184-8.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between MEGAMUGA184 and GBRS184-8.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 </div>
 <div id="correlation-between-gigamuga358-and-gbrs358" class="section level1">
 <h1>Correlation between GIGAMUGA358 and GBRS358</h1>
@@ -669,10 +926,70 @@ DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 hist(mismatch_gigamuga358GBRS$self.cor, breaks=80, main=&quot;Correlation between GBRS and GIGAMUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA358%20and%20GBRS358-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between GIGAMUGA358 and GBRS358-3.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between GIGAMUGA358 and GBRS358-3.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>#ignore mismatch with r &lt; 0.6
 hist(mismatch_gigamuga358GBRS$self.cor, breaks=60, main=&quot;Correlation between GBRS and GIGAMUGA&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA358%20and%20GBRS358-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between GIGAMUGA358 and GBRS358-4.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between GIGAMUGA358 and GBRS358-4.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 # on autosome
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_gigamuga358GBRS.RData&quot;)
@@ -692,10 +1009,70 @@ DT::datatable(data.frame(x=matrix(x),row.names=names(x)))</code></pre>
 hist(mismatch_autochr_gigamuga358GBRS$self.cor, breaks=80, main=&quot;Correlation between GBRS and GIGAMUGA on autosome&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA358%20and%20GBRS358-7.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between GIGAMUGA358 and GBRS358-7.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between GIGAMUGA358 and GBRS358-7.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>#ignore mismatch with r &lt; 0.6
 hist(mismatch_autochr_gigamuga358GBRS$self.cor, breaks=60, main=&quot;Correlation between GBRS and GIGAMUGA on autosome&quot;,
      xlab = &quot;Pearson Correlation Coefficient&quot;, xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)</code></pre>
 <p><img src="figure/Correlation.Rmd/Correlation%20between%20GIGAMUGA358%20and%20GBRS358-8.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Correlation between GIGAMUGA358 and GBRS358-8.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/figure/Correlation.Rmd/Correlation between GIGAMUGA358 and GBRS358-8.png" target="_blank">5b90500</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()
