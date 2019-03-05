@@ -20,58 +20,108 @@ library(ggplot2)
 library(DT)
 ```
 
-# Correlation between MUGA282 and GBRS282
-```{r Correlation between MUGA282 and GBRS282, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_muga282GBRS.RData")
+# Correlation between MUGA275 and GBRS275
+```{r Correlation between MUGA275 and GBRS275, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_muga275GBRS.RData")
 #summary
-x <- summary(mismatch_muga282GBRS$`0.120`$self.cor)
+x <- summary(mismatch_muga275GBRS$`0.130`$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
 
 #summary after remove mismatch
-x <- summary(mismatch_muga282GBRS$`0.120`[mismatch_muga282GBRS$`0.120`$mismatch == FALSE,]$self.cor)
+x <- summary(mismatch_muga275GBRS$`0.130`[mismatch_muga275GBRS$`0.130`$mismatch == FALSE,]$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
 
 #plot
-hist(mismatch_muga282GBRS$`0.120`$self.cor, breaks=80, main="Correlation between GBRS and MUGA",
+hist(mismatch_muga275GBRS$`0.130`$self.cor, breaks=80, main="Correlation between GBRS and MUGA",
      xlab = "Pearson Correlation Coefficient", xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
 #ignore mismatch with r < 0.6
-hist(mismatch_muga282GBRS$`0.120`$self.cor, breaks=60, main="Correlation between GBRS and MUGA",
+hist(mismatch_muga275GBRS$`0.130`$self.cor, breaks=60, main="Correlation between GBRS and MUGA",
+     xlab = "Pearson Correlation Coefficient", xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
+
+#on autosome
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_muga275GBRS.RData")
+#summary
+x <- summary(mismatch_autochr_muga275GBRS$`0.130`$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
+
+#summary after remove mismatch
+x <- summary(mismatch_autochr_muga275GBRS$`0.130`[mismatch_autochr_muga275GBRS$`0.130`$mismatch == FALSE,]$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
+
+#plot
+hist(mismatch_autochr_muga275GBRS$`0.130`$self.cor, breaks=80, main="Correlation between GBRS and MUGA on autosome",
+     xlab = "Pearson Correlation Coefficient", xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
+#ignore mismatch with r < 0.6
+hist(mismatch_autochr_muga275GBRS$`0.130`$self.cor, breaks=60, main="Correlation between GBRS and MUGA on autosome",
      xlab = "Pearson Correlation Coefficient", xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
 ```
 
-# Correlation between MEGAMUGA200 and GBRS200
-```{r Correlation between MEGAMUGA200 and GBRS200, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_megamuga200GBRS.RData")
+# Correlation between MEGAMUGA184 and GBRS184
+```{r Correlation between MEGAMUGA184 and GBRS184, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_megamuga184GBRS.RData")
 #summary
-x <- summary(mismatch_megamuga200GBRS$`0.120`$self.cor)
+x <- summary(mismatch_megamuga184GBRS$`0.130`$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
 
 #summary after remove mismatch
-x <- summary(mismatch_megamuga200GBRS$`0.120`[mismatch_megamuga200GBRS$`0.120`$mismatch == FALSE,]$self.cor)
+x <- summary(mismatch_megamuga184GBRS$`0.130`[mismatch_megamuga184GBRS$`0.130`$mismatch == FALSE,]$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
 
 #plot
-hist(mismatch_megamuga200GBRS$`0.120`$self.cor, breaks=80, main="Correlation between GBRS and MEGAMUGA",
+hist(mismatch_megamuga184GBRS$`0.130`$self.cor, breaks=80, main="Correlation between GBRS and MEGAMUGA",
      xlab = "Pearson Correlation Coefficient", xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
-hist(mismatch_megamuga200GBRS$`0.120`$self.cor, breaks=60, main="Correlation between GBRS and MEMUGA",
+hist(mismatch_megamuga184GBRS$`0.130`$self.cor, breaks=60, main="Correlation between GBRS and MEMUGA",
+     xlab = "Pearson Correlation Coefficient", xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
+
+#on autosome
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_megamuga184GBRS.RData")
+#summary
+x <- summary(mismatch_autochr_megamuga184GBRS$`0.130`$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
+
+#summary after remove mismatch
+x <- summary(mismatch_autochr_megamuga184GBRS$`0.130`[mismatch_autochr_megamuga184GBRS$`0.130`$mismatch == FALSE,]$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
+
+#plot
+hist(mismatch_autochr_megamuga184GBRS$`0.130`$self.cor, breaks=80, main="Correlation between GBRS and MEGAMUGA on autosome",
+     xlab = "Pearson Correlation Coefficient", xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
+hist(mismatch_autochr_megamuga184GBRS$`0.130`$self.cor, breaks=60, main="Correlation between GBRS and MEMUGA on autosome",
      xlab = "Pearson Correlation Coefficient", xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
 ```
 
-# Correlation between GIGAMUGA369 and GBRS369
-```{r Correlation between GIGAMUGA369 and GBRS369, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_gigamuga369GBRS.RData")
+# Correlation between GIGAMUGA358 and GBRS358
+```{r Correlation between GIGAMUGA358 and GBRS358, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_gigamuga358GBRS.RData")
 #summary
-x <- summary(mismatch_gigamuga369GBRS$self.cor)
+x <- summary(mismatch_gigamuga358GBRS$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
 
 #summary after remove mismatch
-x <- summary(mismatch_gigamuga369GBRS[mismatch_gigamuga369GBRS$mismatch == FALSE,]$self.cor)
+x <- summary(mismatch_gigamuga358GBRS[mismatch_gigamuga358GBRS$mismatch == FALSE,]$self.cor)
 DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
 
 #plot
-hist(mismatch_gigamuga369GBRS$self.cor, breaks=80, main="Correlation between GBRS and GIGAMUGA",
+hist(mismatch_gigamuga358GBRS$self.cor, breaks=80, main="Correlation between GBRS and GIGAMUGA",
      xlab = "Pearson Correlation Coefficient", xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
 #ignore mismatch with r < 0.6
-hist(mismatch_gigamuga369GBRS$self.cor, breaks=60, main="Correlation between GBRS and GIGAMUGA",
+hist(mismatch_gigamuga358GBRS$self.cor, breaks=60, main="Correlation between GBRS and GIGAMUGA",
+     xlab = "Pearson Correlation Coefficient", xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
+
+# on autosome
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_gigamuga358GBRS.RData")
+#summary
+x <- summary(mismatch_autochr_gigamuga358GBRS$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
+
+#summary after remove mismatch
+x <- summary(mismatch_autochr_gigamuga358GBRS[mismatch_autochr_gigamuga358GBRS$mismatch == FALSE,]$self.cor)
+DT::datatable(data.frame(x=matrix(x),row.names=names(x)))
+
+#plot
+hist(mismatch_autochr_gigamuga358GBRS$self.cor, breaks=80, main="Correlation between GBRS and GIGAMUGA on autosome",
+     xlab = "Pearson Correlation Coefficient", xlim = c(0,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
+#ignore mismatch with r < 0.6
+hist(mismatch_autochr_gigamuga358GBRS$self.cor, breaks=60, main="Correlation between GBRS and GIGAMUGA on autosome",
      xlab = "Pearson Correlation Coefficient", xlim = c(0.6,1.0),cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
 ```
