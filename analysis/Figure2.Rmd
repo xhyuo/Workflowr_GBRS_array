@@ -86,6 +86,68 @@ p3 <- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
  p3
 ```
 
+```{r Figure 2 autosome, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+#load mismatch results to get the correlation
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_muga275GBRS.RData")
+muga.cor <- mismatch_autochr_muga275GBRS$`0.130`
+muga.cor$array <- "MUGA"
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_megamuga184GBRS.RData")
+megamuga.cor <- mismatch_autochr_megamuga184GBRS$`0.130`
+megamuga.cor$array <- "MEGAMUGA"
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_gigamuga358GBRS.RData")
+gigamuga.cor <- mismatch_autochr_gigamuga358GBRS
+gigamuga.cor$array <- "GIGAMUGA"
+#correlation results
+gbrs.array.cor <- rbind(rbind(muga.cor,megamuga.cor),gigamuga.cor)
+#histgram
+#pdf(file = "Figure2_correlation_on_autosome_histogram.pdf", width = 12, height = 10)
+p <- ggplot(gbrs.array.cor, aes(x=self.cor, fill = array)) +
+  geom_histogram(alpha=0.70, position="identity",binwidth=0.005) +
+  scale_color_manual(values=c("green3", "blue", "cyan")) +
+  scale_fill_manual(values=c("green3", "blue", "cyan")) +
+  labs(x = "Correlation between GBRS and Array") +
+  labs(y = "Count") +
+  #scale_x_discrete(limits=c(-0.02,1)) +
+  scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
+  theme(legend.title=element_blank(), text = element_text(size=22), 
+        axis.title=element_text(size=18,face="bold"))
+p
+#dev.off()
+
+gbrs.array.cor$array <- as.factor(gbrs.array.cor$array)
+p2 <- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
+  geom_density_ridges(aes(x = self.cor, fill = array), stat = "binline", binwidth = 0.005, scale = 0.95,alpha = .8) +
+  scale_color_manual(values=c("green3", "blue", "cyan")) +
+  scale_fill_manual(values=c("green3", "blue", "cyan")) +
+  labs(x = "Correlation between GBRS and Array on autosome markers") +
+  labs(y = "") +
+  #scale_x_discrete(limits=c(-0.02,1)) +
+  scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
+  scale_y_discrete(
+    expand = c(0.01, 0), name = "",
+    labels = c("GIGAMUGA", "MEGAMUGA", "MUGA")
+  ) +
+  theme(legend.title=element_blank(), text = element_text(size=25), 
+        axis.title=element_text(size=22,face="bold"))
+p2
+
+p3 <- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
+  geom_density_ridges(aes(x = self.cor, fill = array), scale = 0.95, bandwidth = 0.01) +
+  scale_color_manual(values=c("green3", "blue", "cyan")) +
+  scale_fill_manual(values=c("green3", "blue", "cyan")) +
+  labs(x = "Correlation between GBRS and Array on autosome markers") +
+  labs(y = "") +
+  #scale_x_discrete(limits=c(-0.02,1)) +
+  scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
+  scale_y_discrete(
+    expand = c(0.01, 0), name = "",
+    labels = c("GIGAMUGA", "MEGAMUGA", "MUGA")
+  ) +
+  theme(legend.title=element_blank(), text = element_text(size=25), 
+        axis.title=element_text(size=22,face="bold"))
+p3
+```
+
 # Get agree table
 ```{r Agree table, message=FALSE, eval=FALSE}
 # Library -----------------------------------------------------------------
@@ -100,7 +162,7 @@ library(abind)
 #load muga275.probs.69kchr  
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/MG/muga275.probs.69kchr.RData")
 #For each individual at each position, find the genotype with the maximum marginal probability.
-muga275.g <- maxmarg(muga275.probs.69kchr,cores = 20)
+muga275.g <- maxmarg(muga275.probs.69kchr,cores = 20, minprob = 0.5)
 muga275.g <- do.call("abind",list(muga275.g,along = 2))
 
 #GBRS275.geno.probs
@@ -110,7 +172,7 @@ attr(GBRS275.geno.probs, "is_x_chr") <- structure(c(rep(FALSE,19),TRUE), names=1
 attr(GBRS275.geno.probs, "alleles") <- LETTERS[1:8]
 attr(GBRS275.geno.probs, "alleleprobs") <- FALSE
 attr(GBRS275.geno.probs, "class") <- c("calc_genoprob", "list")
-gbrs275.g <- maxmarg(GBRS275.geno.probs$`0.130`,cores = 20)
+gbrs275.g <- maxmarg(GBRS275.geno.probs$`0.130`,cores = 20, minprob = 0.5)
 gbrs275.g <- do.call("abind",list(gbrs275.g,along = 2))
 
 #agree and disagree in muga275

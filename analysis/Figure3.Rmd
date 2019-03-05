@@ -26,6 +26,8 @@ library(ggplot2)
 library(plyr)
 library(VennDiagram)
 library(dplyr)
+library(data.table)
+library(qvalue)
 
 #eqtl results with generation -----------------------------------------------------------------
 #load cis-eqtl
@@ -115,18 +117,37 @@ p
 # Figure 3, Trans-eQTL
 ```{r Figure 3 Trans-eQTL number, message=FALSE, eval=FALSE}
 a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
-#load trans-eqtl muga275
+load("/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData")
+#load eqtl pvalue for muga275
 a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/muga275/muga275_pvalue.RData"))
+a <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 a$marker <- paste0(a$chr,"_",a$pos)
-b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData"))
-b$marker <- paste0(b$chr,"_",b$pos)
-c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData"))
-c$marker <- paste0(c$chr,"_",c$pos)
+a$max_qvalue <- qvalue(p = a$pval)$qvalues
+a$eqtl_marker <- paste0(a$chr, "_", a$pos)
+a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+a$cis_trans_max <- ifelse(a$nearest_marker == a$eqtl_marker, "cis", "trans")
+a$cis_trans_location <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06) & (abs(a$pos - a$end) <= 5e+06),"cis", "trans")
+a <- a[a$max_qvalue <= 0.05 & a$cis_trans_location == "trans",]
 
-#cut off at q value 0.01
-a <- a[a$qvalue <= 0.01,]
-b <- b[b$qvalue <= 0.01,]
-c <- c[c$qvalue <= 0.01,]
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData"))
+b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$max_qvalue <- qvalue(p = b$pval)$qvalues
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans_max <- ifelse(b$nearest_marker == b$eqtl_marker, "cis", "trans")
+b$cis_trans_location <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06) & (abs(b$pos - b$end) <= 5e+06),"cis", "trans")
+b <- b[b$max_qvalue <= 0.05 & b$cis_trans_location == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData"))
+c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$max_qvalue <- qvalue(p = c$pval)$qvalues
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans_max <- ifelse(c$nearest_marker == c$eqtl_marker, "cis", "trans")
+c$cis_trans_location <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06) & (abs(c$pos - c$end) <= 5e+06),"cis", "trans")
+c <- c[c$max_qvalue <= 0.05 & c$cis_trans_location == "trans",]
 
 a1[[1]] = length(unique(a$marker))
 a2[[1]] = length(unique(b$marker))
@@ -136,19 +157,36 @@ n13[[1]] <- length(intersect(unique(a$marker), unique(c$marker)))
 n23[[1]] <- length(intersect(unique(b$marker), unique(c$marker)))
 n123[[1]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
-#load trans-eqtl megamuga184
-#load trans-eqtl megamuga184
+#load eqtl pvalue for megamuga184
 a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData"))
+a <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 a$marker <- paste0(a$chr,"_",a$pos)
-b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData"))
-b$marker <- paste0(b$chr,"_",b$pos)
-c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData"))
-c$marker <- paste0(c$chr,"_",c$pos)
+a$max_qvalue <- qvalue(p = a$pval)$qvalues
+a$eqtl_marker <- paste0(a$chr, "_", a$pos)
+a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+a$cis_trans_max <- ifelse(a$nearest_marker == a$eqtl_marker, "cis", "trans")
+a$cis_trans_location <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06) & (abs(a$pos - a$end) <= 5e+06),"cis", "trans")
+a <- a[a$max_qvalue <= 0.05 & a$cis_trans_location == "trans",]
 
-#cut off at q value 0.01
-a <- a[a$qvalue <= 0.01,]
-b <- b[b$qvalue <= 0.01,]
-c <- c[c$qvalue <= 0.01,]
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData"))
+b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$max_qvalue <- qvalue(p = b$pval)$qvalues
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans_max <- ifelse(b$nearest_marker == b$eqtl_marker, "cis", "trans")
+b$cis_trans_location <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06) & (abs(b$pos - b$end) <= 5e+06),"cis", "trans")
+b <- b[b$max_qvalue <= 0.05 & b$cis_trans_location == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData"))
+c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$max_qvalue <- qvalue(p = c$pval)$qvalues
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans_max <- ifelse(c$nearest_marker == c$eqtl_marker, "cis", "trans")
+c$cis_trans_location <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06) & (abs(c$pos - c$end) <= 5e+06),"cis", "trans")
+c <- c[c$max_qvalue <= 0.05 & c$cis_trans_location == "trans",]
 
 a1[[2]] = length(unique(a$marker))
 a2[[2]] = length(unique(b$marker))
@@ -158,19 +196,36 @@ n13[[2]] <- length(intersect(unique(a$marker), unique(c$marker)))
 n23[[2]] <- length(intersect(unique(b$marker), unique(c$marker)))
 n123[[2]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
-#load trans-eqtl gigamuga358
-#load trans-eqtl gigamuga358
+#load eqtl pvalue for gigamuga358
 a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData"))
+a <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 a$marker <- paste0(a$chr,"_",a$pos)
-b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData"))
-b$marker <- paste0(b$chr,"_",b$pos)
-c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData"))
-c$marker <- paste0(c$chr,"_",c$pos)
+a$max_qvalue <- qvalue(p = a$pval)$qvalues
+a$eqtl_marker <- paste0(a$chr, "_", a$pos)
+a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+a$cis_trans_max <- ifelse(a$nearest_marker == a$eqtl_marker, "cis", "trans")
+a$cis_trans_location <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06) & (abs(a$pos - a$end) <= 5e+06),"cis", "trans")
+a <- a[a$max_qvalue <= 0.05 & a$cis_trans_location == "trans",]
 
-#cut off at q value 0.01
-a <- a[a$qvalue <= 0.01,]
-b <- b[b$qvalue <= 0.01,]
-c <- c[c$qvalue <= 0.01,]
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData"))
+b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$max_qvalue <- qvalue(p = b$pval)$qvalues
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans_max <- ifelse(b$nearest_marker == b$eqtl_marker, "cis", "trans")
+b$cis_trans_location <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06) & (abs(b$pos - b$end) <= 5e+06),"cis", "trans")
+b <- b[b$max_qvalue <= 0.05 & b$cis_trans_location == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData"))
+c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$max_qvalue <- qvalue(p = c$pval)$qvalues
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans_max <- ifelse(c$nearest_marker == c$eqtl_marker, "cis", "trans")
+c$cis_trans_location <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06) & (abs(c$pos - c$end) <= 5e+06),"cis", "trans")
+c <- c[c$max_qvalue <= 0.05 & c$cis_trans_location == "trans",]
 
 a1[[3]] = length(unique(a$marker))
 a2[[3]] = length(unique(b$marker))
@@ -180,17 +235,17 @@ n13[[3]] <- length(intersect(unique(a$marker), unique(c$marker)))
 n23[[3]] <- length(intersect(unique(b$marker), unique(c$marker)))
 n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
-save(a1,a2,a3,n12, n13, n23, n123, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/new_venn_diag_transeqtl.RData")
+save(a1,a2,a3,n12, n13, n23, n123, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData")
 ```
 
 ```{r Figure 3 Trans-eQTL, message=FALSE, eval=TRUE,fig.height=20, fig.width=20}
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/new_venn_diag_transeqtl.RData")
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData")
 #bar plot
 barplot(c(a3[[1]],a3[[2]],a3[[3]]),
-        ylab = "Number of trans-eQTL",
+        ylab = "Number of trans-eQTL at FDR 0.05",
         names.arg = c("FIXED.MUGA", "FIXED.MEGAMUGA", "FIXED.GIGAMUGA"), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
         col = c("cyan", "blue", "green3"),
-        ylim = c(0,12000))
+        ylim = c(0,2500))
 
 #MUGA
 grid.newpage()
