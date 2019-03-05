@@ -114,8 +114,8 @@ p <- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) +
 p
 ```
 
-# Figure 3, Trans-eQTL
-```{r Figure 3 Trans-eQTL number, message=FALSE, eval=FALSE}
+# Figure 3, Trans-eQTL at FDR 0.05
+```{r Figure 3 Trans-eQTL number, message=FALSE, eval=TRUE,fig.height=20, fig.width=20}
 a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
 load("/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData")
 #load eqtl pvalue for muga275
@@ -236,9 +236,7 @@ n23[[3]] <- length(intersect(unique(b$marker), unique(c$marker)))
 n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
 save(a1,a2,a3,n12, n13, n23, n123, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData")
-```
 
-```{r Figure 3 Trans-eQTL, message=FALSE, eval=TRUE,fig.height=20, fig.width=20}
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData")
 #bar plot
 barplot(c(a3[[1]],a3[[2]],a3[[3]]),
@@ -282,6 +280,5 @@ draw.triple.venn(area1 = a1[[3]],
                  n123 = n123[[3]], 
                  category = c("GIGAMUGA", "GBRS", "FIXED.GIGAMUGA"), lty = "blank", cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c("skyblue", "pink1", "mediumorchid"))
-
 ```
 
