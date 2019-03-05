@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2018-12-13" />
+<meta name="date" content="2019-03-04" />
 
 <title>Figure2</title>
 
@@ -35,7 +35,8 @@
 <script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
 <link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -104,8 +105,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -121,7 +128,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -141,6 +147,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -162,18 +205,77 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -321,12 +423,12 @@ div.section {
 
 <h1 class="title toc-ignore">Figure2</h1>
 <h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2018-12-13</em></h4>
+<h4 class="date"><em>2019-03-04</em></h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2018-12-13</p>
+<p><strong>Last updated:</strong> 2019-03-04</p>
 <strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
 <ul>
 <li>
@@ -350,21 +452,26 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/0869bf869151b589e6e649aa558fd3b269eb4ab6" target="_blank">0869bf8</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/c57ed3cec55015a1f3ff072bb496423812bd5143" target="_blank">c57ed3c</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
 Untracked files:
     Untracked:  analysis/Figure1_by_vit.R
-    Untracked:  analysis/Figure3.Rmd
+    Untracked:  analysis/Figure3.0.Rmd
+    Untracked:  analysis/Figure3_0.Rmd
     Untracked:  analysis/old_analysis/
+    Untracked:  docs/figure/Figure3_2.Rmd/
     Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
     Untracked:  output/DO_Liver/
     Untracked:  output/DO_Striatum/
 
 Unstaged changes:
+    Modified:   analysis/Correlation.Rmd
+    Modified:   analysis/Figure1.Rmd
     Modified:   analysis/Recombination.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MEGAMUGA.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
@@ -396,6 +503,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/c57ed3cec55015a1f3ff072bb496423812bd5143/analysis/Figure2.Rmd" target="_blank">c57ed3c</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-04
+</td>
+<td style="text-align:left;">
+update Figure2,3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/212a2261dcafc86fe6c7020865e3d72f091b5d09/docs/Figure2.html" target="_blank">212a226</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-13
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 Rmd
@@ -685,6 +826,36 @@ p2 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
         axis.title=element_text(size=22,face=&quot;bold&quot;))
 p2</code></pre>
 <p><img src="figure/Figure2.Rmd/Figure%202-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 2-2.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/212a2261dcafc86fe6c7020865e3d72f091b5d09/docs/figure/Figure2.Rmd/Figure 2-2.png" target="_blank">212a226</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-13
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 p3 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
   geom_density_ridges(aes(x = self.cor, fill = array), scale = 0.95, bandwidth = 0.01) +
@@ -702,6 +873,98 @@ p3 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
         axis.title=element_text(size=22,face=&quot;bold&quot;))
  p3</code></pre>
 <p><img src="figure/Figure2.Rmd/Figure%202-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 2-3.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/212a2261dcafc86fe6c7020865e3d72f091b5d09/docs/figure/Figure2.Rmd/Figure 2-3.png" target="_blank">212a226</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2018-12-13
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>#load mismatch results to get the correlation
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_muga275GBRS.RData&quot;)
+muga.cor &lt;- mismatch_autochr_muga275GBRS$`0.130`
+muga.cor$array &lt;- &quot;MUGA&quot;
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_megamuga184GBRS.RData&quot;)
+megamuga.cor &lt;- mismatch_autochr_megamuga184GBRS$`0.130`
+megamuga.cor$array &lt;- &quot;MEGAMUGA&quot;
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_gigamuga358GBRS.RData&quot;)
+gigamuga.cor &lt;- mismatch_autochr_gigamuga358GBRS
+gigamuga.cor$array &lt;- &quot;GIGAMUGA&quot;
+#correlation results
+gbrs.array.cor &lt;- rbind(rbind(muga.cor,megamuga.cor),gigamuga.cor)
+#histgram
+#pdf(file = &quot;Figure2_correlation_on_autosome_histogram.pdf&quot;, width = 12, height = 10)
+p &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, fill = array)) +
+  geom_histogram(alpha=0.70, position=&quot;identity&quot;,binwidth=0.005) +
+  scale_color_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  scale_fill_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  labs(x = &quot;Correlation between GBRS and Array&quot;) +
+  labs(y = &quot;Count&quot;) +
+  #scale_x_discrete(limits=c(-0.02,1)) +
+  scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
+  theme(legend.title=element_blank(), text = element_text(size=22), 
+        axis.title=element_text(size=18,face=&quot;bold&quot;))
+p</code></pre>
+<p><img src="figure/Figure2.Rmd/Figure%202%20autosome-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+
+gbrs.array.cor$array &lt;- as.factor(gbrs.array.cor$array)
+p2 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
+  geom_density_ridges(aes(x = self.cor, fill = array), stat = &quot;binline&quot;, binwidth = 0.005, scale = 0.95,alpha = .8) +
+  scale_color_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  scale_fill_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  labs(x = &quot;Correlation between GBRS and Array on autosome markers&quot;) +
+  labs(y = &quot;&quot;) +
+  #scale_x_discrete(limits=c(-0.02,1)) +
+  scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
+  scale_y_discrete(
+    expand = c(0.01, 0), name = &quot;&quot;,
+    labels = c(&quot;GIGAMUGA&quot;, &quot;MEGAMUGA&quot;, &quot;MUGA&quot;)
+  ) +
+  theme(legend.title=element_blank(), text = element_text(size=25), 
+        axis.title=element_text(size=22,face=&quot;bold&quot;))
+p2</code></pre>
+<p><img src="figure/Figure2.Rmd/Figure%202%20autosome-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+p3 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
+  geom_density_ridges(aes(x = self.cor, fill = array), scale = 0.95, bandwidth = 0.01) +
+  scale_color_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  scale_fill_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
+  labs(x = &quot;Correlation between GBRS and Array on autosome markers&quot;) +
+  labs(y = &quot;&quot;) +
+  #scale_x_discrete(limits=c(-0.02,1)) +
+  scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
+  scale_y_discrete(
+    expand = c(0.01, 0), name = &quot;&quot;,
+    labels = c(&quot;GIGAMUGA&quot;, &quot;MEGAMUGA&quot;, &quot;MUGA&quot;)
+  ) +
+  theme(legend.title=element_blank(), text = element_text(size=25), 
+        axis.title=element_text(size=22,face=&quot;bold&quot;))
+p3</code></pre>
+<p><img src="figure/Figure2.Rmd/Figure%202%20autosome-3.png" width="1920" style="display: block; margin: auto;" /></p>
 </div>
 <div id="get-agree-table" class="section level1">
 <h1>Get agree table</h1>
@@ -717,7 +980,7 @@ library(abind)
 #load muga275.probs.69kchr  
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/MG/muga275.probs.69kchr.RData&quot;)
 #For each individual at each position, find the genotype with the maximum marginal probability.
-muga275.g &lt;- maxmarg(muga275.probs.69kchr,cores = 20)
+muga275.g &lt;- maxmarg(muga275.probs.69kchr,cores = 20, minprob = 0.5)
 muga275.g &lt;- do.call(&quot;abind&quot;,list(muga275.g,along = 2))
 
 #GBRS275.geno.probs
@@ -727,7 +990,7 @@ attr(GBRS275.geno.probs, &quot;is_x_chr&quot;) &lt;- structure(c(rep(FALSE,19),T
 attr(GBRS275.geno.probs, &quot;alleles&quot;) &lt;- LETTERS[1:8]
 attr(GBRS275.geno.probs, &quot;alleleprobs&quot;) &lt;- FALSE
 attr(GBRS275.geno.probs, &quot;class&quot;) &lt;- c(&quot;calc_genoprob&quot;, &quot;list&quot;)
-gbrs275.g &lt;- maxmarg(GBRS275.geno.probs$`0.130`,cores = 20)
+gbrs275.g &lt;- maxmarg(GBRS275.geno.probs$`0.130`,cores = 20, minprob = 0.5)
 gbrs275.g &lt;- do.call(&quot;abind&quot;,list(gbrs275.g,along = 2))
 
 #agree and disagree in muga275
@@ -827,23 +1090,26 @@ DT::datatable(tab,options = list(pageLength = 40, scrollY = &quot;300px&quot;, s
 # [1] stats     graphics  grDevices utils     datasets  methods   base     
 # 
 # other attached packages:
-# [1] ggridges_0.5.1 ggplot2_2.2.1  sinaplot_1.1.0 plyr_1.8.4    
+# [1] ggridges_0.5.1 ggplot2_3.1.0  sinaplot_1.1.0 plyr_1.8.4    
 # 
 # loaded via a namespace (and not attached):
-#  [1] Rcpp_0.12.18      pillar_1.0.1      later_0.7.5      
-#  [4] git2r_0.23.0      workflowr_1.1.1   R.methodsS3_1.7.1
-#  [7] R.utils_2.5.0     tools_3.3.2       digest_0.6.13    
-# [10] jsonlite_1.5      evaluate_0.10     tibble_1.4.1     
-# [13] gtable_0.2.0      rlang_0.2.2       shiny_1.0.5      
-# [16] crosstalk_1.0.0   yaml_2.1.14       stringr_1.2.0    
-# [19] knitr_1.20        htmlwidgets_1.3   rprojroot_1.3-2  
-# [22] grid_3.3.2        DT_0.4            R6_2.2.2         
-# [25] rmarkdown_1.9     magrittr_1.5      whisker_0.3-2    
-# [28] backports_1.1.2   scales_0.4.1      promises_1.0.1   
-# [31] htmltools_0.3.6   xtable_1.8-2      mime_0.5         
-# [34] colorspace_1.3-2  httpuv_1.4.5      labeling_0.3     
-# [37] stringi_1.1.2     lazyeval_0.2.0    munsell_0.4.3    
-# [40] R.oo_1.21.0</code></pre>
+#  [1] Rcpp_1.0.0        later_0.7.5       pillar_1.3.1     
+#  [4] git2r_0.23.0      workflowr_1.1.1   bindr_0.1.1      
+#  [7] R.methodsS3_1.7.1 R.utils_2.5.0     tools_3.3.2      
+# [10] digest_0.6.18     jsonlite_1.6      evaluate_0.10    
+# [13] tibble_1.4.1      gtable_0.2.0      pkgconfig_2.0.2  
+# [16] rlang_0.3.1       shiny_1.2.0       crosstalk_1.0.0  
+# [19] yaml_2.2.0        bindrcpp_0.2.2    withr_2.1.2      
+# [22] stringr_1.3.1     dplyr_0.7.6       knitr_1.20       
+# [25] htmlwidgets_1.3   DT_0.4            rprojroot_1.3-2  
+# [28] grid_3.3.2        tidyselect_0.2.4  glue_1.3.0       
+# [31] R6_2.3.0          rmarkdown_1.11    purrr_0.2.2      
+# [34] magrittr_1.5      whisker_0.3-2     promises_1.0.1   
+# [37] backports_1.1.2   scales_1.0.0      htmltools_0.3.6  
+# [40] assertthat_0.2.0  xtable_1.8-3      mime_0.5         
+# [43] colorspace_1.4-0  httpuv_1.4.5      labeling_0.3     
+# [46] stringi_1.2.4     lazyeval_0.2.1    munsell_0.5.0    
+# [49] crayon_1.3.4      R.oo_1.21.0</code></pre>
 </div>
 </div>
 
