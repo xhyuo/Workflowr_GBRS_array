@@ -452,7 +452,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/d5709b024e1da192d61a867e75d4dce0f9c168cb" target="_blank">d5709b0</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/bece325f8458f81333e41249f1e1a2b8faf1aa90" target="_blank">bece325</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -502,6 +502,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/bece325f8458f81333e41249f1e1a2b8faf1aa90/analysis/Figure2.Rmd" target="_blank">bece325</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-05
+</td>
+<td style="text-align:left;">
+update Figure2,3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/811ec274eb1ffceeb56653c94a007385c0d369f3/docs/Figure2.html" target="_blank">811ec27</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-05
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 html
@@ -987,7 +1021,7 @@ p &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, fill = array)) +
   geom_histogram(alpha=0.70, position=&quot;identity&quot;,binwidth=0.005) +
   scale_color_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
   scale_fill_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
-  labs(x = &quot;Correlation between GBRS and Array&quot;) +
+  labs(x = &quot;Correlation between GBRS and Array on Autosome&quot;) +
   labs(y = &quot;Count&quot;) +
   #scale_x_discrete(limits=c(-0.02,1)) +
   scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
@@ -1032,7 +1066,7 @@ p2 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
   geom_density_ridges(aes(x = self.cor, fill = array), stat = &quot;binline&quot;, binwidth = 0.005, scale = 0.95,alpha = .8) +
   scale_color_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
   scale_fill_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
-  labs(x = &quot;Correlation between GBRS and Array on autosome markers&quot;) +
+  labs(x = &quot;Correlation between GBRS and Array on Autosome&quot;) +
   labs(y = &quot;&quot;) +
   #scale_x_discrete(limits=c(-0.02,1)) +
   scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
@@ -1079,7 +1113,7 @@ p3 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
   geom_density_ridges(aes(x = self.cor, fill = array), scale = 0.95, bandwidth = 0.01) +
   scale_color_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
   scale_fill_manual(values=c(&quot;green3&quot;, &quot;blue&quot;, &quot;cyan&quot;)) +
-  labs(x = &quot;Correlation between GBRS and Array on autosome markers&quot;) +
+  labs(x = &quot;Correlation between GBRS and Array on Autosome&quot;) +
   labs(y = &quot;&quot;) +
   #scale_x_discrete(limits=c(-0.02,1)) +
   scale_x_continuous(breaks = seq(0, 1.0, by = 0.15)) +
@@ -1136,7 +1170,7 @@ library(abind)
 #load muga275.probs.69kchr  
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/data/qtl2/GENO/MG/muga275.probs.69kchr.RData&quot;)
 #For each individual at each position, find the genotype with the maximum marginal probability.
-muga275.g &lt;- maxmarg(muga275.probs.69kchr,cores = 20, minprob = 0.5)
+muga275.g &lt;- maxmarg(muga275.probs.69kchr,cores = 20)
 muga275.g &lt;- do.call(&quot;abind&quot;,list(muga275.g,along = 2))
 
 #GBRS275.geno.probs
@@ -1227,6 +1261,14 @@ save(tab, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/A
 DT::datatable(tab,options = list(pageLength = 40, scrollY = &quot;300px&quot;, scrollX = &quot;40px&quot;))</code></pre>
 <div id="htmlwidget-61b14e40a9f168c7cdcc" style="width:100%;height:auto;" class="datatables html-widget"></div>
 <script type="application/json" data-for="htmlwidget-61b14e40a9f168c7cdcc">{"x":{"filter":"none","data":[["1","2","3"],["MUGA","MEGAMUGA","GIGAMUGA"],["5511.05 ± 2167.27","5972.88 ± 2049.69","5137.19 ± 1752.78"],["36156.69 ± 2894.7","40132.27 ± 2277.28","35212.15 ± 1857.05"],[7.986,8.656,7.445],[52.397,58.158,51.028]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Array<\/th>\n      <th>Agree<\/th>\n      <th>Disagree<\/th>\n      <th>total.percentage.agree<\/th>\n      <th>total.percentage.disagree<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":40,"scrollY":"300px","scrollX":"40px","columnDefs":[{"className":"dt-right","targets":[4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,25,40,50,100]}},"evals":[],"jsHooks":[]}</script>
+<pre class="r"><code>
+#bar plot
+barplot(tab$total.percentage.agree,
+        ylab = &quot;Percetage of agree between GBRS and Array&quot;,
+        names.arg = c(&quot;MUGA&quot;, &quot;MEGAMUGA&quot;, &quot;GIGAMUGA&quot;), font.axis = 3, las = 1,cex.names=1,cex.lab = 1,
+        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
+        ylim = c(0,10))</code></pre>
+<p><img src="figure/Figure2.Rmd/unnamed-chunk-1-2.png" width="672" style="display: block; margin: auto;" /></p>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()
