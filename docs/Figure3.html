@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2019-03-05" />
+<meta name="date" content="2019-03-07" />
 
 <title>Figure3</title>
 
@@ -415,12 +415,12 @@ div.section {
 
 <h1 class="title toc-ignore">Figure3</h1>
 <h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2019-03-05</em></h4>
+<h4 class="date"><em>2019-03-07</em></h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2019-03-05</p>
+<p><strong>Last updated:</strong> 2019-03-07</p>
 <strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
 <ul>
 <li>
@@ -444,7 +444,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/bece325f8458f81333e41249f1e1a2b8faf1aa90" target="_blank">bece325</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/7bf0fd2b6915fb957f0d2a1ec5f0cf44b09ab94a" target="_blank">7bf0fd2</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -456,6 +456,29 @@ Untracked files:
     Untracked:  analysis/Figure3.0.Rmd
     Untracked:  analysis/Figure3_0.Rmd
     Untracked:  analysis/old_analysis/
+    Untracked:  data/Agree_table_three_array.RData
+    Untracked:  data/DO_Striatum_recomb.GBRS.genotypes.RData
+    Untracked:  data/DO_liver_recomb.GBRS.genotypes.RData
+    Untracked:  data/fixed.gigamuga358_cis.eqtl.RData
+    Untracked:  data/fixed.megamuga184_cis.eqtl.RData
+    Untracked:  data/fixed.muga275_cis.eqtl.RData
+    Untracked:  data/gbrs184_cis.eqtl.RData
+    Untracked:  data/gbrs275_cis.eqtl.RData
+    Untracked:  data/gbrs358_cis.eqtl.RData
+    Untracked:  data/gene.anno.cis.RData
+    Untracked:  data/gigamuga358.recomb.RData
+    Untracked:  data/gigamuga358_cis.eqtl.RData
+    Untracked:  data/megamuga184.recomb.RData
+    Untracked:  data/megamuga184_cis.eqtl.RData
+    Untracked:  data/mismatch_autochr_gigamuga358GBRS.RData
+    Untracked:  data/mismatch_autochr_megamuga184GBRS.RData
+    Untracked:  data/mismatch_autochr_muga275GBRS.RData
+    Untracked:  data/mismatch_gigamuga358GBRS.RData
+    Untracked:  data/mismatch_megamuga184GBRS.RData
+    Untracked:  data/mismatch_muga275GBRS.RData
+    Untracked:  data/muga275.recomb.RData
+    Untracked:  data/muga275_cis.eqtl.RData
+    Untracked:  data/venn_diag_transeqtl_max.RData
     Untracked:  docs/figure/Figure3_2.Rmd/
     Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
     Untracked:  output/DO_Liver/
@@ -494,6 +517,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7bf0fd2b6915fb957f0d2a1ec5f0cf44b09ab94a/analysis/Figure3.Rmd" target="_blank">7bf0fd2</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-07
+</td>
+<td style="text-align:left;">
+update Figure 3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/6110ac8224875ca5f8c07f2b93fbc1fe8fa2ebb3/docs/Figure3.html" target="_blank">6110ac8</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-05
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 html
@@ -1028,7 +1085,7 @@ xhyuo
 <p></details></p>
 </div>
 <div id="figure-3-trans-eqtl-at-fdr-0.05" class="section level1">
-<h1>Figure 3, Trans-eQTL at FDR 0.05</h1>
+<h1>Figure 3 Trans-eQTL at FDR 0.05</h1>
 <pre class="r"><code>a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
 load(&quot;/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData&quot;)
 #load eqtl pvalue for muga275
@@ -1157,37 +1214,7 @@ barplot(c(a3[[1]],a3[[2]],a3[[3]]),
         names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
         col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
         ylim = c(0,2500))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20number-1.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL number-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/811ec274eb1ffceeb56653c94a007385c0d369f3/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL number-1.png" target="_blank">811ec27</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-05
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05-1.png" width="1920" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>
 #MUGA
 grid.newpage()
@@ -1200,37 +1227,7 @@ draw.triple.venn(area1 = a1[[1]],
                  n123 = n123[[1]], 
                  category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20number-2.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL number-2.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/811ec274eb1ffceeb56653c94a007385c0d369f3/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL number-2.png" target="_blank">811ec27</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-05
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05-2.png" width="1920" style="display: block; margin: auto;" /></p>
 <pre><code># (polygon[GRID.polygon.303], polygon[GRID.polygon.304], polygon[GRID.polygon.305], polygon[GRID.polygon.306], polygon[GRID.polygon.307], polygon[GRID.polygon.308], text[GRID.text.309], text[GRID.text.310], text[GRID.text.311], text[GRID.text.312], text[GRID.text.313], text[GRID.text.314], text[GRID.text.315], text[GRID.text.316], text[GRID.text.317], text[GRID.text.318])
 
 #MEGAMUGA
@@ -1244,37 +1241,7 @@ draw.triple.venn(area1 = a1[[2]],
                  n123 = n123[[2]], 
                  category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20number-3.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL number-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/811ec274eb1ffceeb56653c94a007385c0d369f3/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL number-3.png" target="_blank">811ec27</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-05
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05-3.png" width="1920" style="display: block; margin: auto;" /></p>
 <pre><code># (polygon[GRID.polygon.319], polygon[GRID.polygon.320], polygon[GRID.polygon.321], polygon[GRID.polygon.322], polygon[GRID.polygon.323], polygon[GRID.polygon.324], text[GRID.text.325], text[GRID.text.326], text[GRID.text.327], text[GRID.text.328], text[GRID.text.329], text[GRID.text.330], text[GRID.text.331], text[GRID.text.332], text[GRID.text.333], text[GRID.text.334])
 
 #GIGAMUGA
@@ -1288,37 +1255,7 @@ draw.triple.venn(area1 = a1[[3]],
                  n123 = n123[[3]], 
                  category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20number-4.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL number-4.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/811ec274eb1ffceeb56653c94a007385c0d369f3/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL number-4.png" target="_blank">811ec27</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-05
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05-4.png" width="1920" style="display: block; margin: auto;" /></p>
 <pre><code># (polygon[GRID.polygon.335], polygon[GRID.polygon.336], polygon[GRID.polygon.337], polygon[GRID.polygon.338], polygon[GRID.polygon.339], polygon[GRID.polygon.340], text[GRID.text.341], text[GRID.text.342], text[GRID.text.343], text[GRID.text.344], text[GRID.text.345], text[GRID.text.346], text[GRID.text.347], text[GRID.text.348], text[GRID.text.349], text[GRID.text.350])</code></pre>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
@@ -1353,7 +1290,7 @@ xhyuo
 # [16] rlang_0.3.1          yaml_2.2.0           bindrcpp_0.2.2      
 # [19] withr_2.1.2          stringr_1.3.1        knitr_1.20          
 # [22] rprojroot_1.3-2      tidyselect_0.2.4     glue_1.3.0          
-# [25] R6_2.3.0             rmarkdown_1.11       reshape2_1.4.3      
+# [25] R6_2.4.0             rmarkdown_1.11       reshape2_1.4.3      
 # [28] lambda.r_1.2.3       purrr_0.2.2          magrittr_1.5        
 # [31] whisker_0.3-2        splines_3.3.2        backports_1.1.2     
 # [34] scales_1.0.0         htmltools_0.3.6      assertthat_0.2.0    
