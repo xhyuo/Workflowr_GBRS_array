@@ -281,3 +281,162 @@ draw.triple.venn(area1 = a1[[3]],
                  category = c("GIGAMUGA", "GBRS", "FIXED.GIGAMUGA"), lty = "blank", cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c("skyblue", "pink1", "mediumorchid"))
 ```
+
+# Figure 3 Trans-eQTL at LOD >=8
+```{r Figure 3 Trans-eQTL at LOD 8, message=FALSE, eval=TRUE,fig.height=20, fig.width=20}
+a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
+load("/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData")
+#load eqtl pvalue for muga275
+a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/muga275/muga275_pvalue.RData"))
+a <- a[a$lod >= 8,]
+a$marker <- paste0(a$chr,"_",a$pos)
+a$eqtl_marker <- paste0(a$chr, "_", a$pos)
+a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+a$cis_trans_max <- ifelse(a$nearest_marker == a$eqtl_marker, "cis", "trans")
+a$cis_trans_location <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06) & (abs(a$pos - a$end) <= 5e+06),"cis", "trans")
+a <- a[a$cis_trans_location == "trans",]
+
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData"))
+b <- b[b$lod >= 8,]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans_max <- ifelse(b$nearest_marker == b$eqtl_marker, "cis", "trans")
+b$cis_trans_location <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06) & (abs(b$pos - b$end) <= 5e+06),"cis", "trans")
+b <- b[b$cis_trans_location == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData"))
+c <- c[c$lod >= 8,]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans_max <- ifelse(c$nearest_marker == c$eqtl_marker, "cis", "trans")
+c$cis_trans_location <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06) & (abs(c$pos - c$end) <= 5e+06),"cis", "trans")
+c <- c[c$cis_trans_location == "trans",]
+
+a1[[1]] = length(unique(a$marker))
+a2[[1]] = length(unique(b$marker))
+a3[[1]] = length(unique(c$marker))
+n12[[1]] <- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[1]] <- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[1]] <- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[1]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
+
+#load eqtl pvalue for megamuga184
+a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData"))
+a <- a[a$lod >= 8,]
+a$marker <- paste0(a$chr,"_",a$pos)
+a$eqtl_marker <- paste0(a$chr, "_", a$pos)
+a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+a$cis_trans_max <- ifelse(a$nearest_marker == a$eqtl_marker, "cis", "trans")
+a$cis_trans_location <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06) & (abs(a$pos - a$end) <= 5e+06),"cis", "trans")
+a <- a[a$cis_trans_location == "trans",]
+
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData"))
+b <- b[b$lod >= 8,]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans_max <- ifelse(b$nearest_marker == b$eqtl_marker, "cis", "trans")
+b$cis_trans_location <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06) & (abs(b$pos - b$end) <= 5e+06),"cis", "trans")
+b <- b[b$cis_trans_location == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData"))
+c <- c[c$lod >= 8,]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans_max <- ifelse(c$nearest_marker == c$eqtl_marker, "cis", "trans")
+c$cis_trans_location <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06) & (abs(c$pos - c$end) <= 5e+06),"cis", "trans")
+c <- c[c$cis_trans_location == "trans",]
+
+a1[[2]] = length(unique(a$marker))
+a2[[2]] = length(unique(b$marker))
+a3[[2]] = length(unique(c$marker))
+n12[[2]] <- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[2]] <- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[2]] <- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[2]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
+
+#load eqtl pvalue for gigamuga358
+a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData"))
+a <- a[a$lod >= 8,]
+a$marker <- paste0(a$chr,"_",a$pos)
+a$eqtl_marker <- paste0(a$chr, "_", a$pos)
+a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+a$cis_trans_max <- ifelse(a$nearest_marker == a$eqtl_marker, "cis", "trans")
+a$cis_trans_location <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06) & (abs(a$pos - a$end) <= 5e+06),"cis", "trans")
+a <- a[a$cis_trans_location == "trans",]
+
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData"))
+b <- b[b$lod >= 8,]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans_max <- ifelse(b$nearest_marker == b$eqtl_marker, "cis", "trans")
+b$cis_trans_location <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06) & (abs(b$pos - b$end) <= 5e+06),"cis", "trans")
+b <- b[b$cis_trans_location == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData"))
+c <- c[c$lod >= 8,]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans_max <- ifelse(c$nearest_marker == c$eqtl_marker, "cis", "trans")
+c$cis_trans_location <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06) & (abs(c$pos - c$end) <= 5e+06),"cis", "trans")
+c <- c[c$cis_trans_location == "trans",]
+
+a1[[3]] = length(unique(a$marker))
+a2[[3]] = length(unique(b$marker))
+a3[[3]] = length(unique(c$marker))
+n12[[3]] <- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[3]] <- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[3]] <- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
+
+save(a1,a2,a3,n12, n13, n23, n123, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData")
+
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData")
+#bar plot
+barplot(c(a3[[1]],a3[[2]],a3[[3]]),
+        ylab = "Number of trans-eQTL at LOD >=8",
+        names.arg = c("FIXED.MUGA", "FIXED.MEGAMUGA", "FIXED.GIGAMUGA"), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
+        col = c("cyan", "blue", "green3"),
+        ylim = c(0,3000))
+
+#MUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[1]], 
+                 area2 = a2[[1]], 
+                 area3 = a3[[1]], 
+                 n12 = n12[[1]], 
+                 n23 = n23[[1]], 
+                 n13 = n13[[1]], 
+                 n123 = n123[[1]], 
+                 category = c("MUGA", "GBRS", "FIXED.MUGA"), lty = "blank", cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c("skyblue", "pink1", "mediumorchid"))
+
+#MEGAMUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[2]], 
+                 area2 = a2[[2]], 
+                 area3 = a3[[2]], 
+                 n12 = n12[[2]], 
+                 n23 = n23[[2]], 
+                 n13 = n13[[2]], 
+                 n123 = n123[[2]], 
+                 category = c("MEGAMUGA", "GBRS", "FIXED.MEGAMUGA"), lty = "blank", cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c("skyblue", "pink1", "mediumorchid"))
+
+#GIGAMUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[3]], 
+                 area2 = a2[[3]], 
+                 area3 = a3[[3]], 
+                 n12 = n12[[3]], 
+                 n23 = n23[[3]], 
+                 n13 = n13[[3]], 
+                 n123 = n123[[3]], 
+                 category = c("GIGAMUGA", "GBRS", "FIXED.GIGAMUGA"), lty = "blank", cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c("skyblue", "pink1", "mediumorchid"))
+```
