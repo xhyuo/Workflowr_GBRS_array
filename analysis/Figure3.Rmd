@@ -195,6 +195,56 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_y_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
   labs(title="Calling agreement of distal eQTLs between array and GBRS (2Mb)")
 
+
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c("1",
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                             "1",
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                             "1"))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
+  scale_y_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (5Mb)")
+
 a1[[1]] = length(unique(a$marker))
 a2[[1]] = length(unique(b$marker))
 a3[[1]] = length(unique(c$marker))
@@ -280,6 +330,56 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_y_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
   labs(title="Calling agreement of distal eQTLs between array and GBRS (2Mb)")
 
+
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c("1",
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                             "1",
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                             "1"))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
+  scale_y_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (5Mb)")
+
 a1[[2]] = length(unique(a$marker))
 a2[[2]] = length(unique(b$marker))
 a3[[2]] = length(unique(c$marker))
@@ -364,6 +464,55 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_x_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
   scale_y_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
   labs(title="Calling agreement of distal eQTLs between array and GBRS (2Mb)")
+
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c("1",
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                             "1",
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                             "1"))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
+  scale_y_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (5Mb)")
 
 a1[[3]] = length(unique(a$marker))
 a2[[3]] = length(unique(b$marker))
@@ -498,6 +647,55 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_y_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
   labs(title="Calling agreement of distal eQTLs between array and GBRS (2Mb)")
 
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c("1",
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                             "1",
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                             "1"))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
+  scale_y_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (5Mb)")
+
 a1[[1]] = length(unique(a$marker))
 a2[[1]] = length(unique(b$marker))
 a3[[1]] = length(unique(c$marker))
@@ -580,6 +778,56 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_y_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
   labs(title="Calling agreement of distal eQTLs between array and GBRS (2Mb)")
 
+
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c("1",
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                             "1",
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                             "1"))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
+  scale_y_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (5Mb)")
+
 a1[[2]] = length(unique(a$marker))
 a2[[2]] = length(unique(b$marker))
 a3[[2]] = length(unique(c$marker))
@@ -661,6 +909,55 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_x_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
   scale_y_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
   labs(title="Calling agreement of distal eQTLs between array and GBRS (2Mb)")
+
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c("1",
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                             "1",
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                             "1"))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
+  scale_y_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (5Mb)")
 
 a1[[3]] = length(unique(a$marker))
 a2[[3]] = length(unique(b$marker))
