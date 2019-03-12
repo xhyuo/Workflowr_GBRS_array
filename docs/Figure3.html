@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2019-03-11" />
+<meta name="date" content="2019-03-12" />
 
 <title>Figure3</title>
 
@@ -415,12 +415,12 @@ div.section {
 
 <h1 class="title toc-ignore">Figure3</h1>
 <h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2019-03-11</em></h4>
+<h4 class="date"><em>2019-03-12</em></h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2019-03-11</p>
+<p><strong>Last updated:</strong> 2019-03-12</p>
 <strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
 <ul>
 <li>
@@ -444,7 +444,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/0011596ed22efc05166f336edc21ab9a339d2dae" target="_blank">0011596</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/10974f2c949a7ce7f88ba52b6b156408b5f25a2a" target="_blank">10974f2</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -452,6 +452,7 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
+    Untracked:  analysis/11.Rmd
     Untracked:  analysis/Figure1_by_vit.R
     Untracked:  analysis/Figure3.0.Rmd
     Untracked:  analysis/Figure3_0.Rmd
@@ -519,6 +520,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/10974f2c949a7ce7f88ba52b6b156408b5f25a2a/analysis/Figure3.Rmd" target="_blank">10974f2</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-12
+</td>
+<td style="text-align:left;">
+update Figure 3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/c5ae74af09d4bf5ac4d0e975c17c1cde8365ebc7/docs/Figure3.html" target="_blank">c5ae74a</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 html
@@ -1373,6 +1408,109 @@ xhyuo
 </table>
 <p></details></p>
 <pre class="r"><code>
+
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;MUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;MUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (5Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-2.png" width="1344" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">0011596</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">0062709</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
 a1[[1]] = length(unique(a$marker))
 a2[[1]] = length(unique(b$marker))
 a3[[1]] = length(unique(c$marker))
@@ -1457,8 +1595,8 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_x_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
   scale_y_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
   labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-2.png" width="1344" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png:</em></summary>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-3.png" width="1344" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
 <tr>
@@ -1476,7 +1614,7 @@ Date
 <tbody>
 <tr>
 <td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">0011596</a>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">0011596</a>
 </td>
 <td style="text-align:left;">
 xhyuo
@@ -1487,7 +1625,7 @@ xhyuo
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">7a1cb70</a>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">7a1cb70</a>
 </td>
 <td style="text-align:left;">
 xhyuo
@@ -1498,7 +1636,110 @@ xhyuo
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">0062709</a>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">0062709</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
+
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (5Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-4.png" width="1344" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">0011596</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">0062709</a>
 </td>
 <td style="text-align:left;">
 xhyuo
@@ -1595,142 +1836,6 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_x_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
   scale_y_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
   labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-3.png" width="1344" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">0011596</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">7a1cb70</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
-a1[[3]] = length(unique(a$marker))
-a2[[3]] = length(unique(b$marker))
-a3[[3]] = length(unique(c$marker))
-n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
-
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
-#bar plot
-barplot(c(a3[[1]],a3[[2]],a3[[3]]),
-        ylab = &quot;Number of trans-eQTL at FDR 0.05&quot;,
-        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
-        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
-        ylim = c(0,2500))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-4.png" width="1344" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">0011596</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">7a1cb70</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
-#MUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[1]], 
-                 area2 = a2[[1]], 
-                 area3 = a3[[1]], 
-                 n12 = n12[[1]], 
-                 n23 = n23[[1]], 
-                 n13 = n13[[1]], 
-                 n123 = n123[[1]], 
-                 category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-5.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-5.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
@@ -1762,19 +1867,55 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.396], polygon[GRID.polygon.397], polygon[GRID.polygon.398], polygon[GRID.polygon.399], polygon[GRID.polygon.400], polygon[GRID.polygon.401], text[GRID.text.402], text[GRID.text.403], text[GRID.text.404], text[GRID.text.405], text[GRID.text.406], text[GRID.text.407], text[GRID.text.408], text[GRID.text.409], text[GRID.text.410], text[GRID.text.411])
-
-#MEGAMUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[2]], 
-                 area2 = a2[[2]], 
-                 area3 = a3[[2]], 
-                 n12 = n12[[2]], 
-                 n23 = n23[[2]], 
-                 n13 = n13[[2]], 
-                 n123 = n123[[2]], 
-                 category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<pre class="r"><code>
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (5Mb)&quot;)</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-6.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-6.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
@@ -1806,19 +1947,24 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.412], polygon[GRID.polygon.413], polygon[GRID.polygon.414], polygon[GRID.polygon.415], polygon[GRID.polygon.416], polygon[GRID.polygon.417], text[GRID.text.418], text[GRID.text.419], text[GRID.text.420], text[GRID.text.421], text[GRID.text.422], text[GRID.text.423], text[GRID.text.424], text[GRID.text.425], text[GRID.text.426], text[GRID.text.427])
+<pre class="r"><code>
+a1[[3]] = length(unique(a$marker))
+a2[[3]] = length(unique(b$marker))
+a3[[3]] = length(unique(c$marker))
+n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
-#GIGAMUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[3]], 
-                 area2 = a2[[3]], 
-                 area3 = a3[[3]], 
-                 n12 = n12[[3]], 
-                 n23 = n23[[3]], 
-                 n13 = n13[[3]], 
-                 n123 = n123[[3]], 
-                 category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
+
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
+#bar plot
+barplot(c(a3[[1]],a3[[2]],a3[[3]]),
+        ylab = &quot;Number of trans-eQTL at FDR 0.05&quot;,
+        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
+        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
+        ylim = c(0,2500))</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-7.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-7.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
@@ -1850,7 +1996,48 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.428], polygon[GRID.polygon.429], polygon[GRID.polygon.430], polygon[GRID.polygon.431], polygon[GRID.polygon.432], polygon[GRID.polygon.433], text[GRID.text.434], text[GRID.text.435], text[GRID.text.436], text[GRID.text.437], text[GRID.text.438], text[GRID.text.439], text[GRID.text.440], text[GRID.text.441], text[GRID.text.442], text[GRID.text.443])</code></pre>
+<pre class="r"><code>
+#MUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[1]], 
+                 area2 = a2[[1]], 
+                 area3 = a3[[1]], 
+                 n12 = n12[[1]], 
+                 n23 = n23[[1]], 
+                 n13 = n13[[1]], 
+                 n123 = n123[[1]], 
+                 category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-8.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.489], polygon[GRID.polygon.490], polygon[GRID.polygon.491], polygon[GRID.polygon.492], polygon[GRID.polygon.493], polygon[GRID.polygon.494], text[GRID.text.495], text[GRID.text.496], text[GRID.text.497], text[GRID.text.498], text[GRID.text.499], text[GRID.text.500], text[GRID.text.501], text[GRID.text.502], text[GRID.text.503], text[GRID.text.504])
+
+#MEGAMUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[2]], 
+                 area2 = a2[[2]], 
+                 area3 = a3[[2]], 
+                 n12 = n12[[2]], 
+                 n23 = n23[[2]], 
+                 n13 = n13[[2]], 
+                 n123 = n123[[2]], 
+                 category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-9.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.505], polygon[GRID.polygon.506], polygon[GRID.polygon.507], polygon[GRID.polygon.508], polygon[GRID.polygon.509], polygon[GRID.polygon.510], text[GRID.text.511], text[GRID.text.512], text[GRID.text.513], text[GRID.text.514], text[GRID.text.515], text[GRID.text.516], text[GRID.text.517], text[GRID.text.518], text[GRID.text.519], text[GRID.text.520])
+
+#GIGAMUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[3]], 
+                 area2 = a2[[3]], 
+                 area3 = a3[[3]], 
+                 n12 = n12[[3]], 
+                 n23 = n23[[3]], 
+                 n13 = n13[[3]], 
+                 n123 = n123[[3]], 
+                 category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-10.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.521], polygon[GRID.polygon.522], polygon[GRID.polygon.523], polygon[GRID.polygon.524], polygon[GRID.polygon.525], polygon[GRID.polygon.526], text[GRID.text.527], text[GRID.text.528], text[GRID.text.529], text[GRID.text.530], text[GRID.text.531], text[GRID.text.532], text[GRID.text.533], text[GRID.text.534], text[GRID.text.535], text[GRID.text.536])</code></pre>
 </div>
 <div id="figure-3-trans-eqtl-at-lod-8-5-mb" class="section level1">
 <h1>Figure 3 Trans-eQTL at LOD &gt;=8 (5 Mb)</h1>
@@ -1972,6 +2159,108 @@ xhyuo
 </table>
 <p></details></p>
 <pre class="r"><code>
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;MUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;MUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (5Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-2.png" width="1344" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-2.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-2.png" target="_blank">0011596</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-2.png" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-2.png" target="_blank">0062709</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
 a1[[1]] = length(unique(a$marker))
 a2[[1]] = length(unique(b$marker))
 a3[[1]] = length(unique(c$marker))
@@ -2053,8 +2342,8 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_x_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
   scale_y_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
   labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-2.png" width="1344" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-2.png:</em></summary>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-3.png" width="1344" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-3.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
 <tr>
@@ -2072,7 +2361,7 @@ Date
 <tbody>
 <tr>
 <td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-2.png" target="_blank">0011596</a>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-3.png" target="_blank">0011596</a>
 </td>
 <td style="text-align:left;">
 xhyuo
@@ -2083,7 +2372,7 @@ xhyuo
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-2.png" target="_blank">7a1cb70</a>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-3.png" target="_blank">7a1cb70</a>
 </td>
 <td style="text-align:left;">
 xhyuo
@@ -2094,7 +2383,99 @@ xhyuo
 </tr>
 <tr>
 <td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-2.png" target="_blank">0062709</a>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-3.png" target="_blank">0062709</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
+
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (5Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-4.png" width="1344" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-4.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-4.png" target="_blank">0011596</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-4.png" target="_blank">0062709</a>
 </td>
 <td style="text-align:left;">
 xhyuo
@@ -2188,131 +2569,6 @@ ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   scale_x_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
   scale_y_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
   labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-3.png" width="1344" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-3.png" target="_blank">0011596</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-3.png" target="_blank">7a1cb70</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-3.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
-a1[[3]] = length(unique(a$marker))
-a2[[3]] = length(unique(b$marker))
-a3[[3]] = length(unique(c$marker))
-n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
-
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
-#bar plot
-barplot(c(a3[[1]],a3[[2]],a3[[3]]),
-        ylab = &quot;Number of trans-eQTL at LOD &gt;=8&quot;,
-        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
-        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
-        ylim = c(0,2500))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-4.png" width="1344" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-4.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0011596ed22efc05166f336edc21ab9a339d2dae/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-4.png" target="_blank">0011596</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-4.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
-#MUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[1]], 
-                 area2 = a2[[1]], 
-                 area3 = a3[[1]], 
-                 n12 = n12[[1]], 
-                 n23 = n23[[1]], 
-                 n13 = n13[[1]], 
-                 n123 = n123[[1]], 
-                 category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-5.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-5.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
@@ -2344,19 +2600,55 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.537], polygon[GRID.polygon.538], polygon[GRID.polygon.539], polygon[GRID.polygon.540], polygon[GRID.polygon.541], polygon[GRID.polygon.542], text[GRID.text.543], text[GRID.text.544], text[GRID.text.545], text[GRID.text.546], text[GRID.text.547], text[GRID.text.548], text[GRID.text.549], text[GRID.text.550], text[GRID.text.551], text[GRID.text.552])
-
-#MEGAMUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[2]], 
-                 area2 = a2[[2]], 
-                 area3 = a3[[2]], 
-                 n12 = n12[[2]], 
-                 n23 = n23[[2]], 
-                 n13 = n13[[2]], 
-                 n123 = n123[[2]], 
-                 category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<pre class="r"><code>
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 5e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (5Mb)&quot;)</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-6.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-6.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
@@ -2388,19 +2680,24 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.553], polygon[GRID.polygon.554], polygon[GRID.polygon.555], polygon[GRID.polygon.556], polygon[GRID.polygon.557], polygon[GRID.polygon.558], text[GRID.text.559], text[GRID.text.560], text[GRID.text.561], text[GRID.text.562], text[GRID.text.563], text[GRID.text.564], text[GRID.text.565], text[GRID.text.566], text[GRID.text.567], text[GRID.text.568])
+<pre class="r"><code>
+a1[[3]] = length(unique(a$marker))
+a2[[3]] = length(unique(b$marker))
+a3[[3]] = length(unique(c$marker))
+n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
-#GIGAMUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[3]], 
-                 area2 = a2[[3]], 
-                 area3 = a3[[3]], 
-                 n12 = n12[[3]], 
-                 n23 = n23[[3]], 
-                 n13 = n13[[3]], 
-                 n123 = n123[[3]], 
-                 category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
+
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
+#bar plot
+barplot(c(a3[[1]],a3[[2]],a3[[3]]),
+        ylab = &quot;Number of trans-eQTL at LOD &gt;=8&quot;,
+        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
+        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
+        ylim = c(0,2500))</code></pre>
 <p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-7.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-7.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
@@ -2432,7 +2729,48 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.569], polygon[GRID.polygon.570], polygon[GRID.polygon.571], polygon[GRID.polygon.572], polygon[GRID.polygon.573], polygon[GRID.polygon.574], text[GRID.text.575], text[GRID.text.576], text[GRID.text.577], text[GRID.text.578], text[GRID.text.579], text[GRID.text.580], text[GRID.text.581], text[GRID.text.582], text[GRID.text.583], text[GRID.text.584])</code></pre>
+<pre class="r"><code>
+#MUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[1]], 
+                 area2 = a2[[1]], 
+                 area3 = a3[[1]], 
+                 n12 = n12[[1]], 
+                 n23 = n23[[1]], 
+                 n13 = n13[[1]], 
+                 n123 = n123[[1]], 
+                 category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-8.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.723], polygon[GRID.polygon.724], polygon[GRID.polygon.725], polygon[GRID.polygon.726], polygon[GRID.polygon.727], polygon[GRID.polygon.728], text[GRID.text.729], text[GRID.text.730], text[GRID.text.731], text[GRID.text.732], text[GRID.text.733], text[GRID.text.734], text[GRID.text.735], text[GRID.text.736], text[GRID.text.737], text[GRID.text.738])
+
+#MEGAMUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[2]], 
+                 area2 = a2[[2]], 
+                 area3 = a3[[2]], 
+                 n12 = n12[[2]], 
+                 n23 = n23[[2]], 
+                 n13 = n13[[2]], 
+                 n123 = n123[[2]], 
+                 category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-9.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.739], polygon[GRID.polygon.740], polygon[GRID.polygon.741], polygon[GRID.polygon.742], polygon[GRID.polygon.743], polygon[GRID.polygon.744], text[GRID.text.745], text[GRID.text.746], text[GRID.text.747], text[GRID.text.748], text[GRID.text.749], text[GRID.text.750], text[GRID.text.751], text[GRID.text.752], text[GRID.text.753], text[GRID.text.754])
+
+#GIGAMUGA
+grid.newpage()
+draw.triple.venn(area1 = a1[[3]], 
+                 area2 = a2[[3]], 
+                 area3 = a3[[3]], 
+                 n12 = n12[[3]], 
+                 n23 = n23[[3]], 
+                 n13 = n13[[3]], 
+                 n123 = n123[[3]], 
+                 category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
+                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-10.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.755], polygon[GRID.polygon.756], polygon[GRID.polygon.757], polygon[GRID.polygon.758], polygon[GRID.polygon.759], polygon[GRID.polygon.760], text[GRID.text.761], text[GRID.text.762], text[GRID.text.763], text[GRID.text.764], text[GRID.text.765], text[GRID.text.766], text[GRID.text.767], text[GRID.text.768], text[GRID.text.769], text[GRID.text.770])</code></pre>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()
