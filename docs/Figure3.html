@@ -444,7 +444,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/b2664681a01e1d23a0893978e714f2204cdea416" target="_blank">b266468</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/91b735b4cecdb96205db60b3af96c309c8587d40" target="_blank">91b735b</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -452,8 +452,6 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
-    Untracked:  analysis/11.Rmd
-    Untracked:  analysis/22.Rmd
     Untracked:  analysis/Figure1_by_vit.R
     Untracked:  analysis/Figure3.0.Rmd
     Untracked:  analysis/Figure3_0.Rmd
@@ -521,6 +519,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/91b735b4cecdb96205db60b3af96c309c8587d40/analysis/Figure3.Rmd" target="_blank">91b735b</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+<td style="text-align:left;">
+update Figure 3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/7a1cb70b025f106c604b86fe9461d933405338f6/docs/Figure3.html" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 Rmd
@@ -1201,9 +1233,8 @@ a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
 a$max_qvalue &lt;- qvalue(p = a$pval)$qvalues
 a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
 a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$max_qvalue &lt;= 0.05 &amp; a$cis_trans_location == &quot;trans&quot;,]
+a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+a &lt;- a[a$max_qvalue &lt;= 0.05 &amp; a$cis_trans == &quot;trans&quot;,]
 
 b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData&quot;))
 b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
@@ -1211,9 +1242,8 @@ b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
 b$max_qvalue &lt;- qvalue(p = b$pval)$qvalues
 b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
 b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$max_qvalue &lt;= 0.05 &amp; b$cis_trans_location == &quot;trans&quot;,]
+b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+b &lt;- b[b$max_qvalue &lt;= 0.05 &amp; b$cis_trans == &quot;trans&quot;,]
 
 c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData&quot;))
 c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
@@ -1221,106 +1251,58 @@ c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
 c$max_qvalue &lt;- qvalue(p = c$pval)$qvalues
 c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
 c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$max_qvalue &lt;= 0.05 &amp; c$cis_trans_location == &quot;trans&quot;,]
+c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+c &lt;- c[c$max_qvalue &lt;= 0.05 &amp; c$cis_trans == &quot;trans&quot;,]
 
-a1[[1]] = length(unique(a$marker))
-a2[[1]] = length(unique(b$marker))
-a3[[1]] = length(unique(c$marker))
-n12[[1]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[1]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[1]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[1]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-#load eqtl pvalue for megamuga184
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData&quot;))
-a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$max_qvalue &lt;- qvalue(p = a$pval)$qvalues
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$max_qvalue &lt;= 0.05 &amp; a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData&quot;))
-b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$max_qvalue &lt;- qvalue(p = b$pval)$qvalues
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$max_qvalue &lt;= 0.05 &amp; b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData&quot;))
-c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$max_qvalue &lt;- qvalue(p = c$pval)$qvalues
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$max_qvalue &lt;= 0.05 &amp; c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[2]] = length(unique(a$marker))
-a2[[2]] = length(unique(b$marker))
-a3[[2]] = length(unique(c$marker))
-n12[[2]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[2]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[2]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[2]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-#load eqtl pvalue for gigamuga358
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData&quot;))
-a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$max_qvalue &lt;- qvalue(p = a$pval)$qvalues
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$max_qvalue &lt;= 0.05 &amp; a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
-b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$max_qvalue &lt;- qvalue(p = b$pval)$qvalues
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$max_qvalue &lt;= 0.05 &amp; b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData&quot;))
-c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$max_qvalue &lt;- qvalue(p = c$pval)$qvalues
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$max_qvalue &lt;= 0.05 &amp; c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[3]] = length(unique(a$marker))
-a2[[3]] = length(unique(b$marker))
-a3[[3]] = length(unique(c$marker))
-n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
-
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
-#bar plot
-barplot(c(a3[[1]],a3[[2]],a3[[3]]),
-        ylab = &quot;Number of trans-eQTL at FDR 0.05&quot;,
-        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
-        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
-        ylim = c(0,2500))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-1.png" width="1920" style="display: block; margin: auto;" /></p>
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;MUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;MUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-1.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -1339,7 +1321,332 @@ Date
 <tbody>
 <tr>
 <td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-1.png" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-1.png" target="_blank">0062709</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
+a1[[1]] = length(unique(a$marker))
+a2[[1]] = length(unique(b$marker))
+a3[[1]] = length(unique(c$marker))
+n12[[1]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[1]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[1]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[1]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
+
+#load eqtl pvalue for megamuga184
+a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData&quot;))
+a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
+a$max_qvalue &lt;- qvalue(p = a$pval)$qvalues
+a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
+a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+a &lt;- a[a$max_qvalue &lt;= 0.05 &amp; a$cis_trans == &quot;trans&quot;,]
+
+b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData&quot;))
+b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
+b$max_qvalue &lt;- qvalue(p = b$pval)$qvalues
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
+b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+b &lt;- b[b$max_qvalue &lt;= 0.05 &amp; b$cis_trans == &quot;trans&quot;,]
+
+c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData&quot;))
+c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
+c$max_qvalue &lt;- qvalue(p = c$pval)$qvalues
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
+c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+c &lt;- c[c$max_qvalue &lt;= 0.05 &amp; c$cis_trans == &quot;trans&quot;,]
+
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-2.png" width="1344" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">0062709</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
+a1[[2]] = length(unique(a$marker))
+a2[[2]] = length(unique(b$marker))
+a3[[2]] = length(unique(c$marker))
+n12[[2]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[2]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[2]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[2]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
+
+#load eqtl pvalue for gigamuga358
+a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData&quot;))
+a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
+a$max_qvalue &lt;- qvalue(p = a$pval)$qvalues
+a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
+a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+a &lt;- a[a$max_qvalue &lt;= 0.05 &amp; a$cis_trans == &quot;trans&quot;,]
+
+b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
+b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
+b$max_qvalue &lt;- qvalue(p = b$pval)$qvalues
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
+b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+b &lt;- b[b$max_qvalue &lt;= 0.05 &amp; b$cis_trans == &quot;trans&quot;,]
+
+c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData&quot;))
+c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
+c$max_qvalue &lt;- qvalue(p = c$pval)$qvalues
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
+c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+c &lt;- c[c$max_qvalue &lt;= 0.05 &amp; c$cis_trans == &quot;trans&quot;,]
+
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-3.png" width="1344" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">0062709</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
+<pre class="r"><code>
+a1[[3]] = length(unique(a$marker))
+a2[[3]] = length(unique(b$marker))
+a3[[3]] = length(unique(c$marker))
+n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
+
+save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
+
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
+#bar plot
+barplot(c(a3[[1]],a3[[2]],a3[[3]]),
+        ylab = &quot;Number of trans-eQTL at FDR 0.05&quot;,
+        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
+        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
+        ylim = c(0,2500))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-4.png" width="1344" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">0062709</a>
 </td>
 <td style="text-align:left;">
 xhyuo
@@ -1363,38 +1670,8 @@ draw.triple.venn(area1 = a1[[1]],
                  n123 = n123[[1]], 
                  category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-2.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre><code># (polygon[GRID.polygon.303], polygon[GRID.polygon.304], polygon[GRID.polygon.305], polygon[GRID.polygon.306], polygon[GRID.polygon.307], polygon[GRID.polygon.308], text[GRID.text.309], text[GRID.text.310], text[GRID.text.311], text[GRID.text.312], text[GRID.text.313], text[GRID.text.314], text[GRID.text.315], text[GRID.text.316], text[GRID.text.317], text[GRID.text.318])
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-5.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.396], polygon[GRID.polygon.397], polygon[GRID.polygon.398], polygon[GRID.polygon.399], polygon[GRID.polygon.400], polygon[GRID.polygon.401], text[GRID.text.402], text[GRID.text.403], text[GRID.text.404], text[GRID.text.405], text[GRID.text.406], text[GRID.text.407], text[GRID.text.408], text[GRID.text.409], text[GRID.text.410], text[GRID.text.411])
 
 #MEGAMUGA
 grid.newpage()
@@ -1407,38 +1684,8 @@ draw.triple.venn(area1 = a1[[2]],
                  n123 = n123[[2]], 
                  category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-3.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre><code># (polygon[GRID.polygon.319], polygon[GRID.polygon.320], polygon[GRID.polygon.321], polygon[GRID.polygon.322], polygon[GRID.polygon.323], polygon[GRID.polygon.324], text[GRID.text.325], text[GRID.text.326], text[GRID.text.327], text[GRID.text.328], text[GRID.text.329], text[GRID.text.330], text[GRID.text.331], text[GRID.text.332], text[GRID.text.333], text[GRID.text.334])
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-6.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.412], polygon[GRID.polygon.413], polygon[GRID.polygon.414], polygon[GRID.polygon.415], polygon[GRID.polygon.416], polygon[GRID.polygon.417], text[GRID.text.418], text[GRID.text.419], text[GRID.text.420], text[GRID.text.421], text[GRID.text.422], text[GRID.text.423], text[GRID.text.424], text[GRID.text.425], text[GRID.text.426], text[GRID.text.427])
 
 #GIGAMUGA
 grid.newpage()
@@ -1451,38 +1698,8 @@ draw.triple.venn(area1 = a1[[3]],
                  n123 = n123[[3]], 
                  category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-4.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre><code># (polygon[GRID.polygon.335], polygon[GRID.polygon.336], polygon[GRID.polygon.337], polygon[GRID.polygon.338], polygon[GRID.polygon.339], polygon[GRID.polygon.340], text[GRID.text.341], text[GRID.text.342], text[GRID.text.343], text[GRID.text.344], text[GRID.text.345], text[GRID.text.346], text[GRID.text.347], text[GRID.text.348], text[GRID.text.349], text[GRID.text.350])</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-7.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.428], polygon[GRID.polygon.429], polygon[GRID.polygon.430], polygon[GRID.polygon.431], polygon[GRID.polygon.432], polygon[GRID.polygon.433], text[GRID.text.434], text[GRID.text.435], text[GRID.text.436], text[GRID.text.437], text[GRID.text.438], text[GRID.text.439], text[GRID.text.440], text[GRID.text.441], text[GRID.text.442], text[GRID.text.443])</code></pre>
 </div>
 <div id="figure-3-trans-eqtl-at-lod-8-5-mb" class="section level1">
 <h1>Figure 3 Trans-eQTL at LOD &gt;=8 (5 Mb)</h1>
@@ -1494,118 +1711,74 @@ a &lt;- a[a$lod &gt;= 8,]
 a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
 a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
 a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$cis_trans_location == &quot;trans&quot;,]
+a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+a &lt;- a[a$cis_trans == &quot;trans&quot;,]
 
 b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData&quot;))
 b &lt;- b[b$lod &gt;= 8,]
 b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
 b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
 b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$cis_trans_location == &quot;trans&quot;,]
+b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+b &lt;- b[b$cis_trans == &quot;trans&quot;,]
 
 c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData&quot;))
 c &lt;- c[c$lod &gt;= 8,]
 c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
 c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
 c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$cis_trans_location == &quot;trans&quot;,]
+c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+c &lt;- c[c$cis_trans == &quot;trans&quot;,]
 
-a1[[1]] = length(unique(a$marker))
-a2[[1]] = length(unique(b$marker))
-a3[[1]] = length(unique(c$marker))
-n12[[1]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[1]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[1]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[1]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-#load eqtl pvalue for megamuga184
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData&quot;))
-a &lt;- a[a$lod &gt;= 8,]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData&quot;))
-b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData&quot;))
-c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[2]] = length(unique(a$marker))
-a2[[2]] = length(unique(b$marker))
-a3[[2]] = length(unique(c$marker))
-n12[[2]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[2]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[2]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[2]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-#load eqtl pvalue for gigamuga358
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData&quot;))
-a &lt;- a[a$lod &gt;= 8,]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
-b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData&quot;))
-c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[3]] = length(unique(a$marker))
-a2[[3]] = length(unique(b$marker))
-a3[[3]] = length(unique(c$marker))
-n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
-
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
-#bar plot
-barplot(c(a3[[1]],a3[[2]],a3[[3]]),
-        ylab = &quot;Number of trans-eQTL at LOD &gt;=8&quot;,
-        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
-        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
-        ylim = c(0,2500))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-1.png" width="1920" style="display: block; margin: auto;" /></p>
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;MUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;MUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-1.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-1.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -1637,18 +1810,88 @@ xhyuo
 </table>
 <p></details></p>
 <pre class="r"><code>
-#MUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[1]], 
-                 area2 = a2[[1]], 
-                 area3 = a3[[1]], 
-                 n12 = n12[[1]], 
-                 n23 = n23[[1]], 
-                 n13 = n13[[1]], 
-                 n123 = n123[[1]], 
-                 category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-2.png" width="1920" style="display: block; margin: auto;" /></p>
+a1[[1]] = length(unique(a$marker))
+a2[[1]] = length(unique(b$marker))
+a3[[1]] = length(unique(c$marker))
+n12[[1]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[1]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[1]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[1]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
+
+#load eqtl pvalue for megamuga184
+a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData&quot;))
+a &lt;- a[a$lod &gt;= 8,]
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
+a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
+a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+a &lt;- a[a$cis_trans == &quot;trans&quot;,]
+
+b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData&quot;))
+b &lt;- b[b$lod &gt;= 8,]
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
+b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+b &lt;- b[b$cis_trans == &quot;trans&quot;,]
+
+c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData&quot;))
+c &lt;- c[c$lod &gt;= 8,]
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
+c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+c &lt;- c[c$cis_trans == &quot;trans&quot;,]
+
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;MEGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.MEGAMUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-2.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-2.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -1667,6 +1910,17 @@ Date
 <tbody>
 <tr>
 <td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-2.png" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-2.png" target="_blank">0062709</a>
 </td>
 <td style="text-align:left;">
@@ -1679,20 +1933,89 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.351], polygon[GRID.polygon.352], polygon[GRID.polygon.353], polygon[GRID.polygon.354], polygon[GRID.polygon.355], polygon[GRID.polygon.356], text[GRID.text.357], text[GRID.text.358], text[GRID.text.359], text[GRID.text.360], text[GRID.text.361], text[GRID.text.362], text[GRID.text.363], text[GRID.text.364], text[GRID.text.365], text[GRID.text.366])
+<pre class="r"><code>
+a1[[2]] = length(unique(a$marker))
+a2[[2]] = length(unique(b$marker))
+a3[[2]] = length(unique(c$marker))
+n12[[2]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[2]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[2]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[2]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
-#MEGAMUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[2]], 
-                 area2 = a2[[2]], 
-                 area3 = a3[[2]], 
-                 n12 = n12[[2]], 
-                 n23 = n23[[2]], 
-                 n13 = n13[[2]], 
-                 n123 = n123[[2]], 
-                 category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-3.png" width="1920" style="display: block; margin: auto;" /></p>
+#load eqtl pvalue for gigamuga358
+a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData&quot;))
+a &lt;- a[a$lod &gt;= 8,]
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
+a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
+a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+a &lt;- a[a$cis_trans == &quot;trans&quot;,]
+
+b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
+b &lt;- b[b$lod &gt;= 8,]
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
+b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+b &lt;- b[b$cis_trans == &quot;trans&quot;,]
+
+c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData&quot;))
+c &lt;- c[c$lod &gt;= 8,]
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
+c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
+c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+c &lt;- c[c$cis_trans == &quot;trans&quot;,]
+
+#a and b
+ab &lt;- merge(a, b, by = &quot;genes&quot;)
+ab$trans_agree &lt;- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) &amp; (abs(ab$pos.x - ab$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#a and c
+ac &lt;- merge(a, c, by = &quot;genes&quot;)
+ac$trans_agree &lt;- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) &amp; (abs(ac$pos.x - ac$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#b and c
+bc &lt;- merge(b, c, by = &quot;genes&quot;)
+bc$trans_agree &lt;- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 2e+06),
+  &quot;agree&quot;,
+  &quot;disagree&quot;
+)
+#show in a triangle
+df_long &lt;- data.frame(v1 = factor(c(&quot;a&quot;,&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;)),
+                      v2 = factor(c(&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;)),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c(&quot;1&quot;,
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), &quot;\n&quot;,table(ab$trans_agree)[[1]], &quot;/&quot;,nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), &quot;\n&quot;,table(ac$trans_agree)[[1]], &quot;/&quot;,nrow(ac)),
+                             &quot;1&quot;,
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), &quot;\n&quot;,table(bc$trans_agree)[[1]], &quot;/&quot;,nrow(bc)),
+                             &quot;1&quot;))
+ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 5) +
+  scale_fill_distiller(palette = &quot;Spectral&quot;) +
+  theme_minimal() +
+  theme(legend.position=&quot;none&quot;,
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
+  scale_y_discrete(labels=c(&quot;a&quot; = &quot;GIGAMUGA&quot;, &quot;b&quot; = &quot;GBRS&quot;,&quot;c&quot; = &quot;FIXED.GIGAMUGA&quot;)) +
+  labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (2Mb)&quot;)</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-3.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-3.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -1711,6 +2034,17 @@ Date
 <tbody>
 <tr>
 <td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1cb70b025f106c604b86fe9461d933405338f6/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-3.png" target="_blank">7a1cb70</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-3.png" target="_blank">0062709</a>
 </td>
 <td style="text-align:left;">
@@ -1723,20 +2057,25 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.367], polygon[GRID.polygon.368], polygon[GRID.polygon.369], polygon[GRID.polygon.370], polygon[GRID.polygon.371], polygon[GRID.polygon.372], text[GRID.text.373], text[GRID.text.374], text[GRID.text.375], text[GRID.text.376], text[GRID.text.377], text[GRID.text.378], text[GRID.text.379], text[GRID.text.380], text[GRID.text.381], text[GRID.text.382])
+<pre class="r"><code>
+a1[[3]] = length(unique(a$marker))
+a2[[3]] = length(unique(b$marker))
+a3[[3]] = length(unique(c$marker))
+n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
+n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
+n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
+n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
 
-#GIGAMUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[3]], 
-                 area2 = a2[[3]], 
-                 area3 = a3[[3]], 
-                 n12 = n12[[3]], 
-                 n23 = n23[[3]], 
-                 n13 = n13[[3]], 
-                 n123 = n123[[3]], 
-                 category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-4.png" width="1920" style="display: block; margin: auto;" /></p>
+save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
+
+load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
+#bar plot
+barplot(c(a3[[1]],a3[[2]],a3[[3]]),
+        ylab = &quot;Number of trans-eQTL at LOD &gt;=8&quot;,
+        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
+        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
+        ylim = c(0,2500))</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-4.png" width="1344" style="display: block; margin: auto;" /></p>
 <details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-4.png:</em></summary>
 <table style="border-collapse:separate; border-spacing:5px;">
 <thead>
@@ -1767,169 +2106,6 @@ xhyuo
 </tbody>
 </table>
 <p></details></p>
-<pre><code># (polygon[GRID.polygon.383], polygon[GRID.polygon.384], polygon[GRID.polygon.385], polygon[GRID.polygon.386], polygon[GRID.polygon.387], polygon[GRID.polygon.388], text[GRID.text.389], text[GRID.text.390], text[GRID.text.391], text[GRID.text.392], text[GRID.text.393], text[GRID.text.394], text[GRID.text.395], text[GRID.text.396], text[GRID.text.397], text[GRID.text.398])</code></pre>
-</div>
-<div id="figure-3-trans-eqtl-at-fdr-0.05-2-mb" class="section level1">
-<h1>Figure 3 Trans-eQTL at FDR 0.05 (2 Mb)</h1>
-<pre class="r"><code>a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
-load(&quot;/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData&quot;)
-#load eqtl pvalue for muga275
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/muga275/muga275_pvalue.RData&quot;))
-a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$max_qvalue &lt;- qvalue(p = a$pval)$qvalues
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 2e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$max_qvalue &lt;= 0.05 &amp; a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData&quot;))
-b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$max_qvalue &lt;- qvalue(p = b$pval)$qvalues
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$max_qvalue &lt;= 0.05 &amp; b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData&quot;))
-c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$max_qvalue &lt;- qvalue(p = c$pval)$qvalues
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$max_qvalue &lt;= 0.05 &amp; c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[1]] = length(unique(a$marker))
-a2[[1]] = length(unique(b$marker))
-a3[[1]] = length(unique(c$marker))
-n12[[1]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[1]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[1]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[1]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-#load eqtl pvalue for megamuga184
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData&quot;))
-a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$max_qvalue &lt;- qvalue(p = a$pval)$qvalues
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 2e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$max_qvalue &lt;= 0.05 &amp; a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData&quot;))
-b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$max_qvalue &lt;- qvalue(p = b$pval)$qvalues
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$max_qvalue &lt;= 0.05 &amp; b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData&quot;))
-c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$max_qvalue &lt;- qvalue(p = c$pval)$qvalues
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$max_qvalue &lt;= 0.05 &amp; c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[2]] = length(unique(a$marker))
-a2[[2]] = length(unique(b$marker))
-a3[[2]] = length(unique(c$marker))
-n12[[2]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[2]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[2]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[2]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-#load eqtl pvalue for gigamuga358
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData&quot;))
-a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$max_qvalue &lt;- qvalue(p = a$pval)$qvalues
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 2e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$max_qvalue &lt;= 0.05 &amp; a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
-b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$max_qvalue &lt;- qvalue(p = b$pval)$qvalues
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$max_qvalue &lt;= 0.05 &amp; b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData&quot;))
-c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$max_qvalue &lt;- qvalue(p = c$pval)$qvalues
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$max_qvalue &lt;= 0.05 &amp; c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[3]] = length(unique(a$marker))
-a2[[3]] = length(unique(b$marker))
-a3[[3]] = length(unique(c$marker))
-n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
-
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData&quot;)
-#bar plot
-barplot(c(a3[[1]],a3[[2]],a3[[3]]),
-        ylab = &quot;Number of trans-eQTL at FDR 0.05&quot;,
-        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
-        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
-        ylim = c(0,2500))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%202Mb-1.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 2Mb-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 2Mb-1.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
 <pre class="r"><code>
 #MUGA
 grid.newpage()
@@ -1942,38 +2118,8 @@ draw.triple.venn(area1 = a1[[1]],
                  n123 = n123[[1]], 
                  category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%202Mb-2.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 2Mb-2.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 2Mb-2.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre><code># (polygon[GRID.polygon.399], polygon[GRID.polygon.400], polygon[GRID.polygon.401], polygon[GRID.polygon.402], polygon[GRID.polygon.403], polygon[GRID.polygon.404], text[GRID.text.405], text[GRID.text.406], text[GRID.text.407], text[GRID.text.408], text[GRID.text.409], text[GRID.text.410], text[GRID.text.411], text[GRID.text.412], text[GRID.text.413], text[GRID.text.414])
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-5.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.537], polygon[GRID.polygon.538], polygon[GRID.polygon.539], polygon[GRID.polygon.540], polygon[GRID.polygon.541], polygon[GRID.polygon.542], text[GRID.text.543], text[GRID.text.544], text[GRID.text.545], text[GRID.text.546], text[GRID.text.547], text[GRID.text.548], text[GRID.text.549], text[GRID.text.550], text[GRID.text.551], text[GRID.text.552])
 
 #MEGAMUGA
 grid.newpage()
@@ -1986,38 +2132,8 @@ draw.triple.venn(area1 = a1[[2]],
                  n123 = n123[[2]], 
                  category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%202Mb-3.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 2Mb-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 2Mb-3.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre><code># (polygon[GRID.polygon.415], polygon[GRID.polygon.416], polygon[GRID.polygon.417], polygon[GRID.polygon.418], polygon[GRID.polygon.419], polygon[GRID.polygon.420], text[GRID.text.421], text[GRID.text.422], text[GRID.text.423], text[GRID.text.424], text[GRID.text.425], text[GRID.text.426], text[GRID.text.427], text[GRID.text.428], text[GRID.text.429], text[GRID.text.430])
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-6.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.553], polygon[GRID.polygon.554], polygon[GRID.polygon.555], polygon[GRID.polygon.556], polygon[GRID.polygon.557], polygon[GRID.polygon.558], text[GRID.text.559], text[GRID.text.560], text[GRID.text.561], text[GRID.text.562], text[GRID.text.563], text[GRID.text.564], text[GRID.text.565], text[GRID.text.566], text[GRID.text.567], text[GRID.text.568])
 
 #GIGAMUGA
 grid.newpage()
@@ -2030,323 +2146,8 @@ draw.triple.venn(area1 = a1[[3]],
                  n123 = n123[[3]], 
                  category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
                  fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%202Mb-4.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 2Mb-4.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at FDR 0.05 2Mb-4.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre><code># (polygon[GRID.polygon.431], polygon[GRID.polygon.432], polygon[GRID.polygon.433], polygon[GRID.polygon.434], polygon[GRID.polygon.435], polygon[GRID.polygon.436], text[GRID.text.437], text[GRID.text.438], text[GRID.text.439], text[GRID.text.440], text[GRID.text.441], text[GRID.text.442], text[GRID.text.443], text[GRID.text.444], text[GRID.text.445], text[GRID.text.446])</code></pre>
-</div>
-<div id="figure-3-trans-eqtl-at-lod-8-2-mb" class="section level1">
-<h1>Figure 3 Trans-eQTL at LOD &gt;=8 (2 Mb)</h1>
-<pre class="r"><code>a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
-load(&quot;/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData&quot;)
-#load eqtl pvalue for muga275
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/muga275/muga275_pvalue.RData&quot;))
-a &lt;- a[a$lod &gt;= 8,]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 2e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData&quot;))
-b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData&quot;))
-c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[1]] = length(unique(a$marker))
-a2[[1]] = length(unique(b$marker))
-a3[[1]] = length(unique(c$marker))
-n12[[1]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[1]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[1]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[1]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-#load eqtl pvalue for megamuga184
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData&quot;))
-a &lt;- a[a$lod &gt;= 8,]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 2e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData&quot;))
-b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData&quot;))
-c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[2]] = length(unique(a$marker))
-a2[[2]] = length(unique(b$marker))
-a3[[2]] = length(unique(c$marker))
-n12[[2]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[2]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[2]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[2]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-#load eqtl pvalue for gigamuga358
-a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData&quot;))
-a &lt;- a[a$lod &gt;= 8,]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
-a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans_max &lt;- ifelse(a$nearest_marker == a$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-a$cis_trans_location &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 2e+06),&quot;cis&quot;, &quot;trans&quot;)
-a &lt;- a[a$cis_trans_location == &quot;trans&quot;,]
-
-b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
-b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
-b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-b$cis_trans_max &lt;- ifelse(b$nearest_marker == b$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-b$cis_trans_location &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-b &lt;- b[b$cis_trans_location == &quot;trans&quot;,]
-
-c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData&quot;))
-c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
-c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-c$cis_trans_max &lt;- ifelse(c$nearest_marker == c$eqtl_marker, &quot;cis&quot;, &quot;trans&quot;)
-c$cis_trans_location &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 2e+06) ,&quot;cis&quot;, &quot;trans&quot;)
-c &lt;- c[c$cis_trans_location == &quot;trans&quot;,]
-
-a1[[3]] = length(unique(a$marker))
-a2[[3]] = length(unique(b$marker))
-a3[[3]] = length(unique(c$marker))
-n12[[3]] &lt;- length(intersect(unique(a$marker), unique(b$marker)))
-n13[[3]] &lt;- length(intersect(unique(a$marker), unique(c$marker)))
-n23[[3]] &lt;- length(intersect(unique(b$marker), unique(c$marker)))
-n123[[3]] = length(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker))))
-
-save(a1,a2,a3,n12, n13, n23, n123, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
-
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_lod8.RData&quot;)
-#bar plot
-barplot(c(a3[[1]],a3[[2]],a3[[3]]),
-        ylab = &quot;Number of trans-eQTL at LOD &gt;=8&quot;,
-        names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
-        col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
-        ylim = c(0,2500))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%202Mb-1.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 2Mb-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 2Mb-1.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
-#MUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[1]], 
-                 area2 = a2[[1]], 
-                 area3 = a3[[1]], 
-                 n12 = n12[[1]], 
-                 n23 = n23[[1]], 
-                 n13 = n13[[1]], 
-                 n123 = n123[[1]], 
-                 category = c(&quot;MUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%202Mb-2.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 2Mb-2.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 2Mb-2.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre><code># (polygon[GRID.polygon.447], polygon[GRID.polygon.448], polygon[GRID.polygon.449], polygon[GRID.polygon.450], polygon[GRID.polygon.451], polygon[GRID.polygon.452], text[GRID.text.453], text[GRID.text.454], text[GRID.text.455], text[GRID.text.456], text[GRID.text.457], text[GRID.text.458], text[GRID.text.459], text[GRID.text.460], text[GRID.text.461], text[GRID.text.462])
-
-#MEGAMUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[2]], 
-                 area2 = a2[[2]], 
-                 area3 = a3[[2]], 
-                 n12 = n12[[2]], 
-                 n23 = n23[[2]], 
-                 n13 = n13[[2]], 
-                 n123 = n123[[2]], 
-                 category = c(&quot;MEGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.MEGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%202Mb-3.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 2Mb-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 2Mb-3.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre><code># (polygon[GRID.polygon.463], polygon[GRID.polygon.464], polygon[GRID.polygon.465], polygon[GRID.polygon.466], polygon[GRID.polygon.467], polygon[GRID.polygon.468], text[GRID.text.469], text[GRID.text.470], text[GRID.text.471], text[GRID.text.472], text[GRID.text.473], text[GRID.text.474], text[GRID.text.475], text[GRID.text.476], text[GRID.text.477], text[GRID.text.478])
-
-#GIGAMUGA
-grid.newpage()
-draw.triple.venn(area1 = a1[[3]], 
-                 area2 = a2[[3]], 
-                 area3 = a3[[3]], 
-                 n12 = n12[[3]], 
-                 n23 = n23[[3]], 
-                 n13 = n13[[3]], 
-                 n123 = n123[[3]], 
-                 category = c(&quot;GIGAMUGA&quot;, &quot;GBRS&quot;, &quot;FIXED.GIGAMUGA&quot;), lty = &quot;blank&quot;, cex= rep(2, 7), cat.cex = rep(2,3),
-                 fill = c(&quot;skyblue&quot;, &quot;pink1&quot;, &quot;mediumorchid&quot;))</code></pre>
-<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%202Mb-4.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 2Mb-4.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/00627096960cac37bb62abf14e627130da2ea2ba/docs/figure/Figure3.Rmd/Figure 3 Trans-eQTL at LOD 8 2Mb-4.png" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre><code># (polygon[GRID.polygon.479], polygon[GRID.polygon.480], polygon[GRID.polygon.481], polygon[GRID.polygon.482], polygon[GRID.polygon.483], polygon[GRID.polygon.484], text[GRID.text.485], text[GRID.text.486], text[GRID.text.487], text[GRID.text.488], text[GRID.text.489], text[GRID.text.490], text[GRID.text.491], text[GRID.text.492], text[GRID.text.493], text[GRID.text.494])</code></pre>
+<p><img src="figure/Figure3.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-7.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre><code># (polygon[GRID.polygon.569], polygon[GRID.polygon.570], polygon[GRID.polygon.571], polygon[GRID.polygon.572], polygon[GRID.polygon.573], polygon[GRID.polygon.574], text[GRID.text.575], text[GRID.text.576], text[GRID.text.577], text[GRID.text.578], text[GRID.text.579], text[GRID.text.580], text[GRID.text.581], text[GRID.text.582], text[GRID.text.583], text[GRID.text.584])</code></pre>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()
@@ -2372,21 +2173,21 @@ xhyuo
 # [7] sinaplot_1.1.0      plyr_1.8.4         
 # 
 # loaded via a namespace (and not attached):
-#  [1] Rcpp_1.0.0           formatR_1.5          pillar_1.3.1        
-#  [4] git2r_0.23.0         workflowr_1.1.1      bindr_0.1.1         
-#  [7] futile.options_1.0.1 R.methodsS3_1.7.1    R.utils_2.5.0       
-# [10] tools_3.3.2          digest_0.6.18        evaluate_0.10       
-# [13] tibble_1.4.1         gtable_0.2.0         pkgconfig_2.0.2     
-# [16] rlang_0.3.1          yaml_2.2.0           bindrcpp_0.2.2      
-# [19] withr_2.1.2          stringr_1.3.1        knitr_1.20          
-# [22] rprojroot_1.3-2      tidyselect_0.2.4     glue_1.3.0          
-# [25] R6_2.4.0             rmarkdown_1.11       reshape2_1.4.3      
-# [28] lambda.r_1.2.3       purrr_0.2.2          magrittr_1.5        
-# [31] whisker_0.3-2        splines_3.3.2        backports_1.1.2     
-# [34] scales_1.0.0         htmltools_0.3.6      assertthat_0.2.0    
-# [37] colorspace_1.4-0     labeling_0.3         stringi_1.2.4       
-# [40] lazyeval_0.2.1       munsell_0.5.0        crayon_1.3.4        
-# [43] R.oo_1.21.0</code></pre>
+#  [1] Rcpp_1.0.0           RColorBrewer_1.1-2   formatR_1.5         
+#  [4] pillar_1.3.1         git2r_0.23.0         workflowr_1.1.1     
+#  [7] bindr_0.1.1          futile.options_1.0.1 R.methodsS3_1.7.1   
+# [10] R.utils_2.5.0        tools_3.3.2          digest_0.6.18       
+# [13] evaluate_0.10        tibble_1.4.1         gtable_0.2.0        
+# [16] pkgconfig_2.0.2      rlang_0.3.1          yaml_2.2.0          
+# [19] bindrcpp_0.2.2       withr_2.1.2          stringr_1.3.1       
+# [22] knitr_1.20           rprojroot_1.3-2      tidyselect_0.2.4    
+# [25] glue_1.3.0           R6_2.4.0             rmarkdown_1.11      
+# [28] reshape2_1.4.3       lambda.r_1.2.3       purrr_0.2.2         
+# [31] magrittr_1.5         whisker_0.3-2        splines_3.3.2       
+# [34] backports_1.1.2      scales_1.0.0         htmltools_0.3.6     
+# [37] assertthat_0.2.0     colorspace_1.4-0     labeling_0.3        
+# [40] stringi_1.2.4        lazyeval_0.2.1       munsell_0.5.0       
+# [43] crayon_1.3.4         R.oo_1.21.0</code></pre>
 </div>
 </div>
 
