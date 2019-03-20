@@ -41,7 +41,7 @@ megamuga184.recomb$array <- "MEGAMUGA"
 megamuga184.recomb$array.sub <- "MEGAMUGA"
 #DO liver GBRS
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/DO_liver_recomb.GBRS.genotypes.RData")
-gbrs.genotype.recomb <- recomb.GBRS.genotypes$`0.130`
+gbrs.genotype.recomb <- recomb.GBRS.genotypes$`0.130`[recomb.GBRS.genotypes$`0.130`$Sample %in% c(as.character(muga275.recomb$Sample),as.character(megamuga184.recomb$Sample)),]
 gbrs.genotype.recomb$array <- "GBRS"
 gbrs.genotype.recomb$array.sub <- NULL
 #GBRS.MUGA
@@ -61,8 +61,8 @@ load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga358.recomb
 gigamuga358.recomb$array <- "GIGAMUGA"
 gigamuga358.recomb$array.sub <- "GIGAMUGA"
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/DO_Striatum_recomb.GBRS.genotypes.RData")
-gbrs.genotype.recomb <- gbrs.genotype.recomb[gbrs.genotype.recomb$Sample %in% gigamuga358.recomb$Sample,]
-gbrs.genotype.recomb <- recomb.GBRS.genotypes$`0.130`
+# gbrs.genotype.recomb <- gbrs.genotype.recomb[gbrs.genotype.recomb$Sample %in% gigamuga358.recomb$Sample,]
+gbrs.genotype.recomb <- recomb.GBRS.genotypes$`0.130`[recomb.GBRS.genotypes$`0.130`$Sample %in% gigamuga358.recomb$Sample,]
 gbrs.genotype.recomb$array <- "GBRS"
 gbrs.genotype.recomb$array.sub <- "GBRS.GIGAMUGA"
 #DO_striatum recombinations
@@ -87,6 +87,29 @@ summary.tab <- ddply(recomb,.(array,Gen),
 #display summary table
 DT::datatable(summary.tab,options = list(pageLength = 100, scrollY = "800px", scrollX = "20px"))
 
+# for every individual sample recombination
+recomb_ind <- merge(recomb[recomb$array == "GBRS",], recomb[recomb$array != "GBRS",], by = "Sample")
+recomb_ind$array.sub.y <- as.factor(as.character(recomb_ind$array.sub.y))
+#scatter plot
+plot_recomb_ind <- ggplot(recomb_ind, aes(x=recomb.x, y=recomb.y)) + 
+  geom_point(aes(shape = array.sub.y, color = array.sub.y), size = 4) + 
+  scale_shape_manual(values=c(18,17,16)) +
+  scale_color_manual(values=c("green3","blue","cyan")) +
+  scale_fill_manual(values=c("green3","blue","cyan")) +
+  theme(aspect.ratio=1) +
+  xlab("Recombination in GBRS") +
+  ylab("Recombination in array") +
+  ggtitle("Recombination for each sample in GBRS vs array") + 
+  scale_y_continuous(limits=c(100, 600)) +
+  scale_x_continuous(limits=c(100, 600)) +
+  geom_abline(slope=1, intercept=0) +
+  theme(legend.title=element_blank(),legend.text=element_text(size=22), 
+        text = element_text(size=22), axis.title=element_text(size=22)) +
+  theme(plot.title = element_text(hjust=0.5, size = 22)) +
+  guides(colour = guide_legend(override.aes = list(size=5)))
+
+plot_recomb_ind
+
 #Figure1_sinaplot
 #color
 # GBRS <- "red",
@@ -97,7 +120,7 @@ DT::datatable(summary.tab,options = list(pageLength = 100, scrollY = "800px", sc
 sinaplot(formula = recomb ~ array.sub, data = recomb, col = c("red","cyan","red","blue","red","green3"), pch = c(15,18,15,17,15,16), bty = "n",
          xlab = "",
          ylab = "Number of Recombinations",
-         ylim=c(50, 600), cex.axis=1.5, cex.lab=1.5, cex = 1.2)
+         ylim=c(50, 600), cex.axis=1.5, cex.lab=1.5, cex = 1.5)
   legend("top", inset=.02, title="Array type",
    c("GBRS.MUGA", "MUGA", "GBRS.MEGAMUGA","MEGAMUGA","GBRS.GIGAMUGA","GIGAMUGA"), col=c("red","cyan","red","blue","red","green3"), pch = c(15,18,15,17,15,16), horiz=TRUE, cex=1.7)
 #dev.off()
@@ -106,7 +129,7 @@ sinaplot(formula = recomb ~ array.sub, data = recomb, col = c("red","cyan","red"
 sinaplot(formula = recomb ~ array, data = recomb, col = c("red","green3","blue","cyan"), pch = c(15:18), bty = "n",
          xlab = "",
          ylab = "Number of Recombinations",
-         ylim=c(50, 600), cex.axis=1.5, cex.lab=1.5, cex = 1.2)
+         ylim=c(50, 600), cex.axis=1.5, cex.lab=1.5, cex = 1.5)
   legend("top", inset=.02, title="Array type",
    c("GBRS","GIGAMUGA", "MEGAMUGA", "MUGA"), col=c("red","green3","blue","cyan"), pch = c(15:18), horiz=TRUE, cex=1.7)
 #dev.off()
