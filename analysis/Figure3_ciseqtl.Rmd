@@ -1,0 +1,125 @@
+---
+title: "Figure3_ciseqtl"
+author: "Hao He"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+  toc: true
+vignette: >
+  %\VignetteIndexEntry{Figure3_ciseqtl}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE)
+```
+
+# Figure 3
+a) Maybe just one plot with the curves of GBRS (sigma=0.130), Muga, Megamuga, and Gigamuga including both before/after correction of sample mixups. 
+Because combining results did not make the result better, let’s ditch it.
+
+# Figure 3, Cis-eQTL
+```{r Figure 3 Cis-eQTL, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+library(sinaplot)
+library(ggplot2)
+library(plyr)
+library(VennDiagram)
+library(dplyr)
+library(data.table)
+library(qvalue)
+library(gridExtra)
+library(plotly)
+library(reshape2)
+library(MASS)
+library(ggplot2)
+library(viridis)
+
+#eqtl results with generation -----------------------------------------------------------------
+#load cis-eqtl
+##meta data
+meta.data <- c("muga275", "gbrs275", "fixed.muga275",
+               "megamuga184","gbrs184","fixed.megamuga184",
+               "gigamuga358","gbrs358","fixed.gigamuga358")
+
+mainDir <- "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/"
+
+cis.eqtl.total <- list()
+cislod.plot <- list()
+for (i in meta.data){
+  cis.eqtl.total[[i]] <- get(load(paste0(mainDir,i,"/",i,"_cis.eqtl.RData")))
+  # quantile and combine cisqtl
+  cislod.plot[[i]]$array = rep(i,100)
+  cislod.plot[[i]]$sub.array = rep(i,100)
+  cislod.plot[[i]]$qgrid = seq(from=0.70, to=0.999, length=100)
+  cislod.plot[[i]]$quantile.cislod <- quantile(cis.eqtl.total[[i]]$cislod[!is.nan(cis.eqtl.total[[i]]$cislod)],
+                      seq(from=0.70, to=0.999, length=100))
+  }
+cislod.plot.data <- do.call(rbind.data.frame, cislod.plot)
+cislod.plot.data$array <- ordered(cislod.plot.data$array, 
+                                  levels = c("muga275", "gbrs275", "fixed.muga275",
+                                             "megamuga184","gbrs184","fixed.megamuga184",
+                                             "gigamuga358","gbrs358","fixed.gigamuga358"))
+cislod.plot.data$sub.array <- ordered(cislod.plot.data$sub.array, 
+                                  levels = c("muga275", "gbrs275", "fixed.muga275",
+                                             "megamuga184","gbrs184","fixed.megamuga184",
+                                             "gigamuga358","gbrs358","fixed.gigamuga358"))
+
+#revalue 
+cislod.plot.data$array <- revalue(cislod.plot.data$array, c("muga275" = "MUGA", 
+                                  "gbrs275" = "MUGA", 
+                                  "fixed.muga275" = "MUGA",
+                                  "megamuga184" = "MEGAMUGA",
+                                  "gbrs184" = "MEGAMUGA",
+                                  "fixed.megamuga184" = "MEGAMUGA",
+                                  "gigamuga358" = "GIGAMUGA",
+                                  "gbrs358" = "GIGAMUGA",
+                                  "fixed.gigamuga358" = "GIGAMUGA"))
+
+#revalue 
+cislod.plot.data$sub.array <- revalue(cislod.plot.data$sub.array, c("muga275" = "MUGA", 
+                                  "gbrs275" = "GBRS.MUGA", 
+                                  "fixed.muga275" = "FIXED.MUGA",
+                                  "megamuga184" = "MEGAMUGA",
+                                  "gbrs184" = "GBRS.MEGAMUGA",
+                                  "fixed.megamuga184" = "FIXED.MEGAMUGA",
+                                  "gigamuga358" = "GIGAMUGA",
+                                  "gbrs358" = "GBRS.GIGAMUGA",
+                                  "fixed.gigamuga358" = "FIXED.GIGAMUGA"))
+
+# plot
+# GBRS <- "red",
+# MUGA <- "cyan",
+# MEGAMUGA <- "blue",
+# GIGAMUGA <- "green3"
+p <- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
+  scale_color_manual(values=c("cyan","cyan", "cyan", "blue", "blue", "blue", "green3","green3","green3")) +
+  scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
+  xlab("Quantile of LODs") +
+  ylab("LOD of cis-eQTL") +
+  ggtitle("Cis-eQTL with generation") + 
+  #scale_y_continuous(limits=c(0, 120)) +
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = "bold")) +
+  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face="bold")) +
+    theme(legend.key.width = unit(2.5,"cm")) +
+  guides(linetype = guide_legend(override.aes = list(size = 1)))
+p
+
+p <- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
+  scale_color_manual(values=c("cyan","cyan", "cyan", "blue", "blue", "blue", "green3","green3","green3")) +
+  scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
+  xlab("Quantile of LODs") +
+  ylab("LOD of cis-eQTL") +
+  ggtitle("Cis-eQTL with generation") + 
+  #scale_y_continuous(limits=c(0, 120)) +
+  theme(legend.title=element_blank(), legend.text=element_text(size=20), plot.title = element_text(size = 30, face = "bold")) +
+  theme(axis.text=element_text(size=20),axis.title=element_text(size=20,face="bold"),
+        strip.text = element_text(size = 20)) +
+  facet_grid(array ~ ., scales="free", space="free") +
+  theme(legend.key.width = unit(2.5,"cm")) + 
+  guides(linetype = guide_legend(override.aes = list(size = 1)))
+#facet_grid(.~array, scales="free", space="free")
+p
+```

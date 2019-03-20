@@ -26,4 +26,7 @@ To evaluate the performance of GBRS by comparing its genoprob with arraybased ge
 
 ## LODs on local eQTLs
 * [Cis-eQTLs](Cis-eQTL.html)
-* [Figure3](Figure3.html)
+* [Figure3_ciseqtl](Figure3_ciseqtl.html)
+* [Figure3_transeqtl_lod8](Figure3_transeqtl_lod8.html)
+* [Figure3_transeqtl_FDR0.01](Figure3_transeqtl_FDR0.01.html)
+* [Figure3_transeqtl_FDR0.05](Figure3_transeqtl_FDR0.05.html)
