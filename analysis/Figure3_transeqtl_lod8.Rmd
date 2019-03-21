@@ -1,0 +1,969 @@
+---
+title: "Figure3_transeqtl_lod8"
+author: "Hao He"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+  toc: true
+vignette: >
+  %\VignetteIndexEntry{Figure3_transeqtl_lod8}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE,error = TRUE)
+```
+
+# Figure 3 Trans-eQTL at LOD >=8 (5 Mb)
+```{r Figure 3 Trans-eQTL at LOD 8 5Mb, message=FALSE, eval=TRUE,fig.height=16, fig.width=16}
+library(sinaplot)
+library(ggplot2)
+library(plyr)
+library(VennDiagram)
+library(dplyr)
+library(data.table)
+library(qvalue)
+library(gridExtra)
+library(plotly)
+library(reshape2)
+library(MASS)
+library(ggplot2)
+library(viridis)
+
+a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
+load("/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData")
+#load eqtl pvalue for muga275
+a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/muga275/muga275_pvalue.RData"))
+a <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; a <- a[a$lod >= 8,]
+a$marker <- paste0(a$chr,"_",a$pos)
+a$eqtl_marker <- paste0(a$chr, "_", a$pos)
+a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+a$cis_trans <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06),"cis", "trans")
+a <- a[a$cis_trans == "trans",]
+
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData"))
+b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; b <- b[b$lod >= 8,]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
+b <- b[b$cis_trans == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData"))
+c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; c <- c[c$lod >= 8,]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06),"cis", "trans")
+c <- c[c$cis_trans == "trans",]
+
+p1 <- list()
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 2e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p1[[1]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                             length(unique(b$genes)), 
+                             table(ab$trans_agree)[[1]], 
+                             category = c("MUGA", "GBRS"),
+                             lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                             cat.pos = c(0, 0),
+                             fill = c("skyblue", "pink1"),
+                             ind = FALSE)
+
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 2e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p1[[2]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                             length(unique(c$genes)), 
+                             table(ac$trans_agree)[[1]], 
+                             category = c("MUGA", "FIXED.MUGA"),
+                             lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                             cat.pos = c(0, 0),
+                             fill = c("skyblue", "mediumorchid"),
+                             ind = FALSE)
+
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 2e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p1[[3]] <- draw.pairwise.venn(length(unique(b$genes)), 
+                             length(unique(c$genes)), 
+                             table(bc$trans_agree)[[1]], 
+                             category = c("GBRS", "FIXED.MUGA"),
+                             lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                             cat.pos = c(0, 0),
+                             fill = c("pink1", "mediumorchid"),
+                             ind = FALSE)
+
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c("1",
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                             "1",
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                             "1"))
+pp1 <- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 6) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
+  scale_y_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (2Mb)")
+
+p2 <- list()
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p2[[1]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                             length(unique(b$genes)), 
+                             table(ab$trans_agree)[[1]], 
+                             category = c("MUGA", "GBRS"),
+                             lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                             cat.pos = c(0, 0),
+                             fill = c("skyblue", "pink1"),
+                             ind = FALSE)
+
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p2[[2]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                             length(unique(c$genes)), 
+                             table(ac$trans_agree)[[1]], 
+                             category = c("MUGA", "FIXED.MUGA"),
+                             lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                             cat.pos = c(0, 0),
+                             fill = c("skyblue", "mediumorchid"),
+                             ind = FALSE)
+
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p2[[3]] <- draw.pairwise.venn(length(unique(b$genes)), 
+                             length(unique(c$genes)), 
+                             table(bc$trans_agree)[[1]], 
+                             category = c("GBRS", "FIXED.MUGA"),
+                             lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                             cat.pos = c(0, 0),
+                             fill = c("pink1", "mediumorchid"),
+                             ind = FALSE)
+
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                   label = c("1",
+                             paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                             paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                             "1",
+                             paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                             "1"))
+pp2 <- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 6) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
+  scale_y_discrete(labels=c("a" = "MUGA", "b" = "GBRS","c" = "FIXED.MUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (5Mb)")
+
+#triangle plot
+grid.arrange(pp1, pp2, nrow = 2)
+
+#three venn diagrams
+grid.arrange(gTree(children=p1[[1]]),
+             top=textGrob("Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)", gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p1[[2]]))
+grid.arrange(gTree(children=p1[[3]]))
+
+#three venn diagrams
+grid.arrange(gTree(children=p2[[1]]),
+             top=textGrob("Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)", gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p2[[2]]))
+grid.arrange(gTree(children=p2[[3]]))
+
+a1[[1]] = length(unique(a$marker))
+a2[[1]] = length(unique(b$marker))
+a3[[1]] = length(unique(c$marker))
+n12[[1]] <- length(unique(intersect(unique(a$marker), unique(b$marker))))
+n13[[1]] <- length(unique(intersect(unique(a$marker), unique(c$marker))))
+n23[[1]] <- length(unique(intersect(unique(b$marker), unique(c$marker))))
+n123[[1]] = length(unique(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker)))))
+
+#load eqtl pvalue for megamuga184
+a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData"))
+a <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; a <- a[a$lod >= 8,]
+a$marker <- paste0(a$chr,"_",a$pos)
+a$eqtl_marker <- paste0(a$chr, "_", a$pos)
+a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+a$cis_trans <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06),"cis", "trans")
+a <- a[a$cis_trans == "trans",]
+
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData"))
+b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; b <- b[b$lod >= 8,]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
+b <- b[b$cis_trans == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData"))
+c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; c <- c[c$lod >= 8,]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06),"cis", "trans")
+c <- c[c$cis_trans == "trans",]
+
+p1 <- list()
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 2e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p1[[1]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                              length(unique(b$genes)), 
+                              table(ab$trans_agree)[[1]], 
+                              category = c("MEGAMUGA", "GBRS"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("skyblue", "pink1"),
+                              ind = FALSE)
+
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 2e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p1[[2]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                              length(unique(c$genes)), 
+                              table(ac$trans_agree)[[1]], 
+                              category = c("MEGAMUGA", "FIXED.MEGAMUGA"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("skyblue", "mediumorchid"),
+                              ind = FALSE)
+
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 2e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p1[[3]] <- draw.pairwise.venn(length(unique(b$genes)), 
+                              length(unique(c$genes)), 
+                              table(bc$trans_agree)[[1]], 
+                              category = c("GBRS", "FIXED.MEGAMUGA"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("pink1", "mediumorchid"),
+                              ind = FALSE)
+
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                      label = c("1",
+                                paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                                paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                                "1",
+                                paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                                "1"))
+pp1 <- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 6) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
+  scale_y_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (2Mb)")
+
+p2 <- list()
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p2[[1]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                              length(unique(b$genes)), 
+                              table(ab$trans_agree)[[1]], 
+                              category = c("MEGAMUGA", "GBRS"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("skyblue", "pink1"),
+                              ind = FALSE)
+
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p2[[2]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                              length(unique(c$genes)), 
+                              table(ac$trans_agree)[[1]], 
+                              category = c("MEGAMUGA", "FIXED.MEGAMUGA"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("skyblue", "mediumorchid"),
+                              ind = FALSE)
+
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p2[[3]] <- draw.pairwise.venn(length(unique(b$genes)), 
+                              length(unique(c$genes)), 
+                              table(bc$trans_agree)[[1]], 
+                              category = c("GBRS", "FIXED.MEGAMUGA"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("pink1", "mediumorchid"),
+                              ind = FALSE)
+
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                      label = c("1",
+                                paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                                paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                                "1",
+                                paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                                "1"))
+pp2 <- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 6) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
+  scale_y_discrete(labels=c("a" = "MEGAMUGA", "b" = "GBRS","c" = "FIXED.MEGAMUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (5Mb)")
+
+#triangle plot
+grid.arrange(pp1, pp2, nrow = 2)
+
+#three venn diagrams
+grid.arrange(gTree(children=p1[[1]]),
+             top=textGrob("Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)", gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p1[[2]]))
+grid.arrange(gTree(children=p1[[3]]))
+
+#three venn diagrams
+grid.arrange(gTree(children=p2[[1]]),
+             top=textGrob("Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)", gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p2[[2]]))
+grid.arrange(gTree(children=p2[[3]]))
+
+a1[[2]] = length(unique(a$marker))
+a2[[2]] = length(unique(b$marker))
+a3[[2]] = length(unique(c$marker))
+n12[[2]] <- length(unique(intersect(unique(a$marker), unique(b$marker))))
+n13[[2]] <- length(unique(intersect(unique(a$marker), unique(c$marker))))
+n23[[2]] <- length(unique(intersect(unique(b$marker), unique(c$marker))))
+n123[[2]] = length(unique(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker)))))
+
+#load eqtl pvalue for gigamuga358
+a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData"))
+a <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; a <- a[a$lod >= 8,]
+a$marker <- paste0(a$chr,"_",a$pos)
+a$eqtl_marker <- paste0(a$chr, "_", a$pos)
+a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+a$cis_trans <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06),"cis", "trans")
+a <- a[a$cis_trans == "trans",]
+
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData"))
+b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; b <- b[b$lod >= 8,]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
+b <- b[b$cis_trans == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData"))
+c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; c <- c[c$lod >= 8,]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06),"cis", "trans")
+c <- c[c$cis_trans == "trans",]
+
+p1 <- list()
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 2e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p1[[1]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                              length(unique(b$genes)), 
+                              table(ab$trans_agree)[[1]], 
+                              category = c("GIGAMUGA", "GBRS"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("skyblue", "pink1"),
+                              ind = FALSE)
+
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 2e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p1[[2]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                              length(unique(c$genes)), 
+                              table(ac$trans_agree)[[1]], 
+                              category = c("GIGAMUGA", "FIXED.GIGAMUGA"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("skyblue", "mediumorchid"),
+                              ind = FALSE)
+
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 2e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p1[[3]] <- draw.pairwise.venn(length(unique(b$genes)), 
+                              length(unique(c$genes)), 
+                              table(bc$trans_agree)[[1]], 
+                              category = c("GBRS", "FIXED.GIGAMUGA"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("pink1", "mediumorchid"),
+                              ind = FALSE)
+
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                      label = c("1",
+                                paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                                paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                                "1",
+                                paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                                "1"))
+pp1 <- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 6) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
+  scale_y_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (2Mb)")
+
+p2 <- list()
+#a and b
+ab <- merge(a, b, by = "genes")
+ab$trans_agree <- ifelse(
+  (ab$chr.x.x == ab$chr.x.y) & (abs(ab$pos.x - ab$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p2[[1]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                              length(unique(b$genes)), 
+                              table(ab$trans_agree)[[1]], 
+                              category = c("GIGAMUGA", "GBRS"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("skyblue", "pink1"),
+                              ind = FALSE)
+
+#a and c
+ac <- merge(a, c, by = "genes")
+ac$trans_agree <- ifelse(
+  (ac$chr.x.x == ac$chr.x.y) & (abs(ac$pos.x - ac$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p2[[2]] <- draw.pairwise.venn(length(unique(a$genes)), 
+                              length(unique(c$genes)), 
+                              table(ac$trans_agree)[[1]], 
+                              category = c("GIGAMUGA", "FIXED.GIGAMUGA"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("skyblue", "mediumorchid"),
+                              ind = FALSE)
+
+#b and c
+bc <- merge(b, c, by = "genes")
+bc$trans_agree <- ifelse(
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
+  "agree",
+  "disagree"
+)
+#pairwise venn
+p2[[3]] <- draw.pairwise.venn(length(unique(b$genes)), 
+                              length(unique(c$genes)), 
+                              table(bc$trans_agree)[[1]], 
+                              category = c("GBRS", "FIXED.GIGAMUGA"),
+                              lty = rep("blank", 1), cex= rep(2, 3), cat.cex = rep(1.5,2), 
+                              cat.pos = c(0, 0),
+                              fill = c("pink1", "mediumorchid"),
+                              ind = FALSE)
+
+#show in a triangle
+df_long <- data.frame(v1 = factor(c("a","a","a","b","b","c")),
+                      v2 = factor(c("a","b","c","b","c","c")),
+                      v3 = c(1,
+                             table(ab$trans_agree)[[1]]/nrow(ab),
+                             table(ac$trans_agree)[[1]]/nrow(ac),
+                             1,
+                             table(bc$trans_agree)[[1]]/nrow(bc),
+                             1),
+                      label = c("1",
+                                paste0(round(table(ab$trans_agree)[[1]]/nrow(ab),3), "\n",table(ab$trans_agree)[[1]], "/",nrow(ab)),
+                                paste0(round(table(ac$trans_agree)[[1]]/nrow(ac),3), "\n",table(ac$trans_agree)[[1]], "/",nrow(ac)),
+                                "1",
+                                paste0(round(table(bc$trans_agree)[[1]]/nrow(bc),3), "\n",table(bc$trans_agree)[[1]], "/",nrow(bc)),
+                                "1"))
+pp2 <- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
+  geom_raster() +
+  geom_text(aes(label = label), size = 6) +
+  scale_fill_distiller(palette = "Spectral") +
+  theme_minimal() +
+  theme(legend.position="none",
+        panel.grid = element_blank(),
+        axis.title.x=element_blank(),
+        axis.title.y=element_blank(), text = element_text(size=20)) +
+  scale_x_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
+  scale_y_discrete(labels=c("a" = "GIGAMUGA", "b" = "GBRS","c" = "FIXED.GIGAMUGA")) +
+  labs(title="Calling agreement of distal eQTLs between array and GBRS (5Mb)")
+
+#triangle plot
+grid.arrange(pp1, pp2, nrow = 2)
+
+#three venn diagrams
+grid.arrange(gTree(children=p1[[1]]),
+             top=textGrob("Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)", gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p1[[2]]))
+grid.arrange(gTree(children=p1[[3]]))
+
+#three venn diagrams
+grid.arrange(gTree(children=p2[[1]]),
+             top=textGrob("Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)", gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p2[[2]]))
+grid.arrange(gTree(children=p2[[3]]))
+
+a1[[3]] = length(unique(a$marker))
+a2[[3]] = length(unique(b$marker))
+a3[[3]] = length(unique(c$marker))
+n12[[3]] <- length(unique(intersect(unique(a$marker), unique(b$marker))))
+n13[[3]] <- length(unique(intersect(unique(a$marker), unique(c$marker))))
+n23[[3]] <- length(unique(intersect(unique(b$marker), unique(c$marker))))
+n123[[3]] = length(unique(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker)))))
+
+save(a1,a2,a3,n12, n13, n23, n123, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData")
+
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData")
+#bar plot
+barplot(c(a3[[1]],a3[[2]],a3[[3]]),
+        ylab = "Number of trans-eQTL at LOD 8",
+        names.arg = c("FIXED.MUGA", "FIXED.MEGAMUGA", "FIXED.GIGAMUGA"), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
+        col = c("cyan", "blue", "green3"),
+        ylim = c(0,2500))
+
+#MUGA
+g1 <- draw.triple.venn(area1 = a1[[1]], 
+                 area2 = a2[[1]], 
+                 area3 = a3[[1]], 
+                 n12 = n12[[1]], 
+                 n23 = n23[[1]], 
+                 n13 = n13[[1]], 
+                 n123 = n123[[1]], 
+                 category = c("MUGA", "GBRS", "FIXED.MUGA"), lty = "blank", 
+                 cex= rep(2, 7), cat.cex = rep(2,3), ind = FALSE,
+                 fill = c("skyblue", "pink1", "mediumorchid"))
+
+#MEGAMUGA
+g2 <- draw.triple.venn(area1 = a1[[2]], 
+                 area2 = a2[[2]], 
+                 area3 = a3[[2]], 
+                 n12 = n12[[2]], 
+                 n23 = n23[[2]], 
+                 n13 = n13[[2]], 
+                 n123 = n123[[2]], 
+                 category = c("MEGAMUGA", "GBRS", "FIXED.MEGAMUGA"), lty = "blank", 
+                 cex= rep(2, 7), cat.cex = rep(2,3), ind = FALSE,
+                 fill = c("skyblue", "pink1", "mediumorchid"))
+
+#GIGAMUGA
+g3 <-  draw.triple.venn(area1 = a1[[3]], 
+                 area2 = a2[[3]], 
+                 area3 = a3[[3]], 
+                 n12 = n12[[3]], 
+                 n23 = n23[[3]], 
+                 n13 = n13[[3]], 
+                 n123 = n123[[3]], 
+                 category = c("GIGAMUGA", "GBRS", "FIXED.GIGAMUGA"), lty = "blank", 
+                 cex= rep(2, 7), cat.cex = rep(2,3), ind = FALSE,
+                 fill = c("skyblue", "pink1", "mediumorchid"))
+
+#three venn diagrams
+grid.arrange(gTree(children=g1),
+             top=textGrob("Venn diagram for number of distal eQTLs (5Mb) between array and GBRS", gp=gpar(fontsize=26,font=8)))
+
+grid.arrange(gTree(children=g2))
+
+grid.arrange(gTree(children=g3))
+
+```
+
+# Figure 3 Scatterplot for Trans-eQTL at LOD >=8 (5 Mb)
+```{r Figure 3 Scatterplot for Trans-eQTL at LOD 8 5Mb, message=FALSE, eval=TRUE,fig.height=16, fig.width=16}
+load("/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData")
+
+######MUGA275######
+#load eqtl pvalue for gbrs275
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData"))
+b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+b <- b[b$lod >= 8,]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$eqtl_marker <- paste0(b$chr, "_", as.character(b$pos))
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
+b <- b[b$cis_trans == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData"))
+c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+c <- c[c$lod >= 8,]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$eqtl_marker <- paste0(c$chr, "_", as.character(c$pos))
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06),"cis", "trans")
+c <- c[c$cis_trans == "trans",]
+
+#get all the pair eqtl marker and gene from b and c
+bc_pair <- rbind(b[,c("genes","eqtl_marker")],c[,c("genes","eqtl_marker")])
+bc_pair$genes <- as.character(bc_pair$genes)
+bc_pair <- bc_pair[!duplicated(bc_pair[,1:2]),]
+
+#extract from b and c respectively
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275.eqtl.RData")
+b0 <- eqtl[, bc_pair$genes]
+b0 <- b0[unique(bc_pair$eqtl_marker), ]
+b0 <- setNames(melt(b0), c('eqtl_marker', 'genes', 'lod'))
+b0$eqtl_marker <- as.character(b0$eqtl_marker)
+b0$genes <- as.character(b0$genes)
+bc_pair_b_lod <- merge(b0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_b_lod$g <- "GBRS"
+
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275.eqtl.RData")
+c0 <- eqtl[, bc_pair$genes]
+c0 <- c0[unique(bc_pair$eqtl_marker), ]
+c0 <- setNames(melt(c0), c('eqtl_marker', 'genes', 'lod'))
+c0$eqtl_marker <- as.character(c0$eqtl_marker)
+c0$genes <- as.character(c0$genes)
+bc_pair_c_lod <- merge(c0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_c_lod$g <- "FIXED.MUGA"
+
+bc_pair_lod <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
+bc_pair_lod$g <- ifelse(bc_pair_lod$lod.x >=8 & bc_pair_lod$lod.y >= 8, "Both", ifelse(bc_pair_lod$lod.x >=8 & bc_pair_lod$lod.y < 8,"GBRS","FIXED.MUGA"))
+#scatter plot for the overlapped genes between GBRS and FIXED.MUGA
+# scatter plot
+plot_bcpair_lod1 <- plot_ly(bc_pair_lod, x = ~lod.x) %>%
+  add_markers(y = ~lod.y, text = bc_pair_lod$eqtl_marker, name = "", showlegend = FALSE) %>%
+  add_lines(y = ~fitted(loess(lod.y ~ lod.x)),
+            line = list(color = 'black'),
+            name = "", showlegend = FALSE) %>%
+  add_lines(y = ~lod.x, color = I("red"), name = "", showlegend = FALSE) %>%
+  layout(xaxis = list(title = 'LODs in GBRS'),
+         yaxis = list(title = 'LODs in FIXED.MUGA'),
+         title = paste0('Scatter plot of LODs for distal eQTLs in identified in either array or GBRS'))
+
+plot_bcpair_lod1
+
+# Get density of points in 2 dimensions.
+# @param x A numeric vector.
+# @param y A numeric vector.
+# @param n Create a square n by n grid to compute density.
+# @return The density within each square.
+get_density <- function(x, y, ...) {
+  dens <- MASS::kde2d(x, y, ...)
+  ix <- findInterval(x, dens$x)
+  iy <- findInterval(y, dens$y)
+  ii <- cbind(ix, iy)
+  return(dens$z[ii])
+}
+
+bc_pair_lod$density <- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
+plot_bcpair_lod2 <- ggplot(bc_pair_lod) + 
+  geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod$g))) + 
+  #scale_color_viridis() + 
+  theme(aspect.ratio=1) +
+  xlab("LODs in GBRS") +
+  ylab("LOD in FIXED.MUGA") +
+  ggtitle("Scatter plot of LODs for distal eQTLs in identified in either array or GBRS") + 
+  scale_y_continuous(limits=c(0, 180)) +
+  scale_x_continuous(limits=c(0, 180)) +
+  theme(legend.position="none") +
+  geom_abline(slope=1, intercept=0) +
+  theme(legend.title=element_blank(), text = element_text(size=22), 
+        axis.title=element_text(size=22,face="bold")) +
+  theme(plot.title = element_text(hjust=0.5, size = 28))
+
+plot_bcpair_lod2
+
+
+######MEGAMUGA184######
+#load eqtl pvalue for gbrs184
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData"))
+b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+b <- b[b$lod >= 8,]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
+b <- b[b$cis_trans == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData"))
+c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+c <- c[c$lod >= 8,]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06),"cis", "trans")
+c <- c[c$cis_trans == "trans",]
+
+#get all the pair eqtl marker and gene from b and c
+bc_pair <- rbind(b[,c("genes","eqtl_marker")],c[,c("genes","eqtl_marker")])
+bc_pair$genes <- as.character(bc_pair$genes)
+bc_pair <- bc_pair[!duplicated(bc_pair[,1:2]),]
+
+#extract from b and c respectively
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184.eqtl.RData")
+b0 <- eqtl[, bc_pair$genes]
+b0 <- b0[unique(bc_pair$eqtl_marker), ]
+b0 <- setNames(melt(b0), c('eqtl_marker', 'genes', 'lod'))
+b0$eqtl_marker <- as.character(b0$eqtl_marker)
+b0$genes <- as.character(b0$genes)
+bc_pair_b_lod <- merge(b0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_b_lod$g <- "GBRS"
+
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184.eqtl.RData")
+c0 <- eqtl[, bc_pair$genes]
+c0 <- c0[unique(bc_pair$eqtl_marker), ]
+c0 <- setNames(melt(c0), c('eqtl_marker', 'genes', 'lod'))
+c0$eqtl_marker <- as.character(c0$eqtl_marker)
+c0$genes <- as.character(c0$genes)
+bc_pair_c_lod <- merge(c0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_c_lod$g <- "FIXED.MEGAMUGA"
+
+bc_pair_lod <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
+bc_pair_lod$g <- ifelse(bc_pair_lod$lod.x >=8 & bc_pair_lod$lod.y >= 8, "Both", ifelse(bc_pair_lod$lod.x >=8 & bc_pair_lod$lod.y < 8,"GBRS","FIXED.MEGAMUGA"))
+#scatter plot for the overlapped genes between GBRS and FIXED.MEGAMUGA
+# scatter plot
+plot_bcpair_lod1 <- plot_ly(bc_pair_lod, x = ~lod.x) %>%
+  add_markers(y = ~lod.y, text = bc_pair_lod$eqtl_marker, name = "", showlegend = FALSE) %>%
+  add_lines(y = ~fitted(loess(lod.y ~ lod.x)),
+            line = list(color = 'black'),
+            name = "", showlegend = FALSE) %>%
+  add_lines(y = ~lod.x, color = I("red"), name = "", showlegend = FALSE) %>%
+  layout(xaxis = list(title = 'LODs in GBRS'),
+         yaxis = list(title = 'LODs in FIXED.MEGAMUGA'),
+         title = paste0('Scatter plot of LODs for distal eQTLs in identified in either array or GBRS'))
+
+plot_bcpair_lod1
+
+
+bc_pair_lod$density <- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
+plot_bcpair_lod2 <- ggplot(bc_pair_lod) + 
+  geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod$g))) + 
+  #scale_color_viridis() + 
+  theme(aspect.ratio=1) +
+  xlab("LODs in GBRS") +
+  ylab("LOD in FIXED.MEGAMUGA") +
+  ggtitle("Scatter plot of LODs for distal eQTLs in identified in either array or GBRS") + 
+  scale_y_continuous(limits=c(0, 180)) +
+  scale_x_continuous(limits=c(0, 180)) +
+  theme(legend.position="none") +
+  geom_abline(slope=1, intercept=0) +
+  theme(legend.title=element_blank(), text = element_text(size=22), 
+        axis.title=element_text(size=22,face="bold")) +
+  theme(plot.title = element_text(hjust=0.5, size = 28))
+
+plot_bcpair_lod2
+
+######GIGAMUGA358######
+#load eqtl pvalue for gbrs358
+b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData"))
+b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+b <- b[b$lod >= 8,]
+b$marker <- paste0(b$chr,"_",b$pos)
+b$eqtl_marker <- paste0(b$chr, "_", b$pos)
+b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
+b <- b[b$cis_trans == "trans",]
+
+c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData"))
+c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+c <- c[c$lod >= 8,]
+c$marker <- paste0(c$chr,"_",c$pos)
+c$eqtl_marker <- paste0(c$chr, "_", c$pos)
+c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
+c$cis_trans <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06),"cis", "trans")
+c <- c[c$cis_trans == "trans",]
+
+#get all the pair eqtl marker and gene from b and c
+bc_pair <- rbind(b[,c("genes","eqtl_marker")],c[,c("genes","eqtl_marker")])
+bc_pair$genes <- as.character(bc_pair$genes)
+bc_pair <- bc_pair[!duplicated(bc_pair[,1:2]),]
+
+#extract from b and c respectively
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358.eqtl.RData")
+b0 <- eqtl[, bc_pair$genes]
+b0 <- b0[unique(bc_pair$eqtl_marker), ]
+b0 <- setNames(melt(b0), c('eqtl_marker', 'genes', 'lod'))
+b0$eqtl_marker <- as.character(b0$eqtl_marker)
+b0$genes <- as.character(b0$genes)
+bc_pair_b_lod <- merge(b0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_b_lod$g <- "GBRS"
+
+load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358.eqtl.RData")
+c0 <- eqtl[, bc_pair$genes]
+c0 <- c0[unique(bc_pair$eqtl_marker), ]
+c0 <- setNames(melt(c0), c('eqtl_marker', 'genes', 'lod'))
+c0$eqtl_marker <- as.character(c0$eqtl_marker)
+c0$genes <- as.character(c0$genes)
+bc_pair_c_lod <- merge(c0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_c_lod$g <- "FIXED.GIGAMUGA"
+
+bc_pair_lod <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
+bc_pair_lod$g <- ifelse(bc_pair_lod$lod.x >=8 & bc_pair_lod$lod.y >= 8, "Both", ifelse(bc_pair_lod$lod.x >=8 & bc_pair_lod$lod.y < 8,"GBRS","FIXED.GIGAMUGA"))
+#scatter plot for the overlapped genes between GBRS and FIXED.GIGAMUGA
+# scatter plot
+plot_bcpair_lod1 <- plot_ly(bc_pair_lod, x = ~lod.x) %>%
+  add_markers(y = ~lod.y, text = bc_pair_lod$eqtl_marker, name = "", showlegend = FALSE) %>%
+  add_lines(y = ~fitted(loess(lod.y ~ lod.x)),
+            line = list(color = 'black'),
+            name = "", showlegend = FALSE) %>%
+  add_lines(y = ~lod.x, color = I("red"), name = "", showlegend = FALSE) %>%
+  layout(xaxis = list(title = 'LODs in GBRS'),
+         yaxis = list(title = 'LODs in FIXED.GIGAMUGA'),
+         title = paste0('Scatter plot of LODs for distal eQTLs in identified in either array or GBRS'))
+
+plot_bcpair_lod1
+
+bc_pair_lod$density <- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
+plot_bcpair_lod2 <- ggplot(bc_pair_lod) + 
+  geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod$g))) + 
+  #scale_color_viridis() + 
+  theme(aspect.ratio=1) +
+  xlab("LODs in GBRS") +
+  ylab("LOD in FIXED.GIGAMUGA") +
+  ggtitle("Scatter plot of LODs for distal eQTLs in identified in either array or GBRS") + 
+  scale_y_continuous(limits=c(0, 180)) +
+  scale_x_continuous(limits=c(0, 180)) +
+  theme(legend.position="none") +
+  geom_abline(slope=1, intercept=0) +
+  theme(legend.title=element_blank(), text = element_text(size=22), 
+        axis.title=element_text(size=22,face="bold")) +
+  theme(plot.title = element_text(hjust=0.5, size = 28))
+
+plot_bcpair_lod2
+
+```
