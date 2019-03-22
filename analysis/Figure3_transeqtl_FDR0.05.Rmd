@@ -30,6 +30,7 @@ library(reshape2)
 library(MASS)
 library(ggplot2)
 library(viridis)
+library(parallel)
 
 a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
 load("/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData")
@@ -756,21 +757,19 @@ bc_pair <- bc_pair[!duplicated(bc_pair[,1:2]),]
 
 #extract from b and c respectively
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275.eqtl.RData")
-b0 <- eqtl[, bc_pair$genes]
-b0 <- b0[unique(bc_pair$eqtl_marker), ]
-b0 <- setNames(melt(b0), c('eqtl_marker', 'genes', 'lod'))
-b0$eqtl_marker <- as.character(b0$eqtl_marker)
-b0$genes <- as.character(b0$genes)
-bc_pair_b_lod <- merge(b0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_b_lod <- bc_pair
+bc_pair_b_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_b_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_b_lod[i,1]),as.character(bc_pair_b_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
 bc_pair_b_lod$g <- "GBRS"
 
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275.eqtl.RData")
-c0 <- eqtl[, bc_pair$genes]
-c0 <- c0[unique(bc_pair$eqtl_marker), ]
-c0 <- setNames(melt(c0), c('eqtl_marker', 'genes', 'lod'))
-c0$eqtl_marker <- as.character(c0$eqtl_marker)
-c0$genes <- as.character(c0$genes)
-bc_pair_c_lod <- merge(c0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_c_lod <- bc_pair
+bc_pair_c_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_c_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_c_lod[i,1]),as.character(bc_pair_c_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
 bc_pair_c_lod$g <- "FIXED.MUGA"
 
 bc_pair_lod <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
@@ -850,21 +849,19 @@ bc_pair <- bc_pair[!duplicated(bc_pair[,1:2]),]
 
 #extract from b and c respectively
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184.eqtl.RData")
-b0 <- eqtl[, bc_pair$genes]
-b0 <- b0[unique(bc_pair$eqtl_marker), ]
-b0 <- setNames(melt(b0), c('eqtl_marker', 'genes', 'lod'))
-b0$eqtl_marker <- as.character(b0$eqtl_marker)
-b0$genes <- as.character(b0$genes)
-bc_pair_b_lod <- merge(b0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_b_lod <- bc_pair
+bc_pair_b_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_b_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_b_lod[i,1]),as.character(bc_pair_b_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
 bc_pair_b_lod$g <- "GBRS"
 
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184.eqtl.RData")
-c0 <- eqtl[, bc_pair$genes]
-c0 <- c0[unique(bc_pair$eqtl_marker), ]
-c0 <- setNames(melt(c0), c('eqtl_marker', 'genes', 'lod'))
-c0$eqtl_marker <- as.character(c0$eqtl_marker)
-c0$genes <- as.character(c0$genes)
-bc_pair_c_lod <- merge(c0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_c_lod <- bc_pair
+bc_pair_c_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_c_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_c_lod[i,1]),as.character(bc_pair_c_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
 bc_pair_c_lod$g <- "FIXED.MEGAMUGA"
 
 bc_pair_lod <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
@@ -931,21 +928,19 @@ bc_pair <- bc_pair[!duplicated(bc_pair[,1:2]),]
 
 #extract from b and c respectively
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358.eqtl.RData")
-b0 <- eqtl[, bc_pair$genes]
-b0 <- b0[unique(bc_pair$eqtl_marker), ]
-b0 <- setNames(melt(b0), c('eqtl_marker', 'genes', 'lod'))
-b0$eqtl_marker <- as.character(b0$eqtl_marker)
-b0$genes <- as.character(b0$genes)
-bc_pair_b_lod <- merge(b0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_b_lod <- bc_pair
+bc_pair_b_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_b_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_b_lod[i,1]),as.character(bc_pair_b_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
 bc_pair_b_lod$g <- "GBRS"
 
 load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358.eqtl.RData")
-c0 <- eqtl[, bc_pair$genes]
-c0 <- c0[unique(bc_pair$eqtl_marker), ]
-c0 <- setNames(melt(c0), c('eqtl_marker', 'genes', 'lod'))
-c0$eqtl_marker <- as.character(c0$eqtl_marker)
-c0$genes <- as.character(c0$genes)
-bc_pair_c_lod <- merge(c0, bc_pair, by = c("eqtl_marker", "genes"), all.y = TRUE)
+bc_pair_c_lod <- bc_pair
+bc_pair_c_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_c_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_c_lod[i,1]),as.character(bc_pair_c_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
 bc_pair_c_lod$g <- "FIXED.GIGAMUGA"
 
 bc_pair_lod <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
