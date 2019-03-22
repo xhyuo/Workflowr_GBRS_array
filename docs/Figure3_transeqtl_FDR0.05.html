@@ -444,7 +444,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/d0fdac62aee1e5d6d674c90164167883dfa56b3c" target="_blank">d0fdac6</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/a31d6051899f648e4bf647409ca5d1a586338dbd" target="_blank">a31d605</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -452,11 +452,22 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
+    Untracked:  Figure3_transeqtl_FDR0.01.R
+    Untracked:  Figure3_transeqtl_FDR0.01.sh
+    Untracked:  Figure3_transeqtl_FDR0.01.sh.e9523946
+    Untracked:  Figure3_transeqtl_FDR0.01.sh.o9523946
+    Untracked:  Figure3_transeqtl_FDR0.05.R
+    Untracked:  Figure3_transeqtl_FDR0.05.sh
+    Untracked:  Figure3_transeqtl_FDR0.05.sh.e9523947
+    Untracked:  Figure3_transeqtl_FDR0.05.sh.o9523947
+    Untracked:  Figure3_transeqtl_lod8.R
+    Untracked:  Figure3_transeqtl_lod8.sh
+    Untracked:  Figure3_transeqtl_lod8.sh.e9523673
+    Untracked:  Figure3_transeqtl_lod8.sh.o9523673
     Untracked:  analysis/Figure1_by_vit.R
     Untracked:  analysis/Figure3.0.Rmd
     Untracked:  analysis/Figure3_0.Rmd
     Untracked:  analysis/Figure3_LOD8.Rmd
-    Untracked:  analysis/Figure3_transeqtl_FDR0.01.Rmd
     Untracked:  analysis/old_analysis/
     Untracked:  data/Agree_table_three_array.RData
     Untracked:  data/DO_Striatum_recomb.GBRS.genotypes.RData
@@ -485,10 +496,10 @@ Untracked files:
     Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
     Untracked:  output/DO_Liver/
     Untracked:  output/DO_Striatum/
-    Untracked:  trans_eqtl_GBRS_FIXED.MUGA.jpeg
 
 Unstaged changes:
     Modified:   analysis/Figure3.Rmd
+    Modified:   analysis/Figure3_transeqtl_FDR0.01.Rmd
     Modified:   analysis/Recombination.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MEGAMUGA.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
@@ -497,6 +508,67 @@ Unstaged changes:
 Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
 </li>
 </ul>
+<details> <summary> <small><strong>Expand here to see past versions:</strong></small> </summary>
+<ul>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+File
+</th>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a31d6051899f648e4bf647409ca5d1a586338dbd/analysis/Figure3_transeqtl_FDR0.05.Rmd" target="_blank">a31d605</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+<td style="text-align:left;">
+update Figure3_transeqtl_FDR0.05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/Figure3_transeqtl_FDR0.05.html" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
+</tbody>
+</table>
+</ul>
+<p></details></p>
 <hr />
 <div id="figure-3-trans-eqtl-at-fdr-0.05-5-mb" class="section level1">
 <h1>Figure 3 Trans-eQTL at FDR 0.05 (5 Mb)</h1>
@@ -513,6 +585,7 @@ library(reshape2)
 library(MASS)
 library(ggplot2)
 library(viridis)
+library(parallel)
 
 a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
 load(&quot;/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData&quot;)
@@ -706,25 +779,235 @@ pp2 &lt;- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
 
 #triangle plot
 grid.arrange(pp1, pp2, nrow = 2)</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-1.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-1.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-1.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-1.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 #three venn diagrams
 grid.arrange(gTree(children=p1[[1]]),
              top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-2.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-2.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p1[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-3.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-3.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p1[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-4.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-4.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 #three venn diagrams
 grid.arrange(gTree(children=p2[[1]]),
              top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-5.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-5.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-5.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-5.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p2[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-6.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-6.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-6.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-6.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p2[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-7.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-7.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-7.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-7.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 a1[[1]] = length(unique(a$marker))
 a2[[1]] = length(unique(b$marker))
@@ -924,25 +1207,235 @@ pp2 &lt;- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
 
 #triangle plot
 grid.arrange(pp1, pp2, nrow = 2)</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-8.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-8.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-8.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-8.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 #three venn diagrams
 grid.arrange(gTree(children=p1[[1]]),
              top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-9.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-9.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-9.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-9.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p1[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-10.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-10.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-10.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-10.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p1[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-11.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-11.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-11.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-11.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 #three venn diagrams
 grid.arrange(gTree(children=p2[[1]]),
              top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-12.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-12.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-12.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-12.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p2[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-13.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-13.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-13.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-13.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p2[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-14.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-14.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-14.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-14.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 a1[[2]] = length(unique(a$marker))
 a2[[2]] = length(unique(b$marker))
@@ -1142,25 +1635,235 @@ pp2 &lt;- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
 
 #triangle plot
 grid.arrange(pp1, pp2, nrow = 2)</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-15.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-15.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-15.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-15.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 #three venn diagrams
 grid.arrange(gTree(children=p1[[1]]),
              top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-16.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-16.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-16.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-16.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p1[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-17.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-17.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-17.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-17.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p1[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-18.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-18.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-18.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-18.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 #three venn diagrams
 grid.arrange(gTree(children=p2[[1]]),
              top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-19.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-19.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-19.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-19.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p2[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-20.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-20.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-20.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-20.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>grid.arrange(gTree(children=p2[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-21.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-21.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-21.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-21.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 a1[[3]] = length(unique(a$marker))
 a2[[3]] = length(unique(b$marker))
@@ -1179,7 +1882,37 @@ barplot(c(a3[[1]],a3[[2]],a3[[3]]),
         names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
         col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
         ylim = c(0,2500))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-22.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-22.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-22.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-22.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 #MUGA
 g1 &lt;- draw.triple.venn(area1 = a1[[1]],
@@ -1220,13 +1953,103 @@ g3 &lt;-  draw.triple.venn(area1 = a1[[3]],
 #three venn diagrams
 grid.arrange(gTree(children=g1),
              top=textGrob(&quot;Venn diagram for number of distal eQTLs (5Mb) between array and GBRS&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-23.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-23.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-23.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-23.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 grid.arrange(gTree(children=g2))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-24.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-24.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-24.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-24.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <pre class="r"><code>
 grid.arrange(gTree(children=g3))</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Trans-eQTL%20at%20FDR%200.05%205Mb-25.png" width="1536" style="display: block; margin: auto;" /></p>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-25.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at FDR 0.05 5Mb-25.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Trans-eQTL at FDR 0.05 5Mb-25.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 </div>
 <div id="figure-3-scatterplot-for-trans-eqtl-at-fdr-0.05-5-mb" class="section level1">
 <h1>Figure 3 Scatterplot for Trans-eQTL at FDR 0.05 (5 Mb)</h1>
@@ -1262,23 +2085,23 @@ bc_pair &lt;- bc_pair[!duplicated(bc_pair[,1:2]),]
 
 #extract from b and c respectively
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275.eqtl.RData&quot;)
-b0 &lt;- eqtl[, bc_pair$genes]
-b0 &lt;- b0[unique(bc_pair$eqtl_marker), ]
-# Error in b0[unique(bc_pair$eqtl_marker), ]: subscript out of bounds
-b0 &lt;- setNames(melt(b0), c(&#39;eqtl_marker&#39;, &#39;genes&#39;, &#39;lod&#39;))
-b0$eqtl_marker &lt;- as.character(b0$eqtl_marker)
-b0$genes &lt;- as.character(b0$genes)
-bc_pair_b_lod &lt;- merge(b0, bc_pair, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;), all.y = TRUE)
+bc_pair_b_lod &lt;- bc_pair
+bc_pair_b_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_b_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_b_lod[i,1]),as.character(bc_pair_b_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
+# Warning in mclapply(X = 1:nrow(bc_pair_b_lod), FUN = function(i) {: 5003
+# function calls resulted in an error
 bc_pair_b_lod$g &lt;- &quot;GBRS&quot;
 
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275.eqtl.RData&quot;)
-c0 &lt;- eqtl[, bc_pair$genes]
-c0 &lt;- c0[unique(bc_pair$eqtl_marker), ]
-# Error in c0[unique(bc_pair$eqtl_marker), ]: subscript out of bounds
-c0 &lt;- setNames(melt(c0), c(&#39;eqtl_marker&#39;, &#39;genes&#39;, &#39;lod&#39;))
-c0$eqtl_marker &lt;- as.character(c0$eqtl_marker)
-c0$genes &lt;- as.character(c0$genes)
-bc_pair_c_lod &lt;- merge(c0, bc_pair, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;), all.y = TRUE)
+bc_pair_c_lod &lt;- bc_pair
+bc_pair_c_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_c_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_c_lod[i,1]),as.character(bc_pair_c_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
+# Warning in mclapply(X = 1:nrow(bc_pair_c_lod), FUN = function(i) {: 5003
+# function calls resulted in an error
 bc_pair_c_lod$g &lt;- &quot;FIXED.MUGA&quot;
 
 bc_pair_lod &lt;- merge(bc_pair_b_lod, bc_pair_c_lod, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;))
@@ -1296,8 +2119,10 @@ plot_bcpair_lod1 &lt;- plot_ly(bc_pair_lod, x = ~lod.x) %&gt;%
          title = paste0(&#39;Scatter plot of LODs for distal eQTLs in identified in either array or GBRS&#39;))
 
 plot_bcpair_lod1
-# Warning: Ignoring 3 observations
-# Error: Column `y` must be length 1 or 13850, not 13847
+# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
+# Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
+# parametric, : NAs introduced by coercion
+# Error in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : NA/NaN/Inf in foreign function call (arg 1)
 
 # Get density of points in 2 dimensions.
 # @param x A numeric vector.
@@ -1330,9 +2155,8 @@ plot_bcpair_lod2 &lt;- ggplot(bc_pair_lod) +
   theme(plot.title = element_text(hjust=0.5, size = 28))
 
 plot_bcpair_lod2
-# Warning: Removed 3 rows containing missing values (geom_point).</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Scatterplot%20for%20Trans-eQTL%20at%20FDR%200.05%205Mb-1.png" width="1536" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>
+# Error: Discrete value supplied to continuous scale
+
 
 ######MEGAMUGA184######
 #load eqtl pvalue for gbrs184
@@ -1363,23 +2187,23 @@ bc_pair &lt;- bc_pair[!duplicated(bc_pair[,1:2]),]
 
 #extract from b and c respectively
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184.eqtl.RData&quot;)
-b0 &lt;- eqtl[, bc_pair$genes]
-b0 &lt;- b0[unique(bc_pair$eqtl_marker), ]
-# Error in b0[unique(bc_pair$eqtl_marker), ]: subscript out of bounds
-b0 &lt;- setNames(melt(b0), c(&#39;eqtl_marker&#39;, &#39;genes&#39;, &#39;lod&#39;))
-b0$eqtl_marker &lt;- as.character(b0$eqtl_marker)
-b0$genes &lt;- as.character(b0$genes)
-bc_pair_b_lod &lt;- merge(b0, bc_pair, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;), all.y = TRUE)
+bc_pair_b_lod &lt;- bc_pair
+bc_pair_b_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_b_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_b_lod[i,1]),as.character(bc_pair_b_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
+# Warning in mclapply(X = 1:nrow(bc_pair_b_lod), FUN = function(i) {: 6794
+# function calls resulted in an error
 bc_pair_b_lod$g &lt;- &quot;GBRS&quot;
 
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184.eqtl.RData&quot;)
-c0 &lt;- eqtl[, bc_pair$genes]
-c0 &lt;- c0[unique(bc_pair$eqtl_marker), ]
-# Error in c0[unique(bc_pair$eqtl_marker), ]: subscript out of bounds
-c0 &lt;- setNames(melt(c0), c(&#39;eqtl_marker&#39;, &#39;genes&#39;, &#39;lod&#39;))
-c0$eqtl_marker &lt;- as.character(c0$eqtl_marker)
-c0$genes &lt;- as.character(c0$genes)
-bc_pair_c_lod &lt;- merge(c0, bc_pair, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;), all.y = TRUE)
+bc_pair_c_lod &lt;- bc_pair
+bc_pair_c_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_c_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_c_lod[i,1]),as.character(bc_pair_c_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
+# Warning in mclapply(X = 1:nrow(bc_pair_c_lod), FUN = function(i) {: 6794
+# function calls resulted in an error
 bc_pair_c_lod$g &lt;- &quot;FIXED.MEGAMUGA&quot;
 
 bc_pair_lod &lt;- merge(bc_pair_b_lod, bc_pair_c_lod, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;))
@@ -1397,8 +2221,10 @@ plot_bcpair_lod1 &lt;- plot_ly(bc_pair_lod, x = ~lod.x) %&gt;%
          title = paste0(&#39;Scatter plot of LODs for distal eQTLs in identified in either array or GBRS&#39;))
 
 plot_bcpair_lod1
-# Warning: Ignoring 5 observations
-# Error: Column `y` must be length 1 or 18881, not 18876
+# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
+
+# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
+# Error in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : NA/NaN/Inf in foreign function call (arg 1)
 
 
 bc_pair_lod$density &lt;- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
@@ -1419,9 +2245,8 @@ plot_bcpair_lod2 &lt;- ggplot(bc_pair_lod) +
   theme(plot.title = element_text(hjust=0.5, size = 28))
 
 plot_bcpair_lod2
-# Warning: Removed 5 rows containing missing values (geom_point).</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Scatterplot%20for%20Trans-eQTL%20at%20FDR%200.05%205Mb-2.png" width="1536" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>
+# Error: Discrete value supplied to continuous scale
+
 ######GIGAMUGA358######
 #load eqtl pvalue for gbrs358
 b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
@@ -1451,23 +2276,23 @@ bc_pair &lt;- bc_pair[!duplicated(bc_pair[,1:2]),]
 
 #extract from b and c respectively
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358.eqtl.RData&quot;)
-b0 &lt;- eqtl[, bc_pair$genes]
-b0 &lt;- b0[unique(bc_pair$eqtl_marker), ]
-# Error in b0[unique(bc_pair$eqtl_marker), ]: subscript out of bounds
-b0 &lt;- setNames(melt(b0), c(&#39;eqtl_marker&#39;, &#39;genes&#39;, &#39;lod&#39;))
-b0$eqtl_marker &lt;- as.character(b0$eqtl_marker)
-b0$genes &lt;- as.character(b0$genes)
-bc_pair_b_lod &lt;- merge(b0, bc_pair, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;), all.y = TRUE)
+bc_pair_b_lod &lt;- bc_pair
+bc_pair_b_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_b_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_b_lod[i,1]),as.character(bc_pair_b_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
+# Warning in mclapply(X = 1:nrow(bc_pair_b_lod), FUN = function(i) {: 5834
+# function calls resulted in an error
 bc_pair_b_lod$g &lt;- &quot;GBRS&quot;
 
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358.eqtl.RData&quot;)
-c0 &lt;- eqtl[, bc_pair$genes]
-c0 &lt;- c0[unique(bc_pair$eqtl_marker), ]
-# Error in c0[unique(bc_pair$eqtl_marker), ]: subscript out of bounds
-c0 &lt;- setNames(melt(c0), c(&#39;eqtl_marker&#39;, &#39;genes&#39;, &#39;lod&#39;))
-c0$eqtl_marker &lt;- as.character(c0$eqtl_marker)
-c0$genes &lt;- as.character(c0$genes)
-bc_pair_c_lod &lt;- merge(c0, bc_pair, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;), all.y = TRUE)
+bc_pair_c_lod &lt;- bc_pair
+bc_pair_c_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_c_lod),
+                                               FUN = function(i){eqtl[as.character(bc_pair_c_lod[i,1]),as.character(bc_pair_c_lod[i,2])]},
+                                               mc.cores = 20,
+                                               mc.preschedule = F)))
+# Warning in mclapply(X = 1:nrow(bc_pair_c_lod), FUN = function(i) {: 5834
+# function calls resulted in an error
 bc_pair_c_lod$g &lt;- &quot;FIXED.GIGAMUGA&quot;
 
 bc_pair_lod &lt;- merge(bc_pair_b_lod, bc_pair_c_lod, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;))
@@ -1485,8 +2310,10 @@ plot_bcpair_lod1 &lt;- plot_ly(bc_pair_lod, x = ~lod.x) %&gt;%
          title = paste0(&#39;Scatter plot of LODs for distal eQTLs in identified in either array or GBRS&#39;))
 
 plot_bcpair_lod1
-# Warning: Ignoring 3 observations
-# Error: Column `y` must be length 1 or 15107, not 15104
+# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
+
+# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
+# Error in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : NA/NaN/Inf in foreign function call (arg 1)
 
 
 bc_pair_lod$density &lt;- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
@@ -1507,25 +2334,50 @@ plot_bcpair_lod2 &lt;- ggplot(bc_pair_lod) +
   theme(plot.title = element_text(hjust=0.5, size = 28))
 
 plot_bcpair_lod2
-# Warning: Removed 3 rows containing missing values (geom_point).</code></pre>
-<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Scatterplot%20for%20Trans-eQTL%20at%20FDR%200.05%205Mb-3.png" width="1536" style="display: block; margin: auto;" /></p>
+# Error: Discrete value supplied to continuous scale</code></pre>
+<p><img src="figure/Figure3_transeqtl_FDR0.05.Rmd/Figure%203%20Scatterplot%20for%20Trans-eQTL%20at%20FDR%200.05%205Mb-1.png" width="1536" style="display: block; margin: auto;" /></p>
+<details> <summary><em>Expand here to see past versions of Figure 3 Scatterplot for Trans-eQTL at FDR 0.05 5Mb-1.png:</em></summary>
+<table style="border-collapse:separate; border-spacing:5px;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Version
+</th>
+<th style="text-align:left;">
+Author
+</th>
+<th style="text-align:left;">
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/figure/Figure3_transeqtl_FDR0.05.Rmd/Figure 3 Scatterplot for Trans-eQTL at FDR 0.05 5Mb-1.png" target="_blank">a7fd07d</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+</tr>
+</tbody>
+</table>
+<p></details></p>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()
 # R version 3.3.2 (2016-10-31)
 # Platform: x86_64-pc-linux-gnu (64-bit)
-# Running under: CentOS release 6.7 (Final)
+# Running under: CentOS release 6.5 (Final)
 # 
 # locale:
-#  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-#  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
-#  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-#  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-#  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-# [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+# [1] C
 # 
 # attached base packages:
-# [1] grid      stats     graphics  grDevices utils     datasets  methods  
+# [1] parallel  grid      stats     graphics  grDevices utils     datasets 
 # [8] base     
 # 
 # other attached packages:
@@ -1544,7 +2396,7 @@ plot_bcpair_lod2
 # [16] lambda.r_1.2.3       bindr_0.1.1          stringr_1.3.1       
 # [19] munsell_0.5.0        gtable_0.2.0         workflowr_1.1.1     
 # [22] R.methodsS3_1.7.1    htmlwidgets_1.3      evaluate_0.10       
-# [25] labeling_0.3         knitr_1.20           Rcpp_1.0.0          
+# [25] knitr_1.20           methods_3.3.2        Rcpp_1.0.0          
 # [28] scales_1.0.0         backports_1.1.2      formatR_1.5         
 # [31] jsonlite_1.6         digest_0.6.18        stringi_1.2.4       
 # [34] rprojroot_1.3-2      tools_3.3.2          magrittr_1.5        
