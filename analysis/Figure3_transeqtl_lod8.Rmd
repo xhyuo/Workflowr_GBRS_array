@@ -97,7 +97,7 @@ p1[[2]] <- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc <- merge(b, c, by = "genes")
 bc$trans_agree <- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) & (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) <= 2e+06),
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 2e+06),
   "agree",
   "disagree"
 )
@@ -177,7 +177,7 @@ p2[[2]] <- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc <- merge(b, c, by = "genes")
 bc$trans_agree <- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) & (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) <= 5e+06),
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
   "agree",
   "disagree"
 )
@@ -305,7 +305,7 @@ p1[[2]] <- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc <- merge(b, c, by = "genes")
 bc$trans_agree <- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) & (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) <= 2e+06),
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 2e+06),
   "agree",
   "disagree"
 )
@@ -385,7 +385,7 @@ p2[[2]] <- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc <- merge(b, c, by = "genes")
 bc$trans_agree <- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) & (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) <= 5e+06),
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
   "agree",
   "disagree"
 )
@@ -513,7 +513,7 @@ p1[[2]] <- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc <- merge(b, c, by = "genes")
 bc$trans_agree <- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) & (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) <= 2e+06),
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 2e+06),
   "agree",
   "disagree"
 )
@@ -593,7 +593,7 @@ p2[[2]] <- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc <- merge(b, c, by = "genes")
 bc$trans_agree <- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) & (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) <= 5e+06),
+  (bc$chr.x.x == bc$chr.x.y) & (abs(bc$pos.x - bc$pos.y) <= 5e+06),
   "agree",
   "disagree"
 )
