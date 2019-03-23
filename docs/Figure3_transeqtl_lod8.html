@@ -444,7 +444,7 @@ div.section {
 </details>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/ab5fd3b5a4a8251af705daaa61761d6beda0e720" target="_blank">ab5fd3b</a> </summary></p>
+<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/f15581805e0a3ae4df902ccb85d1e1f33feba73f" target="_blank">f155818</a> </summary></p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 <pre><code>
 Ignored files:
@@ -458,8 +458,8 @@ Untracked files:
     Untracked:  Figure3_transeqtl_FDR0.05.sh
     Untracked:  Figure3_transeqtl_lod8.R
     Untracked:  Figure3_transeqtl_lod8.sh
-    Untracked:  Figure3_transeqtl_lod8.sh.e9523673
-    Untracked:  Figure3_transeqtl_lod8.sh.o9523673
+    Untracked:  Figure3_transeqtl_lod8.sh.e9525134
+    Untracked:  Figure3_transeqtl_lod8.sh.o9525134
     Untracked:  analysis/Figure1_by_vit.R
     Untracked:  analysis/Figure3.0.Rmd
     Untracked:  analysis/Figure3_0.Rmd
@@ -528,6 +528,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align:left;">
+Rmd
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f15581805e0a3ae4df902ccb85d1e1f33feba73f/analysis/Figure3_transeqtl_lod8.Rmd" target="_blank">f155818</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+<td style="text-align:left;">
+update Figure3_transeqtl_lod8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+html
+</td>
+<td style="text-align:left;">
+<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/adc6899163ceba9fd38fb45f7f0f6c743fd92e30/docs/Figure3_transeqtl_lod8.html" target="_blank">adc6899</a>
+</td>
+<td style="text-align:left;">
+xhyuo
+</td>
+<td style="text-align:left;">
+2019-03-22
+</td>
+<td style="text-align:left;">
+Build site.
+</td>
+</tr>
 <tr>
 <td style="text-align:left;">
 html
@@ -606,24 +640,24 @@ load(&quot;/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData&quot;)
 #load eqtl pvalue for muga275
 a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/muga275/muga275_pvalue.RData&quot;))
 a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; a &lt;- a[a$lod &gt;= 8,]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,as.integer(a$pos))
+a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, as.integer(a$pos))
 a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(as.integer(a$pos) - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 a &lt;- a[a$cis_trans == &quot;trans&quot;,]
 
 b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData&quot;))
 b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,as.integer(b$pos))
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, as.integer(b$pos))
 b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 b &lt;- b[b$cis_trans == &quot;trans&quot;,]
 
 c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData&quot;))
 c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,as.integer(c$pos))
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, as.integer(c$pos))
 c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 c &lt;- c[c$cis_trans == &quot;trans&quot;,]
@@ -666,7 +700,7 @@ p1[[2]] &lt;- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc &lt;- merge(b, c, by = &quot;genes&quot;)
 bc$trans_agree &lt;- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 2e+06),
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) &lt;= 2e+06),
   &quot;agree&quot;,
   &quot;disagree&quot;
 )
@@ -746,7 +780,7 @@ p2[[2]] &lt;- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc &lt;- merge(b, c, by = &quot;genes&quot;)
 bc$trans_agree &lt;- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 5e+06),
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) &lt;= 5e+06),
   &quot;agree&quot;,
   &quot;disagree&quot;
 )
@@ -789,237 +823,20 @@ pp2 &lt;- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (5Mb)&quot;)
 
 #triangle plot
-grid.arrange(pp1, pp2, nrow = 2)</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-1.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-1.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+grid.arrange(pp1, pp2, nrow = 2)
+
 #three venn diagrams
 grid.arrange(gTree(children=p1[[1]]),
-             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-2.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-2.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-2.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p1[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-3.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-3.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p1[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-4.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-4.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-4.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)&quot;, gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p1[[2]]))
+grid.arrange(gTree(children=p1[[3]]))
+
 #three venn diagrams
 grid.arrange(gTree(children=p2[[1]]),
-             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-5.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-5.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-5.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p2[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-6.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-6.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-6.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p2[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-7.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-7.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-7.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)&quot;, gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p2[[2]]))
+grid.arrange(gTree(children=p2[[3]]))
+
 a1[[1]] = length(unique(a$marker))
 a2[[1]] = length(unique(b$marker))
 a3[[1]] = length(unique(c$marker))
@@ -1031,24 +848,24 @@ n123[[1]] = length(unique(intersect(unique(a$marker),intersect(unique(b$marker),
 #load eqtl pvalue for megamuga184
 a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData&quot;))
 a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; a &lt;- a[a$lod &gt;= 8,]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,as.integer(a$pos))
+a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, as.integer(a$pos))
 a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(as.integer(a$pos) - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 a &lt;- a[a$cis_trans == &quot;trans&quot;,]
 
 b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData&quot;))
 b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,as.integer(b$pos))
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, as.integer(b$pos))
 b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 b &lt;- b[b$cis_trans == &quot;trans&quot;,]
 
 c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData&quot;))
 c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,as.integer(c$pos))
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, as.integer(c$pos))
 c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 c &lt;- c[c$cis_trans == &quot;trans&quot;,]
@@ -1091,7 +908,7 @@ p1[[2]] &lt;- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc &lt;- merge(b, c, by = &quot;genes&quot;)
 bc$trans_agree &lt;- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 2e+06),
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) &lt;= 2e+06),
   &quot;agree&quot;,
   &quot;disagree&quot;
 )
@@ -1171,7 +988,7 @@ p2[[2]] &lt;- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc &lt;- merge(b, c, by = &quot;genes&quot;)
 bc$trans_agree &lt;- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 5e+06),
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) &lt;= 5e+06),
   &quot;agree&quot;,
   &quot;disagree&quot;
 )
@@ -1214,237 +1031,20 @@ pp2 &lt;- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (5Mb)&quot;)
 
 #triangle plot
-grid.arrange(pp1, pp2, nrow = 2)</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-8.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-8.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-8.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+grid.arrange(pp1, pp2, nrow = 2)
+
 #three venn diagrams
 grid.arrange(gTree(children=p1[[1]]),
-             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-9.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-9.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-9.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p1[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-10.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-10.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-10.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p1[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-11.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-11.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-11.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)&quot;, gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p1[[2]]))
+grid.arrange(gTree(children=p1[[3]]))
+
 #three venn diagrams
 grid.arrange(gTree(children=p2[[1]]),
-             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-12.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-12.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-12.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p2[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-13.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-13.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-13.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p2[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-14.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-14.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-14.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)&quot;, gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p2[[2]]))
+grid.arrange(gTree(children=p2[[3]]))
+
 a1[[2]] = length(unique(a$marker))
 a2[[2]] = length(unique(b$marker))
 a3[[2]] = length(unique(c$marker))
@@ -1456,24 +1056,24 @@ n123[[2]] = length(unique(intersect(unique(a$marker),intersect(unique(b$marker),
 #load eqtl pvalue for gigamuga358
 a &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData&quot;))
 a &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; a &lt;- a[a$lod &gt;= 8,]
-a$marker &lt;- paste0(a$chr,&quot;_&quot;,a$pos)
-a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, a$pos)
+a$marker &lt;- paste0(a$chr,&quot;_&quot;,as.integer(a$pos))
+a$eqtl_marker &lt;- paste0(a$chr, &quot;_&quot;, as.integer(a$pos))
 a &lt;- merge(a, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
-a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(a$pos - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
+a$cis_trans &lt;- ifelse((a$chr.y == a$chr.x) &amp; (abs(as.integer(a$pos) - a$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 a &lt;- a[a$cis_trans == &quot;trans&quot;,]
 
 b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
 b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,as.integer(b$pos))
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, as.integer(b$pos))
 b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 b &lt;- b[b$cis_trans == &quot;trans&quot;,]
 
 c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData&quot;))
 c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]; c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,as.integer(c$pos))
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, as.integer(c$pos))
 c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 c &lt;- c[c$cis_trans == &quot;trans&quot;,]
@@ -1516,7 +1116,7 @@ p1[[2]] &lt;- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc &lt;- merge(b, c, by = &quot;genes&quot;)
 bc$trans_agree &lt;- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 2e+06),
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) &lt;= 2e+06),
   &quot;agree&quot;,
   &quot;disagree&quot;
 )
@@ -1596,7 +1196,7 @@ p2[[2]] &lt;- draw.pairwise.venn(length(unique(a$genes)),
 #b and c
 bc &lt;- merge(b, c, by = &quot;genes&quot;)
 bc$trans_agree &lt;- ifelse(
-  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bc$pos.x - bc$pos.y) &lt;= 5e+06),
+  (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bas.integer(c$pos).x - bas.integer(c$pos).y) &lt;= 5e+06),
   &quot;agree&quot;,
   &quot;disagree&quot;
 )
@@ -1639,237 +1239,20 @@ pp2 &lt;- ggplot(df_long, aes(x = v1, y = v2, fill = v3)) +
   labs(title=&quot;Calling agreement of distal eQTLs between array and GBRS (5Mb)&quot;)
 
 #triangle plot
-grid.arrange(pp1, pp2, nrow = 2)</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-15.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-15.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-15.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+grid.arrange(pp1, pp2, nrow = 2)
+
 #three venn diagrams
 grid.arrange(gTree(children=p1[[1]]),
-             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-16.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-16.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-16.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p1[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-17.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-17.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-17.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p1[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-18.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-18.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-18.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (2Mb)&quot;, gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p1[[2]]))
+grid.arrange(gTree(children=p1[[3]]))
+
 #three venn diagrams
 grid.arrange(gTree(children=p2[[1]]),
-             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-19.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-19.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-19.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p2[[2]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-20.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-20.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-20.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>grid.arrange(gTree(children=p2[[3]]))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-21.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-21.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-21.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+             top=textGrob(&quot;Venn diagram for number of distal eQTLs in agreement between array and GBRS (5Mb)&quot;, gp=gpar(fontsize=26,font=8)))
+grid.arrange(gTree(children=p2[[2]]))
+grid.arrange(gTree(children=p2[[3]]))
+
 a1[[3]] = length(unique(a$marker))
 a2[[3]] = length(unique(b$marker))
 a3[[3]] = length(unique(c$marker))
@@ -1886,39 +1269,8 @@ barplot(c(a3[[1]],a3[[2]],a3[[3]]),
         ylab = &quot;Number of trans-eQTL at LOD 8&quot;,
         names.arg = c(&quot;FIXED.MUGA&quot;, &quot;FIXED.MEGAMUGA&quot;, &quot;FIXED.GIGAMUGA&quot;), font.axis = 4, las = 1,cex.names=1.5,cex.lab = 1.5,
         col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
-        ylim = c(0,2500))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-22.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-22.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-22.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
+        ylim = c(0,2500))
+
 #MUGA
 g1 &lt;- draw.triple.venn(area1 = a1[[1]], 
                  area2 = a2[[1]], 
@@ -1957,104 +1309,15 @@ g3 &lt;-  draw.triple.venn(area1 = a1[[3]],
 
 #three venn diagrams
 grid.arrange(gTree(children=g1),
-             top=textGrob(&quot;Venn diagram for number of distal eQTLs (5Mb) between array and GBRS&quot;, gp=gpar(fontsize=26,font=8)))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-23.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-23.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-23.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
-grid.arrange(gTree(children=g2))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-24.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-24.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-24.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
-<pre class="r"><code>
-grid.arrange(gTree(children=g3))</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Trans-eQTL%20at%20LOD%208%205Mb-25.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Trans-eQTL at LOD 8 5Mb-25.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Trans-eQTL at LOD 8 5Mb-25.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
+             top=textGrob(&quot;Venn diagram for number of distal eQTLs (5Mb) between array and GBRS&quot;, gp=gpar(fontsize=26,font=8)))
+
+grid.arrange(gTree(children=g2))
+
+grid.arrange(gTree(children=g3))
+# Error: &lt;text&gt;:81:55: unexpected symbol
+# 80: bc$trans_agree &lt;- ifelse(
+# 81:   (bc$chr.x.x == bc$chr.x.y) &amp; (abs(bas.integer(c$pos).x
+#                                                           ^</code></pre>
 </div>
 <div id="figure-3-scatterplot-for-trans-eqtl-at-lod-8-5-mb" class="section level1">
 <h1>Figure 3 Scatterplot for Trans-eQTL at LOD &gt;=8 (5 Mb)</h1>
@@ -2064,18 +1327,20 @@ xhyuo
 #load eqtl pvalue for gbrs275
 b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData&quot;))
 b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+# Error in eval(expr, envir, enclos): could not find function &quot;setDT&quot;
 b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, as.character(b$pos))
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,as.integer(b$pos))
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, as.integer(b$pos))
 b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 b &lt;- b[b$cis_trans == &quot;trans&quot;,]
 
 c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData&quot;))
 c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+# Error in eval(expr, envir, enclos): could not find function &quot;setDT&quot;
 c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, as.character(c$pos))
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,as.integer(c$pos))
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, as.integer(c$pos))
 c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 c &lt;- c[c$cis_trans == &quot;trans&quot;,]
@@ -2088,26 +1353,25 @@ bc_pair &lt;- bc_pair[!duplicated(bc_pair[,1:2]),]
 #extract from b and c respectively
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275.eqtl.RData&quot;)
 bc_pair_b_lod &lt;- bc_pair
-bc_pair_b_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_b_lod),
-                                             FUN = function(i){eqtl[as.character(bc_pair_b_lod[i,1]),as.character(bc_pair_b_lod[i,2])]},
+bc_pair_b_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
                                              mc.cores = 20,
                                              mc.preschedule = F)))
-# Warning in mclapply(X = 1:nrow(bc_pair_b_lod), FUN = function(i) {: 1738
-# function calls resulted in an error
+# Error in unlist(mclapply(X = 1:nrow(bc_pair), FUN = function(i) {: could not find function &quot;mclapply&quot;
 bc_pair_b_lod$g &lt;- &quot;GBRS&quot;
 
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275.eqtl.RData&quot;)
 bc_pair_c_lod &lt;- bc_pair
-bc_pair_c_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_c_lod),
-                                             FUN = function(i){eqtl[as.character(bc_pair_c_lod[i,1]),as.character(bc_pair_c_lod[i,2])]},
+bc_pair_c_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
                                              mc.cores = 20,
                                              mc.preschedule = F)))
-# Warning in mclapply(X = 1:nrow(bc_pair_c_lod), FUN = function(i) {: 1738
-# function calls resulted in an error
+# Error in unlist(mclapply(X = 1:nrow(bc_pair), FUN = function(i) {: could not find function &quot;mclapply&quot;
 bc_pair_c_lod$g &lt;- &quot;FIXED.MUGA&quot;
 
 bc_pair_lod &lt;- merge(bc_pair_b_lod, bc_pair_c_lod, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;))
 bc_pair_lod$g &lt;- ifelse(bc_pair_lod$lod.x &gt;=8 &amp; bc_pair_lod$lod.y &gt;= 8, &quot;Both&quot;, ifelse(bc_pair_lod$lod.x &gt;=8 &amp; bc_pair_lod$lod.y &lt; 8,&quot;GBRS&quot;,&quot;FIXED.MUGA&quot;))
+# Error in `$&lt;-.data.frame`(`*tmp*`, &quot;g&quot;, value = logical(0)): replacement has 0 rows, data has 2232
 #scatter plot for the overlapped genes between GBRS and FIXED.MUGA
 # scatter plot
 plot_bcpair_lod1 &lt;- plot_ly(bc_pair_lod, x = ~lod.x) %&gt;%
@@ -2119,12 +1383,10 @@ plot_bcpair_lod1 &lt;- plot_ly(bc_pair_lod, x = ~lod.x) %&gt;%
   layout(xaxis = list(title = &#39;LODs in GBRS&#39;),
          yaxis = list(title = &#39;LODs in FIXED.MUGA&#39;),
          title = paste0(&#39;Scatter plot of LODs for distal eQTLs in identified in either array or GBRS&#39;))
+# Error in eval(expr, envir, enclos): could not find function &quot;%&gt;%&quot;
 
 plot_bcpair_lod1
-# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
-# Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-# parametric, : NAs introduced by coercion
-# Error in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : NA/NaN/Inf in foreign function call (arg 1)
+# Error in eval(expr, envir, enclos): object &#39;plot_bcpair_lod1&#39; not found
 
 # Get density of points in 2 dimensions.
 # @param x A numeric vector.
@@ -2140,7 +1402,15 @@ get_density &lt;- function(x, y, ...) {
 }
 
 bc_pair_lod$density &lt;- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
-# Error in MASS::kde2d(x, y, ...): missing or infinite values in the data are not allowed
+# Warning in min(x, na.rm = na.rm): no non-missing arguments to min;
+# returning Inf
+# Warning in max(x, na.rm = na.rm): no non-missing arguments to max;
+# returning -Inf
+# Warning in min(x, na.rm = na.rm): no non-missing arguments to min;
+# returning Inf
+# Warning in max(x, na.rm = na.rm): no non-missing arguments to max;
+# returning -Inf
+# Error in MASS::kde2d(x, y, ...): only finite values are allowed in &#39;lims&#39;
 plot_bcpair_lod2 &lt;- ggplot(bc_pair_lod) + 
   geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod$g))) + 
   #scale_color_viridis() + 
@@ -2155,27 +1425,30 @@ plot_bcpair_lod2 &lt;- ggplot(bc_pair_lod) +
   theme(legend.title=element_blank(), text = element_text(size=22), 
         axis.title=element_text(size=22,face=&quot;bold&quot;)) +
   theme(plot.title = element_text(hjust=0.5, size = 28))
+# Error in eval(expr, envir, enclos): could not find function &quot;ggplot&quot;
 
 plot_bcpair_lod2
-# Error: Discrete value supplied to continuous scale
+# Error in eval(expr, envir, enclos): object &#39;plot_bcpair_lod2&#39; not found
 
 
 ######MEGAMUGA184######
 #load eqtl pvalue for gbrs184
 b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData&quot;))
 b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+# Error in eval(expr, envir, enclos): could not find function &quot;setDT&quot;
 b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,as.integer(b$pos))
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, as.integer(b$pos))
 b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 b &lt;- b[b$cis_trans == &quot;trans&quot;,]
 
 c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData&quot;))
 c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+# Error in eval(expr, envir, enclos): could not find function &quot;setDT&quot;
 c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,as.integer(c$pos))
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, as.integer(c$pos))
 c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 c &lt;- c[c$cis_trans == &quot;trans&quot;,]
@@ -2188,26 +1461,25 @@ bc_pair &lt;- bc_pair[!duplicated(bc_pair[,1:2]),]
 #extract from b and c respectively
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184.eqtl.RData&quot;)
 bc_pair_b_lod &lt;- bc_pair
-bc_pair_b_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_b_lod),
-                                               FUN = function(i){eqtl[as.character(bc_pair_b_lod[i,1]),as.character(bc_pair_b_lod[i,2])]},
-                                               mc.cores = 20,
-                                               mc.preschedule = F)))
-# Warning in mclapply(X = 1:nrow(bc_pair_b_lod), FUN = function(i) {: 2203
-# function calls resulted in an error
+bc_pair_b_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+                                             mc.cores = 20,
+                                             mc.preschedule = F)))
+# Error in unlist(mclapply(X = 1:nrow(bc_pair), FUN = function(i) {: could not find function &quot;mclapply&quot;
 bc_pair_b_lod$g &lt;- &quot;GBRS&quot;
 
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184.eqtl.RData&quot;)
 bc_pair_c_lod &lt;- bc_pair
-bc_pair_c_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_c_lod),
-                                               FUN = function(i){eqtl[as.character(bc_pair_c_lod[i,1]),as.character(bc_pair_c_lod[i,2])]},
-                                               mc.cores = 20,
-                                               mc.preschedule = F)))
-# Warning in mclapply(X = 1:nrow(bc_pair_c_lod), FUN = function(i) {: 2203
-# function calls resulted in an error
+bc_pair_c_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+                                             mc.cores = 20,
+                                             mc.preschedule = F)))
+# Error in unlist(mclapply(X = 1:nrow(bc_pair), FUN = function(i) {: could not find function &quot;mclapply&quot;
 bc_pair_c_lod$g &lt;- &quot;FIXED.MEGAMUGA&quot;
 
 bc_pair_lod &lt;- merge(bc_pair_b_lod, bc_pair_c_lod, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;))
 bc_pair_lod$g &lt;- ifelse(bc_pair_lod$lod.x &gt;=8 &amp; bc_pair_lod$lod.y &gt;= 8, &quot;Both&quot;, ifelse(bc_pair_lod$lod.x &gt;=8 &amp; bc_pair_lod$lod.y &lt; 8,&quot;GBRS&quot;,&quot;FIXED.MEGAMUGA&quot;))
+# Error in `$&lt;-.data.frame`(`*tmp*`, &quot;g&quot;, value = logical(0)): replacement has 0 rows, data has 2716
 #scatter plot for the overlapped genes between GBRS and FIXED.MEGAMUGA
 # scatter plot
 plot_bcpair_lod1 &lt;- plot_ly(bc_pair_lod, x = ~lod.x) %&gt;%
@@ -2219,16 +1491,23 @@ plot_bcpair_lod1 &lt;- plot_ly(bc_pair_lod, x = ~lod.x) %&gt;%
   layout(xaxis = list(title = &#39;LODs in GBRS&#39;),
          yaxis = list(title = &#39;LODs in FIXED.MEGAMUGA&#39;),
          title = paste0(&#39;Scatter plot of LODs for distal eQTLs in identified in either array or GBRS&#39;))
+# Error in eval(expr, envir, enclos): could not find function &quot;%&gt;%&quot;
 
 plot_bcpair_lod1
-# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
-
-# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
-# Error in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : NA/NaN/Inf in foreign function call (arg 1)
+# Error in eval(expr, envir, enclos): object &#39;plot_bcpair_lod1&#39; not found
 
 
 bc_pair_lod$density &lt;- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
-# Error in MASS::kde2d(x, y, ...): missing or infinite values in the data are not allowed
+# Warning in min(x, na.rm = na.rm): no non-missing arguments to min;
+# returning Inf
+
+# Warning in min(x, na.rm = na.rm): no non-missing arguments to max;
+# returning -Inf
+# Warning in min(x, na.rm = na.rm): no non-missing arguments to min;
+# returning Inf
+# Warning in max(x, na.rm = na.rm): no non-missing arguments to max;
+# returning -Inf
+# Error in MASS::kde2d(x, y, ...): only finite values are allowed in &#39;lims&#39;
 plot_bcpair_lod2 &lt;- ggplot(bc_pair_lod) + 
   geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod$g))) + 
   #scale_color_viridis() + 
@@ -2243,26 +1522,29 @@ plot_bcpair_lod2 &lt;- ggplot(bc_pair_lod) +
   theme(legend.title=element_blank(), text = element_text(size=22), 
         axis.title=element_text(size=22,face=&quot;bold&quot;)) +
   theme(plot.title = element_text(hjust=0.5, size = 28))
+# Error in eval(expr, envir, enclos): could not find function &quot;ggplot&quot;
 
 plot_bcpair_lod2
-# Error: Discrete value supplied to continuous scale
+# Error in eval(expr, envir, enclos): object &#39;plot_bcpair_lod2&#39; not found
 
 ######GIGAMUGA358######
 #load eqtl pvalue for gbrs358
 b &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData&quot;))
 b &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+# Error in eval(expr, envir, enclos): could not find function &quot;setDT&quot;
 b &lt;- b[b$lod &gt;= 8,]
-b$marker &lt;- paste0(b$chr,&quot;_&quot;,b$pos)
-b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, b$pos)
+b$marker &lt;- paste0(b$chr,&quot;_&quot;,as.integer(b$pos))
+b$eqtl_marker &lt;- paste0(b$chr, &quot;_&quot;, as.integer(b$pos))
 b &lt;- merge(b, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 b$cis_trans &lt;- ifelse((b$chr.y == b$chr.x) &amp; (abs(b$pos - b$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 b &lt;- b[b$cis_trans == &quot;trans&quot;,]
 
 c &lt;- get(load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData&quot;))
 c &lt;- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
+# Error in eval(expr, envir, enclos): could not find function &quot;setDT&quot;
 c &lt;- c[c$lod &gt;= 8,]
-c$marker &lt;- paste0(c$chr,&quot;_&quot;,c$pos)
-c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, c$pos)
+c$marker &lt;- paste0(c$chr,&quot;_&quot;,as.integer(c$pos))
+c$eqtl_marker &lt;- paste0(c$chr, &quot;_&quot;, as.integer(c$pos))
 c &lt;- merge(c, gene.anno, by.x=c(&quot;genes&quot;), by.y=c(&quot;gene&quot;), all.x = TRUE)
 c$cis_trans &lt;- ifelse((c$chr.y == c$chr.x) &amp; (abs(c$pos - c$start) &lt;= 5e+06),&quot;cis&quot;, &quot;trans&quot;)
 c &lt;- c[c$cis_trans == &quot;trans&quot;,]
@@ -2275,26 +1557,25 @@ bc_pair &lt;- bc_pair[!duplicated(bc_pair[,1:2]),]
 #extract from b and c respectively
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358.eqtl.RData&quot;)
 bc_pair_b_lod &lt;- bc_pair
-bc_pair_b_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_b_lod),
-                                               FUN = function(i){eqtl[as.character(bc_pair_b_lod[i,1]),as.character(bc_pair_b_lod[i,2])]},
-                                               mc.cores = 20,
-                                               mc.preschedule = F)))
-# Warning in mclapply(X = 1:nrow(bc_pair_b_lod), FUN = function(i) {: 2657
-# function calls resulted in an error
+bc_pair_b_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+                                             mc.cores = 20,
+                                             mc.preschedule = F)))
+# Error in unlist(mclapply(X = 1:nrow(bc_pair), FUN = function(i) {: could not find function &quot;mclapply&quot;
 bc_pair_b_lod$g &lt;- &quot;GBRS&quot;
 
 load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358.eqtl.RData&quot;)
 bc_pair_c_lod &lt;- bc_pair
-bc_pair_c_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair_c_lod),
-                                               FUN = function(i){eqtl[as.character(bc_pair_c_lod[i,1]),as.character(bc_pair_c_lod[i,2])]},
-                                               mc.cores = 20,
-                                               mc.preschedule = F)))
-# Warning in mclapply(X = 1:nrow(bc_pair_c_lod), FUN = function(i) {: 2657
-# function calls resulted in an error
+bc_pair_c_lod$lod &lt;- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+                                             mc.cores = 20,
+                                             mc.preschedule = F)))
+# Error in unlist(mclapply(X = 1:nrow(bc_pair), FUN = function(i) {: could not find function &quot;mclapply&quot;
 bc_pair_c_lod$g &lt;- &quot;FIXED.GIGAMUGA&quot;
 
 bc_pair_lod &lt;- merge(bc_pair_b_lod, bc_pair_c_lod, by = c(&quot;eqtl_marker&quot;, &quot;genes&quot;))
 bc_pair_lod$g &lt;- ifelse(bc_pair_lod$lod.x &gt;=8 &amp; bc_pair_lod$lod.y &gt;= 8, &quot;Both&quot;, ifelse(bc_pair_lod$lod.x &gt;=8 &amp; bc_pair_lod$lod.y &lt; 8,&quot;GBRS&quot;,&quot;FIXED.GIGAMUGA&quot;))
+# Error in `$&lt;-.data.frame`(`*tmp*`, &quot;g&quot;, value = logical(0)): replacement has 0 rows, data has 3761
 #scatter plot for the overlapped genes between GBRS and FIXED.GIGAMUGA
 # scatter plot
 plot_bcpair_lod1 &lt;- plot_ly(bc_pair_lod, x = ~lod.x) %&gt;%
@@ -2306,15 +1587,22 @@ plot_bcpair_lod1 &lt;- plot_ly(bc_pair_lod, x = ~lod.x) %&gt;%
   layout(xaxis = list(title = &#39;LODs in GBRS&#39;),
          yaxis = list(title = &#39;LODs in FIXED.GIGAMUGA&#39;),
          title = paste0(&#39;Scatter plot of LODs for distal eQTLs in identified in either array or GBRS&#39;))
+# Error in eval(expr, envir, enclos): could not find function &quot;%&gt;%&quot;
 
 plot_bcpair_lod1
-# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
-
-# Warning in model.response(mf, &quot;numeric&quot;): NAs introduced by coercion
-# Error in simpleLoess(y, x, w, span, degree = degree, parametric = parametric, : NA/NaN/Inf in foreign function call (arg 1)
+# Error in eval(expr, envir, enclos): object &#39;plot_bcpair_lod1&#39; not found
 
 bc_pair_lod$density &lt;- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
-# Error in MASS::kde2d(x, y, ...): missing or infinite values in the data are not allowed
+# Warning in min(x, na.rm = na.rm): no non-missing arguments to min;
+# returning Inf
+
+# Warning in min(x, na.rm = na.rm): no non-missing arguments to max;
+# returning -Inf
+# Warning in min(x, na.rm = na.rm): no non-missing arguments to min;
+# returning Inf
+# Warning in max(x, na.rm = na.rm): no non-missing arguments to max;
+# returning -Inf
+# Error in MASS::kde2d(x, y, ...): only finite values are allowed in &#39;lims&#39;
 plot_bcpair_lod2 &lt;- ggplot(bc_pair_lod) + 
   geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod$g))) + 
   #scale_color_viridis() + 
@@ -2329,40 +1617,10 @@ plot_bcpair_lod2 &lt;- ggplot(bc_pair_lod) +
   theme(legend.title=element_blank(), text = element_text(size=22), 
         axis.title=element_text(size=22,face=&quot;bold&quot;)) +
   theme(plot.title = element_text(hjust=0.5, size = 28))
+# Error in eval(expr, envir, enclos): could not find function &quot;ggplot&quot;
 
 plot_bcpair_lod2
-# Error: Discrete value supplied to continuous scale</code></pre>
-<p><img src="figure/Figure3_transeqtl_lod8.Rmd/Figure%203%20Scatterplot%20for%20Trans-eQTL%20at%20LOD%208%205Mb-1.png" width="1536" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Scatterplot for Trans-eQTL at LOD 8 5Mb-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Version
-</th>
-<th style="text-align:left;">
-Author
-</th>
-<th style="text-align:left;">
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/1702b842882c22c61496d7e5e8869e4fc7832815/docs/figure/Figure3_transeqtl_lod8.Rmd/Figure 3 Scatterplot for Trans-eQTL at LOD 8 5Mb-1.png" target="_blank">1702b84</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-21
-</td>
-</tr>
-</tbody>
-</table>
-<p></details></p>
+# Error in eval(expr, envir, enclos): object &#39;plot_bcpair_lod2&#39; not found</code></pre>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <pre class="r"><code>sessionInfo()
@@ -2374,33 +1632,16 @@ xhyuo
 # [1] C
 # 
 # attached base packages:
-# [1] parallel  grid      stats     graphics  grDevices utils     datasets 
-# [8] base     
-# 
-# other attached packages:
-#  [1] bindrcpp_0.2.2      viridis_0.3.4       MASS_7.3-50        
-#  [4] reshape2_1.4.3      plotly_4.5.6        gridExtra_2.3      
-#  [7] qvalue_2.6.0        data.table_1.11.4   dplyr_0.7.6        
-# [10] VennDiagram_1.6.17  futile.logger_1.4.3 ggplot2_3.1.0      
-# [13] sinaplot_1.1.0      plyr_1.8.4         
+# [1] stats     graphics  grDevices utils     datasets  base     
 # 
 # loaded via a namespace (and not attached):
-#  [1] tidyselect_0.2.4     purrr_0.2.2          splines_3.3.2       
-#  [4] colorspace_1.4-0     htmltools_0.3.6      viridisLite_0.3.0   
-#  [7] yaml_2.2.0           base64enc_0.1-3      rlang_0.3.1         
-# [10] R.oo_1.21.0          pillar_1.3.1         glue_1.3.0          
-# [13] withr_2.1.2          R.utils_2.5.0        RColorBrewer_1.1-2  
-# [16] lambda.r_1.2.3       bindr_0.1.1          stringr_1.3.1       
-# [19] munsell_0.5.0        gtable_0.2.0         workflowr_1.1.1     
-# [22] R.methodsS3_1.7.1    htmlwidgets_1.3      evaluate_0.10       
-# [25] knitr_1.20           methods_3.3.2        Rcpp_1.0.0          
-# [28] scales_1.0.0         backports_1.1.2      formatR_1.5         
-# [31] jsonlite_1.6         digest_0.6.18        stringi_1.2.4       
-# [34] rprojroot_1.3-2      tools_3.3.2          magrittr_1.5        
-# [37] lazyeval_0.2.1       tibble_1.4.1         futile.options_1.0.1
-# [40] crayon_1.3.4         whisker_0.3-2        tidyr_0.8.1         
-# [43] pkgconfig_2.0.2      assertthat_0.2.0     rmarkdown_1.11      
-# [46] httr_1.4.0           R6_2.4.0             git2r_0.23.0</code></pre>
+#  [1] workflowr_1.1.1   Rcpp_1.0.0        digest_0.6.18    
+#  [4] rprojroot_1.3-2   MASS_7.3-50       R.methodsS3_1.7.1
+#  [7] backports_1.1.2   git2r_0.23.0      magrittr_1.5     
+# [10] evaluate_0.10     stringi_1.2.4     whisker_0.3-2    
+# [13] R.oo_1.21.0       R.utils_2.5.0     rmarkdown_1.11   
+# [16] tools_3.3.2       stringr_1.3.1     yaml_2.2.0       
+# [19] htmltools_0.3.6   knitr_1.20        methods_3.3.2</code></pre>
 </div>
 </div>
 
