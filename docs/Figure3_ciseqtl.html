@@ -559,10 +559,10 @@ relative
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytree3b5c53493c37fa15068e468a6be018e090812d27targetblank3b5c534a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/3b5c53493c37fa15068e468a6be018e090812d27" target="_blank">3b5c534</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytreee2929a401e4c71526b32a6953f98c34804fc017dtargetblanke2929a4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/e2929a401e4c71526b32a6953f98c34804fc017d" target="_blank">e2929a4</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytree3b5c53493c37fa15068e468a6be018e090812d27targetblank3b5c534a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytreee2929a401e4c71526b32a6953f98c34804fc017dtargetblanke2929a4a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -578,7 +578,7 @@ Untracked files:
     Untracked:  analysis/Figure3.pdf
     Untracked:  analysis/Figure3_0.Rmd
     Untracked:  analysis/Figure3_LOD8.Rmd
-    Untracked:  analysis/Figure3_ciseqtl_2.Rmd
+    Untracked:  analysis/Figure3_ciseqtl0.Rmd
     Untracked:  analysis/Figure3_transeqtl_FDR0.01.R
     Untracked:  analysis/Figure3_transeqtl_FDR0.01.sh
     Untracked:  analysis/Figure3_transeqtl_FDR0.05.R
@@ -719,6 +719,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/e2929a401e4c71526b32a6953f98c34804fc017d/analysis/Figure3_ciseqtl.Rmd" target="_blank">e2929a4</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-12-02
+</td>
+<td>
+update Figure3_ciseqtl.Rmd
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/7a1c07b59ab1548ebfd3237b613735e2631124d1/docs/Figure3_ciseqtl.html" target="_blank">7a1c07b</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-12-02
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/3b5c53493c37fa15068e468a6be018e090812d27/analysis/Figure3_ciseqtl.Rmd" target="_blank">3b5c534</a>
 </td>
 <td>
@@ -823,6 +857,23 @@ cis.eqtl.total &lt;- list()
 cislod.plot &lt;- list()
 for (i in meta.data){
   cis.eqtl.total[[i]] &lt;- get(load(paste0(&quot;./output/&quot;,i,&quot;_cis.eqtl.RData&quot;)))
+  # #cutoff
+  # if(i == &quot;gbrs275&quot;){
+  #   cutoff = 6.637
+  # }else if(i == &quot;fixed.muga275&quot;){
+  #   cutoff = 6.642903
+  # }else if(i == &quot;gbrs184&quot;){
+  #   cutoff = 6.733226
+  # }else if(i == &quot;fixed.megamuga184&quot;){
+  #   cutoff = 6.937301
+  # }else if(i == &quot;gbrs358&quot;){
+  #   cutoff = 7.081477
+  # }else if(i == &quot;fixed.gigamuga358&quot;){
+  #   cutoff = 7.045437
+  # } else {
+  #   cutoff = 0
+  # }
+  # cis.eqtl.total[[i]] &lt;- cis.eqtl.total[[i]][cis.eqtl.total[[i]]$cislod &gt;=cutoff,]
   # quantile and combine cisqtl
   cislod.plot[[i]]$array = rep(i,100)
   cislod.plot[[i]]$sub.array = rep(i,100)
@@ -905,6 +956,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1c07b59ab1548ebfd3237b613735e2631124d1/docs/figure/Figure3_ciseqtl.Rmd/Figure 3 Cis-eQTL-1.png" target="_blank">7a1c07b</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-12-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/01f25d14dea476c85dad47eb7d5337f576831b29/docs/figure/Figure3_ciseqtl.Rmd/Figure 3 Cis-eQTL-1.png" target="_blank">01f25d1</a>
 </td>
 <td>
@@ -960,6 +1022,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1c07b59ab1548ebfd3237b613735e2631124d1/docs/figure/Figure3_ciseqtl.Rmd/Figure 3 Cis-eQTL-2.png" target="_blank">7a1c07b</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-12-02
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/01f25d14dea476c85dad47eb7d5337f576831b29/docs/figure/Figure3_ciseqtl.Rmd/Figure 3 Cis-eQTL-2.png" target="_blank">01f25d1</a>
 </td>
 <td>
@@ -984,7 +1057,7 @@ p1 &lt;- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) +
                               &quot;#238A8DFF&quot;, &quot;#238A8DFF&quot;, &quot;#238A8DFF&quot;)) +
   scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
   xlab(&quot;Quantile of LOD&quot;) +
-  ylab(&quot;LOD of cis-eQTL&quot;) +
+  ylab(&quot;&quot;) +
   theme(aspect.ratio=1) +
   #ggtitle(&quot;Cis-eQTL with generation&quot;) + 
   scale_y_continuous(limits=c(0, 160)) +
@@ -992,60 +1065,232 @@ p1 &lt;- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) +
         panel.grid.minor = element_blank(),
         panel.background = element_blank(), 
         axis.line = element_line(colour = &quot;black&quot;),
+        axis.title.y=element_blank(),
         legend.title=element_blank(), 
-        text = element_text(size=16), 
+        text = element_text(size=12), 
         strip.text.y = element_blank(),
-        axis.title=element_text(size=16,face=&quot;bold&quot;),
-        legend.text = element_text(size=10)) +
-  facet_grid(array ~ .) +
+        strip.background = element_blank(),
+        strip.text.x = element_blank(),
+        axis.title=element_text(size=12),
+        plot.margin = unit(c(0,0,0,0), &quot;cm&quot;),
+        legend.text = element_text(size=8)) +
+  facet_wrap(.~array, ncol = 1, nrow = 3, scales = &quot;free&quot;) +
   theme(legend.key.width = unit(0.5,&quot;cm&quot;)) + 
   guides(linetype = guide_legend(override.aes = list(size = 1)))
 
 p1</code></pre>
 <p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203,%20Cis-eQTL,%20new%20color%20scheme-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-3,-Cis-eQTL,-new-color-scheme-1">
+Past versions of “Figure 3, Cis-eQTL, new color scheme-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-3,-Cis-eQTL,-new-color-scheme-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1c07b59ab1548ebfd3237b613735e2631124d1/docs/figure/Figure3_ciseqtl.Rmd/Figure 3, Cis-eQTL, new color scheme-1.png" target="_blank">7a1c07b</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-12-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="figure-3-cis-eqtl-pair" class="section level1">
 <h1>Figure 3, Cis-eQTL pair</h1>
-<pre class="r"><code>d1 &lt;- data.frame(x = cis.eqtl.total$gbrs275$cislod, 
-                 y = cis.eqtl.total$fixed.muga275$cislod,
-                 z = &quot;MUGA&quot;)
-d2 &lt;- data.frame(x = cis.eqtl.total$gbrs184$cislod, 
-                 y = cis.eqtl.total$fixed.megamuga184$cislod,
-                 z = &quot;MEGAMUGA&quot;)
+<pre class="r"><code>#muga
+b_cutoff = 6.637
+c_cutoff = 6.642903
+d1 &lt;- merge(cis.eqtl.total$gbrs275,
+cis.eqtl.total$fixed.muga275, by = c(&quot;gene&quot;, &quot;nearest_marker&quot;),
+all.x = TRUE, all.y = TRUE)
+d1$z &lt;- ifelse(d1$cislod.x &gt;= b_cutoff &amp; d1$cislod.y &gt;= c_cutoff, &quot;Both&quot;,
+ifelse(d1$cislod.x &lt;= b_cutoff &amp; d1$cislod.y &lt;= c_cutoff, &quot;Both_fail&quot;,
+ifelse(d1$cislod.x &gt;= b_cutoff &amp; d1$cislod.y &lt; c_cutoff,&quot;GBRS&quot;,
+&quot;FIXED.MUGA&quot;)))
+d1 &lt;- d1[d1$z != &quot;Both_fail&quot;,]
+d1$array = &quot;MUGA&quot;
 
-d3 &lt;- data.frame(x = cis.eqtl.total$gbrs358$cislod, 
-                 y = cis.eqtl.total$fixed.gigamuga358$cislod,
-                 z = &quot;GIGAMUGA&quot;)
-d &lt;- do.call(rbind.data.frame,list(d1,d2,d3))
-#d &lt;- d[d$x&gt;=8 | d$y&gt;=8,]
-plot_cispair &lt;- ggplot(data=d, aes(x=x, y = y)) + 
-  geom_point(aes(color=z), size = 1, show.legend = F) +
-  scale_color_manual(values=c(&quot;#FDE725FF&quot;, 
-                              &quot;#55C667FF&quot;, 
-                              &quot;#238A8DFF&quot;)) +
+#megamuga
+b_cutoff = 6.733226
+c_cutoff = 6.937301
+d2 &lt;- merge(cis.eqtl.total$gbrs184,
+cis.eqtl.total$fixed.megamuga184, by = c(&quot;gene&quot;, &quot;nearest_marker&quot;),
+all.x = TRUE, all.y = TRUE)
+d2$z &lt;- ifelse(d2$cislod.x &gt;= b_cutoff &amp; d2$cislod.y &gt;= c_cutoff, &quot;Both&quot;,
+ifelse(d2$cislod.x &lt;= b_cutoff &amp; d2$cislod.y &lt;= c_cutoff, &quot;Both_fail&quot;,
+ifelse(d2$cislod.x &gt;= b_cutoff &amp; d2$cislod.y &lt; c_cutoff,&quot;GBRS&quot;,
+&quot;FIXED.MEGAMUGA&quot;)))
+d2 &lt;- d2[d2$z != &quot;Both_fail&quot;,]
+d2$array = &quot;MEGAMUGA&quot;
+
+#gigamuga
+b_cutoff = 7.081477
+c_cutoff = 7.045437
+d3 &lt;- merge(cis.eqtl.total$gbrs358,
+cis.eqtl.total$fixed.gigamuga358, by = c(&quot;gene&quot;, &quot;nearest_marker&quot;),
+all.x = TRUE, all.y = TRUE)
+d3$z &lt;- ifelse(d3$cislod.x &gt;= b_cutoff &amp; d3$cislod.y &gt;= c_cutoff, &quot;Both&quot;,
+ifelse(d3$cislod.x &lt;= b_cutoff &amp; d3$cislod.y &lt;= c_cutoff, &quot;Both_fail&quot;,
+ifelse(d3$cislod.x &gt;= b_cutoff &amp; d3$cislod.y &lt; c_cutoff,&quot;GBRS&quot;,
+&quot;FIXED.GIGAMUGA&quot;)))
+d3 &lt;- d3[d3$z != &quot;Both_fail&quot;,]
+d3$array = &quot;GIGAMUGA&quot;
+
+plot_bcpair1 &lt;- ggplot(d1) + 
+  geom_point(aes(cislod.x, cislod.y, 
+                 color = factor(d1$z)), 
+             size = 0.5) + 
+  scale_color_manual(values=c(&quot;red&quot;,
+                              &quot;#FDE725FF&quot;, 
+                              &quot;#404788FF&quot;)) +
   theme(aspect.ratio=1) +
-  xlab(&quot;LOD of cis-eQTL in GBRS&quot;) +
-  ylab(&quot;LOD of cis-eQTL in array&quot;) +
-  #ggtitle(&quot;Cis-eQTL with generation&quot;) + 
+  xlab(&quot;&quot;) +
+  ylab(&quot;Cis-eQTL LOD in FIXED.MUGA&quot;) +
   scale_y_continuous(limits=c(0, 160)) +
-  scale_x_continuous(limits=c(0, 160)) +  
+  scale_x_continuous(limits=c(0, 160)) +
+  theme(legend.position=&quot;none&quot;) +
   geom_abline(slope=1, intercept=0) +
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         panel.background = element_blank(), 
         axis.line = element_line(colour = &quot;black&quot;),
         legend.title=element_blank(), 
-        text = element_text(size=16), 
+        text = element_text(size=12),
+        axis.title.x=element_blank(),
         strip.text.y = element_blank(),
-        axis.title=element_text(size=16,face=&quot;bold&quot;),
-        legend.text = element_text(size=10)) +
-  facet_grid(z ~ .)
-## Figure 3  Combine all
-fig3 &lt;- plot_grid(plot_cispair, p1, labels=c(&#39;A&#39;,&#39;B&#39;),
-                  align = &quot;h&quot;)
-fig3</code></pre>
+        plot.margin = unit(c(0,0,0,0), &quot;cm&quot;),
+        axis.title=element_text(size=12))
+plot_bcpair1</code></pre>
 <p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203,%20Cis-eQTL%20pair-1.png" width="1920" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>ggsave(&quot;output/Figure3.pdf&quot;, fig3, height = 14, width=14)</code></pre>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-3,-Cis-eQTL-pair-1">
+Past versions of “Figure 3, Cis-eQTL pair-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-3,-Cis-eQTL-pair-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7a1c07b59ab1548ebfd3237b613735e2631124d1/docs/figure/Figure3_ciseqtl.Rmd/Figure 3, Cis-eQTL pair-1.png" target="_blank">7a1c07b</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-12-02
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>
+plot_bcpair2 &lt;- ggplot(d2) + 
+  geom_point(aes(cislod.x, cislod.y, 
+                 color = factor(d2$z)), 
+             size = 0.5) + 
+  scale_color_manual(values=c(&quot;red&quot;,
+                              &quot;#55C667FF&quot;, 
+                              &quot;#404788FF&quot;)) +
+  theme(aspect.ratio=1) +
+  xlab(&quot;&quot;) +
+  ylab(&quot;Cis-eQTL LOD in FIXED.MEGAMUGA&quot;) +
+  scale_y_continuous(limits=c(0, 160)) +
+  scale_x_continuous(limits=c(0, 160)) +
+  theme(legend.position=&quot;none&quot;) +
+  geom_abline(slope=1, intercept=0) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = &quot;black&quot;),
+        legend.title=element_blank(), 
+        text = element_text(size=12),
+        axis.title.x=element_blank(),
+        strip.text.y = element_blank(),
+        plot.margin = unit(c(0,0,0,0), &quot;cm&quot;),
+        axis.title=element_text(size=12))
+plot_bcpair2</code></pre>
+<p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203,%20Cis-eQTL%20pair-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+plot_bcpair3 &lt;- ggplot(d3) + 
+  geom_point(aes(cislod.x, cislod.y, 
+                 color = factor(d3$z)), 
+             size = 0.5) + 
+  scale_color_manual(values=c(&quot;red&quot;,
+                              &quot;#238A8DFF&quot;, 
+                              &quot;#404788FF&quot;)) +
+  theme(aspect.ratio=1) +
+  xlab(&quot;Cis-eQTL LOD in GBRS&quot;) +
+  ylab(&quot;Cis-eQTL LOD in FIXED.GIGAMUGA&quot;) +
+  scale_y_continuous(limits=c(0, 160)) +
+  scale_x_continuous(limits=c(0, 160)) +
+  theme(legend.position=&quot;none&quot;) +
+  geom_abline(slope=1, intercept=0) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = &quot;black&quot;),
+        legend.title=element_blank(), 
+        text = element_text(size=12),
+        #axis.title.x=element_blank(),
+        strip.text.y = element_blank(),
+        plot.margin = unit(c(0,0,0,0), &quot;cm&quot;),
+        axis.title=element_text(size=12))
+plot_bcpair3</code></pre>
+<p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203,%20Cis-eQTL%20pair-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+
+plot_bcpair_col &lt;- plot_grid(plot_bcpair1,
+                             plot_bcpair2,
+                             plot_bcpair3, 
+                             labels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;), hjust = -6,
+                             align = &quot;hv&quot;,nrow = 3)
+plot_bcpair_col</code></pre>
+<p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203,%20Cis-eQTL%20pair-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>
+## Figure 3  Combine all
+fig3 &lt;- plot_grid(plot_bcpair_col, p1, ncol = 2)
+fig3</code></pre>
+<p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203,%20Cis-eQTL%20pair-5.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggsave(&quot;output/Figure3_cis.pdf&quot;, fig3, height = 14, width=14)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
