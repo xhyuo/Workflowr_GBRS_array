@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2019-03-21" />
+<meta name="date" content="2019-12-02" />
 
 <title>Figure3_ciseqtl</title>
 
@@ -76,9 +76,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -196,8 +194,6 @@ $(document).ready(function () {
   menuAnchor.closest('li.dropdown').addClass('active');
 });
 </script>
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -345,8 +341,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -355,6 +349,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -414,38 +418,155 @@ div.section {
 
 
 <h1 class="title toc-ignore">Figure3_ciseqtl</h1>
-<h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2019-03-21</em></h4>
+<h4 class="author">Hao He</h4>
+<h4 class="date">2019-12-02</h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2019-03-21</p>
-<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
-<ul>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2019-12-02
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Workflowr_GBRS_array/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Environment:</strong> empty </summary></p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
 <p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Seed:</strong> <code>set.seed(20181011)</code> </summary></p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20181011code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20181011)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20181011code" class="panel-collapse collapse">
+<div class="panel-body">
 <p>The command <code>set.seed(20181011)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Session information:</strong> recorded </summary></p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
 <p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/1702b842882c22c61496d7e5e8869e4fc7832815" target="_blank">1702b84</a> </summary></p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+</p>
+</div>
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/home/heh/GBRS/Workflowr_GBRS_array/
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytree3b5c53493c37fa15068e468a6be018e090812d27targetblank3b5c534a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/3b5c53493c37fa15068e468a6be018e090812d27" target="_blank">3b5c534</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytree3b5c53493c37fa15068e468a6be018e090812d27targetblank3b5c534a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
 <pre><code>
 Ignored files:
     Ignored:    .Rhistory
@@ -454,13 +575,25 @@ Ignored files:
 Untracked files:
     Untracked:  analysis/Figure1_by_vit.R
     Untracked:  analysis/Figure3.0.Rmd
+    Untracked:  analysis/Figure3.pdf
     Untracked:  analysis/Figure3_0.Rmd
     Untracked:  analysis/Figure3_LOD8.Rmd
-    Untracked:  analysis/Figure3_transeqtl_FDR0.01.Rmd
-    Untracked:  analysis/Figure3_transeqtl_FDR0.05.Rmd
+    Untracked:  analysis/Figure3_ciseqtl_2.Rmd
+    Untracked:  analysis/Figure3_transeqtl_FDR0.01.R
+    Untracked:  analysis/Figure3_transeqtl_FDR0.01.sh
+    Untracked:  analysis/Figure3_transeqtl_FDR0.05.R
+    Untracked:  analysis/Figure3_transeqtl_FDR0.05.sh
+    Untracked:  analysis/Figure3_transeqtl_lod8.R
+    Untracked:  analysis/Figure3_transeqtl_lod8.sh
     Untracked:  analysis/old_analysis/
+    Untracked:  analysis/publish_workflowr.R
+    Untracked:  analysis/sina_plot.rmd
+    Untracked:  code/R_rainclouds.R
+    Untracked:  code/summarySE.R
     Untracked:  data/Agree_table_three_array.RData
+    Untracked:  data/DO_Liver_sample_sheet.tsv
     Untracked:  data/DO_Striatum_recomb.GBRS.genotypes.RData
+    Untracked:  data/DO_Striatum_sample_sheet.tsv
     Untracked:  data/DO_liver_recomb.GBRS.genotypes.RData
     Untracked:  data/fixed.gigamuga358_cis.eqtl.RData
     Untracked:  data/fixed.megamuga184_cis.eqtl.RData
@@ -481,12 +614,62 @@ Untracked files:
     Untracked:  data/mismatch_muga275GBRS.RData
     Untracked:  data/muga275.recomb.RData
     Untracked:  data/muga275_cis.eqtl.RData
+    Untracked:  data/repeated_measures_data.csv
     Untracked:  data/venn_diag_transeqtl_max.RData
-    Untracked:  docs/figure/Figure3_2.Rmd/
-    Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
     Untracked:  output/DO_Liver/
     Untracked:  output/DO_Striatum/
-    Untracked:  trans_eqtl_GBRS_FIXED.MUGA.jpeg
+    Untracked:  output/Figure1.pdf
+    Untracked:  output/Figure2.pdf
+    Untracked:  output/Figure3.pdf
+    Untracked:  output/Figure3_cis.pdf
+    Untracked:  output/Figure4_col.pdf
+    Untracked:  output/Figure4_row.pdf
+    Untracked:  output/bc_pair_b_lod_gbrs184.RData
+    Untracked:  output/bc_pair_b_lod_gbrs275.RData
+    Untracked:  output/bc_pair_b_lod_gbrs358.RData
+    Untracked:  output/bc_pair_c_lod_fixed.gigamuga358.RData
+    Untracked:  output/bc_pair_c_lod_fixed.megamuga184.RData
+    Untracked:  output/bc_pair_c_lod_fixed.muga275.RData
+    Untracked:  output/fixed.gigamuga358_cis.eqtl.RData
+    Untracked:  output/fixed.gigamuga358_max_lod_pvalue.RData
+    Untracked:  output/fixed.gigamuga358_pvalue.RData
+    Untracked:  output/fixed.megamuga184_cis.eqtl.RData
+    Untracked:  output/fixed.megamuga184_max_lod_pvalue.RData
+    Untracked:  output/fixed.megamuga184_pvalue.RData
+    Untracked:  output/fixed.muga275_cis.eqtl.RData
+    Untracked:  output/fixed.muga275_max_lod_pvalue.RData
+    Untracked:  output/fixed.muga275_pvalue.RData
+    Untracked:  output/gbrs184_cis.eqtl.RData
+    Untracked:  output/gbrs184_max_lod_pvalue.RData
+    Untracked:  output/gbrs184_pvalue.RData
+    Untracked:  output/gbrs275_cis.eqtl.RData
+    Untracked:  output/gbrs275_max_lod_pvalue.RData
+    Untracked:  output/gbrs275_pvalue.RData
+    Untracked:  output/gbrs358_cis.eqtl.RData
+    Untracked:  output/gbrs358_max_lod_pvalue.RData
+    Untracked:  output/gbrs358_pvalue.RData
+    Untracked:  output/gene.anno.cis.RData
+    Untracked:  output/gigamuga358_cis.eqtl.RData
+    Untracked:  output/gigamuga358_max_lod_pvalue.RData
+    Untracked:  output/gigamuga358_pvalue.RData
+    Untracked:  output/megamuga184_cis.eqtl.RData
+    Untracked:  output/megamuga184_max_lod_pvalue.RData
+    Untracked:  output/megamuga184_pvalue.RData
+    Untracked:  output/mismatch_autochr_gigamuga358GBRS.RData
+    Untracked:  output/mismatch_autochr_megamuga184GBRS.RData
+    Untracked:  output/mismatch_autochr_muga275GBRS.RData
+    Untracked:  output/mismatch_gigamuga358GBRS.RData
+    Untracked:  output/mismatch_gigamuga369GBRS.RData
+    Untracked:  output/mismatch_gigamuga407GBRS.RData
+    Untracked:  output/mismatch_megamuga184GBRS.RData
+    Untracked:  output/mismatch_megamuga200GBRS.RData
+    Untracked:  output/mismatch_muga275GBRS.RData
+    Untracked:  output/mismatch_muga282GBRS.RData
+    Untracked:  output/muga275_cis.eqtl.RData
+    Untracked:  output/muga275_max_lod_pvalue.RData
+    Untracked:  output/muga275_pvalue.RData
+    Untracked:  output/muga275_scan1_chunk_1.rds
+    Untracked:  output/venn_diag_transeqtl_max.RData
 
 Unstaged changes:
     Modified:   analysis/Figure3.Rmd
@@ -495,71 +678,117 @@ Unstaged changes:
     Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
 
 </code></pre>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
-</li>
-</ul>
-<details> <summary> <small><strong>Expand here to see past versions:</strong></small> </summary>
-<ul>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 File
 </th>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
-<th style="text-align:left;">
+<th>
 Message
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-html
+<td>
+Rmd
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/01f25d14dea476c85dad47eb7d5337f576831b29/docs/Figure3_ciseqtl.html" target="_blank">01f25d1</a>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/3b5c53493c37fa15068e468a6be018e090812d27/analysis/Figure3_ciseqtl.Rmd" target="_blank">3b5c534</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-19
+<td>
+2019-12-02
 </td>
-<td style="text-align:left;">
+<td>
+update Figure1_2_3_4
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/6dbc7f093c9c3043869b08aa5373928d699186b6/docs/Figure3_ciseqtl.html" target="_blank">6dbc7f0</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-03-22
+</td>
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-Rmd
+<td>
+html
 </td>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/805396ec5e06eb99fd6002f02b99834e28da8245/analysis/Figure3_ciseqtl.Rmd" target="_blank">805396e</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/01f25d14dea476c85dad47eb7d5337f576831b29/docs/Figure3_ciseqtl.html" target="_blank">01f25d1</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-19
+<td>
+2019-03-20
 </td>
-<td style="text-align:left;">
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/805396ec5e06eb99fd6002f02b99834e28da8245/analysis/Figure3_ciseqtl.Rmd" target="_blank">805396e</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-03-20
+</td>
+<td>
 update Figure3_ciseqtl
 </td>
 </tr>
 </tbody>
 </table>
-</ul>
-<p></details></p>
-<hr />
+</div>
+<hr>
+</div>
+</div>
+</div>
 <div id="figure-3" class="section level1">
 <h1>Figure 3</h1>
 <ol style="list-style-type: lower-alpha">
@@ -574,14 +803,15 @@ library(plyr)
 library(VennDiagram)
 library(dplyr)
 library(data.table)
-library(qvalue)
+#library(qvalue)
 library(gridExtra)
 library(plotly)
 library(reshape2)
 library(MASS)
 library(ggplot2)
 library(viridis)
-
+library(cowplot)
+#setwd(&quot;/home/heh/GBRS/Workflowr_GBRS_array/&quot;)
 #eqtl results with generation -----------------------------------------------------------------
 #load cis-eqtl
 ##meta data
@@ -589,18 +819,16 @@ meta.data &lt;- c(&quot;muga275&quot;, &quot;gbrs275&quot;, &quot;fixed.muga275&
                &quot;megamuga184&quot;,&quot;gbrs184&quot;,&quot;fixed.megamuga184&quot;,
                &quot;gigamuga358&quot;,&quot;gbrs358&quot;,&quot;fixed.gigamuga358&quot;)
 
-mainDir &lt;- &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/&quot;
-
 cis.eqtl.total &lt;- list()
 cislod.plot &lt;- list()
 for (i in meta.data){
-  cis.eqtl.total[[i]] &lt;- get(load(paste0(mainDir,i,&quot;/&quot;,i,&quot;_cis.eqtl.RData&quot;)))
+  cis.eqtl.total[[i]] &lt;- get(load(paste0(&quot;./output/&quot;,i,&quot;_cis.eqtl.RData&quot;)))
   # quantile and combine cisqtl
   cislod.plot[[i]]$array = rep(i,100)
   cislod.plot[[i]]$sub.array = rep(i,100)
-  cislod.plot[[i]]$qgrid = seq(from=0.70, to=0.999, length=100)
+  cislod.plot[[i]]$qgrid = seq(from=0.70, to=1, length=100)
   cislod.plot[[i]]$quantile.cislod &lt;- quantile(cis.eqtl.total[[i]]$cislod[!is.nan(cis.eqtl.total[[i]]$cislod)],
-                      seq(from=0.70, to=0.999, length=100))
+                      seq(from=0.70, to=1, length=100))
   }
 cislod.plot.data &lt;- do.call(rbind.data.frame, cislod.plot)
 cislod.plot.data$array &lt;- ordered(cislod.plot.data$array, 
@@ -653,36 +881,43 @@ p &lt;- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) +
   guides(linetype = guide_legend(override.aes = list(size = 1)))
 p</code></pre>
 <p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203%20Cis-eQTL-1.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Cis-eQTL-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-3-Cis-eQTL-1">
+Past versions of “Figure 3 Cis-eQTL-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-3-Cis-eQTL-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/01f25d14dea476c85dad47eb7d5337f576831b29/docs/figure/Figure3_ciseqtl.Rmd/Figure 3 Cis-eQTL-1.png" target="_blank">01f25d1</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-19
+<td>
+2019-03-20
 </td>
 </tr>
 </tbody>
 </table>
-<p></details></p>
+</div>
+</div>
 <pre class="r"><code>
 p &lt;- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) + 
   geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
@@ -701,42 +936,130 @@ p &lt;- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) +
 #facet_grid(.~array, scales=&quot;free&quot;, space=&quot;free&quot;)
 p</code></pre>
 <p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203%20Cis-eQTL-2.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 3 Cis-eQTL-2.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-3-Cis-eQTL-2">
+Past versions of “Figure 3 Cis-eQTL-2.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-3-Cis-eQTL-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/01f25d14dea476c85dad47eb7d5337f576831b29/docs/figure/Figure3_ciseqtl.Rmd/Figure 3 Cis-eQTL-2.png" target="_blank">01f25d1</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-19
+<td>
+2019-03-20
 </td>
 </tr>
 </tbody>
 </table>
-<p></details></p>
-<div id="session-information" class="section level2">
-<h2>Session information</h2>
+</div>
+</div>
+</div>
+<div id="figure-3-cis-eqtl-new-color-scheme" class="section level1">
+<h1>Figure 3, Cis-eQTL, new color scheme</h1>
+<pre class="r"><code>
+p1 &lt;- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
+  scale_color_manual(values=c(&quot;#FDE725FF&quot;, &quot;#FDE725FF&quot;, &quot;#FDE725FF&quot;, 
+                              &quot;#55C667FF&quot;, &quot;#55C667FF&quot;, &quot;#55C667FF&quot;, 
+                              &quot;#238A8DFF&quot;, &quot;#238A8DFF&quot;, &quot;#238A8DFF&quot;)) +
+  scale_linetype_manual(values= rep(c(&quot;dashed&quot;,&quot;solid&quot;,&quot;twodash&quot;), times = 3))+
+  xlab(&quot;Quantile of LOD&quot;) +
+  ylab(&quot;LOD of cis-eQTL&quot;) +
+  theme(aspect.ratio=1) +
+  #ggtitle(&quot;Cis-eQTL with generation&quot;) + 
+  scale_y_continuous(limits=c(0, 160)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = &quot;black&quot;),
+        legend.title=element_blank(), 
+        text = element_text(size=16), 
+        strip.text.y = element_blank(),
+        axis.title=element_text(size=16,face=&quot;bold&quot;),
+        legend.text = element_text(size=10)) +
+  facet_grid(array ~ .) +
+  theme(legend.key.width = unit(0.5,&quot;cm&quot;)) + 
+  guides(linetype = guide_legend(override.aes = list(size = 1)))
+
+p1</code></pre>
+<p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203,%20Cis-eQTL,%20new%20color%20scheme-1.png" width="1920" style="display: block; margin: auto;" /></p>
+</div>
+<div id="figure-3-cis-eqtl-pair" class="section level1">
+<h1>Figure 3, Cis-eQTL pair</h1>
+<pre class="r"><code>d1 &lt;- data.frame(x = cis.eqtl.total$gbrs275$cislod, 
+                 y = cis.eqtl.total$fixed.muga275$cislod,
+                 z = &quot;MUGA&quot;)
+d2 &lt;- data.frame(x = cis.eqtl.total$gbrs184$cislod, 
+                 y = cis.eqtl.total$fixed.megamuga184$cislod,
+                 z = &quot;MEGAMUGA&quot;)
+
+d3 &lt;- data.frame(x = cis.eqtl.total$gbrs358$cislod, 
+                 y = cis.eqtl.total$fixed.gigamuga358$cislod,
+                 z = &quot;GIGAMUGA&quot;)
+d &lt;- do.call(rbind.data.frame,list(d1,d2,d3))
+#d &lt;- d[d$x&gt;=8 | d$y&gt;=8,]
+plot_cispair &lt;- ggplot(data=d, aes(x=x, y = y)) + 
+  geom_point(aes(color=z), size = 1, show.legend = F) +
+  scale_color_manual(values=c(&quot;#FDE725FF&quot;, 
+                              &quot;#55C667FF&quot;, 
+                              &quot;#238A8DFF&quot;)) +
+  theme(aspect.ratio=1) +
+  xlab(&quot;LOD of cis-eQTL in GBRS&quot;) +
+  ylab(&quot;LOD of cis-eQTL in array&quot;) +
+  #ggtitle(&quot;Cis-eQTL with generation&quot;) + 
+  scale_y_continuous(limits=c(0, 160)) +
+  scale_x_continuous(limits=c(0, 160)) +  
+  geom_abline(slope=1, intercept=0) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = &quot;black&quot;),
+        legend.title=element_blank(), 
+        text = element_text(size=16), 
+        strip.text.y = element_blank(),
+        axis.title=element_text(size=16,face=&quot;bold&quot;),
+        legend.text = element_text(size=10)) +
+  facet_grid(z ~ .)
+## Figure 3  Combine all
+fig3 &lt;- plot_grid(plot_cispair, p1, labels=c(&#39;A&#39;,&#39;B&#39;),
+                  align = &quot;h&quot;)
+fig3</code></pre>
+<p><img src="figure/Figure3_ciseqtl.Rmd/Figure%203,%20Cis-eQTL%20pair-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggsave(&quot;output/Figure3.pdf&quot;, fig3, height = 14, width=14)</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()
-# R version 3.3.2 (2016-10-31)
+# R version 3.6.0 (2019-04-26)
 # Platform: x86_64-pc-linux-gnu (64-bit)
-# Running under: CentOS release 6.7 (Final)
+# Running under: CentOS Linux 7 (Core)
+# 
+# Matrix products: default
+# BLAS/LAPACK: /usr/lib64/libopenblas-r0.3.3.so
 # 
 # locale:
 #  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -751,31 +1074,32 @@ xhyuo
 # [8] base     
 # 
 # other attached packages:
-#  [1] viridis_0.3.4       MASS_7.3-50         reshape2_1.4.3     
-#  [4] plotly_4.5.6        gridExtra_2.3       qvalue_2.6.0       
-#  [7] data.table_1.11.4   dplyr_0.7.6         VennDiagram_1.6.17 
-# [10] futile.logger_1.4.3 ggplot2_3.1.0       sinaplot_1.1.0     
-# [13] plyr_1.8.4         
+#  [1] cowplot_1.0.0       viridis_0.5.1       viridisLite_0.3.0  
+#  [4] MASS_7.3-51.4       reshape2_1.4.3      plotly_4.9.0       
+#  [7] gridExtra_2.3       data.table_1.12.2   dplyr_0.8.1        
+# [10] VennDiagram_1.6.20  futile.logger_1.4.3 ggplot2_3.1.1      
+# [13] sinaplot_1.1.0      plyr_1.8.4         
 # 
 # loaded via a namespace (and not attached):
-#  [1] tidyselect_0.2.4     purrr_0.2.2          splines_3.3.2       
-#  [4] colorspace_1.4-0     htmltools_0.3.6      viridisLite_0.3.0   
-#  [7] yaml_2.2.0           base64enc_0.1-3      rlang_0.3.1         
-# [10] R.oo_1.21.0          pillar_1.3.1         glue_1.3.0          
-# [13] withr_2.1.2          R.utils_2.5.0        lambda.r_1.2.3      
-# [16] bindrcpp_0.2.2       bindr_0.1.1          stringr_1.3.1       
-# [19] munsell_0.5.0        gtable_0.2.0         workflowr_1.1.1     
-# [22] R.methodsS3_1.7.1    htmlwidgets_1.3      evaluate_0.10       
-# [25] labeling_0.3         knitr_1.20           Rcpp_1.0.0          
-# [28] scales_1.0.0         backports_1.1.2      formatR_1.5         
-# [31] jsonlite_1.6         digest_0.6.18        stringi_1.2.4       
-# [34] rprojroot_1.3-2      tools_3.3.2          magrittr_1.5        
-# [37] lazyeval_0.2.1       tibble_1.4.1         futile.options_1.0.1
-# [40] crayon_1.3.4         whisker_0.3-2        tidyr_0.8.1         
-# [43] pkgconfig_2.0.2      assertthat_0.2.0     rmarkdown_1.11      
-# [46] httr_1.4.0           R6_2.4.0             git2r_0.23.0</code></pre>
+#  [1] tidyselect_0.2.5     xfun_0.11            purrr_0.3.2         
+#  [4] colorspace_1.4-1     htmltools_0.4.0      yaml_2.2.0          
+#  [7] rlang_0.4.1          later_1.0.0          pillar_1.4.1        
+# [10] glue_1.3.1           withr_2.1.2          lambda.r_1.2.4      
+# [13] stringr_1.4.0        munsell_0.5.0        gtable_0.3.0        
+# [16] workflowr_1.5.0      htmlwidgets_1.3      evaluate_0.14       
+# [19] labeling_0.3         knitr_1.26           httpuv_1.5.2        
+# [22] highr_0.8            Rcpp_1.0.3           promises_1.1.0      
+# [25] scales_1.0.0         backports_1.1.5      formatR_1.7         
+# [28] jsonlite_1.6         fs_1.3.1             digest_0.6.22       
+# [31] stringi_1.4.3        rprojroot_1.3-2      tools_3.6.0         
+# [34] magrittr_1.5         lazyeval_0.2.2       tibble_2.1.3        
+# [37] futile.options_1.0.1 crayon_1.3.4         whisker_0.4         
+# [40] tidyr_0.8.3          pkgconfig_2.0.2      assertthat_0.2.1    
+# [43] rmarkdown_1.13       httr_1.4.1           R6_2.4.1            
+# [46] git2r_0.26.1         compiler_3.6.0</code></pre>
 </div>
 </div>
+
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
@@ -788,14 +1112,6 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
-
-<hr>
-<p>
-  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-  analysis was created with
-  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
-</p>
-<hr>
 
 
 </div>

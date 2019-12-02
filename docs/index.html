@@ -71,9 +71,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -192,8 +190,6 @@ $(document).ready(function () {
 });
 </script>
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
 
 <style type="text/css">
@@ -267,6 +263,15 @@ $(document).ready(function () {
 
 
 
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
@@ -318,36 +323,92 @@ div.section {
 </div>
 
 
-<p><strong>Last updated:</strong> 2019-03-23</p>
-<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
-<ul>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
-</details>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/6e07b45a64b2f4b434a679703913013aa47e4707" target="_blank">6e07b45</a> </summary></p>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2019-12-02
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Workflowr_GBRS_array/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytree3b5c53493c37fa15068e468a6be018e090812d27targetblank3b5c534a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/3b5c53493c37fa15068e468a6be018e090812d27" target="_blank">3b5c534</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytree3b5c53493c37fa15068e468a6be018e090812d27targetblank3b5c534a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
 <pre><code>
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
 
 Untracked files:
-    Untracked:  Figure3_transeqtl_FDR0.01.R
-    Untracked:  Figure3_transeqtl_FDR0.01.sh
-    Untracked:  Figure3_transeqtl_FDR0.05.R
-    Untracked:  Figure3_transeqtl_FDR0.05.sh
-    Untracked:  Figure3_transeqtl_lod8.R
-    Untracked:  Figure3_transeqtl_lod8.sh
     Untracked:  analysis/Figure1_by_vit.R
     Untracked:  analysis/Figure3.0.Rmd
+    Untracked:  analysis/Figure3.pdf
     Untracked:  analysis/Figure3_0.Rmd
     Untracked:  analysis/Figure3_LOD8.Rmd
+    Untracked:  analysis/Figure3_ciseqtl_2.Rmd
+    Untracked:  analysis/Figure3_transeqtl_FDR0.01.R
+    Untracked:  analysis/Figure3_transeqtl_FDR0.01.sh
+    Untracked:  analysis/Figure3_transeqtl_FDR0.05.R
+    Untracked:  analysis/Figure3_transeqtl_FDR0.05.sh
+    Untracked:  analysis/Figure3_transeqtl_lod8.R
+    Untracked:  analysis/Figure3_transeqtl_lod8.sh
     Untracked:  analysis/old_analysis/
+    Untracked:  analysis/publish_workflowr.R
+    Untracked:  code/R_rainclouds.R
+    Untracked:  code/summarySE.R
     Untracked:  data/Agree_table_three_array.RData
+    Untracked:  data/DO_Liver_sample_sheet.tsv
     Untracked:  data/DO_Striatum_recomb.GBRS.genotypes.RData
+    Untracked:  data/DO_Striatum_sample_sheet.tsv
     Untracked:  data/DO_liver_recomb.GBRS.genotypes.RData
     Untracked:  data/fixed.gigamuga358_cis.eqtl.RData
     Untracked:  data/fixed.megamuga184_cis.eqtl.RData
@@ -368,11 +429,63 @@ Untracked files:
     Untracked:  data/mismatch_muga275GBRS.RData
     Untracked:  data/muga275.recomb.RData
     Untracked:  data/muga275_cis.eqtl.RData
+    Untracked:  data/repeated_measures_data.csv
     Untracked:  data/venn_diag_transeqtl_max.RData
-    Untracked:  docs/figure/Figure3_2.Rmd/
-    Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
     Untracked:  output/DO_Liver/
     Untracked:  output/DO_Striatum/
+    Untracked:  output/Figure1.pdf
+    Untracked:  output/Figure2.pdf
+    Untracked:  output/Figure3.pdf
+    Untracked:  output/Figure3_cis.pdf
+    Untracked:  output/Figure4_col.pdf
+    Untracked:  output/Figure4_row.pdf
+    Untracked:  output/bc_pair_b_lod_gbrs184.RData
+    Untracked:  output/bc_pair_b_lod_gbrs275.RData
+    Untracked:  output/bc_pair_b_lod_gbrs358.RData
+    Untracked:  output/bc_pair_c_lod_fixed.gigamuga358.RData
+    Untracked:  output/bc_pair_c_lod_fixed.megamuga184.RData
+    Untracked:  output/bc_pair_c_lod_fixed.muga275.RData
+    Untracked:  output/fixed.gigamuga358_cis.eqtl.RData
+    Untracked:  output/fixed.gigamuga358_max_lod_pvalue.RData
+    Untracked:  output/fixed.gigamuga358_pvalue.RData
+    Untracked:  output/fixed.megamuga184_cis.eqtl.RData
+    Untracked:  output/fixed.megamuga184_max_lod_pvalue.RData
+    Untracked:  output/fixed.megamuga184_pvalue.RData
+    Untracked:  output/fixed.muga275_cis.eqtl.RData
+    Untracked:  output/fixed.muga275_max_lod_pvalue.RData
+    Untracked:  output/fixed.muga275_pvalue.RData
+    Untracked:  output/gbrs184_cis.eqtl.RData
+    Untracked:  output/gbrs184_max_lod_pvalue.RData
+    Untracked:  output/gbrs184_pvalue.RData
+    Untracked:  output/gbrs275_cis.eqtl.RData
+    Untracked:  output/gbrs275_max_lod_pvalue.RData
+    Untracked:  output/gbrs275_pvalue.RData
+    Untracked:  output/gbrs358_cis.eqtl.RData
+    Untracked:  output/gbrs358_max_lod_pvalue.RData
+    Untracked:  output/gbrs358_pvalue.RData
+    Untracked:  output/gene.anno.cis.RData
+    Untracked:  output/gigamuga358_cis.eqtl.RData
+    Untracked:  output/gigamuga358_max_lod_pvalue.RData
+    Untracked:  output/gigamuga358_pvalue.RData
+    Untracked:  output/megamuga184_cis.eqtl.RData
+    Untracked:  output/megamuga184_max_lod_pvalue.RData
+    Untracked:  output/megamuga184_pvalue.RData
+    Untracked:  output/mismatch_autochr_gigamuga358GBRS.RData
+    Untracked:  output/mismatch_autochr_megamuga184GBRS.RData
+    Untracked:  output/mismatch_autochr_muga275GBRS.RData
+    Untracked:  output/mismatch_gigamuga358GBRS.RData
+    Untracked:  output/mismatch_gigamuga369GBRS.RData
+    Untracked:  output/mismatch_gigamuga407GBRS.RData
+    Untracked:  output/mismatch_megamuga184GBRS.RData
+    Untracked:  output/mismatch_megamuga200GBRS.RData
+    Untracked:  output/mismatch_muga275GBRS.RData
+    Untracked:  output/mismatch_muga282GBRS.RData
+    Untracked:  output/muga275_cis.eqtl.RData
+    Untracked:  output/muga275_max_lod_pvalue.RData
+    Untracked:  output/muga275_pvalue.RData
+    Untracked:  output/muga275_scan1_chunk_1.rds
+    Untracked:  output/venn_diag_transeqtl_max.RData
+    Untracked:  sina_plot.rmd
 
 Unstaged changes:
     Modified:   analysis/Figure3.Rmd
@@ -381,1142 +494,1171 @@ Unstaged changes:
     Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
 
 </code></pre>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
-</li>
-</ul>
-<details> <summary> <small><strong>Expand here to see past versions:</strong></small> </summary>
-<ul>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 File
 </th>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
-<th style="text-align:left;">
+<th>
 Message
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/aa3eb6b6c1be8e4a599a6591e628fea3fdc3ecb3/docs/index.html" target="_blank">aa3eb6b</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/9855d9b9a0de318c7f94f4df21bf15bfc8d0ba54/docs/index.html" target="_blank">9855d9b</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-23
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/d46146f47db5d16d8decb0723fa4c4f8b7edc9f3/docs/index.html" target="_blank">d46146f</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/aa3eb6b6c1be8e4a599a6591e628fea3fdc3ecb3/docs/index.html" target="_blank">aa3eb6b</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
+2019-03-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/d46146f47db5d16d8decb0723fa4c4f8b7edc9f3/docs/index.html" target="_blank">d46146f</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-03-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/a1f8656bb1ef2bf3508e0b04938fdf08083c7995/docs/index.html" target="_blank">a1f8656</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-03-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/e970bad39b17fefa3ee0d2d846011002519da9aa/docs/index.html" target="_blank">e970bad</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
 2019-03-22
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/a1f8656bb1ef2bf3508e0b04938fdf08083c7995/docs/index.html" target="_blank">a1f8656</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/adc6899163ceba9fd38fb45f7f0f6c743fd92e30/docs/index.html" target="_blank">adc6899</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-22
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/e970bad39b17fefa3ee0d2d846011002519da9aa/docs/index.html" target="_blank">e970bad</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/dea78c151cd5c7dbc86a77e9dcf307df7dc9dbc6/docs/index.html" target="_blank">dea78c1</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-22
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/adc6899163ceba9fd38fb45f7f0f6c743fd92e30/docs/index.html" target="_blank">adc6899</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/index.html" target="_blank">a7fd07d</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-22
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/dea78c151cd5c7dbc86a77e9dcf307df7dc9dbc6/docs/index.html" target="_blank">dea78c1</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/945aa3516a135be7a7bc111c015941fba6f61024/docs/index.html" target="_blank">945aa35</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-22
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/a7fd07d6da8acd3d3d58ff3456656549ae47b8cf/docs/index.html" target="_blank">a7fd07d</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/6dbc7f093c9c3043869b08aa5373928d699186b6/docs/index.html" target="_blank">6dbc7f0</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-22
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/945aa3516a135be7a7bc111c015941fba6f61024/docs/index.html" target="_blank">945aa35</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/1702b842882c22c61496d7e5e8869e4fc7832815/docs/index.html" target="_blank">1702b84</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-22
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/6dbc7f093c9c3043869b08aa5373928d699186b6/docs/index.html" target="_blank">6dbc7f0</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
+<td>
 2019-03-21
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/1702b842882c22c61496d7e5e8869e4fc7832815/docs/index.html" target="_blank">1702b84</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/01f25d14dea476c85dad47eb7d5337f576831b29/docs/index.html" target="_blank">01f25d1</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-21
+<td>
+2019-03-20
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/01f25d14dea476c85dad47eb7d5337f576831b29/docs/index.html" target="_blank">01f25d1</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-19
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/805396ec5e06eb99fd6002f02b99834e28da8245/analysis/index.Rmd" target="_blank">805396e</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-19
+<td>
+2019-03-20
 </td>
-<td style="text-align:left;">
+<td>
 update Figure3_ciseqtl
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/2da22551065f13b314c1bc80b6e6eb7ae04dba46/docs/index.html" target="_blank">2da2255</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/2da22551065f13b314c1bc80b6e6eb7ae04dba46/docs/index.html" target="_blank">2da2255</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-19
+<td>
+2019-03-20
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/bdad1f8f34996032229019b89f49edbaef6073fd/docs/index.html" target="_blank">bdad1f8</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/bdad1f8f34996032229019b89f49edbaef6073fd/docs/index.html" target="_blank">bdad1f8</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-19
+<td>
+2019-03-20
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/0b9bb2b97cc929593085f6198d1ab6469bbae6ae/docs/index.html" target="_blank">0b9bb2b</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/0b9bb2b97cc929593085f6198d1ab6469bbae6ae/docs/index.html" target="_blank">0b9bb2b</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
+2019-03-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/338c9ee52cb9a1598508a1f5720998303ec1ed6c/docs/index.html" target="_blank">338c9ee</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
 2019-03-12
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/338c9ee52cb9a1598508a1f5720998303ec1ed6c/docs/index.html" target="_blank">338c9ee</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/c5ae74af09d4bf5ac4d0e975c17c1cde8365ebc7/docs/index.html" target="_blank">c5ae74a</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-12
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/c5ae74af09d4bf5ac4d0e975c17c1cde8365ebc7/docs/index.html" target="_blank">c5ae74a</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/0011596ed22efc05166f336edc21ab9a339d2dae/docs/index.html" target="_blank">0011596</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
+2019-03-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/7a1cb70b025f106c604b86fe9461d933405338f6/docs/index.html" target="_blank">7a1cb70</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
 2019-03-11
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/0011596ed22efc05166f336edc21ab9a339d2dae/docs/index.html" target="_blank">0011596</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/00627096960cac37bb62abf14e627130da2ea2ba/docs/index.html" target="_blank">0062709</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-11
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/7a1cb70b025f106c604b86fe9461d933405338f6/docs/index.html" target="_blank">7a1cb70</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/393de5d55b707dfee522b533857cf9abde1f05ac/docs/index.html" target="_blank">393de5d</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/00627096960cac37bb62abf14e627130da2ea2ba/docs/index.html" target="_blank">0062709</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
-2019-03-11
-</td>
-<td style="text-align:left;">
-Build site.
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-html
-</td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/393de5d55b707dfee522b533857cf9abde1f05ac/docs/index.html" target="_blank">393de5d</a>
-</td>
-<td style="text-align:left;">
-xhyuo
-</td>
-<td style="text-align:left;">
+<td>
 2019-03-08
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/8e9786489b6c6db74c9ed771775cebe5f2e76ae2/docs/index.html" target="_blank">8e97864</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/8e9786489b6c6db74c9ed771775cebe5f2e76ae2/docs/index.html" target="_blank">8e97864</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-08
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/1f2f9e38971e2b16dc6e6fffedbfd03f04af743a/docs/index.html" target="_blank">1f2f9e3</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/1f2f9e38971e2b16dc6e6fffedbfd03f04af743a/docs/index.html" target="_blank">1f2f9e3</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-08
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/84ea0bb2af48fc8947633967d1581b12824489af/docs/index.html" target="_blank">84ea0bb</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/84ea0bb2af48fc8947633967d1581b12824489af/docs/index.html" target="_blank">84ea0bb</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-07
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/6110ac8224875ca5f8c07f2b93fbc1fe8fa2ebb3/docs/index.html" target="_blank">6110ac8</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/6110ac8224875ca5f8c07f2b93fbc1fe8fa2ebb3/docs/index.html" target="_blank">6110ac8</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-05
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/811ec274eb1ffceeb56653c94a007385c0d369f3/docs/index.html" target="_blank">811ec27</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/811ec274eb1ffceeb56653c94a007385c0d369f3/docs/index.html" target="_blank">811ec27</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-05
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/index.html" target="_blank">5b90500</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/index.html" target="_blank">5b90500</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/index.html" target="_blank">f5e9e66</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/index.html" target="_blank">f5e9e66</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/95859b83c2d3f30becc73c59b0de2cef3d923943/docs/index.html" target="_blank">95859b8</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/95859b83c2d3f30becc73c59b0de2cef3d923943/docs/index.html" target="_blank">95859b8</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-01-02
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/4cdd7f7abd70594e191d2eacedecba16ce9c7add/docs/index.html" target="_blank">4cdd7f7</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/4cdd7f7abd70594e191d2eacedecba16ce9c7add/docs/index.html" target="_blank">4cdd7f7</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-17
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/987c0138042b7ee6c29502e404d9234d0b4d8391/docs/index.html" target="_blank">987c013</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/987c0138042b7ee6c29502e404d9234d0b4d8391/docs/index.html" target="_blank">987c013</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-17
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/8ee39a383302f86ebb873f37f9933d305c66575b/docs/index.html" target="_blank">8ee39a3</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/8ee39a383302f86ebb873f37f9933d305c66575b/docs/index.html" target="_blank">8ee39a3</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-17
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/4c2fc6c16d4adfe45c61f569616546f0af4c8555/docs/index.html" target="_blank">4c2fc6c</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/4c2fc6c16d4adfe45c61f569616546f0af4c8555/docs/index.html" target="_blank">4c2fc6c</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-17
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/6552bad8e756f5db6dc3f9df4689353636989838/docs/index.html" target="_blank">6552bad</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/6552bad8e756f5db6dc3f9df4689353636989838/docs/index.html" target="_blank">6552bad</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-17
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/b6cad7564e07e3163a9d4c8fe01a21436fe390de/analysis/index.Rmd" target="_blank">b6cad75</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-17
 </td>
-<td style="text-align:left;">
+<td>
 Figure3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/d3e956c8d8b3d844496ba6404c5a7cb1ff83bec5/docs/index.html" target="_blank">d3e956c</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/d3e956c8d8b3d844496ba6404c5a7cb1ff83bec5/docs/index.html" target="_blank">d3e956c</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-17
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/212a2261dcafc86fe6c7020865e3d72f091b5d09/docs/index.html" target="_blank">212a226</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/212a2261dcafc86fe6c7020865e3d72f091b5d09/docs/index.html" target="_blank">212a226</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/61e16b994009320e61580afbecba04a78df7f265/docs/index.html" target="_blank">61e16b9</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/61e16b994009320e61580afbecba04a78df7f265/docs/index.html" target="_blank">61e16b9</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/3d730efa889751a8d104925cb59cd9bb44c1fb59/docs/index.html" target="_blank">3d730ef</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/3d730efa889751a8d104925cb59cd9bb44c1fb59/docs/index.html" target="_blank">3d730ef</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/36b7a54ddfdfe0d4c16aa86b04d29f244166027e/docs/index.html" target="_blank">36b7a54</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/36b7a54ddfdfe0d4c16aa86b04d29f244166027e/docs/index.html" target="_blank">36b7a54</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/49156a4f627b3827a93b06ecd6e3857ec0cb7db4/docs/index.html" target="_blank">49156a4</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/49156a4f627b3827a93b06ecd6e3857ec0cb7db4/docs/index.html" target="_blank">49156a4</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/ffaf51a18f0cce80d4ff2f59dd9cfa5280f02d51/docs/index.html" target="_blank">ffaf51a</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/ffaf51a18f0cce80d4ff2f59dd9cfa5280f02d51/docs/index.html" target="_blank">ffaf51a</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/631fdaf12d7b7b1f52c207b74a6372146c8348b5/docs/index.html" target="_blank">631fdaf</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/631fdaf12d7b7b1f52c207b74a6372146c8348b5/docs/index.html" target="_blank">631fdaf</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/031fb72103a8e13a3685f9b8c65a2063a5b5770b/docs/index.html" target="_blank">031fb72</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/031fb72103a8e13a3685f9b8c65a2063a5b5770b/docs/index.html" target="_blank">031fb72</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/02ee9e0077aebf34669dffc9707015274f397b4f/analysis/index.Rmd" target="_blank">02ee9e0</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
-<td style="text-align:left;">
+<td>
 Figure12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/ae78ed8391c9f25bfd05a10e5986efdd9236ca7f/docs/index.html" target="_blank">ae78ed8</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/ae78ed8391c9f25bfd05a10e5986efdd9236ca7f/docs/index.html" target="_blank">ae78ed8</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-16
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/064c4e445d219591330edc598733da9a8242569b/docs/index.html" target="_blank">064c4e4</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/064c4e445d219591330edc598733da9a8242569b/docs/index.html" target="_blank">064c4e4</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-16
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/bce336429aca3ea0174eff25ffd2a621bc43fb76/docs/index.html" target="_blank">bce3364</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/bce336429aca3ea0174eff25ffd2a621bc43fb76/docs/index.html" target="_blank">bce3364</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-16
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/64eb668043ddef36cf8e133dc78ed80a50d23074/docs/index.html" target="_blank">64eb668</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/64eb668043ddef36cf8e133dc78ed80a50d23074/docs/index.html" target="_blank">64eb668</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-16
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/a91272c7f65e07e97e785f924a71b857bc9897ab/docs/index.html" target="_blank">a91272c</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/a91272c7f65e07e97e785f924a71b857bc9897ab/docs/index.html" target="_blank">a91272c</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-16
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/e7cd6cc387b6020c6e9b8512a541eaa1cdf67319/docs/index.html" target="_blank">e7cd6cc</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/e7cd6cc387b6020c6e9b8512a541eaa1cdf67319/docs/index.html" target="_blank">e7cd6cc</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-15
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/f4aa8a33077737374e0103eae2ee2bc76e6a1445/docs/index.html" target="_blank">f4aa8a3</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/f4aa8a33077737374e0103eae2ee2bc76e6a1445/docs/index.html" target="_blank">f4aa8a3</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-15
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/617234560c628627ef4d62cd17c335f6cb323441/docs/index.html" target="_blank">6172345</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/617234560c628627ef4d62cd17c335f6cb323441/docs/index.html" target="_blank">6172345</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-15
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/03588ba09f7692c24e58f837eb77a06458b3d4d4/docs/index.html" target="_blank">03588ba</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/03588ba09f7692c24e58f837eb77a06458b3d4d4/docs/index.html" target="_blank">03588ba</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-15
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/faa5a5c5b885e629622b08ea38b6a4815d13c921/docs/index.html" target="_blank">faa5a5c</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/faa5a5c5b885e629622b08ea38b6a4815d13c921/docs/index.html" target="_blank">faa5a5c</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-09
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/09c3f857f9d66e01923fa6891da8495280339bb2/docs/index.html" target="_blank">09c3f85</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/09c3f857f9d66e01923fa6891da8495280339bb2/docs/index.html" target="_blank">09c3f85</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-07
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/34357f81b8fc03e2868ab6a6d3eeffcae989c0bd/docs/index.html" target="_blank">34357f8</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/34357f81b8fc03e2868ab6a6d3eeffcae989c0bd/docs/index.html" target="_blank">34357f8</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-07
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/cff81384f5ae846ec1bef09234bf6f84ffb74baa/docs/index.html" target="_blank">cff8138</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/cff81384f5ae846ec1bef09234bf6f84ffb74baa/docs/index.html" target="_blank">cff8138</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-07
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/68ba02d4ac51541f4d88098cb1312b8452074164/docs/index.html" target="_blank">68ba02d</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/68ba02d4ac51541f4d88098cb1312b8452074164/docs/index.html" target="_blank">68ba02d</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-07
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/7ba11656b7324f9091573a12ba71c8218b05ed4e/docs/index.html" target="_blank">7ba1165</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/7ba11656b7324f9091573a12ba71c8218b05ed4e/docs/index.html" target="_blank">7ba1165</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-07
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/86d4c3935141f2bd117e43a43cf34a02d6acee79/docs/index.html" target="_blank">86d4c39</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/86d4c3935141f2bd117e43a43cf34a02d6acee79/docs/index.html" target="_blank">86d4c39</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-07
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/2fba8049ed4e336d55e37e8b635220bde2d1b923/analysis/index.Rmd" target="_blank">2fba804</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-11-07
 </td>
-<td style="text-align:left;">
+<td>
 update building
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/af25e5f76c1c54d6452e6e3e2a6f82e48d3ee2a7/docs/index.html" target="_blank">af25e5f</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/af25e5f76c1c54d6452e6e3e2a6f82e48d3ee2a7/docs/index.html" target="_blank">af25e5f</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-10-11
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/8d135952aed7a1378cc5d2d37bd65d9572d35f8d/analysis/index.Rmd" target="_blank">8d13595</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-10-11
 </td>
-<td style="text-align:left;">
+<td>
 Publish the initial files for project
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/7015a3a4e7f2845d654a3b8bfcc12be7d210c62a/analysis/index.Rmd" target="_blank">7015a3a</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-10-11
 </td>
-<td style="text-align:left;">
+<td>
 Start workflowr project.
 </td>
 </tr>
 </tbody>
 </table>
-</ul>
-<p></details></p>
-<hr />
+</div>
+<hr>
+</div>
+</div>
+</div>
 <p>Research website for GBRS_array.</p>
 <div id="goal" class="section level1">
 <h1>Goal</h1>
@@ -1555,6 +1697,7 @@ Start workflowr project.
 </div>
 </div>
 
+
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
 http://docs.mathjax.org/en/latest/configuration.html.  This will make
@@ -1566,14 +1709,6 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
-
-<hr>
-<p>
-  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-  analysis was created with
-  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
-</p>
-<hr>
 
 
 

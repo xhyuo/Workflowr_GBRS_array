@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hao He" />
 
-<meta name="date" content="2019-03-05" />
+<meta name="date" content="2019-12-02" />
 
 <title>Figure2</title>
 
@@ -29,10 +29,10 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
 <link href="site_libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-<script src="site_libs/datatables-binding-0.4/datatables.js"></script>
-<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="site_libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="site_libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="site_libs/datatables-binding-0.10/datatables.js"></script>
+<link href="site_libs/dt-core-1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="site_libs/dt-core-1.10.19/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="site_libs/dt-core-1.10.19/js/jquery.dataTables.min.js"></script>
 <link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
@@ -84,9 +84,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -204,8 +202,6 @@ $(document).ready(function () {
   menuAnchor.closest('li.dropdown').addClass('active');
 });
 </script>
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -353,8 +349,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -363,6 +357,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -422,38 +426,155 @@ div.section {
 
 
 <h1 class="title toc-ignore">Figure2</h1>
-<h4 class="author"><em>Hao He</em></h4>
-<h4 class="date"><em>2019-03-05</em></h4>
+<h4 class="author">Hao He</h4>
+<h4 class="date">2019-12-02</h4>
 
 </div>
 
 
-<p><strong>Last updated:</strong> 2019-03-05</p>
-<strong>workflowr checks:</strong> <small>(Click a bullet for more information)</small>
-<ul>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
 <li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>R Markdown file:</strong> up-to-date </summary></p>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2019-12-02
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>Workflowr_GBRS_array/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.5.0). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
 <p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Environment:</strong> empty </summary></p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
 <p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Seed:</strong> <code>set.seed(20181011)</code> </summary></p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20181011code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20181011)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20181011code" class="panel-collapse collapse">
+<div class="panel-body">
 <p>The command <code>set.seed(20181011)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Session information:</strong> recorded </summary></p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
 <p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
-</details>
-</li>
-<li>
-<p><details> <summary> <strong style="color:blue;">✔</strong> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/bece325f8458f81333e41249f1e1a2b8faf1aa90" target="_blank">bece325</a> </summary></p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+</p>
+</div>
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/home/heh/GBRS/Workflowr_GBRS_array/
+</td>
+<td style="text-align:left;">
+.
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytree3b5c53493c37fa15068e468a6be018e090812d27targetblank3b5c534a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/xhyuo/Workflowr_GBRS_array/tree/3b5c53493c37fa15068e468a6be018e090812d27" target="_blank">3b5c534</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomxhyuoWorkflowrGBRSarraytree3b5c53493c37fa15068e468a6be018e090812d27targetblank3b5c534a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility. The version displayed above was the version of the Git repository at the time these results were generated. <br><br> Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
 <pre><code>
 Ignored files:
     Ignored:    .Rhistory
@@ -462,340 +583,475 @@ Ignored files:
 Untracked files:
     Untracked:  analysis/Figure1_by_vit.R
     Untracked:  analysis/Figure3.0.Rmd
+    Untracked:  analysis/Figure3.pdf
     Untracked:  analysis/Figure3_0.Rmd
+    Untracked:  analysis/Figure3_LOD8.Rmd
+    Untracked:  analysis/Figure3_ciseqtl_2.Rmd
+    Untracked:  analysis/Figure3_transeqtl_FDR0.01.R
+    Untracked:  analysis/Figure3_transeqtl_FDR0.01.sh
+    Untracked:  analysis/Figure3_transeqtl_FDR0.05.R
+    Untracked:  analysis/Figure3_transeqtl_FDR0.05.sh
+    Untracked:  analysis/Figure3_transeqtl_lod8.R
+    Untracked:  analysis/Figure3_transeqtl_lod8.sh
     Untracked:  analysis/old_analysis/
-    Untracked:  docs/figure/Figure3_2.Rmd/
-    Untracked:  docs/figure/cor_DO_Liver_GBRS_MUGA.Rmd/
+    Untracked:  analysis/publish_workflowr.R
+    Untracked:  analysis/sina_plot.rmd
+    Untracked:  code/R_rainclouds.R
+    Untracked:  code/summarySE.R
+    Untracked:  data/Agree_table_three_array.RData
+    Untracked:  data/DO_Liver_sample_sheet.tsv
+    Untracked:  data/DO_Striatum_recomb.GBRS.genotypes.RData
+    Untracked:  data/DO_Striatum_sample_sheet.tsv
+    Untracked:  data/DO_liver_recomb.GBRS.genotypes.RData
+    Untracked:  data/fixed.gigamuga358_cis.eqtl.RData
+    Untracked:  data/fixed.megamuga184_cis.eqtl.RData
+    Untracked:  data/fixed.muga275_cis.eqtl.RData
+    Untracked:  data/gbrs184_cis.eqtl.RData
+    Untracked:  data/gbrs275_cis.eqtl.RData
+    Untracked:  data/gbrs358_cis.eqtl.RData
+    Untracked:  data/gene.anno.cis.RData
+    Untracked:  data/gigamuga358.recomb.RData
+    Untracked:  data/gigamuga358_cis.eqtl.RData
+    Untracked:  data/megamuga184.recomb.RData
+    Untracked:  data/megamuga184_cis.eqtl.RData
+    Untracked:  data/mismatch_autochr_gigamuga358GBRS.RData
+    Untracked:  data/mismatch_autochr_megamuga184GBRS.RData
+    Untracked:  data/mismatch_autochr_muga275GBRS.RData
+    Untracked:  data/mismatch_gigamuga358GBRS.RData
+    Untracked:  data/mismatch_megamuga184GBRS.RData
+    Untracked:  data/mismatch_muga275GBRS.RData
+    Untracked:  data/muga275.recomb.RData
+    Untracked:  data/muga275_cis.eqtl.RData
+    Untracked:  data/repeated_measures_data.csv
+    Untracked:  data/venn_diag_transeqtl_max.RData
     Untracked:  output/DO_Liver/
     Untracked:  output/DO_Striatum/
+    Untracked:  output/Figure1.pdf
+    Untracked:  output/Figure2.pdf
+    Untracked:  output/Figure3.pdf
+    Untracked:  output/Figure3_cis.pdf
+    Untracked:  output/Figure4_col.pdf
+    Untracked:  output/Figure4_row.pdf
+    Untracked:  output/bc_pair_b_lod_gbrs184.RData
+    Untracked:  output/bc_pair_b_lod_gbrs275.RData
+    Untracked:  output/bc_pair_b_lod_gbrs358.RData
+    Untracked:  output/bc_pair_c_lod_fixed.gigamuga358.RData
+    Untracked:  output/bc_pair_c_lod_fixed.megamuga184.RData
+    Untracked:  output/bc_pair_c_lod_fixed.muga275.RData
+    Untracked:  output/fixed.gigamuga358_cis.eqtl.RData
+    Untracked:  output/fixed.gigamuga358_max_lod_pvalue.RData
+    Untracked:  output/fixed.gigamuga358_pvalue.RData
+    Untracked:  output/fixed.megamuga184_cis.eqtl.RData
+    Untracked:  output/fixed.megamuga184_max_lod_pvalue.RData
+    Untracked:  output/fixed.megamuga184_pvalue.RData
+    Untracked:  output/fixed.muga275_cis.eqtl.RData
+    Untracked:  output/fixed.muga275_max_lod_pvalue.RData
+    Untracked:  output/fixed.muga275_pvalue.RData
+    Untracked:  output/gbrs184_cis.eqtl.RData
+    Untracked:  output/gbrs184_max_lod_pvalue.RData
+    Untracked:  output/gbrs184_pvalue.RData
+    Untracked:  output/gbrs275_cis.eqtl.RData
+    Untracked:  output/gbrs275_max_lod_pvalue.RData
+    Untracked:  output/gbrs275_pvalue.RData
+    Untracked:  output/gbrs358_cis.eqtl.RData
+    Untracked:  output/gbrs358_max_lod_pvalue.RData
+    Untracked:  output/gbrs358_pvalue.RData
+    Untracked:  output/gene.anno.cis.RData
+    Untracked:  output/gigamuga358_cis.eqtl.RData
+    Untracked:  output/gigamuga358_max_lod_pvalue.RData
+    Untracked:  output/gigamuga358_pvalue.RData
+    Untracked:  output/megamuga184_cis.eqtl.RData
+    Untracked:  output/megamuga184_max_lod_pvalue.RData
+    Untracked:  output/megamuga184_pvalue.RData
+    Untracked:  output/mismatch_autochr_gigamuga358GBRS.RData
+    Untracked:  output/mismatch_autochr_megamuga184GBRS.RData
+    Untracked:  output/mismatch_autochr_muga275GBRS.RData
+    Untracked:  output/mismatch_gigamuga358GBRS.RData
+    Untracked:  output/mismatch_gigamuga369GBRS.RData
+    Untracked:  output/mismatch_gigamuga407GBRS.RData
+    Untracked:  output/mismatch_megamuga184GBRS.RData
+    Untracked:  output/mismatch_megamuga200GBRS.RData
+    Untracked:  output/mismatch_muga275GBRS.RData
+    Untracked:  output/mismatch_muga282GBRS.RData
+    Untracked:  output/muga275_cis.eqtl.RData
+    Untracked:  output/muga275_max_lod_pvalue.RData
+    Untracked:  output/muga275_pvalue.RData
+    Untracked:  output/muga275_scan1_chunk_1.rds
+    Untracked:  output/venn_diag_transeqtl_max.RData
 
 Unstaged changes:
-    Modified:   analysis/Figure1.Rmd
+    Modified:   analysis/Figure3.Rmd
     Modified:   analysis/Recombination.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MEGAMUGA.Rmd
     Deleted:    analysis/recombinations_in_DO_Liver_MUGA.Rmd
 
 </code></pre>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes. </details>
-</li>
-</ul>
-<details> <summary> <small><strong>Expand here to see past versions:</strong></small> </summary>
-<ul>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the R Markdown and HTML files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view them.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 File
 </th>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
-<th style="text-align:left;">
+<th>
 Message
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/3b5c53493c37fa15068e468a6be018e090812d27/analysis/Figure2.Rmd" target="_blank">3b5c534</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-12-02
+</td>
+<td>
+update Figure1_2_3_4
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/6110ac8224875ca5f8c07f2b93fbc1fe8fa2ebb3/docs/Figure2.html" target="_blank">6110ac8</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-03-05
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/bece325f8458f81333e41249f1e1a2b8faf1aa90/analysis/Figure2.Rmd" target="_blank">bece325</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-05
 </td>
-<td style="text-align:left;">
+<td>
 update Figure2,3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/811ec274eb1ffceeb56653c94a007385c0d369f3/docs/Figure2.html" target="_blank">811ec27</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/811ec274eb1ffceeb56653c94a007385c0d369f3/docs/Figure2.html" target="_blank">811ec27</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2019-03-05
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/Figure2.html" target="_blank">5b90500</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/5b905009bb60bc4703d8fa4bd13902c7629401b5/docs/Figure2.html" target="_blank">5b90500</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/Figure2.html" target="_blank">f5e9e66</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/Figure2.html" target="_blank">f5e9e66</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/c57ed3cec55015a1f3ff072bb496423812bd5143/analysis/Figure2.Rmd" target="_blank">c57ed3c</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
 </td>
-<td style="text-align:left;">
+<td>
 update Figure2,3
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/212a2261dcafc86fe6c7020865e3d72f091b5d09/docs/Figure2.html" target="_blank">212a226</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/212a2261dcafc86fe6c7020865e3d72f091b5d09/docs/Figure2.html" target="_blank">212a226</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/0869bf869151b589e6e649aa558fd3b269eb4ab6/analysis/Figure2.Rmd" target="_blank">0869bf8</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Figure12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/61e16b994009320e61580afbecba04a78df7f265/docs/Figure2.html" target="_blank">61e16b9</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/61e16b994009320e61580afbecba04a78df7f265/docs/Figure2.html" target="_blank">61e16b9</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/3d730efa889751a8d104925cb59cd9bb44c1fb59/docs/Figure2.html" target="_blank">3d730ef</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/3d730efa889751a8d104925cb59cd9bb44c1fb59/docs/Figure2.html" target="_blank">3d730ef</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/54819330c313e94ed83faf42014952861d2e3b9a/analysis/Figure2.Rmd" target="_blank">5481933</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Figure12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/36b7a54ddfdfe0d4c16aa86b04d29f244166027e/docs/Figure2.html" target="_blank">36b7a54</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/36b7a54ddfdfe0d4c16aa86b04d29f244166027e/docs/Figure2.html" target="_blank">36b7a54</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/49156a4f627b3827a93b06ecd6e3857ec0cb7db4/docs/Figure2.html" target="_blank">49156a4</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/49156a4f627b3827a93b06ecd6e3857ec0cb7db4/docs/Figure2.html" target="_blank">49156a4</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/ffaf51a18f0cce80d4ff2f59dd9cfa5280f02d51/docs/Figure2.html" target="_blank">ffaf51a</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/ffaf51a18f0cce80d4ff2f59dd9cfa5280f02d51/docs/Figure2.html" target="_blank">ffaf51a</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/936f8503af67e12bbd4496b78c5bb060fa46598f/analysis/Figure2.Rmd" target="_blank">936f850</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
-<td style="text-align:left;">
+<td>
 Figure12
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/631fdaf12d7b7b1f52c207b74a6372146c8348b5/docs/Figure2.html" target="_blank">631fdaf</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/631fdaf12d7b7b1f52c207b74a6372146c8348b5/docs/Figure2.html" target="_blank">631fdaf</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 html
 </td>
-<td style="text-align:left;">
-<a href="https://cdn.rawgit.com/xhyuo/Workflowr_GBRS_array/031fb72103a8e13a3685f9b8c65a2063a5b5770b/docs/Figure2.html" target="_blank">031fb72</a>
+<td>
+<a href="https://rawcdn.githack.com/xhyuo/Workflowr_GBRS_array/031fb72103a8e13a3685f9b8c65a2063a5b5770b/docs/Figure2.html" target="_blank">031fb72</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
-<td style="text-align:left;">
+<td>
 Build site.
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 Rmd
 </td>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/02ee9e0077aebf34669dffc9707015274f397b4f/analysis/Figure2.Rmd" target="_blank">02ee9e0</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
-<td style="text-align:left;">
+<td>
 Figure12
 </td>
 </tr>
 </tbody>
 </table>
-</ul>
-<p></details></p>
-<hr />
+</div>
+<hr>
+</div>
+</div>
+</div>
 <div id="figure-2.-correlations" class="section level1">
 <h1>Figure 2. Correlations</h1>
 <ol style="list-style-type: lower-alpha">
@@ -806,15 +1062,18 @@ Figure12
 library(ggplot2)
 library(plyr)
 library(ggridges)
+library(viridis)
+library(cowplot)
+#setwd(&quot;/home/heh/GBRS/Workflowr_GBRS_array/&quot;)
 
 #load mismatch results to get the correlation
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_muga275GBRS.RData&quot;)
+load(&quot;data/mismatch_muga275GBRS.RData&quot;)
 muga.cor &lt;- mismatch_muga275GBRS$`0.130`
 muga.cor$array &lt;- &quot;MUGA&quot;
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_megamuga184GBRS.RData&quot;)
+load(&quot;data/mismatch_megamuga184GBRS.RData&quot;)
 megamuga.cor &lt;- mismatch_megamuga184GBRS$`0.130`
 megamuga.cor$array &lt;- &quot;MEGAMUGA&quot;
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_gigamuga358GBRS.RData&quot;)
+load(&quot;data/mismatch_gigamuga358GBRS.RData&quot;)
 gigamuga.cor &lt;- mismatch_gigamuga358GBRS
 gigamuga.cor$array &lt;- &quot;GIGAMUGA&quot;
 #correlation results
@@ -833,58 +1092,65 @@ p &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, fill = array)) +
         axis.title=element_text(size=18,face=&quot;bold&quot;))
 p</code></pre>
 <p><img src="figure/Figure2.Rmd/Figure%202-1.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 2-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-2-1">
+Past versions of “Figure 2-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-2-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/figure/Figure2.Rmd/Figure 2-1.png" target="_blank">f5e9e66</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/3d730efa889751a8d104925cb59cd9bb44c1fb59/docs/figure/Figure2.Rmd/Figure 2-1.png" target="_blank">3d730ef</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/031fb72103a8e13a3685f9b8c65a2063a5b5770b/docs/figure/Figure2.Rmd/Figure 2-1.png" target="_blank">031fb72</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-11
 </td>
 </tr>
 </tbody>
 </table>
-<p></details></p>
+</div>
+</div>
 <pre class="r"><code>#dev.off()
 
 gbrs.array.cor$array &lt;- as.factor(gbrs.array.cor$array)
@@ -904,47 +1170,54 @@ p2 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
         axis.title=element_text(size=22,face=&quot;bold&quot;))
 p2</code></pre>
 <p><img src="figure/Figure2.Rmd/Figure%202-2.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 2-2.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-2-2">
+Past versions of “Figure 2-2.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-2-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/figure/Figure2.Rmd/Figure 2-2.png" target="_blank">f5e9e66</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/212a2261dcafc86fe6c7020865e3d72f091b5d09/docs/figure/Figure2.Rmd/Figure 2-2.png" target="_blank">212a226</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
 </tr>
 </tbody>
 </table>
-<p></details></p>
+</div>
+</div>
 <pre class="r"><code>
 p3 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
   geom_density_ridges(aes(x = self.cor, fill = array), scale = 0.95, bandwidth = 0.01) +
@@ -962,55 +1235,63 @@ p3 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
         axis.title=element_text(size=22,face=&quot;bold&quot;))
  p3</code></pre>
 <p><img src="figure/Figure2.Rmd/Figure%202-3.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 2-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-2-3">
+Past versions of “Figure 2-3.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-2-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/figure/Figure2.Rmd/Figure 2-3.png" target="_blank">f5e9e66</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
+<td>
 <a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/212a2261dcafc86fe6c7020865e3d72f091b5d09/docs/figure/Figure2.Rmd/Figure 2-3.png" target="_blank">212a226</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
+<td>
 2018-12-13
 </td>
 </tr>
 </tbody>
 </table>
-<p></details></p>
-<pre class="r"><code>#load mismatch results to get the correlation
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_muga275GBRS.RData&quot;)
+</div>
+</div>
+<pre class="r"><code>setwd(&quot;/home/heh/GBRS/Workflowr_GBRS_array/&quot;)
+#load mismatch results to get the correlation
+load(&quot;data/mismatch_autochr_muga275GBRS.RData&quot;)
 muga.cor &lt;- mismatch_autochr_muga275GBRS$`0.130`
 muga.cor$array &lt;- &quot;MUGA&quot;
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_megamuga184GBRS.RData&quot;)
+load(&quot;data/mismatch_autochr_megamuga184GBRS.RData&quot;)
 megamuga.cor &lt;- mismatch_autochr_megamuga184GBRS$`0.130`
 megamuga.cor$array &lt;- &quot;MEGAMUGA&quot;
-load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_gigamuga358GBRS.RData&quot;)
+load(&quot;data/mismatch_autochr_gigamuga358GBRS.RData&quot;)
 gigamuga.cor &lt;- mismatch_autochr_gigamuga358GBRS
 gigamuga.cor$array &lt;- &quot;GIGAMUGA&quot;
 #correlation results
@@ -1029,36 +1310,54 @@ p &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, fill = array)) +
         axis.title=element_text(size=18,face=&quot;bold&quot;))
 p</code></pre>
 <p><img src="figure/Figure2.Rmd/Figure%202%20autosome-1.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 2 autosome-1.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-2-autosome-1">
+Past versions of “Figure 2 autosome-1.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-2-autosome-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/figure/Figure2.Rmd/Figure 2 autosome-1.png" target="_blank">f5e9e66</a>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/6110ac8224875ca5f8c07f2b93fbc1fe8fa2ebb3/docs/figure/Figure2.Rmd/Figure 2 autosome-1.png" target="_blank">6110ac8</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/figure/Figure2.Rmd/Figure 2 autosome-1.png" target="_blank">f5e9e66</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-03-05
 </td>
 </tr>
 </tbody>
 </table>
-<p></details></p>
+</div>
+</div>
 <pre class="r"><code>#dev.off()
 
 gbrs.array.cor$array &lt;- as.factor(gbrs.array.cor$array)
@@ -1078,36 +1377,54 @@ p2 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
         axis.title=element_text(size=22,face=&quot;bold&quot;))
 p2</code></pre>
 <p><img src="figure/Figure2.Rmd/Figure%202%20autosome-2.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 2 autosome-2.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-2-autosome-2">
+Past versions of “Figure 2 autosome-2.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-2-autosome-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/figure/Figure2.Rmd/Figure 2 autosome-2.png" target="_blank">f5e9e66</a>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/6110ac8224875ca5f8c07f2b93fbc1fe8fa2ebb3/docs/figure/Figure2.Rmd/Figure 2 autosome-2.png" target="_blank">6110ac8</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/figure/Figure2.Rmd/Figure 2 autosome-2.png" target="_blank">f5e9e66</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-03-05
 </td>
 </tr>
 </tbody>
 </table>
-<p></details></p>
+</div>
+</div>
 <pre class="r"><code>
 p3 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
   geom_density_ridges(aes(x = self.cor, fill = array), scale = 0.95, bandwidth = 0.01) +
@@ -1125,36 +1442,54 @@ p3 &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
         axis.title=element_text(size=22,face=&quot;bold&quot;))
 p3</code></pre>
 <p><img src="figure/Figure2.Rmd/Figure%202%20autosome-3.png" width="1920" style="display: block; margin: auto;" /></p>
-<details> <summary><em>Expand here to see past versions of Figure 2 autosome-3.png:</em></summary>
-<table style="border-collapse:separate; border-spacing:5px;">
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-no-spaces-Figure-2-autosome-3">
+Past versions of “Figure 2 autosome-3.png”
+</button>
+</p>
+<div id="fig-no-spaces-Figure-2-autosome-3" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
 <thead>
 <tr>
-<th style="text-align:left;">
+<th>
 Version
 </th>
-<th style="text-align:left;">
+<th>
 Author
 </th>
-<th style="text-align:left;">
+<th>
 Date
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;">
-<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/figure/Figure2.Rmd/Figure 2 autosome-3.png" target="_blank">f5e9e66</a>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/6110ac8224875ca5f8c07f2b93fbc1fe8fa2ebb3/docs/figure/Figure2.Rmd/Figure 2 autosome-3.png" target="_blank">6110ac8</a>
 </td>
-<td style="text-align:left;">
+<td>
 xhyuo
 </td>
-<td style="text-align:left;">
-2019-03-04
+<td>
+2019-03-05
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/f5e9e66a1c4e64b743116504ce43d27a7684d75c/docs/figure/Figure2.Rmd/Figure 2 autosome-3.png" target="_blank">f5e9e66</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-03-05
 </td>
 </tr>
 </tbody>
 </table>
-<p></details></p>
+</div>
+</div>
 </div>
 <div id="get-agree-table" class="section level1">
 <h1>Get agree table</h1>
@@ -1251,16 +1586,16 @@ tab &lt;- data.frame(Array = c(&quot;MUGA&quot;, &quot;MEGAMUGA&quot;, &quot;GIG
                   total.percentage.disagree = c( round(100*sum(muga275.z2)/c(dim(muga275.z)[1]*dim(muga275.z)[2]),3),
                                                  round(100*sum(megamuga184.z2)/c(dim(megamuga184.z)[1]*dim(megamuga184.z)[2]),3),
                                                  round(100*sum(gigamuga358.z2)/c(dim(gigamuga358.z)[1]*dim(gigamuga358.z)[2]),3)))
-write.csv(tab, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.csv&quot;)  
-save(tab, file = &quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.RData&quot;)  </code></pre>
+write.csv(tab, file = &quot;data/Agree_table_three_array.csv&quot;)  
+save(tab, file = &quot;data/Agree_table_three_array.RData&quot;)  </code></pre>
 </div>
 <div id="show-agree-table" class="section level1">
 <h1>show agree table</h1>
-<pre class="r"><code>load(&quot;/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.RData&quot;)                       
+<pre class="r"><code>load(&quot;data/Agree_table_three_array.RData&quot;)                       
 #display summary table
 DT::datatable(tab,options = list(pageLength = 40, scrollY = &quot;300px&quot;, scrollX = &quot;40px&quot;))</code></pre>
-<div id="htmlwidget-61b14e40a9f168c7cdcc" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-61b14e40a9f168c7cdcc">{"x":{"filter":"none","data":[["1","2","3"],["MUGA","MEGAMUGA","GIGAMUGA"],["5511.05 ± 2167.27","5972.88 ± 2049.69","5137.19 ± 1752.78"],["36156.69 ± 2894.7","40132.27 ± 2277.28","35212.15 ± 1857.05"],[7.986,8.656,7.445],[52.397,58.158,51.028]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Array<\/th>\n      <th>Agree<\/th>\n      <th>Disagree<\/th>\n      <th>total.percentage.agree<\/th>\n      <th>total.percentage.disagree<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":40,"scrollY":"300px","scrollX":"40px","columnDefs":[{"className":"dt-right","targets":[4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,25,40,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fb48389eca4254c88913" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fb48389eca4254c88913">{"x":{"filter":"none","data":[["1","2","3"],["MUGA","MEGAMUGA","GIGAMUGA"],["5511.05 ± 2167.27","5972.88 ± 2049.69","5137.19 ± 1752.78"],["36156.69 ± 2894.7","40132.27 ± 2277.28","35212.15 ± 1857.05"],[7.986,8.656,7.445],[52.397,58.158,51.028]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Array<\/th>\n      <th>Agree<\/th>\n      <th>Disagree<\/th>\n      <th>total.percentage.agree<\/th>\n      <th>total.percentage.disagree<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":40,"scrollY":"300px","scrollX":"40px","columnDefs":[{"className":"dt-right","targets":[4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,25,40,50,100]}},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>
 #bar plot
 barplot(tab$total.percentage.agree,
@@ -1269,12 +1604,113 @@ barplot(tab$total.percentage.agree,
         col = c(&quot;cyan&quot;, &quot;blue&quot;, &quot;green3&quot;),
         ylim = c(0,10))</code></pre>
 <p><img src="figure/Figure2.Rmd/unnamed-chunk-1-2.png" width="672" style="display: block; margin: auto;" /></p>
-<div id="session-information" class="section level2">
-<h2>Session information</h2>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-1-2">
+Past versions of unnamed-chunk-1-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-1-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/xhyuo/Workflowr_GBRS_array/blob/6110ac8224875ca5f8c07f2b93fbc1fe8fa2ebb3/docs/figure/Figure2.Rmd/unnamed-chunk-1-2.png" target="_blank">6110ac8</a>
+</td>
+<td>
+xhyuo
+</td>
+<td>
+2019-03-05
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="new-correlation-ridge-plot" class="section level1">
+<h1>new correlation ridge plot</h1>
+<pre class="r"><code>plot_corr_ridge &lt;- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, fill = array)) + 
+  geom_density_ridges(alpha=0.9, bandwidth = 0.01) +
+  # scale_color_viridis(discrete=TRUE) +
+  # scale_fill_viridis(discrete=TRUE) +
+  scale_color_manual(values=c(&quot;#238A8DFF&quot;,  
+                              &quot;#55C667FF&quot;,  
+                              &quot;#FDE725FF&quot;)) +
+  scale_fill_manual(values=c(&quot;#238A8DFF&quot;,  
+                              &quot;#55C667FF&quot;,  
+                              &quot;#FDE725FF&quot;)) +
+  xlab(&quot;Correlation Between GBRS and Array on Autosome&quot;) +
+  ylab(&quot;&quot;) +
+  labs(fill = &quot;&quot;) +
+  scale_x_continuous(breaks = seq(-0.05, 1.0, by = 0.15), limits = c(-0.05, 1.0)) +
+  scale_y_discrete(
+    expand = c(0.01, 0.05)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = &quot;black&quot;),
+        legend.title=element_blank(), 
+        text = element_text(size=16), 
+        axis.title=element_text(size=16,face=&quot;bold&quot;)) +
+  guides(shape = guide_legend(override.aes = list(size = 8)))
+plot_corr_ridge</code></pre>
+<p><img src="figure/Figure2.Rmd/new%20correlation%20ridge%20plot-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggsave(&quot;output/Figure2.pdf&quot;, plot_corr_ridge, height = 10, width=10)
+
+
+plot_corr_ridge2 &lt;- ggplot(gbrs.array.cor, aes(self.cor)) + 
+  geom_density(aes(fill = array), alpha=0.7) +
+  # scale_color_viridis(discrete=TRUE) +
+  # scale_fill_viridis(discrete=TRUE) +
+    scale_color_manual(values=c(&quot;#238A8DFF&quot;,  
+                              &quot;#55C667FF&quot;,  
+                              &quot;#FDE725FF&quot;)) +
+  scale_fill_manual(values=c(&quot;#238A8DFF&quot;,  
+                              &quot;#55C667FF&quot;,  
+                              &quot;#FDE725FF&quot;)) +
+  xlab(&quot;Correlation Between GBRS and Array on Autosome&quot;) +
+  ylab(&quot;&quot;) +
+  labs(fill = &quot;&quot;) +
+  scale_x_continuous(breaks = seq(-0.05, 1.0, by = 0.15), limits = c(-0.05, 1.0)) +
+  scale_y_discrete(
+    expand = c(0.01, 0.05)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = &quot;black&quot;),
+        legend.title=element_blank(), 
+        text = element_text(size=24), 
+        axis.title=element_text(size=24,face=&quot;bold&quot;)) +
+  guides(shape = guide_legend(override.aes = list(size = 8)))</code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
 <pre class="r"><code>sessionInfo()
-# R version 3.3.2 (2016-10-31)
+# R version 3.6.0 (2019-04-26)
 # Platform: x86_64-pc-linux-gnu (64-bit)
-# Running under: CentOS release 6.7 (Final)
+# Running under: CentOS Linux 7 (Core)
+# 
+# Matrix products: default
+# BLAS/LAPACK: /usr/lib64/libopenblas-r0.3.3.so
 # 
 # locale:
 #  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
@@ -1288,28 +1724,26 @@ barplot(tab$total.percentage.agree,
 # [1] stats     graphics  grDevices utils     datasets  methods   base     
 # 
 # other attached packages:
-# [1] ggridges_0.5.1 ggplot2_3.1.0  sinaplot_1.1.0 plyr_1.8.4    
+# [1] cowplot_1.0.0     viridis_0.5.1     viridisLite_0.3.0 ggridges_0.5.1   
+# [5] ggplot2_3.1.1     sinaplot_1.1.0    plyr_1.8.4       
 # 
 # loaded via a namespace (and not attached):
-#  [1] Rcpp_1.0.0        later_0.7.5       pillar_1.3.1     
-#  [4] git2r_0.23.0      workflowr_1.1.1   bindr_0.1.1      
-#  [7] R.methodsS3_1.7.1 R.utils_2.5.0     tools_3.3.2      
-# [10] digest_0.6.18     jsonlite_1.6      evaluate_0.10    
-# [13] tibble_1.4.1      gtable_0.2.0      pkgconfig_2.0.2  
-# [16] rlang_0.3.1       shiny_1.2.0       crosstalk_1.0.0  
-# [19] yaml_2.2.0        bindrcpp_0.2.2    withr_2.1.2      
-# [22] stringr_1.3.1     dplyr_0.7.6       knitr_1.20       
-# [25] htmlwidgets_1.3   DT_0.4            rprojroot_1.3-2  
-# [28] grid_3.3.2        tidyselect_0.2.4  glue_1.3.0       
-# [31] R6_2.3.0          rmarkdown_1.11    purrr_0.2.2      
-# [34] magrittr_1.5      whisker_0.3-2     promises_1.0.1   
-# [37] backports_1.1.2   scales_1.0.0      htmltools_0.3.6  
-# [40] assertthat_0.2.0  xtable_1.8-3      mime_0.5         
-# [43] colorspace_1.4-0  httpuv_1.4.5      labeling_0.3     
-# [46] stringi_1.2.4     lazyeval_0.2.1    munsell_0.5.0    
-# [49] crayon_1.3.4      R.oo_1.21.0</code></pre>
+#  [1] Rcpp_1.0.3       compiler_3.6.0   pillar_1.4.1     later_1.0.0     
+#  [5] git2r_0.26.1     highr_0.8        workflowr_1.5.0  tools_3.6.0     
+#  [9] digest_0.6.22    jsonlite_1.6     evaluate_0.14    tibble_2.1.3    
+# [13] gtable_0.3.0     pkgconfig_2.0.2  rlang_0.4.1      shiny_1.3.2     
+# [17] crosstalk_1.0.0  yaml_2.2.0       xfun_0.11        gridExtra_2.3   
+# [21] withr_2.1.2      stringr_1.4.0    dplyr_0.8.1      knitr_1.26      
+# [25] htmlwidgets_1.3  fs_1.3.1         DT_0.10          rprojroot_1.3-2 
+# [29] grid_3.6.0       tidyselect_0.2.5 glue_1.3.1       R6_2.4.1        
+# [33] rmarkdown_1.13   purrr_0.3.2      magrittr_1.5     whisker_0.4     
+# [37] backports_1.1.5  scales_1.0.0     promises_1.1.0   htmltools_0.4.0 
+# [41] assertthat_0.2.1 xtable_1.8-4     mime_0.7         colorspace_1.4-1
+# [45] httpuv_1.5.2     labeling_0.3     stringi_1.4.3    lazyeval_0.2.2  
+# [49] munsell_0.5.0    crayon_1.3.4</code></pre>
 </div>
 </div>
+
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
@@ -1322,14 +1756,6 @@ footer is added to webpages before the MathJax javascript. -->
     "HTML-CSS": { availableFonts: ["TeX"] }
   });
 </script>
-
-<hr>
-<p>
-  This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a>
-  analysis was created with
-  <a href="https://github.com/jdblischak/workflowr">workflowr</a> 1.1.1
-</p>
-<hr>
 
 
 </div>
