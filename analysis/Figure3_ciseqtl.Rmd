@@ -47,6 +47,23 @@ cis.eqtl.total <- list()
 cislod.plot <- list()
 for (i in meta.data){
   cis.eqtl.total[[i]] <- get(load(paste0("./output/",i,"_cis.eqtl.RData")))
+  # #cutoff
+  # if(i == "gbrs275"){
+  #   cutoff = 6.637
+  # }else if(i == "fixed.muga275"){
+  #   cutoff = 6.642903
+  # }else if(i == "gbrs184"){
+  #   cutoff = 6.733226
+  # }else if(i == "fixed.megamuga184"){
+  #   cutoff = 6.937301
+  # }else if(i == "gbrs358"){
+  #   cutoff = 7.081477
+  # }else if(i == "fixed.gigamuga358"){
+  #   cutoff = 7.045437
+  # } else {
+  #   cutoff = 0
+  # }
+  # cis.eqtl.total[[i]] <- cis.eqtl.total[[i]][cis.eqtl.total[[i]]$cislod >=cutoff,]
   # quantile and combine cisqtl
   cislod.plot[[i]]$array = rep(i,100)
   cislod.plot[[i]]$sub.array = rep(i,100)
@@ -133,7 +150,7 @@ p1 <- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) +
                               "#238A8DFF", "#238A8DFF", "#238A8DFF")) +
   scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
   xlab("Quantile of LOD") +
-  ylab("LOD of cis-eQTL") +
+  ylab("") +
   theme(aspect.ratio=1) +
   #ggtitle("Cis-eQTL with generation") + 
   scale_y_continuous(limits=c(0, 160)) +
@@ -141,12 +158,16 @@ p1 <- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) +
         panel.grid.minor = element_blank(),
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"),
+        axis.title.y=element_blank(),
         legend.title=element_blank(), 
-        text = element_text(size=16), 
+        text = element_text(size=12), 
         strip.text.y = element_blank(),
-        axis.title=element_text(size=16,face="bold"),
-        legend.text = element_text(size=10)) +
-  facet_grid(array ~ .) +
+        strip.background = element_blank(),
+        strip.text.x = element_blank(),
+        axis.title=element_text(size=12),
+        plot.margin = unit(c(0,0,0,0), "cm"),
+        legend.text = element_text(size=8)) +
+  facet_wrap(.~array, ncol = 1, nrow = 3, scales = "free") +
   theme(legend.key.width = unit(0.5,"cm")) + 
   guides(linetype = guide_legend(override.aes = list(size = 1)))
 
@@ -156,45 +177,135 @@ p1
 
 # Figure 3, Cis-eQTL pair
 ```{r Figure 3, Cis-eQTL pair, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
-d1 <- data.frame(x = cis.eqtl.total$gbrs275$cislod, 
-                 y = cis.eqtl.total$fixed.muga275$cislod,
-                 z = "MUGA")
-d2 <- data.frame(x = cis.eqtl.total$gbrs184$cislod, 
-                 y = cis.eqtl.total$fixed.megamuga184$cislod,
-                 z = "MEGAMUGA")
+#muga
+b_cutoff = 6.637
+c_cutoff = 6.642903
+d1 <- merge(cis.eqtl.total$gbrs275,
+cis.eqtl.total$fixed.muga275, by = c("gene", "nearest_marker"),
+all.x = TRUE, all.y = TRUE)
+d1$z <- ifelse(d1$cislod.x >= b_cutoff & d1$cislod.y >= c_cutoff, "Both",
+ifelse(d1$cislod.x <= b_cutoff & d1$cislod.y <= c_cutoff, "Both_fail",
+ifelse(d1$cislod.x >= b_cutoff & d1$cislod.y < c_cutoff,"GBRS",
+"FIXED.MUGA")))
+d1 <- d1[d1$z != "Both_fail",]
+d1$array = "MUGA"
 
-d3 <- data.frame(x = cis.eqtl.total$gbrs358$cislod, 
-                 y = cis.eqtl.total$fixed.gigamuga358$cislod,
-                 z = "GIGAMUGA")
-d <- do.call(rbind.data.frame,list(d1,d2,d3))
-#d <- d[d$x>=8 | d$y>=8,]
-plot_cispair <- ggplot(data=d, aes(x=x, y = y)) + 
-  geom_point(aes(color=z), size = 1, show.legend = F) +
-  scale_color_manual(values=c("#FDE725FF", 
-                              "#55C667FF", 
-                              "#238A8DFF")) +
+#megamuga
+b_cutoff = 6.733226
+c_cutoff = 6.937301
+d2 <- merge(cis.eqtl.total$gbrs184,
+cis.eqtl.total$fixed.megamuga184, by = c("gene", "nearest_marker"),
+all.x = TRUE, all.y = TRUE)
+d2$z <- ifelse(d2$cislod.x >= b_cutoff & d2$cislod.y >= c_cutoff, "Both",
+ifelse(d2$cislod.x <= b_cutoff & d2$cislod.y <= c_cutoff, "Both_fail",
+ifelse(d2$cislod.x >= b_cutoff & d2$cislod.y < c_cutoff,"GBRS",
+"FIXED.MEGAMUGA")))
+d2 <- d2[d2$z != "Both_fail",]
+d2$array = "MEGAMUGA"
+
+#gigamuga
+b_cutoff = 7.081477
+c_cutoff = 7.045437
+d3 <- merge(cis.eqtl.total$gbrs358,
+cis.eqtl.total$fixed.gigamuga358, by = c("gene", "nearest_marker"),
+all.x = TRUE, all.y = TRUE)
+d3$z <- ifelse(d3$cislod.x >= b_cutoff & d3$cislod.y >= c_cutoff, "Both",
+ifelse(d3$cislod.x <= b_cutoff & d3$cislod.y <= c_cutoff, "Both_fail",
+ifelse(d3$cislod.x >= b_cutoff & d3$cislod.y < c_cutoff,"GBRS",
+"FIXED.GIGAMUGA")))
+d3 <- d3[d3$z != "Both_fail",]
+d3$array = "GIGAMUGA"
+
+plot_bcpair1 <- ggplot(d1) + 
+  geom_point(aes(cislod.x, cislod.y, 
+                 color = factor(d1$z)), 
+             size = 0.5) + 
+  scale_color_manual(values=c("red",
+                              "#FDE725FF", 
+                              "#404788FF")) +
   theme(aspect.ratio=1) +
-  xlab("LOD of cis-eQTL in GBRS") +
-  ylab("LOD of cis-eQTL in array") +
-  #ggtitle("Cis-eQTL with generation") + 
+  xlab("") +
+  ylab("Cis-eQTL LOD in FIXED.MUGA") +
   scale_y_continuous(limits=c(0, 160)) +
-  scale_x_continuous(limits=c(0, 160)) +  
+  scale_x_continuous(limits=c(0, 160)) +
+  theme(legend.position="none") +
   geom_abline(slope=1, intercept=0) +
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"),
         legend.title=element_blank(), 
-        text = element_text(size=16), 
+        text = element_text(size=12),
+        axis.title.x=element_blank(),
         strip.text.y = element_blank(),
-        axis.title=element_text(size=16,face="bold"),
-        legend.text = element_text(size=10)) +
-  facet_grid(z ~ .)
+        plot.margin = unit(c(0,0,0,0), "cm"),
+        axis.title=element_text(size=12))
+plot_bcpair1
+
+plot_bcpair2 <- ggplot(d2) + 
+  geom_point(aes(cislod.x, cislod.y, 
+                 color = factor(d2$z)), 
+             size = 0.5) + 
+  scale_color_manual(values=c("red",
+                              "#55C667FF", 
+                              "#404788FF")) +
+  theme(aspect.ratio=1) +
+  xlab("") +
+  ylab("Cis-eQTL LOD in FIXED.MEGAMUGA") +
+  scale_y_continuous(limits=c(0, 160)) +
+  scale_x_continuous(limits=c(0, 160)) +
+  theme(legend.position="none") +
+  geom_abline(slope=1, intercept=0) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=12),
+        axis.title.x=element_blank(),
+        strip.text.y = element_blank(),
+        plot.margin = unit(c(0,0,0,0), "cm"),
+        axis.title=element_text(size=12))
+plot_bcpair2
+
+plot_bcpair3 <- ggplot(d3) + 
+  geom_point(aes(cislod.x, cislod.y, 
+                 color = factor(d3$z)), 
+             size = 0.5) + 
+  scale_color_manual(values=c("red",
+                              "#238A8DFF", 
+                              "#404788FF")) +
+  theme(aspect.ratio=1) +
+  xlab("Cis-eQTL LOD in GBRS") +
+  ylab("Cis-eQTL LOD in FIXED.GIGAMUGA") +
+  scale_y_continuous(limits=c(0, 160)) +
+  scale_x_continuous(limits=c(0, 160)) +
+  theme(legend.position="none") +
+  geom_abline(slope=1, intercept=0) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=12),
+        #axis.title.x=element_blank(),
+        strip.text.y = element_blank(),
+        plot.margin = unit(c(0,0,0,0), "cm"),
+        axis.title=element_text(size=12))
+plot_bcpair3
+
+
+plot_bcpair_col <- plot_grid(plot_bcpair1,
+                             plot_bcpair2,
+                             plot_bcpair3, 
+                             labels = c("A", "B", "C"), hjust = -6,
+                             align = "hv",nrow = 3)
+plot_bcpair_col
+
 ## Figure 3  Combine all
-fig3 <- plot_grid(plot_cispair, p1, labels=c('A','B'),
-                  align = "h")
+fig3 <- plot_grid(plot_bcpair_col, p1, ncol = 2)
 fig3
-ggsave("output/Figure3.pdf", fig3, height = 14, width=14)
+ggsave("output/Figure3_cis.pdf", fig3, height = 14, width=14)
 
 ```
 
