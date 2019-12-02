@@ -15,7 +15,6 @@ vignette: >
 knitr::opts_chunk$set(comment = "#",collapse = TRUE)
 ```
 
-# Figure 1. The number of recombinations
 a) Why don’t we try a single Sinaplot that includes all the results (GBRS, Muga, Megamuga, and Gigamuga) across all existing generations. 
 Please use genotype-call based recombinations for GBRS. 
 For this manuscript, I like to pick sigma=0.130 which gets us a consistent slope value around 18-20. 
@@ -24,23 +23,30 @@ I believe though I should re-run GBRS for Striatum data since I used sigma=0.120
 b) Gary wants a single scatterplot of array vs GBRS w.r.t # of recombinations. 
 Each array type should be given a different color.
 
-```{r Figure 1, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+```{r}
 library(sinaplot)
 library(ggplot2)
 library(plyr)
+library(ggridges)
+library(viridis)
+library(cowplot)
+```
 
+# Figure 1. The number of recombinations
+```{r Figure 1, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+#setwd("/home/heh/GBRS/Workflowr_GBRS_array/")
 #load recombination results for three arrays
 #DO_liver
 #muga
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/muga275.recomb.RData")
+load("data/muga275.recomb.RData")
 muga275.recomb$array <- "MUGA"
 muga275.recomb$array.sub <- "MUGA"
 #megamuga
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/megamuga184.recomb.RData")
+load("data/megamuga184.recomb.RData")
 megamuga184.recomb$array <- "MEGAMUGA"
 megamuga184.recomb$array.sub <- "MEGAMUGA"
 #DO liver GBRS
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/DO_liver_recomb.GBRS.genotypes.RData")
+load("data/DO_liver_recomb.GBRS.genotypes.RData")
 gbrs.genotype.recomb <- recomb.GBRS.genotypes$`0.130`[recomb.GBRS.genotypes$`0.130`$Sample %in% c(as.character(muga275.recomb$Sample),as.character(megamuga184.recomb$Sample)),]
 gbrs.genotype.recomb$array <- "GBRS"
 gbrs.genotype.recomb$array.sub <- NULL
@@ -52,15 +58,15 @@ gbrs.genotype.recomb[gbrs.genotype.recomb$Sample %in% c(as.character(megamuga184
 #DO_liver recombinations
 DO_liver_recomb <- rbind(rbind(muga275.recomb,megamuga184.recomb),gbrs.genotype.recomb)
 #merge with sample sheet in DO_liver
-sample.sheet <- read.table("/projects/heh/HH/GBRS_array/data/DO_Liver/sample_sheet.tsv", header = TRUE)
+sample.sheet <- read.table("data/DO_Liver_sample_sheet.tsv", header = TRUE)
 DO_liver_recomb <- merge(DO_liver_recomb,sample.sheet, by = "Sample", all.x = TRUE)
 DO_liver_recomb <- DO_liver_recomb[,c(1:6)]
 
 #DO_Striatum
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/gigamuga358.recomb.RData")
+load("data/gigamuga358.recomb.RData")
 gigamuga358.recomb$array <- "GIGAMUGA"
 gigamuga358.recomb$array.sub <- "GIGAMUGA"
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/DO_Striatum_recomb.GBRS.genotypes.RData")
+load("data/DO_Striatum_recomb.GBRS.genotypes.RData")
 # gbrs.genotype.recomb <- gbrs.genotype.recomb[gbrs.genotype.recomb$Sample %in% gigamuga358.recomb$Sample,]
 gbrs.genotype.recomb <- recomb.GBRS.genotypes$`0.130`[recomb.GBRS.genotypes$`0.130`$Sample %in% gigamuga358.recomb$Sample,]
 gbrs.genotype.recomb$array <- "GBRS"
@@ -68,7 +74,7 @@ gbrs.genotype.recomb$array.sub <- "GBRS.GIGAMUGA"
 #DO_striatum recombinations
 DO_striatum_recomb <- rbind(gigamuga358.recomb,gbrs.genotype.recomb)
 #merge with sample sheet in DO_Striatum
-sample.sheet <- read.table("/projects/heh/HH/GBRS_array/data/DO_Striatum/sample_sheet.tsv", header = TRUE)
+sample.sheet <- read.table("data/DO_Striatum_sample_sheet.tsv", header = TRUE)
 DO_striatum_recomb <- merge(DO_striatum_recomb,sample.sheet, by = "Sample", all.x = TRUE)
 DO_striatum_recomb <- DO_striatum_recomb[,c(1:6)]
 
@@ -103,19 +109,19 @@ plot_recomb_ind <- ggplot(recomb_ind, aes(x=recomb.x, y=recomb.y)) +
   scale_y_continuous(limits=c(100, 600)) +
   scale_x_continuous(limits=c(100, 600)) +
   geom_abline(slope=1, intercept=0) +
-  theme(legend.title=element_blank(),legend.text=element_text(size=22), 
-        text = element_text(size=22), axis.title=element_text(size=22)) +
-  theme(plot.title = element_text(hjust=0.5, size = 22)) +
-  guides(colour = guide_legend(override.aes = list(size=5)))
+  theme(legend.title=element_blank(),legend.text=element_text(size=16), 
+        text = element_text(size=16), axis.title=element_text(size=16)) +
+  theme(plot.title = element_text(hjust=0.5, size = 16)) +
+  guides(colour = guide_legend(override.aes = list(size=8)))
 
 plot_recomb_ind
 
 #Figure1_sinaplot
 #color
-# GBRS <- "red",
-# MUGA <- "cyan",
-# MEGAMUGA <- "blue",
-# GIGAMUGA <- "green3"
+# GBRS <- "#404788FF",
+# MUGA <- "#FDE725FF",
+# MEGAMUGA <- "#55C667FF",
+# GIGAMUGA <- "#238A8DFF"
 #pdf(file = "Figure1_sinaplot_array.sub.pdf", width = 12, height = 10)
 sinaplot(formula = recomb ~ array.sub, data = recomb, col = c("red","cyan","red","blue","red","green3"), pch = c(15,18,15,17,15,16), bty = "n",
          xlab = "",
@@ -154,9 +160,9 @@ p2 <- ggplot(recomb, aes(x=Gen, y=recomb)) +
   scale_fill_manual(values=c("red","green3", "blue", "cyan")) +
   labs(x = "DO Outbreeding Generations") +
   labs(y = "Number of Recombinations") +
-  theme(legend.title=element_blank(), text = element_text(size=22), 
-        axis.title=element_text(size=22,face="bold")) +
-  guides(shape = guide_legend(override.aes = list(size = 5)))
+  theme(legend.title=element_blank(), text = element_text(size=16), 
+        axis.title=element_text(size=16,face="bold")) +
+  guides(shape = guide_legend(override.aes = list(size = 8)))
 p2
 #with slope
 p3 <- ggplot(recomb, aes(x=Gen, y=recomb)) + 
@@ -171,10 +177,175 @@ p3 <- ggplot(recomb, aes(x=Gen, y=recomb)) +
   scale_fill_manual(values=c("red","green3", "blue", "cyan")) +
   labs(x = "DO Outbreeding Generations") +
   labs(y = "Number of Recombinations") +
-  theme(legend.title=element_blank(), text = element_text(size=22), 
-        axis.title=element_text(size=22,face="bold")) +
-  guides(shape = guide_legend(override.aes = list(size = 5)))
+  theme(legend.title=element_blank(), text = element_text(size=16), 
+        axis.title=element_text(size=16,face="bold")) +
+  guides(shape = guide_legend(override.aes = list(size = 8)))
 p3
 #dev.off()
 ```
 
+# Figure 1. The number of recombinations (new color scheme)
+```{r Figure 1 new color scheme, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+#scatter plot
+plot_recomb_ind2 <- ggplot(recomb_ind, aes(x=recomb.x, y=recomb.y)) + 
+  geom_point(aes(shape = array.sub.y, color = array.sub.y), size = 2) + 
+  scale_shape_manual(values=c(19,17,15)) +
+  #scale_color_viridis(discrete=TRUE) +
+  #scale_fill_viridis(discrete=TRUE) +
+  scale_color_manual(values=c("#238A8DFF",  
+                              "#55C667FF",  
+                              "#FDE725FF")) +
+  theme(aspect.ratio=1) +
+  theme_bw()+
+  xlab("Recombination in GBRS") +
+  ylab("Recombination in array") +
+  ggtitle("Recombination for each sample in GBRS vs array") + 
+  scale_y_continuous(limits=c(100, 600)) +
+  scale_x_continuous(limits=c(100, 600)) +
+  geom_abline(slope=1, intercept=0) +
+  theme(legend.title=element_blank(),legend.text=element_text(size=16), 
+        text = element_text(size=16), axis.title=element_text(size=16)) +
+  theme(plot.title = element_text(hjust=0.5, size = 16)) +
+  guides(colour = guide_legend(override.aes = list(size=6)))
+plot_recomb_ind2
+
+# violin plot with boxplot
+plot_recomb_sina1 <- ggplot(recomb, aes(x=array.sub, y=recomb)) + 
+  geom_violin(aes(fill=array), show.legend = F) +
+  #scale_color_viridis(discrete=TRUE) +
+  #scale_fill_viridis(discrete=TRUE) +
+  scale_color_manual(values=c("#404788FF",
+                              "#238A8DFF",  
+                              "#55C667FF",  
+                              "#FDE725FF")) +
+  scale_fill_manual(values=c("#404788FF",
+                             "#238A8DFF",  
+                             "#55C667FF",  
+                             "#FDE725FF")) +
+  geom_boxplot(width = 0.2) + 
+  ylab("Number of recombination") +
+  xlab("") +
+  labs(fill = "") +
+  scale_y_continuous(limits=c(100, 600), breaks = seq(100, 600,100)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=16), 
+        axis.title=element_text(size=16),
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  guides(shape = guide_legend(override.aes = list(size = 6)))
+plot_recomb_sina1
+
+
+plot_recomb_sina2 <- ggplot(recomb, aes(x=array, y=recomb)) + 
+  geom_violin(aes(fill=array)) +
+  # scale_color_viridis(discrete=TRUE) +
+  # scale_fill_viridis(discrete=TRUE) +
+  scale_color_manual(values=c("#404788FF",
+                              "#238A8DFF",  
+                              "#55C667FF",  
+                              "#FDE725FF")) +
+  scale_fill_manual(values=c("#404788FF",
+                             "#238A8DFF",  
+                             "#55C667FF",  
+                             "#FDE725FF")) +
+  geom_boxplot(width = 0.1) + 
+  ylab("Number of recombination") +
+  xlab("") +
+  labs(fill = "") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=16), 
+        axis.title=element_text(size=16,face="bold")) +
+  guides(shape = guide_legend(override.aes = list(size = 8)))
+plot_recomb_sina2
+
+#pdf(file = "Figure1_scatterplot.pdf", width = 12, height = 10)
+lm_eqn <- function(df){
+    df$x <- as.numeric(as.character(df$x))
+    m <- lm(y ~ x, df);
+    eq <- substitute(italic(y) == a + b %.% italic(x), 
+         list(a = format(coef(m)[1], digits = 2), 
+              b = format(coef(m)[2], digits = 2)))
+    as.character(as.expression(eq));                 
+}
+
+recomb$Gen <- factor(recomb$Gen, levels = as.character(c(4:23)))
+plot_recomb_ridge1 <- ggplot(recomb, aes(x=recomb, y=Gen, fill = array)) + 
+  geom_density_ridges(alpha=0.8, scale = 1, rel_min_height = 0.005) +
+  # scale_color_viridis(discrete=TRUE) +
+  # scale_fill_viridis(discrete=TRUE) +
+  scale_color_manual(values=c("#404788FF",
+                              "#238A8DFF",  
+                              "#55C667FF",  
+                              "#FDE725FF")) +
+  scale_fill_manual(values=c("#404788FF",
+                             "#238A8DFF",  
+                             "#55C667FF",  
+                             "#FDE725FF")) +
+  scale_y_discrete(drop=FALSE,breaks = c(4,5,NA,7,rep(NA,3),11,rep(NA,9),21:23)) +
+  xlab("Number of recombination") +
+  ylab("Generation") +
+  labs(fill = "") +
+  scale_x_continuous(limits=c(100, 600), breaks = seq(100, 600,100)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        legend.text=element_text(size=10),
+        legend.key.size = unit(0.5, "cm"),
+        text = element_text(size=12), 
+        axis.title=element_text(size=16)) +
+  guides(shape = guide_legend(override.aes = list(size = 10))) +
+  geom_smooth(method = "lm", se=FALSE, color="black", aes(group=1), 
+              linetype="dotted", show.legend = FALSE) +
+  # geom_text(x = 11, y = 500, size = 14, 
+  #           label = lm_eqn(df = data.frame(y = recomb$recomb, x = recomb$Gen)), parse = TRUE) +
+  coord_flip()
+plot_recomb_ridge1
+
+plot_recomb_ridge2 <- ggplot(recomb, aes(x=recomb, y=Gen, fill = array)) + 
+  geom_density_ridges(alpha=0.8, scale = 1, rel_min_height = 0.005) +
+  # scale_color_viridis(discrete=TRUE) +
+  # scale_fill_viridis(discrete=TRUE) +
+  scale_color_manual(values=c("#404788FF",
+                              "#238A8DFF",  
+                              "#55C667FF",  
+                              "#FDE725FF")) +
+  scale_fill_manual(values=c("#404788FF",
+                             "#238A8DFF",  
+                             "#55C667FF",  
+                             "#FDE725FF")) +
+  scale_y_discrete(drop=FALSE,breaks = c(4,5,NA,7,rep(NA,3),11,rep(NA,9),21:23), expand = c(0.05,0)) +
+  xlab("Number of recombination") +
+  ylab("Generation") +
+  labs(fill = "") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=16), 
+        axis.title=element_text(size=16,face="bold")) +
+  guides(shape = guide_legend(override.aes = list(size = 8))) +
+  coord_flip() +
+  facet_wrap(~Sex)
+plot_recomb_ridge2
+
+
+fig1 <- plot_grid(plot_recomb_sina1,
+                  plot_recomb_ridge1,
+                  labels = c("A", "B"), hjust = -2,
+                  align = "h",nrow = 1, ncol = 2)
+
+ggsave("output/Figure1.pdf", fig1, height = 8, width=12)
+
+```

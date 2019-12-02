@@ -27,14 +27,15 @@ library(plyr)
 library(VennDiagram)
 library(dplyr)
 library(data.table)
-library(qvalue)
+#library(qvalue)
 library(gridExtra)
 library(plotly)
 library(reshape2)
 library(MASS)
 library(ggplot2)
 library(viridis)
-
+library(cowplot)
+#setwd("/home/heh/GBRS/Workflowr_GBRS_array/")
 #eqtl results with generation -----------------------------------------------------------------
 #load cis-eqtl
 ##meta data
@@ -42,18 +43,16 @@ meta.data <- c("muga275", "gbrs275", "fixed.muga275",
                "megamuga184","gbrs184","fixed.megamuga184",
                "gigamuga358","gbrs358","fixed.gigamuga358")
 
-mainDir <- "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/"
-
 cis.eqtl.total <- list()
 cislod.plot <- list()
 for (i in meta.data){
-  cis.eqtl.total[[i]] <- get(load(paste0(mainDir,i,"/",i,"_cis.eqtl.RData")))
+  cis.eqtl.total[[i]] <- get(load(paste0("./output/",i,"_cis.eqtl.RData")))
   # quantile and combine cisqtl
   cislod.plot[[i]]$array = rep(i,100)
   cislod.plot[[i]]$sub.array = rep(i,100)
-  cislod.plot[[i]]$qgrid = seq(from=0.70, to=0.999, length=100)
+  cislod.plot[[i]]$qgrid = seq(from=0.70, to=1, length=100)
   cislod.plot[[i]]$quantile.cislod <- quantile(cis.eqtl.total[[i]]$cislod[!is.nan(cis.eqtl.total[[i]]$cislod)],
-                      seq(from=0.70, to=0.999, length=100))
+                      seq(from=0.70, to=1, length=100))
   }
 cislod.plot.data <- do.call(rbind.data.frame, cislod.plot)
 cislod.plot.data$array <- ordered(cislod.plot.data$array, 
@@ -123,3 +122,79 @@ p <- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) +
 #facet_grid(.~array, scales="free", space="free")
 p
 ```
+
+# Figure 3, Cis-eQTL, new color scheme
+```{r Figure 3, Cis-eQTL, new color scheme, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+
+p1 <- ggplot(data=cislod.plot.data, aes(x=qgrid, y = quantile.cislod)) + 
+  geom_line(aes(linetype=sub.array,color=sub.array), size = 1) +
+  scale_color_manual(values=c("#FDE725FF", "#FDE725FF", "#FDE725FF", 
+                              "#55C667FF", "#55C667FF", "#55C667FF", 
+                              "#238A8DFF", "#238A8DFF", "#238A8DFF")) +
+  scale_linetype_manual(values= rep(c("dashed","solid","twodash"), times = 3))+
+  xlab("Quantile of LOD") +
+  ylab("LOD of cis-eQTL") +
+  theme(aspect.ratio=1) +
+  #ggtitle("Cis-eQTL with generation") + 
+  scale_y_continuous(limits=c(0, 160)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=16), 
+        strip.text.y = element_blank(),
+        axis.title=element_text(size=16,face="bold"),
+        legend.text = element_text(size=10)) +
+  facet_grid(array ~ .) +
+  theme(legend.key.width = unit(0.5,"cm")) + 
+  guides(linetype = guide_legend(override.aes = list(size = 1)))
+
+p1
+
+```
+
+# Figure 3, Cis-eQTL pair
+```{r Figure 3, Cis-eQTL pair, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+d1 <- data.frame(x = cis.eqtl.total$gbrs275$cislod, 
+                 y = cis.eqtl.total$fixed.muga275$cislod,
+                 z = "MUGA")
+d2 <- data.frame(x = cis.eqtl.total$gbrs184$cislod, 
+                 y = cis.eqtl.total$fixed.megamuga184$cislod,
+                 z = "MEGAMUGA")
+
+d3 <- data.frame(x = cis.eqtl.total$gbrs358$cislod, 
+                 y = cis.eqtl.total$fixed.gigamuga358$cislod,
+                 z = "GIGAMUGA")
+d <- do.call(rbind.data.frame,list(d1,d2,d3))
+#d <- d[d$x>=8 | d$y>=8,]
+plot_cispair <- ggplot(data=d, aes(x=x, y = y)) + 
+  geom_point(aes(color=z), size = 1, show.legend = F) +
+  scale_color_manual(values=c("#FDE725FF", 
+                              "#55C667FF", 
+                              "#238A8DFF")) +
+  theme(aspect.ratio=1) +
+  xlab("LOD of cis-eQTL in GBRS") +
+  ylab("LOD of cis-eQTL in array") +
+  #ggtitle("Cis-eQTL with generation") + 
+  scale_y_continuous(limits=c(0, 160)) +
+  scale_x_continuous(limits=c(0, 160)) +  
+  geom_abline(slope=1, intercept=0) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=16), 
+        strip.text.y = element_blank(),
+        axis.title=element_text(size=16,face="bold"),
+        legend.text = element_text(size=10)) +
+  facet_grid(z ~ .)
+## Figure 3  Combine all
+fig3 <- plot_grid(plot_cispair, p1, labels=c('A','B'),
+                  align = "h")
+fig3
+ggsave("output/Figure3.pdf", fig3, height = 14, width=14)
+
+```
+

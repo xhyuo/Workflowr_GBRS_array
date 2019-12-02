@@ -31,11 +31,12 @@ library(MASS)
 library(ggplot2)
 library(viridis)
 library(parallel)
+library(cowplot)
 
 a1 = a2 = a3 = n12 = n13 = n23 = n123 = list()
-load("/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData")
+load("output/gene.anno.cis.RData")
 #load eqtl pvalue for muga275
-a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/muga275/muga275_pvalue.RData"))
+a <- get(load("output/muga275_pvalue.RData"))
 a <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 a$marker <- paste0(a$chr,"_",as.integer(a$pos))
 a$max_qvalue <- qvalue(p = a$pval)$qvalues
@@ -44,7 +45,7 @@ a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 a$cis_trans <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06),"cis", "trans")
 a <- a[a$max_qvalue <= 0.05 & a$cis_trans == "trans",]
 
-b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData"))
+b <- get(load("output/gbrs275_pvalue.RData"))
 b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 b$marker <- paste0(b$chr,"_",as.integer(b$pos))
 b$max_qvalue <- qvalue(p = b$pval)$qvalues
@@ -53,7 +54,7 @@ b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
 b <- b[b$max_qvalue <= 0.05 & b$cis_trans == "trans",]
 
-c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData"))
+c <- get(load("output/fixed.muga275_pvalue.RData"))
 c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 c$marker <- paste0(c$chr,"_",as.integer(c$pos))
 c$max_qvalue <- qvalue(p = c$pval)$qvalues
@@ -246,7 +247,7 @@ n23[[1]] <- length(unique(intersect(unique(b$marker), unique(c$marker))))
 n123[[1]] = length(unique(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker)))))
 
 #load eqtl pvalue for megamuga184
-a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/megamuga184/megamuga184_pvalue.RData"))
+a <- get(load("output/megamuga184_pvalue.RData"))
 a <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 a$marker <- paste0(a$chr,"_",as.integer(a$pos))
 a$max_qvalue <- qvalue(p = a$pval)$qvalues
@@ -255,7 +256,7 @@ a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 a$cis_trans <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06),"cis", "trans")
 a <- a[a$max_qvalue <= 0.05 & a$cis_trans == "trans",]
 
-b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData"))
+b <- get(load("output/gbrs184_pvalue.RData"))
 b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 b$marker <- paste0(b$chr,"_",as.integer(b$pos))
 b$max_qvalue <- qvalue(p = b$pval)$qvalues
@@ -264,7 +265,7 @@ b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
 b <- b[b$max_qvalue <= 0.05 & b$cis_trans == "trans",]
 
-c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData"))
+c <- get(load("output/fixed.megamuga184_pvalue.RData"))
 c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 c$marker <- paste0(c$chr,"_",as.integer(c$pos))
 c$max_qvalue <- qvalue(p = c$pval)$qvalues
@@ -457,7 +458,7 @@ n23[[2]] <- length(unique(intersect(unique(b$marker), unique(c$marker))))
 n123[[2]] = length(unique(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker)))))
 
 #load eqtl pvalue for gigamuga358
-a <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gigamuga358/gigamuga358_pvalue.RData"))
+a <- get(load("output/gigamuga358_pvalue.RData"))
 a <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 a$marker <- paste0(a$chr,"_",as.integer(a$pos))
 a$max_qvalue <- qvalue(p = a$pval)$qvalues
@@ -466,7 +467,7 @@ a <- merge(a, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 a$cis_trans <- ifelse((a$chr.y == a$chr.x) & (abs(a$pos - a$start) <= 5e+06),"cis", "trans")
 a <- a[a$max_qvalue <= 0.05 & a$cis_trans == "trans",]
 
-b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData"))
+b <- get(load("output/gbrs358_pvalue.RData"))
 b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 b$marker <- paste0(b$chr,"_",as.integer(b$pos))
 b$max_qvalue <- qvalue(p = b$pval)$qvalues
@@ -475,7 +476,7 @@ b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
 b <- b[b$max_qvalue <= 0.05 & b$cis_trans == "trans",]
 
-c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData"))
+c <- get(load("output/fixed.gigamuga358_pvalue.RData"))
 c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 c$marker <- paste0(c$chr,"_",as.integer(c$pos))
 c$max_qvalue <- qvalue(p = c$pval)$qvalues
@@ -667,9 +668,9 @@ n13[[3]] <- length(unique(intersect(unique(a$marker), unique(c$marker))))
 n23[[3]] <- length(unique(intersect(unique(b$marker), unique(c$marker))))
 n123[[3]] = length(unique(intersect(unique(a$marker),intersect(unique(b$marker), unique(c$marker)))))
 
-save(a1,a2,a3,n12, n13, n23, n123, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData")
+save(a1,a2,a3,n12, n13, n23, n123, file = "output/venn_diag_transeqtl_max.RData")
 
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/venn_diag_transeqtl_max.RData")
+load("output/venn_diag_transeqtl_max.RData")
 #bar plot
 barplot(c(a3[[1]],a3[[2]],a3[[3]]),
         ylab = "Number of trans-eQTL at FDR 0.05",
@@ -725,11 +726,11 @@ grid.arrange(gTree(children=g3))
 
 # Figure 3 Scatterplot for Trans-eQTL at FDR 0.05 (5 Mb)
 ```{r Figure 3 Scatterplot for Trans-eQTL at FDR 0.05 5Mb, message=FALSE, eval=TRUE,fig.height=16, fig.width=16}
-load("/projects/heh/HH/GBRS_array/data/gene.anno.cis.RData")
+load("output/gene.anno.cis.RData")
 
 ######MUGA275######
 #load eqtl pvalue for gbrs275
-b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275_pvalue.RData"))
+b <- get(load("output/gbrs275_pvalue.RData"))
 b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 b$marker <- paste0(b$chr,"_",as.integer(b$pos))
 b$max_qvalue <- qvalue(p = b$pval)$qvalues
@@ -738,8 +739,9 @@ b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
 b <- b[b$max_qvalue <= 0.05 & b$cis_trans == "trans",]
 b_cutoff <- as.numeric(b[which.max(b$max_qvalue),"lod"])
+b_cutoff
 
-c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275_pvalue.RData"))
+c <- get(load("output/fixed.muga275_pvalue.RData"))
 c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 c$marker <- paste0(c$chr,"_",as.integer(c$pos))
 c$max_qvalue <- qvalue(p = c$pval)$qvalues
@@ -748,7 +750,7 @@ c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 c$cis_trans <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06),"cis", "trans")
 c <- c[c$max_qvalue <= 0.05 & c$cis_trans == "trans",]
 c_cutoff <- as.numeric(c[which.max(c$max_qvalue),"lod"])
-
+c_cutoff
 
 #get all the pair eqtl marker and gene from b and c
 bc_pair <- rbind(b[,c("genes","eqtl_marker")],c[,c("genes","eqtl_marker")])
@@ -756,28 +758,30 @@ bc_pair$genes <- as.character(bc_pair$genes)
 bc_pair <- bc_pair[!duplicated(bc_pair[,1:2]),]
 
 #extract from b and c respectively
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs275/gbrs275.eqtl.RData")
-bc_pair_b_lod <- bc_pair
-bc_pair_b_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
-                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
-                                             mc.cores = 20,
-                                             mc.preschedule = F)))
-bc_pair_b_lod$g <- "GBRS"
+# load("output/gbrs275.eqtl.RData")
+# bc_pair_b_lod <- bc_pair
+# bc_pair_b_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+#                                              FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+#                                              mc.cores = 20,
+#                                              mc.preschedule = F)))
+# bc_pair_b_lod$g <- "GBRS"
+load("output/bc_pair_b_lod_gbrs275.RData")
 
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.muga275/fixed.muga275.eqtl.RData")
-bc_pair_c_lod <- bc_pair
-bc_pair_c_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
-                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
-                                             mc.cores = 20,
-                                             mc.preschedule = F)))
-bc_pair_c_lod$g <- "FIXED.MUGA"
+# load("output/fixed.muga275.eqtl.RData")
+# bc_pair_c_lod <- bc_pair
+# bc_pair_c_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+#                                              FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+#                                              mc.cores = 20,
+#                                              mc.preschedule = F)))
+# bc_pair_c_lod$g <- "FIXED.MUGA"
+load("output/bc_pair_c_lod_fixed.muga275.RData")
 
-bc_pair_lod <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
-bc_pair_lod$g <- ifelse(bc_pair_lod$lod.x >= b_cutoff & bc_pair_lod$lod.y >= c_cutoff, "Both", ifelse(bc_pair_lod$lod.x >= b_cutoff & bc_pair_lod$lod.y < c_cutoff,"GBRS","FIXED.MUGA"))
+bc_pair_lod1 <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
+bc_pair_lod1$g <- ifelse(bc_pair_lod1$lod.x >= b_cutoff & bc_pair_lod1$lod.y >= c_cutoff, "Both", ifelse(bc_pair_lod1$lod.x >= b_cutoff & bc_pair_lod1$lod.y < c_cutoff,"GBRS","FIXED.MUGA"))
 #scatter plot for the overlapped genes between GBRS and FIXED.MUGA
 # scatter plot
-plot_bcpair_lod1 <- plot_ly(bc_pair_lod, x = ~lod.x) %>%
-  add_markers(y = ~lod.y, text = bc_pair_lod$eqtl_marker, name = "", showlegend = FALSE) %>%
+plot_bcpair_lod1 <- plot_ly(bc_pair_lod1, x = ~lod.x) %>%
+  add_markers(y = ~lod.y, text = bc_pair_lod1$eqtl_marker, name = "", showlegend = FALSE) %>%
   add_lines(y = ~fitted(loess(lod.y ~ lod.x)),
             line = list(color = 'black'),
             name = "", showlegend = FALSE) %>%
@@ -801,9 +805,9 @@ get_density <- function(x, y, ...) {
   return(dens$z[ii])
 }
 
-bc_pair_lod$density <- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
-plot_bcpair_lod2 <- ggplot(bc_pair_lod) + 
-  geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod$g))) + 
+bc_pair_lod1$density <- get_density(bc_pair_lod1$lod.x, bc_pair_lod1$lod.y, n = 100)
+plot_bcpair_lod21 <- ggplot(bc_pair_lod1) + 
+  geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod1$g))) + 
   #scale_color_viridis() + 
   theme(aspect.ratio=1) +
   xlab("LODs in GBRS") +
@@ -817,12 +821,12 @@ plot_bcpair_lod2 <- ggplot(bc_pair_lod) +
         axis.title=element_text(size=22,face="bold")) +
   theme(plot.title = element_text(hjust=0.5, size = 28))
 
-plot_bcpair_lod2
+plot_bcpair_lod21
 
 
 ######MEGAMUGA184######
 #load eqtl pvalue for gbrs184
-b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184_pvalue.RData"))
+b <- get(load("output/gbrs184_pvalue.RData"))
 b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 b$marker <- paste0(b$chr,"_",as.integer(b$pos))
 b$max_qvalue <- qvalue(p = b$pval)$qvalues
@@ -831,8 +835,9 @@ b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
 b <- b[b$max_qvalue <= 0.05 & b$cis_trans == "trans",]
 b_cutoff <- as.numeric(b[which.max(b$max_qvalue),"lod"])
+b_cutoff
 
-c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184_pvalue.RData"))
+c <- get(load("output/fixed.megamuga184_pvalue.RData"))
 c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 c$marker <- paste0(c$chr,"_",as.integer(c$pos))
 c$max_qvalue <- qvalue(p = c$pval)$qvalues
@@ -841,6 +846,7 @@ c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 c$cis_trans <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06),"cis", "trans")
 c <- c[c$max_qvalue <= 0.05 & c$cis_trans == "trans",]
 c_cutoff <- as.numeric(c[which.max(c$max_qvalue),"lod"])
+c_cutoff
 
 #get all the pair eqtl marker and gene from b and c
 bc_pair <- rbind(b[,c("genes","eqtl_marker")],c[,c("genes","eqtl_marker")])
@@ -848,28 +854,30 @@ bc_pair$genes <- as.character(bc_pair$genes)
 bc_pair <- bc_pair[!duplicated(bc_pair[,1:2]),]
 
 #extract from b and c respectively
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs184/gbrs184.eqtl.RData")
-bc_pair_b_lod <- bc_pair
-bc_pair_b_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
-                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
-                                             mc.cores = 20,
-                                             mc.preschedule = F)))
-bc_pair_b_lod$g <- "GBRS"
+# load("output/gbrs184.eqtl.RData")
+# bc_pair_b_lod <- bc_pair
+# bc_pair_b_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+#                                              FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+#                                              mc.cores = 20,
+#                                              mc.preschedule = F)))
+# bc_pair_b_lod$g <- "GBRS"
+load("output/bc_pair_b_lod_gbrs184.RData")
 
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.megamuga184/fixed.megamuga184.eqtl.RData")
-bc_pair_c_lod <- bc_pair
-bc_pair_c_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
-                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
-                                             mc.cores = 20,
-                                             mc.preschedule = F)))
-bc_pair_c_lod$g <- "FIXED.MEGAMUGA"
+# load("output/fixed.megamuga184.eqtl.RData")
+# bc_pair_c_lod <- bc_pair
+# bc_pair_c_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+#                                              FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+#                                              mc.cores = 20,
+#                                              mc.preschedule = F)))
+# bc_pair_c_lod$g <- "FIXED.MEGAMUGA"
+load("output/bc_pair_c_lod_fixed.megamuga184.RData")
 
-bc_pair_lod <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
-bc_pair_lod$g <- ifelse(bc_pair_lod$lod.x >=b_cutoff & bc_pair_lod$lod.y >= c_cutoff, "Both", ifelse(bc_pair_lod$lod.x >= b_cutoff & bc_pair_lod$lod.y < c_cutoff,"GBRS","FIXED.MEGAMUGA"))
+bc_pair_lod2 <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
+bc_pair_lod2$g <- ifelse(bc_pair_lod2$lod.x >=b_cutoff & bc_pair_lod2$lod.y >= c_cutoff, "Both", ifelse(bc_pair_lod2$lod.x >= b_cutoff & bc_pair_lod2$lod.y < c_cutoff,"GBRS","FIXED.MEGAMUGA"))
 #scatter plot for the overlapped genes between GBRS and FIXED.MEGAMUGA
 # scatter plot
-plot_bcpair_lod1 <- plot_ly(bc_pair_lod, x = ~lod.x) %>%
-  add_markers(y = ~lod.y, text = bc_pair_lod$eqtl_marker, name = "", showlegend = FALSE) %>%
+plot_bcpair_lod1 <- plot_ly(bc_pair_lod2, x = ~lod.x) %>%
+  add_markers(y = ~lod.y, text = bc_pair_lod2$eqtl_marker, name = "", showlegend = FALSE) %>%
   add_lines(y = ~fitted(loess(lod.y ~ lod.x)),
             line = list(color = 'black'),
             name = "", showlegend = FALSE) %>%
@@ -881,9 +889,9 @@ plot_bcpair_lod1 <- plot_ly(bc_pair_lod, x = ~lod.x) %>%
 plot_bcpair_lod1
 
 
-bc_pair_lod$density <- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
-plot_bcpair_lod2 <- ggplot(bc_pair_lod) + 
-  geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod$g))) + 
+bc_pair_lod2$density <- get_density(bc_pair_lod2$lod.x, bc_pair_lod2$lod.y, n = 100)
+plot_bcpair_lod22 <- ggplot(bc_pair_lod2) + 
+  geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod2$g))) + 
   #scale_color_viridis() + 
   theme(aspect.ratio=1) +
   xlab("LODs in GBRS") +
@@ -897,11 +905,11 @@ plot_bcpair_lod2 <- ggplot(bc_pair_lod) +
         axis.title=element_text(size=22,face="bold")) +
   theme(plot.title = element_text(hjust=0.5, size = 28))
 
-plot_bcpair_lod2
+plot_bcpair_lod22
 
 ######GIGAMUGA358######
 #load eqtl pvalue for gbrs358
-b <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358_pvalue.RData"))
+b <- get(load("output/gbrs358_pvalue.RData"))
 b <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 b$marker <- paste0(b$chr,"_",as.integer(b$pos))
 b$max_qvalue <- qvalue(p = b$pval)$qvalues
@@ -910,8 +918,9 @@ b <- merge(b, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 b$cis_trans <- ifelse((b$chr.y == b$chr.x) & (abs(b$pos - b$start) <= 5e+06),"cis", "trans")
 b <- b[b$max_qvalue <= 0.05 & b$cis_trans == "trans",]
 b_cutoff <- as.numeric(b[which.max(b$max_qvalue),"lod"])
+b_cutoff
 
-c <- get(load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358_pvalue.RData"))
+c <- get(load("output/fixed.gigamuga358_pvalue.RData"))
 c <- setDT(pvalue)[, .SD[which.max(lod)], by=genes]
 c$marker <- paste0(c$chr,"_",as.integer(c$pos))
 c$max_qvalue <- qvalue(p = c$pval)$qvalues
@@ -920,6 +929,7 @@ c <- merge(c, gene.anno, by.x=c("genes"), by.y=c("gene"), all.x = TRUE)
 c$cis_trans <- ifelse((c$chr.y == c$chr.x) & (abs(c$pos - c$start) <= 5e+06),"cis", "trans")
 c <- c[c$max_qvalue <= 0.05 & c$cis_trans == "trans",]
 c_cutoff <- as.numeric(c[which.max(c$max_qvalue),"lod"])
+c_cutoff
 
 #get all the pair eqtl marker and gene from b and c
 bc_pair <- rbind(b[,c("genes","eqtl_marker")],c[,c("genes","eqtl_marker")])
@@ -927,28 +937,30 @@ bc_pair$genes <- as.character(bc_pair$genes)
 bc_pair <- bc_pair[!duplicated(bc_pair[,1:2]),]
 
 #extract from b and c respectively
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/gbrs358/gbrs358.eqtl.RData")
-bc_pair_b_lod <- bc_pair
-bc_pair_b_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
-                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
-                                             mc.cores = 20,
-                                             mc.preschedule = F)))
-bc_pair_b_lod$g <- "GBRS"
+# load("output/gbrs358.eqtl.RData")
+# bc_pair_b_lod <- bc_pair
+# bc_pair_b_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+#                                              FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+#                                              mc.cores = 20,
+#                                              mc.preschedule = F)))
+# bc_pair_b_lod$g <- "GBRS"
+load("output/bc_pair_b_lod_gbrs358.RData")
 
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/analysis/eqtl_with_perms/fixed.gigamuga358/fixed.gigamuga358.eqtl.RData")
-bc_pair_c_lod <- bc_pair
-bc_pair_c_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
-                                             FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
-                                             mc.cores = 20,
-                                             mc.preschedule = F)))
-bc_pair_c_lod$g <- "FIXED.GIGAMUGA"
+# load("output/fixed.gigamuga358.eqtl.RData")
+# bc_pair_c_lod <- bc_pair
+# bc_pair_c_lod$lod <- as.vector(unlist(mclapply(X = 1:nrow(bc_pair),
+#                                              FUN = function(i){eqtl[as.character(bc_pair[i,2]),as.character(bc_pair[i,1])]},
+#                                              mc.cores = 20,
+#                                              mc.preschedule = F)))
+# bc_pair_c_lod$g <- "FIXED.GIGAMUGA"
+load("output/bc_pair_c_lod_fixed.gigamuga358.RData")
 
-bc_pair_lod <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
-bc_pair_lod$g <- ifelse(bc_pair_lod$lod.x >= b_cutoff & bc_pair_lod$lod.y >= c_cutoff, "Both", ifelse(bc_pair_lod$lod.x >= b_cutoff & bc_pair_lod$lod.y < c_cutoff,"GBRS","FIXED.GIGAMUGA"))
+bc_pair_lod3 <- merge(bc_pair_b_lod, bc_pair_c_lod, by = c("eqtl_marker", "genes"))
+bc_pair_lod3$g <- ifelse(bc_pair_lod3$lod.x >= b_cutoff & bc_pair_lod3$lod.y >= c_cutoff, "Both", ifelse(bc_pair_lod3$lod.x >= b_cutoff & bc_pair_lod3$lod.y < c_cutoff,"GBRS","FIXED.GIGAMUGA"))
 #scatter plot for the overlapped genes between GBRS and FIXED.GIGAMUGA
 # scatter plot
-plot_bcpair_lod1 <- plot_ly(bc_pair_lod, x = ~lod.x) %>%
-  add_markers(y = ~lod.y, text = bc_pair_lod$eqtl_marker, name = "", showlegend = FALSE) %>%
+plot_bcpair_lod1 <- plot_ly(bc_pair_lod3, x = ~lod.x) %>%
+  add_markers(y = ~lod.y, text = bc_pair_lod3$eqtl_marker, name = "", showlegend = FALSE) %>%
   add_lines(y = ~fitted(loess(lod.y ~ lod.x)),
             line = list(color = 'black'),
             name = "", showlegend = FALSE) %>%
@@ -960,9 +972,9 @@ plot_bcpair_lod1 <- plot_ly(bc_pair_lod, x = ~lod.x) %>%
 plot_bcpair_lod1
 
 
-bc_pair_lod$density <- get_density(bc_pair_lod$lod.x, bc_pair_lod$lod.y, n = 100)
-plot_bcpair_lod2 <- ggplot(bc_pair_lod) + 
-  geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod$g))) + 
+bc_pair_lod3$density <- get_density(bc_pair_lod3$lod.x, bc_pair_lod3$lod.y, n = 100)
+plot_bcpair_lod23 <- ggplot(bc_pair_lod3) + 
+  geom_point(aes(lod.x, lod.y, color = factor(bc_pair_lod3$g))) + 
   #scale_color_viridis() + 
   theme(aspect.ratio=1) +
   xlab("LODs in GBRS") +
@@ -976,7 +988,105 @@ plot_bcpair_lod2 <- ggplot(bc_pair_lod) +
         axis.title=element_text(size=22,face="bold")) +
   theme(plot.title = element_text(hjust=0.5, size = 28))
 
-plot_bcpair_lod2
+plot_bcpair_lod23
+
+```
+
+# New Figure 3 Scatterplot for Trans-eQTL at FDR 0.05 (5 Mb)
+```{r New Figure 3 Scatterplot for Trans-eQTL at FDR 0.05 (5 Mb), message=FALSE, eval=TRUE,fig.height=16, fig.width=16}
+plot_bcpair1 <- ggplot(bc_pair_lod1) + 
+  geom_point(aes(lod.x, lod.y, 
+                 color = factor(bc_pair_lod1$g)), 
+             size = 0.5) + 
+  scale_color_manual(values=c("red",
+                              "#FDE725FF", 
+                              "#404788FF")) +
+  theme(aspect.ratio=1) +
+  xlab("") +
+  ylab("Trans-eQTL LOD in FIXED.MUGA") +
+  scale_y_continuous(limits=c(0, 180)) +
+  scale_x_continuous(limits=c(0, 180)) +
+  theme(legend.position="none") +
+  geom_abline(slope=1, intercept=0) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=12),
+        axis.title.x=element_blank(),
+        strip.text.y = element_blank(),
+        plot.margin = unit(c(0,0,0,0), "cm"),
+        axis.title=element_text(size=12))
+plot_bcpair1
+
+plot_bcpair2 <- ggplot(bc_pair_lod2) + 
+  geom_point(aes(lod.x, lod.y, 
+                 color = factor(bc_pair_lod2$g)), 
+             size = 0.5) + 
+  scale_color_manual(values=c("red",
+                              "#55C667FF", 
+                              "#404788FF")) +
+  theme(aspect.ratio=1) +
+  xlab("") +
+  ylab("Trans-eQTL LOD in FIXED.MEGAMUGA") +
+  scale_y_continuous(limits=c(0, 180)) +
+  scale_x_continuous(limits=c(0, 180)) +
+  theme(legend.position="none") +
+  geom_abline(slope=1, intercept=0) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=12), 
+        axis.title.x=element_blank(),
+        strip.text.y = element_blank(),
+        plot.margin = unit(c(0,0,0,0), "cm"),
+        axis.title=element_text(size=12))
+plot_bcpair2
+
+plot_bcpair3 <- ggplot(bc_pair_lod3) + 
+  geom_point(aes(lod.x, lod.y, 
+                 color = factor(bc_pair_lod3$g)), 
+             size = 0.5) + 
+  scale_color_manual(values=c("red",
+                              "#238A8DFF", 
+                              "#404788FF")) +
+  theme(aspect.ratio=1) +
+  xlab("Trans-eQTL LOD in GBRS") +
+  ylab("Trans-eQTL LOD in FIXED.GIGAMUGA") +
+  scale_y_continuous(limits=c(0, 180)) +
+  scale_x_continuous(limits=c(0, 180)) +
+  theme(legend.position="none") +
+  geom_abline(slope=1, intercept=0) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=12), 
+        strip.text.y = element_blank(),
+        plot.margin = unit(c(0,0,0,0), "cm"),
+        axis.title=element_text(size=12))
+plot_bcpair3
+
+plot_bcpair_row <- plot_grid(plot_bcpair1,
+                         plot_bcpair2,
+                         plot_bcpair3, 
+                        labels = c("A", "B", "C"), 
+                        align = "hv",nrow = 1, ncol = 3, vjust = 10)
+
+ggsave("output/Figure4_row.pdf", plot_bcpair_row, height = 8, width=14)
+
+
+plot_bcpair_col <- plot_grid(plot_bcpair1,
+                         plot_bcpair2,
+                         plot_bcpair3, 
+                        labels = c("A", "B", "C"), hjust = -22,
+                        align = "hv",nrow = 3)
+
+ggsave("output/Figure4_col.pdf", plot_bcpair_col, height = 12, width=10)
 
 ```
 

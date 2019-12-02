@@ -24,15 +24,18 @@ library(sinaplot)
 library(ggplot2)
 library(plyr)
 library(ggridges)
+library(viridis)
+library(cowplot)
+#setwd("/home/heh/GBRS/Workflowr_GBRS_array/")
 
 #load mismatch results to get the correlation
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_muga275GBRS.RData")
+load("data/mismatch_muga275GBRS.RData")
 muga.cor <- mismatch_muga275GBRS$`0.130`
 muga.cor$array <- "MUGA"
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_megamuga184GBRS.RData")
+load("data/mismatch_megamuga184GBRS.RData")
 megamuga.cor <- mismatch_megamuga184GBRS$`0.130`
 megamuga.cor$array <- "MEGAMUGA"
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_gigamuga358GBRS.RData")
+load("data/mismatch_gigamuga358GBRS.RData")
 gigamuga.cor <- mismatch_gigamuga358GBRS
 gigamuga.cor$array <- "GIGAMUGA"
 #correlation results
@@ -87,14 +90,15 @@ p3 <- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, group = array)) +
 ```
 
 ```{r Figure 2 autosome, message=FALSE, eval=TRUE, fig.height=20, fig.width=20}
+setwd("/home/heh/GBRS/Workflowr_GBRS_array/")
 #load mismatch results to get the correlation
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_muga275GBRS.RData")
+load("data/mismatch_autochr_muga275GBRS.RData")
 muga.cor <- mismatch_autochr_muga275GBRS$`0.130`
 muga.cor$array <- "MUGA"
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_megamuga184GBRS.RData")
+load("data/mismatch_autochr_megamuga184GBRS.RData")
 megamuga.cor <- mismatch_autochr_megamuga184GBRS$`0.130`
 megamuga.cor$array <- "MEGAMUGA"
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/mismatch_autochr_gigamuga358GBRS.RData")
+load("data/mismatch_autochr_gigamuga358GBRS.RData")
 gigamuga.cor <- mismatch_autochr_gigamuga358GBRS
 gigamuga.cor$array <- "GIGAMUGA"
 #correlation results
@@ -243,13 +247,13 @@ tab <- data.frame(Array = c("MUGA", "MEGAMUGA", "GIGAMUGA"),
                   total.percentage.disagree = c( round(100*sum(muga275.z2)/c(dim(muga275.z)[1]*dim(muga275.z)[2]),3),
                                                  round(100*sum(megamuga184.z2)/c(dim(megamuga184.z)[1]*dim(megamuga184.z)[2]),3),
                                                  round(100*sum(gigamuga358.z2)/c(dim(gigamuga358.z)[1]*dim(gigamuga358.z)[2]),3)))
-write.csv(tab, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.csv")  
-save(tab, file = "/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.RData")  
+write.csv(tab, file = "data/Agree_table_three_array.csv")  
+save(tab, file = "data/Agree_table_three_array.RData")  
 ```
 
 # show agree table
 ```{r, message=FALSE, eval=TRUE}
-load("/projects/heh/HH/GBRS_array/Workflowr_Array_GBRS/output/Agree_table_three_array.RData")                       
+load("data/Agree_table_three_array.RData")                       
 #display summary table
 DT::datatable(tab,options = list(pageLength = 40, scrollY = "300px", scrollX = "40px"))
 
@@ -261,4 +265,59 @@ barplot(tab$total.percentage.agree,
         ylim = c(0,10))
 ```
 
+#new correlation ridge plot
+```{r new correlation ridge plot, message=FALSE, eval=TRUE, fig.height=6, fig.width=12}
+plot_corr_ridge <- ggplot(gbrs.array.cor, aes(x=self.cor, y=array, fill = array)) + 
+  geom_density_ridges(alpha=0.9, bandwidth = 0.01) +
+  # scale_color_viridis(discrete=TRUE) +
+  # scale_fill_viridis(discrete=TRUE) +
+  scale_color_manual(values=c("#238A8DFF",  
+                              "#55C667FF",  
+                              "#FDE725FF")) +
+  scale_fill_manual(values=c("#238A8DFF",  
+                              "#55C667FF",  
+                              "#FDE725FF")) +
+  xlab("Correlation Between GBRS and Array on Autosome") +
+  ylab("") +
+  labs(fill = "") +
+  scale_x_continuous(breaks = seq(-0.05, 1.0, by = 0.15), limits = c(-0.05, 1.0)) +
+  scale_y_discrete(
+    expand = c(0.01, 0.05)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=16), 
+        axis.title=element_text(size=16,face="bold")) +
+  guides(shape = guide_legend(override.aes = list(size = 8)))
+plot_corr_ridge
+ggsave("output/Figure2.pdf", plot_corr_ridge, height = 10, width=10)
+
+
+plot_corr_ridge2 <- ggplot(gbrs.array.cor, aes(self.cor)) + 
+  geom_density(aes(fill = array), alpha=0.7) +
+  # scale_color_viridis(discrete=TRUE) +
+  # scale_fill_viridis(discrete=TRUE) +
+    scale_color_manual(values=c("#238A8DFF",  
+                              "#55C667FF",  
+                              "#FDE725FF")) +
+  scale_fill_manual(values=c("#238A8DFF",  
+                              "#55C667FF",  
+                              "#FDE725FF")) +
+  xlab("Correlation Between GBRS and Array on Autosome") +
+  ylab("") +
+  labs(fill = "") +
+  scale_x_continuous(breaks = seq(-0.05, 1.0, by = 0.15), limits = c(-0.05, 1.0)) +
+  scale_y_discrete(
+    expand = c(0.01, 0.05)) +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"),
+        legend.title=element_blank(), 
+        text = element_text(size=24), 
+        axis.title=element_text(size=24,face="bold")) +
+  guides(shape = guide_legend(override.aes = list(size = 8)))
+```
 
